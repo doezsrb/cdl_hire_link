@@ -1,0 +1,20 @@
+{
+  "expo": {
+    "name": "cdlhirelink",
+    "slug": "cdlhirelink",
+    "version": "1.0.0",
+    "scheme": "cdlhirelink",
+    "platforms": [
+      "ios",
+      "android"
+    ],
+    "ios": {
+      "bundleIdentifier": "com.cdlhire.link"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "6d467c36-34b7-4290-b43e-ecbb264f0b84"
+      }
+    }
+  }
+}
