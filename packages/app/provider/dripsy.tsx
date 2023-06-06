@@ -1,33 +1,56 @@
 import { DripsyProvider, makeTheme } from 'dripsy'
 
-const primary = '#0cf5a0'
-const secondary = '#012417'
+const primary = '#005199'
+const secondary = '#66CC8F'
 const theme = makeTheme({
   // https://www.dripsy.xyz/usage/theming/create
   colors: {
     primary: primary,
     secondary: secondary,
+    $lightGray: '#D9D9D9',
+  },
+  space: {
+    $0: 0,
+    $1: 4,
+    $2: 8,
+    $3: 16,
+    $4: 32,
+    $5: 64,
+    $6: 128,
+    $7: 256,
   },
   buttons: {
-    default: {
-      backgroundColor: primary,
-      width: ['100%', '50%', 100],
+    bigButton: {
+      borderColor: primary,
+      borderWidth: 1,
 
-      borderRadius: 20,
-      textAlign: 'center',
-    },
-    small: {
-      backgroundColor: primary,
-      width: ['20%', '20%', 100],
-      py: 30,
-      borderRadius: 20,
-      textAlign: 'center',
-      fontSize: 20,
-      fontFamily: 'arial',
+      borderRadius: 30,
+      paddingLeft: 40,
+      paddingRight: 40,
+      paddingTop: 10,
+      paddingBottom: 10,
+      backgroundColor: secondary,
     },
   },
+  view: {},
   text: {
-    buttonText: {
+    title: {
+      paddingTop: '$2',
+      paddingBottom: '$4',
+      fontWeight: 'bold',
+      fontSize: 40,
+      textAlign: 'center',
+    },
+    menuText: {
+      fontSize: 23,
+      paddingTop: 5,
+      color: 'white',
+      textAlign: 'center',
+    },
+    buttonBig: {
+      textAlign: 'center',
+      color: 'primary',
+      fontWeight: 'bold',
       fontSize: 20,
     },
     p: {

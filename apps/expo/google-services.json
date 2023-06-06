@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1076134700049",
+    "project_id": "cdlhirelink",
+    "storage_bucket": "cdlhirelink.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1076134700049:android:f751945ffbc5fed770fdb0",
+        "android_client_info": {
+          "package_name": "com.cdlhire.link"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1076134700049-gec7g219qet4nb2k6hvrmk0aktq3ilui.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cdlhire.link",
+            "certificate_hash": "959d36a5308e206e6cad960020973f2d3e189f7d"
+          }
+        },
+        {
+          "client_id": "1076134700049-k2dind5q15d62lggvvgbqs4c529n7p3g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cdlhire.link",
+            "certificate_hash": "f107bfffcb942ad54190d9834a1a065034dc0e68"
+          }
+        },
+        {
+          "client_id": "1076134700049-b7kotfn7k8o4jajeo7s1hj5mcbb8glem.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB67_y32xoW4AyC-r8C5vK6-5YZQ29ptm4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1076134700049-b7kotfn7k8o4jajeo7s1hj5mcbb8glem.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
