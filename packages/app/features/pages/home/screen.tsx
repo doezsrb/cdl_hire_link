@@ -22,6 +22,7 @@ import ApplyCard from 'app/features/common/components/ApplyCard/ApplyCard'
 import WhyChooseCard from 'app/features/common/components/WhyChooseCard/WhyChooseCard'
 import dynamic from 'next/dynamic'
 import FrontSlider from 'app/features/common/components/FrontSlider/FrontSlider'
+import HeaderSlider from 'app/features/common/components/HeaderSlider/HeaderSlider'
 export function HomeScreen() {
   const sx = useSx()
   const { theme } = useDripsyTheme()
@@ -62,13 +63,7 @@ export function HomeScreen() {
       paddingLeft: [50, '20vw'] as any,
       paddingRight: [50, '20vw'] as any,
     },
-    sliderText: {
-      fontSize: 58 / PixelRatio.getFontScale(),
-      fontWeight: 'bold',
-      textAlign: 'center',
 
-      color: 'secondary',
-    },
     sliderButtonContainer: {
       width: '100%',
       alignItems: 'center',
@@ -128,13 +123,10 @@ export function HomeScreen() {
   return (
     <SafeAreaView>
       <ScrollView>
-        <View sx={{ position: 'relative' }}>
-          <View sx={style.sliderContainer}>
-            <FrontSlider />
-          </View>
+        <HeaderSlider homepage>
           <View sx={style.sliderTextContainer}>
             <View sx={style.sliderTextBox}>
-              <Text sx={style.sliderText}>
+              <Text variant="sliderText">
                 IF YOU NEED A JOB, WE ARE HERE TO HELP YOU!
               </Text>
             </View>
@@ -152,7 +144,7 @@ export function HomeScreen() {
               </View>
             </View>
           </View>
-        </View>
+        </HeaderSlider>
         <View sx={style.applyContainer}>
           <Text variant="title" sx={{ color: 'white' }}>
             HOW TO APPLY?

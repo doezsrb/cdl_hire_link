@@ -20,6 +20,7 @@ const nextConfig = {
     '@expo/html-elements',
     'react-native-gesture-handler',
     'react-native-input-select',
+    'react-native-svg',
   ],
 }
 

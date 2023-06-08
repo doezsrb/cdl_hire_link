@@ -6,8 +6,10 @@ import CustomUploadFile from 'app/features/common/components/CustomUploadFile/Cu
 import StepInd from 'app/features/common/components/StepInd/StepInd'
 import { Pressable, SafeAreaView, Text, View } from 'dripsy'
 import { useDripsyTheme } from 'dripsy'
-import { ScrollView } from 'react-native'
+import { Dimensions, Platform, ScrollView, StyleSheet } from 'react-native'
 import { useState, useEffect, Fragment } from 'react'
+import HeaderSlider from 'app/features/common/components/HeaderSlider/HeaderSlider'
+import DesktopHeader from 'app/features/common/components/DesktopHeader/DesktopHeader.web'
 const ApplyAsADriver = () => {
   const { theme } = useDripsyTheme()
   const [step, setStep] = useState(1)
@@ -234,6 +236,22 @@ const ApplyAsADriver = () => {
       },
     },
   })
+  const style = StyleSheet.create({
+    sliderTextContainer: {
+      zIndex: 2,
+      position: 'absolute',
+      flexDirection: 'column',
+      width: '100%',
+      alignItems: 'center',
+      bottom: 0,
+      height: [
+        Dimensions.get('window').height - Dimensions.get('window').height / 10,
+        '100vh',
+      ] as any,
+      paddingBottom: 50,
+      justifyContent: 'flex-end',
+    },
+  })
 
   const checkData = (): boolean => {
     const checkStep = 'step' + step
@@ -286,15 +304,30 @@ const ApplyAsADriver = () => {
   }
   return (
     <SafeAreaView>
+      {Platform.OS == 'web' && <DesktopHeader />}
       <ScrollView>
-        <View sx={{ width: '100%', alignItems: 'center' }}>
+        <HeaderSlider>
+          <View sx={style.sliderTextContainer}>
+            <Text variant="sliderText">APPLY AS A DRIVER</Text>
+          </View>
+        </HeaderSlider>
+        <View
+          sx={{
+            width: '100%',
+            paddingTop: 20,
+            paddingBottom: 20,
+            alignItems: 'center',
+          }}
+        >
           <View
             sx={{
               width: ['100%', '50%'],
-
+              minHeight: Dimensions.get('window').height,
               display: 'flex',
               backgroundColor: 'white',
               alignItems: 'flex-end',
+              borderWidth: 2,
+              borderColor: 'secondary',
               flexDirection: 'column',
               padding: 20,
             }}
@@ -527,7 +560,11 @@ const ApplyAsADriver = () => {
 
             <View
               sx={{
+                bottom: 0,
                 display: 'flex',
+                flex: 1,
+
+                alignItems: 'flex-end',
                 width: '100%',
                 justifyContent: 'space-between',
                 flexDirection: 'row',
@@ -551,7 +588,7 @@ const ApplyAsADriver = () => {
               <Pressable
                 style={[
                   theme.buttons.bigButton,
-                  { opacity: step >= allSteps ? 0 : 1 },
+                  { opacity: step >= allSteps && step != allSteps ? 0 : 1 },
                 ]}
                 onPress={() => {
                   if (checkData()) {
@@ -562,7 +599,9 @@ const ApplyAsADriver = () => {
                   }
                 }}
               >
-                <Text variant="buttonBig">NEXT STEP</Text>
+                <Text variant="buttonBig">
+                  {step == allSteps ? 'SUBMIT' : 'NEXT STEP'}
+                </Text>
               </Pressable>
             </View>
           </View>

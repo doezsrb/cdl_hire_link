@@ -1,4 +1,5 @@
 import { DripsyProvider, makeTheme } from 'dripsy'
+import { PixelRatio } from 'react-native'
 
 const primary = '#005199'
 const secondary = '#66CC8F'
@@ -34,6 +35,13 @@ const theme = makeTheme({
   },
   view: {},
   text: {
+    sliderText: {
+      fontSize: 58 / PixelRatio.getFontScale(),
+      fontWeight: 'bold',
+      textAlign: 'center',
+
+      color: 'secondary',
+    },
     title: {
       paddingTop: '$2',
       paddingBottom: '$4',

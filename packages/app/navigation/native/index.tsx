@@ -6,7 +6,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer'
 import DrawerMenu from '../../../../apps/expo/components/Drawer/drawer'
 import { Button, Pressable } from 'react-native'
 import { Image, useDripsyTheme } from 'dripsy'
-import Logo from '../../../../apps/expo/components/Logo/logo'
+import Logo from '../../features/common/components/Logo/logo'
 import ApplyAsADriver from 'app/features/pages/apply-as-a-driver/screen'
 
 /* const Stack = createNativeStackNavigator<{

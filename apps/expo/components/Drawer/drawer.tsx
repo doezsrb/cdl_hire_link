@@ -6,7 +6,7 @@ import {
 } from '@react-navigation/drawer'
 import { useEffect } from 'react'
 import { View, Text } from 'dripsy'
-import Logo from '../Logo/logo'
+import Logo from 'app/features/common/components/Logo/logo'
 
 interface DrawerMenuProps {
   drawerProps: DrawerContentComponentProps

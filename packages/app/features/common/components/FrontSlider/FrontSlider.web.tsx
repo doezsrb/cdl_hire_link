@@ -20,7 +20,11 @@ const responsive = {
     items: 1,
   },
 }
-const FrontSlider = () => {
+
+interface FrontSliderProps {
+  homepage?: boolean
+}
+const FrontSlider = ({ homepage = false }: FrontSliderProps) => {
   return (
     <Carousel
       ssr
@@ -30,7 +34,7 @@ const FrontSlider = () => {
       autoPlaySpeed={5000}
       arrows={false}
     >
-      <View sx={{ height: '100vh' }}>
+      <View sx={{ height: homepage ? '100vh' : '30vh' }}>
         <SolitoImage
           src="/images/background.jpg"
           fill={true}
@@ -39,7 +43,7 @@ const FrontSlider = () => {
           style={{ opacity: 0.2 }}
         />
       </View>
-      <View sx={{ height: '100vh' }}>
+      <View sx={{ height: homepage ? '100vh' : '30vh' }}>
         <SolitoImage
           src="/images/background.jpg"
           fill={true}
@@ -48,7 +52,7 @@ const FrontSlider = () => {
           style={{ opacity: 0.2 }}
         />
       </View>
-      <View sx={{ height: '100vh' }}>
+      <View sx={{ height: homepage ? '100vh' : '30vh' }}>
         <SolitoImage
           src="/images/background.jpg"
           fill={true}

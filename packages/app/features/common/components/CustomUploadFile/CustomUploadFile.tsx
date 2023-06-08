@@ -1,7 +1,7 @@
 import { View, Text, useDripsyTheme } from 'dripsy'
 import { useEffect, useRef, useState } from 'react'
 import { Platform, StyleSheet } from 'react-native'
-
+import DocumentPicker from '../../docpicker'
 interface CustomUploadFileProps {
   name: string
   setVal: Function
@@ -50,14 +50,24 @@ const CustomUploadFile = ({
       paddingLeft: [10, 25] as any,
       color: 'primary',
       flex: 1,
-      height: 20,
+      height: 18,
       overflow: 'hidden',
     },
     container: { width: '100%', padding: 2, mt: 2 },
   })
   const UploadFileButton = () => {
     return (
-      <Text sx={style.uploadFileButton} variant="buttonBig">
+      <Text
+        sx={style.uploadFileButton}
+        onPress={async () => {
+          if (Platform.OS != 'web') {
+            var data: any = await DocumentPicker.getDocumentAsync()
+
+            setFilename(data.name)
+          }
+        }}
+        variant="buttonBig"
+      >
         UPLOAD FILE
       </Text>
     )
@@ -79,7 +89,11 @@ const CustomUploadFile = ({
       </Text>
       <View sx={style.childBox}>
         <Text sx={style.textFile}>
-          {filename == null ? 'No file chosen' : filename}
+          {filename == null
+            ? 'No file chosen'
+            : filename.length > 20
+            ? filename.slice(0, 20) + '...'
+            : filename}
         </Text>
 
         {Platform.OS == 'web' ? (

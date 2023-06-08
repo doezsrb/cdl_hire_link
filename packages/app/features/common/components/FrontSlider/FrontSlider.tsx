@@ -3,16 +3,21 @@ import { useRef } from 'react'
 import { Dimensions } from 'react-native'
 import Carousel from 'react-native-snap-carousel'
 import { SolitoImage } from 'solito/image'
-const FrontSlider = () => {
+
+interface FrontSliderProps {
+  homepage?: boolean
+}
+const FrontSlider = ({ homepage = false }: FrontSliderProps) => {
   const isCarousel = useRef<any>()
   const renderItem = ({ item }) => {
     return (
       <View
         sx={{
           width: '100%',
-          height:
-            Dimensions.get('window').height -
-            Dimensions.get('window').height / 10,
+          height: homepage
+            ? Dimensions.get('window').height -
+              Dimensions.get('window').height / 10
+            : Dimensions.get('window').height / 3,
         }}
       >
         <SolitoImage
