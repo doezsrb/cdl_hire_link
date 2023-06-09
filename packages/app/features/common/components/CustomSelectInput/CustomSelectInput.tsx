@@ -79,7 +79,7 @@ const CustomSelectInput = ({
         optionLabel={'name'}
         optionValue={'code'}
         selectedValue={value}
-        onValueChange={(value) => {
+        onValueChange={(value: any) => {
           setValue(value)
 
           setVal(data[value - 1].name)

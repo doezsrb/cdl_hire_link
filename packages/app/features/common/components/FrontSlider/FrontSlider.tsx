@@ -9,7 +9,7 @@ interface FrontSliderProps {
 }
 const FrontSlider = ({ homepage = false }: FrontSliderProps) => {
   const isCarousel = useRef<any>()
-  const renderItem = ({ item }) => {
+  const renderItem = ({ item }: any) => {
     return (
       <View
         sx={{

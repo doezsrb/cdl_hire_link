@@ -14,7 +14,7 @@ const ApplyAsADriver = () => {
   const { theme } = useDripsyTheme()
   const [step, setStep] = useState(1)
   const [allSteps, setAllSteps] = useState(2)
-  const [stepData, setStepData] = useState({
+  const [stepData, setStepData] = useState<any>({
     step2: {
       name: 'Driver Experience',
       groups: {
@@ -256,7 +256,7 @@ const ApplyAsADriver = () => {
   const checkData = (): boolean => {
     const checkStep = 'step' + step
     var err = 0
-    const newStepData = { ...stepData }
+    const newStepData: any = { ...stepData }
     Object.keys(newStepData[checkStep].groups).map((it: any) => {
       Object.keys(newStepData[checkStep].groups[it].data).map((it2: any) => {
         if (
@@ -339,7 +339,7 @@ const ApplyAsADriver = () => {
 
             {Object.keys(stepData['step' + step].groups).map(
               (it: any, index: number) => {
-                var group = stepData['step' + step].groups[it]
+                var group: any = stepData['step' + step].groups[it]
                 return (
                   <BorderInput key={index} text={group.name}>
                     <View
