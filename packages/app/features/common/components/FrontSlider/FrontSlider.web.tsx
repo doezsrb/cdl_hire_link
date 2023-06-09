@@ -1,6 +1,7 @@
 import { View } from 'dripsy'
 import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css'
+import { Dimensions } from 'react-native'
 import { SolitoImage } from 'solito/image'
 const responsive = {
   superLargeDesktop: {
@@ -34,7 +35,11 @@ const FrontSlider = ({ homepage = false }: FrontSliderProps) => {
       autoPlaySpeed={5000}
       arrows={false}
     >
-      <View sx={{ height: homepage ? '100vh' : '30vh' }}>
+      <View
+        sx={{
+          height: homepage ? Dimensions.get('window').height - 80 : '30vh',
+        }}
+      >
         <SolitoImage
           src="/images/background.jpg"
           fill={true}
@@ -43,7 +48,11 @@ const FrontSlider = ({ homepage = false }: FrontSliderProps) => {
           style={{ opacity: 0.2 }}
         />
       </View>
-      <View sx={{ height: homepage ? '100vh' : '30vh' }}>
+      <View
+        sx={{
+          height: homepage ? Dimensions.get('window').height - 80 : '30vh',
+        }}
+      >
         <SolitoImage
           src="/images/background.jpg"
           fill={true}
@@ -52,7 +61,11 @@ const FrontSlider = ({ homepage = false }: FrontSliderProps) => {
           style={{ opacity: 0.2 }}
         />
       </View>
-      <View sx={{ height: homepage ? '100vh' : '30vh' }}>
+      <View
+        sx={{
+          height: homepage ? Dimensions.get('window').height - 80 : '30vh',
+        }}
+      >
         <SolitoImage
           src="/images/background.jpg"
           fill={true}

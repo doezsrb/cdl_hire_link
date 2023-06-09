@@ -1,6 +1,7 @@
 import { View, Text } from 'dripsy'
 import ApplyStepInd from '../ApplyStepInd/ApplyStepInd'
 import { StyleSheet } from 'react-native'
+import { SolitoImage } from 'solito/image'
 
 interface ApplyCardProps {
   title: string
@@ -15,7 +16,7 @@ const ApplyCard = ({ title, step, text }: ApplyCardProps) => {
       alignItems: 'center',
       marginTop: [10, 60] as any,
     },
-    image: { width: 150, height: 150, backgroundColor: 'gray' },
+    image: { width: 150, height: 150 },
     title: {
       fontSize: 30,
       color: 'white',
@@ -34,7 +35,9 @@ const ApplyCard = ({ title, step, text }: ApplyCardProps) => {
     <View sx={style.container}>
       <ApplyStepInd step={step} />
       <View sx={style.childContainer}>
-        <View sx={style.image}></View>
+        <View sx={style.image}>
+          <SolitoImage alt="imgtruck" src="/images/pngtruck2.png" fill />
+        </View>
         <Text sx={style.title}>{title}</Text>
         <Text sx={style.text}>{text}</Text>
       </View>

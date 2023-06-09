@@ -10,7 +10,13 @@ import {
   SafeAreaView,
 } from 'dripsy'
 
-import { Platform, ScrollView, PixelRatio, StyleSheet } from 'react-native'
+import {
+  Platform,
+  ScrollView,
+  PixelRatio,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native'
 import database, { dbRef, onValue } from '../../common/db'
 import { useEffect } from 'react'
 import * as ImagePicker from 'expo-image-picker'
@@ -23,9 +29,11 @@ import WhyChooseCard from 'app/features/common/components/WhyChooseCard/WhyChoos
 import dynamic from 'next/dynamic'
 import FrontSlider from 'app/features/common/components/FrontSlider/FrontSlider'
 import HeaderSlider from 'app/features/common/components/HeaderSlider/HeaderSlider'
+import { useRouter } from 'solito/router'
 export function HomeScreen() {
   const sx = useSx()
   const { theme } = useDripsyTheme()
+  const router = useRouter()
   const style = StyleSheet.create({
     chooseContainer: {
       width: '100%',
@@ -132,7 +140,13 @@ export function HomeScreen() {
             </View>
             <View sx={style.sliderButtonContainer}>
               <View sx={theme.buttons.bigButton}>
-                <Text variant="buttonBig">APPLY AS DRIVER</Text>
+                <TouchableOpacity
+                  onPress={() => {
+                    router.push('/apply-as-a-driver')
+                  }}
+                >
+                  <Text variant="buttonBig">APPLY AS DRIVER</Text>
+                </TouchableOpacity>
               </View>
               <View
                 style={[
@@ -140,7 +154,9 @@ export function HomeScreen() {
                   sx({ marginLeft: [0, 20], marginTop: [20, 0] }),
                 ]}
               >
-                <Text variant="buttonBig">APPLY AS DRIVER</Text>
+                <TouchableOpacity>
+                  <Text variant="buttonBig">APPLY AS DRIVER</Text>
+                </TouchableOpacity>
               </View>
             </View>
           </View>

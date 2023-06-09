@@ -53,12 +53,12 @@ const DesktopHeader = () => {
       ml: 20,
     },
     menuButton: {
-      paddingLeft: [15, 5, 5, 15] as any,
-      paddingRight: [15, 5, 5, 15] as any,
+      paddingLeft: [15, 5, 5, 20] as any,
+      paddingRight: [15, 5, 5, 20] as any,
       color: 'white',
       paddingTop: 40,
       paddingBottom: 40,
-
+      fontWeight: 'bold',
       textAlign: 'center',
     },
     buttonBox: {

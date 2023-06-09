@@ -7,10 +7,11 @@ import StepInd from 'app/features/common/components/StepInd/StepInd'
 import { Pressable, SafeAreaView, Text, View } from 'dripsy'
 import { useDripsyTheme } from 'dripsy'
 import { Dimensions, Platform, ScrollView, StyleSheet } from 'react-native'
-import { useState, useEffect, Fragment } from 'react'
+import { useState, useEffect, Fragment, useRef } from 'react'
 import HeaderSlider from 'app/features/common/components/HeaderSlider/HeaderSlider'
 
 const ApplyAsADriver = () => {
+  const scrollToStepRef: any = useRef()
   const { theme } = useDripsyTheme()
   const [step, setStep] = useState(1)
   const [allSteps, setAllSteps] = useState(2)
@@ -300,6 +301,11 @@ const ApplyAsADriver = () => {
       return true
     }
 
+    window.scroll({
+      top: scrollToStepRef.current.offsetTop,
+      left: 0,
+      behavior: 'smooth',
+    })
     return false
   }
   return (
@@ -336,7 +342,7 @@ const ApplyAsADriver = () => {
               current={step}
               steps={allSteps}
             />
-
+            <View ref={scrollToStepRef} />
             {Object.keys(stepData['step' + step].groups).map(
               (it: any, index: number) => {
                 var group: any = stepData['step' + step].groups[it]
