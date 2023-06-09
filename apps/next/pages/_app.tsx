@@ -5,6 +5,7 @@ import { Provider } from 'app/provider'
 import Head from 'next/head'
 import React from 'react'
 import type { SolitoAppProps } from 'solito'
+import DesktopHeader from '../components/DesktopHeader/DesktopHeader'
 
 function MyApp({ Component, pageProps }: SolitoAppProps) {
   if (process.browser) {
@@ -21,7 +22,9 @@ function MyApp({ Component, pageProps }: SolitoAppProps) {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
       <Provider>
+        <DesktopHeader />
         <Component {...pageProps} />
       </Provider>
     </>

@@ -9,7 +9,7 @@ import { useDripsyTheme } from 'dripsy'
 import { Dimensions, Platform, ScrollView, StyleSheet } from 'react-native'
 import { useState, useEffect, Fragment } from 'react'
 import HeaderSlider from 'app/features/common/components/HeaderSlider/HeaderSlider'
-import DesktopHeader from 'app/features/common/components/DesktopHeader/DesktopHeader.web'
+
 const ApplyAsADriver = () => {
   const { theme } = useDripsyTheme()
   const [step, setStep] = useState(1)
@@ -304,7 +304,6 @@ const ApplyAsADriver = () => {
   }
   return (
     <SafeAreaView>
-      {Platform.OS == 'web' && <DesktopHeader />}
       <ScrollView>
         <HeaderSlider>
           <View sx={style.sliderTextContainer}>
@@ -321,7 +320,7 @@ const ApplyAsADriver = () => {
         >
           <View
             sx={{
-              width: ['100%', '50%'],
+              width: ['100%', '80%', '80%', '80%', '50%'],
               minHeight: Dimensions.get('window').height,
               display: 'flex',
               backgroundColor: 'white',
