@@ -139,25 +139,25 @@ export function HomeScreen() {
               </Text>
             </View>
             <View sx={style.sliderButtonContainer}>
-              <View sx={theme.buttons.bigButton}>
-                <TouchableOpacity
-                  onPress={() => {
-                    router.push('/apply-as-a-driver')
-                  }}
+              <TouchableOpacity
+                onPress={() => {
+                  router.push('/apply-as-a-driver')
+                }}
+              >
+                <View sx={theme.buttons.bigButton}>
+                  <Text variant="buttonBig">APPLY AS DRIVER</Text>
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity>
+                <View
+                  style={[
+                    theme.buttons.bigButton,
+                    sx({ marginLeft: [0, 20], marginTop: [20, 0] }),
+                  ]}
                 >
                   <Text variant="buttonBig">APPLY AS DRIVER</Text>
-                </TouchableOpacity>
-              </View>
-              <View
-                style={[
-                  theme.buttons.bigButton,
-                  sx({ marginLeft: [0, 20], marginTop: [20, 0] }),
-                ]}
-              >
-                <TouchableOpacity>
-                  <Text variant="buttonBig">APPLY AS DRIVER</Text>
-                </TouchableOpacity>
-              </View>
+                </View>
+              </TouchableOpacity>
             </View>
           </View>
         </HeaderSlider>
