@@ -1,13 +1,17 @@
 import { TextInput, View, useDripsyTheme, Text } from 'dripsy'
 import { useState, useEffect } from 'react'
-import { Platform, StyleSheet } from 'react-native'
-
+import { Platform, Pressable, StyleSheet } from 'react-native'
+import DateTimePicker from '../../datepicker'
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
+import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 interface CustomInputProps {
   label: string
   required?: boolean
   error: boolean
   setVal: Function
   currentValue: any
+  datePicker?: boolean
 }
 const CustomInput = ({
   label,
@@ -15,10 +19,12 @@ const CustomInput = ({
   setVal,
   required = false,
   currentValue,
+  datePicker = false,
 }: CustomInputProps) => {
+  const [date, setDate] = useState<any>(new Date())
   const [value, setValue] = useState(currentValue)
   const { theme } = useDripsyTheme()
-
+  const [openDatePicker, setOpenDatePicker] = useState(false)
   const style = StyleSheet.create({
     container: {
       minWidth: '50%',
@@ -39,59 +45,113 @@ const CustomInput = ({
   })
   return (
     <View sx={style.container}>
+      {openDatePicker && Platform.OS != 'web' && (
+        <DateTimePicker
+          testID="dateTimePicker"
+          value={date}
+          mode={'date'}
+          is24Hour={true}
+          onChange={(e: any) => {
+            console.log(e)
+            var date = new Date(e.nativeEvent.timestamp)
+            console.log(new Date(e.nativeEvent.timestamp).getDay())
+            console.log(new Date(e.nativeEvent.timestamp).getDate())
+            console.log(new Date(e.nativeEvent.timestamp).getFullYear())
+            setDate(new Date(e.nativeEvent.timestamp))
+            setOpenDatePicker(false)
+            setVal(
+              date.getMonth() + '/' + date.getDate() + '/' + date.getFullYear()
+            )
+            setValue(
+              date.getMonth() + '/' + date.getDate() + '/' + date.getFullYear()
+            )
+          }}
+        />
+      )}
+
       <Text sx={style.textLabel}>
         {label} {required ? '*' : ''}
       </Text>
-      <TextInput
-        sx={style.textInput}
-        value={value}
-        onChange={(e: any) => {
-          {
-            setValue(e.target.value)
-            setVal(e.target.value)
-          }
-        }}
-        onFocus={() => {}}
-        inputMode={undefined}
-        onPressIn={undefined}
-        onPressOut={undefined}
-        id={undefined}
-        href={undefined}
-        hrefAttrs={undefined}
-        onClick={undefined}
-        onPointerEnter={undefined}
-        onPointerEnterCapture={undefined}
-        onPointerLeave={undefined}
-        onPointerLeaveCapture={undefined}
-        onPointerMove={undefined}
-        onPointerMoveCapture={undefined}
-        onPointerCancel={undefined}
-        onPointerCancelCapture={undefined}
-        onPointerDown={undefined}
-        onPointerDownCapture={undefined}
-        onPointerUp={undefined}
-        onPointerUpCapture={undefined}
-        aria-label={undefined}
-        aria-busy={undefined}
-        aria-checked={undefined}
-        aria-disabled={undefined}
-        aria-expanded={undefined}
-        aria-selected={undefined}
-        aria-labelledby={undefined}
-        aria-valuemax={undefined}
-        aria-valuemin={undefined}
-        aria-valuenow={undefined}
-        aria-valuetext={undefined}
-        aria-hidden={undefined}
-        aria-live={undefined}
-        aria-modal={undefined}
-        role={undefined}
-        accessibilityLabelledBy={undefined}
-        accessibilityLanguage={undefined}
-        autoComplete={undefined}
-        cursorColor={undefined}
-        verticalAlign={undefined}
-      />
+      {Platform.OS == 'web' && datePicker ? (
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <DatePicker
+            onChange={(e: any) => {
+              setVal(e.$M + 1 + '/' + e.$D + '/' + e.$y)
+            }}
+            sx={{
+              '& .MuiInputBase-root': {
+                borderRadius: 30,
+                height: 40,
+                borderColor: 'red !important',
+                marginTop: theme.space.$1 + 'px',
+              },
+              '& .MuiOutlinedInput-notchedOutline': {
+                borderColor: error ? 'red' : theme.colors.primary,
+              },
+            }}
+          />
+        </LocalizationProvider>
+      ) : (
+        <Pressable
+          onPress={() => {
+            if (datePicker) {
+              setOpenDatePicker(true)
+            }
+          }}
+        >
+          <TextInput
+            sx={style.textInput}
+            value={value}
+            onChange={(e: any) => {
+              {
+                setValue(e.target.value)
+                setVal(e.target.value)
+              }
+            }}
+            editable={!datePicker}
+            onFocus={undefined}
+            inputMode={undefined}
+            onPressIn={undefined}
+            onPressOut={undefined}
+            id={undefined}
+            href={undefined}
+            hrefAttrs={undefined}
+            onClick={undefined}
+            onPointerEnter={undefined}
+            onPointerEnterCapture={undefined}
+            onPointerLeave={undefined}
+            onPointerLeaveCapture={undefined}
+            onPointerMove={undefined}
+            onPointerMoveCapture={undefined}
+            onPointerCancel={undefined}
+            onPointerCancelCapture={undefined}
+            onPointerDown={undefined}
+            onPointerDownCapture={undefined}
+            onPointerUp={undefined}
+            onPointerUpCapture={undefined}
+            aria-label={undefined}
+            aria-busy={undefined}
+            aria-checked={undefined}
+            aria-disabled={undefined}
+            aria-expanded={undefined}
+            aria-selected={undefined}
+            aria-labelledby={undefined}
+            aria-valuemax={undefined}
+            aria-valuemin={undefined}
+            aria-valuenow={undefined}
+            aria-valuetext={undefined}
+            aria-hidden={undefined}
+            aria-live={undefined}
+            aria-modal={undefined}
+            role={undefined}
+            accessibilityLabelledBy={undefined}
+            accessibilityLanguage={undefined}
+            autoComplete={undefined}
+            cursorColor={undefined}
+            verticalAlign={undefined}
+          />
+        </Pressable>
+      )}
     </View>
   )
 }

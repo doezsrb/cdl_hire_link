@@ -3395,6 +3395,54 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@mui/x-date-pickers@npm:^6.7.0":
+  version: 6.7.0
+  resolution: "@mui/x-date-pickers@npm:6.7.0"
+  dependencies:
+    "@babel/runtime": ^7.21.0
+    "@mui/utils": ^5.13.1
+    "@types/react-transition-group": ^4.4.6
+    clsx: ^1.2.1
+    prop-types: ^15.8.1
+    react-transition-group: ^4.4.5
+  peerDependencies:
+    "@emotion/react": ^11.9.0
+    "@emotion/styled": ^11.8.1
+    "@mui/base": ^5.0.0-alpha.87
+    "@mui/material": ^5.8.6
+    "@mui/system": ^5.8.0
+    date-fns: ^2.25.0
+    date-fns-jalali: ^2.13.0-0
+    dayjs: ^1.10.7
+    luxon: ^3.0.2
+    moment: ^2.29.4
+    moment-hijri: ^2.1.2
+    moment-jalaali: ^0.7.4 || ^0.8.0 || ^0.9.0 || ^0.10.0
+    react: ^17.0.0 || ^18.0.0
+    react-dom: ^17.0.0 || ^18.0.0
+  peerDependenciesMeta:
+    "@emotion/react":
+      optional: true
+    "@emotion/styled":
+      optional: true
+    date-fns:
+      optional: true
+    date-fns-jalali:
+      optional: true
+    dayjs:
+      optional: true
+    luxon:
+      optional: true
+    moment:
+      optional: true
+    moment-hijri:
+      optional: true
+    moment-jalaali:
+      optional: true
+  checksum: 7e85846ff5eac2de16ba408d0706141e720ae39290439719fb2e38afc9986d98406f57b002b322896ae7cfa96565bd35666dbb7aa3c0125a9aa0e173e08635bf
+  languageName: node
+  linkType: hard
+
 "@next/env@npm:13.2.0":
   version: 13.2.0
   resolution: "@next/env@npm:13.2.0"
@@ -3946,6 +3994,15 @@ __metadata:
   bin:
     react-native: build/bin.js
   checksum: f3c498c8cc660c53a75cfb8522748a26b589fa087d13a03225cd207dad61c592dfa59ebc26e5d9caf8cb210b8802922bc4a3c907e180273027bc738ee7cc6038
+  languageName: node
+  linkType: hard
+
+"@react-native-community/datetimepicker@npm:6.7.3":
+  version: 6.7.3
+  resolution: "@react-native-community/datetimepicker@npm:6.7.3"
+  dependencies:
+    invariant: ^2.2.4
+  checksum: ad08d786aafe8c33135c5f2bdc227d54970bf41ee9f9876a7d4ed365733f02c6e4fb2b8df8f0c45702e5aee43843fe78b7c04c1ff7a1862cde48789e68b9d355
   languageName: node
   linkType: hard
 
@@ -6207,6 +6264,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"dayjs@npm:^1.11.8":
+  version: 1.11.8
+  resolution: "dayjs@npm:1.11.8"
+  checksum: 4fe04b6df98ba6e5f89b49d80bba603cbf01e21a1b4a24ecb163c94c0ba5324a32ac234a139cee654f89d5277a2bcebca5347e6676c28a0a6d1a90f1d34a42b8
+  languageName: node
+  linkType: hard
+
 "dayjs@npm:^1.8.15":
   version: 1.11.7
   resolution: "dayjs@npm:1.11.7"
@@ -7231,6 +7295,7 @@ __metadata:
   resolution: "expo-app@workspace:apps/expo"
   dependencies:
     "@babel/core": ^7.20.0
+    "@react-native-community/datetimepicker": 6.7.3
     "@react-native-firebase/app": ^17.5.0
     "@react-native-firebase/database": ^17.5.0
     "@react-native-firebase/messaging": ^17.5.0
@@ -10926,8 +10991,10 @@ __metadata:
     "@emotion/styled": ^11.11.0
     "@expo/next-adapter": 5.0.2
     "@mui/material": ^5.13.4
+    "@mui/x-date-pickers": ^6.7.0
     "@types/node": 17.0.21
     app: "*"
+    dayjs: ^1.11.8
     eslint-config-next: 13.2.0
     firebase: ^9.22.0
     next: 13.2.0

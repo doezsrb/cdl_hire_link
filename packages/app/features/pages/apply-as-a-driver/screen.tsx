@@ -6,12 +6,21 @@ import CustomUploadFile from 'app/features/common/components/CustomUploadFile/Cu
 import StepInd from 'app/features/common/components/StepInd/StepInd'
 import { Pressable, SafeAreaView, Text, View } from 'dripsy'
 import { useDripsyTheme } from 'dripsy'
-import { Dimensions, Platform, ScrollView, StyleSheet } from 'react-native'
+import {
+  Dimensions,
+  Platform,
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native'
 import { useState, useEffect, Fragment, useRef } from 'react'
 import HeaderSlider from 'app/features/common/components/HeaderSlider/HeaderSlider'
 
+/* import { DateTimePickerAndroid } from '@react-native-community/datetimepicker' */
 const ApplyAsADriver = () => {
   const scrollToStepRef: any = useRef()
+  const [openDatePicker, setOpenDatePicker] = useState(true)
+  const [date, setDate] = useState<any>(new Date())
   const { theme } = useDripsyTheme()
   const [step, setStep] = useState(1)
   const [allSteps, setAllSteps] = useState(2)
@@ -32,7 +41,7 @@ const ApplyAsADriver = () => {
             },
             date_ready_to_start: {
               name: 'Date Ready to Start',
-              type: 'text',
+              type: 'date',
               value: '',
               error: false,
               required: true,
@@ -164,7 +173,7 @@ const ApplyAsADriver = () => {
           subgroup: null,
           data: {
             date_of_birth: {
-              type: 'text',
+              type: 'date',
               name: 'Date Of Birth',
               value: '',
               error: false,
@@ -343,6 +352,21 @@ const ApplyAsADriver = () => {
               steps={allSteps}
             />
             <View ref={scrollToStepRef} />
+
+            {/*  <TouchableOpacity
+              onPress={() => {
+                DateTimePickerAndroid.open({
+                  value: date,
+                  onChange: (e: any) => {
+                    console.log(e)
+                  },
+                  mode: 'date',
+                  is24Hour: true,
+                })
+              }}
+            >
+              <Text>DatePicker</Text>
+            </TouchableOpacity> */}
             {Object.keys(stepData['step' + step].groups).map(
               (it: any, index: number) => {
                 var group: any = stepData['step' + step].groups[it]
@@ -360,6 +384,25 @@ const ApplyAsADriver = () => {
                           response = (
                             <Fragment key={step + it + it2}>
                               <CustomInput
+                                currentValue={group.data[it2].value}
+                                label={group.data[it2].name}
+                                error={group.data[it2].error}
+                                setVal={(val: any) => {
+                                  var newObj = { ...stepData }
+                                  newObj['step' + step].groups[it].data[
+                                    it2
+                                  ].value = val
+                                  setStepData(newObj)
+                                }}
+                                required={group.data[it2].required}
+                              />
+                            </Fragment>
+                          )
+                        } else if (group.data[it2].type == 'date') {
+                          response = (
+                            <Fragment key={step + it + it2}>
+                              <CustomInput
+                                datePicker
                                 currentValue={group.data[it2].value}
                                 label={group.data[it2].name}
                                 error={group.data[it2].error}
@@ -452,6 +495,33 @@ const ApplyAsADriver = () => {
                                         return (
                                           <Fragment key={step + it2 + it3}>
                                             <CustomInput
+                                              currentValue={
+                                                subgroup.data[it3].value
+                                              }
+                                              error={subgroup.data[it3].error}
+                                              setVal={(val: any) => {
+                                                var newObj = { ...stepData }
+                                                newObj['step' + step].groups[
+                                                  it
+                                                ].subgroup[it2].data[
+                                                  it3
+                                                ].value = val
+                                                setStepData(newObj)
+                                              }}
+                                              label={subgroup.data[it3].name}
+                                              required={
+                                                subgroup.data[it3].required
+                                              }
+                                            />
+                                          </Fragment>
+                                        )
+                                      } else if (
+                                        subgroup.data[it3].type == 'date'
+                                      ) {
+                                        return (
+                                          <Fragment key={step + it2 + it3}>
+                                            <CustomInput
+                                              datePicker
                                               currentValue={
                                                 subgroup.data[it3].value
                                               }
