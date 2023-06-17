@@ -36,7 +36,10 @@ const theme = makeTheme({
   view: {},
   text: {
     sliderText: {
-      fontSize: 58 / PixelRatio.getFontScale(),
+      fontSize: [
+        48 / PixelRatio.getFontScale(),
+        58 / PixelRatio.getFontScale(),
+      ],
       fontWeight: 'bold',
       textAlign: 'center',
 

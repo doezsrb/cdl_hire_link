@@ -5,7 +5,7 @@ import {
   ListItem,
   ListItemButton,
   ListItemText,
-} from 'app/features/common/mateiralui'
+} from 'app/features/common/functions/mateiralui'
 import Logo from 'app/features/common/components/Logo/logo'
 import { Dimensions, StyleSheet } from 'react-native'
 import { useRouter } from 'next/router'
@@ -107,14 +107,14 @@ const DesktopDrawer = ({ openDrawer, setOpenDrawer }: DesktopDrawerProps) => {
           <ListItem disablePadding>
             <ListItemButton
               onClick={() => {
-                router.push('/apply-as-a-driver')
+                router.push('/apply/driver')
                 setOpenDrawer(false)
               }}
             >
               <ListItemText
                 sx={{
                   color:
-                    router.route == '/apply-as-a-driver'
+                    router.asPath == '/apply/driver'
                       ? theme.colors.secondary
                       : 'white',
                 }}
@@ -125,12 +125,18 @@ const DesktopDrawer = ({ openDrawer, setOpenDrawer }: DesktopDrawerProps) => {
           <ListItem disablePadding>
             <ListItemButton
               onClick={() => {
-                console.log('dsda')
+                router.push('/apply/carrier')
+                setOpenDrawer(false)
               }}
             >
               <ListItemText
-                sx={{ color: 'white' }}
-                primary="APPLY AS AS CARRIER"
+                sx={{
+                  color:
+                    router.asPath == '/apply/carrier'
+                      ? theme.colors.secondary
+                      : 'white',
+                }}
+                primary="APPLY AS A CARRIER"
               />
             </ListItemButton>
           </ListItem>

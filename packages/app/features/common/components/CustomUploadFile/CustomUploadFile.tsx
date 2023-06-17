@@ -1,7 +1,7 @@
 import { View, Text, useDripsyTheme } from 'dripsy'
 import { useEffect, useRef, useState } from 'react'
 import { Platform, StyleSheet } from 'react-native'
-import DocumentPicker from '../../docpicker'
+import DocumentPicker from '../../functions/docpicker'
 interface CustomUploadFileProps {
   name: string
   setVal: Function

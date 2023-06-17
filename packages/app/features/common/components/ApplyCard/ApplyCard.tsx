@@ -36,7 +36,7 @@ const ApplyCard = ({ title, step, text }: ApplyCardProps) => {
       <ApplyStepInd step={step} />
       <View sx={style.childContainer}>
         <View sx={style.image}>
-          <SolitoImage alt="imgtruck" src="/images/pngtruck2.png" fill />
+          {/* <SolitoImage alt="imgtruck" src="/images/pngtruck2.png" fill /> */}
         </View>
         <Text sx={style.title}>{title}</Text>
         <Text sx={style.text}>{text}</Text>

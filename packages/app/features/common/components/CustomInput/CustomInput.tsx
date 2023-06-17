@@ -1,10 +1,13 @@
 import { TextInput, View, useDripsyTheme, Text } from 'dripsy'
 import { useState, useEffect } from 'react'
 import { Platform, Pressable, StyleSheet } from 'react-native'
-import DateTimePicker from '../../datepicker'
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
-import { DatePicker } from '@mui/x-date-pickers/DatePicker'
+import {
+  AdapterDayjs,
+  DatePicker,
+  DateTimePicker,
+  LocalizationProvider,
+} from '../../functions/datepicker'
+
 interface CustomInputProps {
   label: string
   required?: boolean
@@ -12,6 +15,7 @@ interface CustomInputProps {
   setVal: Function
   currentValue: any
   datePicker?: boolean
+  multiline?: boolean
 }
 const CustomInput = ({
   label,
@@ -20,6 +24,7 @@ const CustomInput = ({
   required = false,
   currentValue,
   datePicker = false,
+  multiline = false,
 }: CustomInputProps) => {
   const [date, setDate] = useState<any>(new Date())
   const [value, setValue] = useState(currentValue)
@@ -36,6 +41,7 @@ const CustomInput = ({
     },
     textLabel: { fontWeight: 'bold', color: 'primary' },
     textInput: {
+      height: multiline ? 200 : 'auto',
       mt: '$1',
       borderWidth: 1,
       borderColor: error ? 'red' : theme.colors.primary,
@@ -52,11 +58,7 @@ const CustomInput = ({
           mode={'date'}
           is24Hour={true}
           onChange={(e: any) => {
-            console.log(e)
             var date = new Date(e.nativeEvent.timestamp)
-            console.log(new Date(e.nativeEvent.timestamp).getDay())
-            console.log(new Date(e.nativeEvent.timestamp).getDate())
-            console.log(new Date(e.nativeEvent.timestamp).getFullYear())
             setDate(new Date(e.nativeEvent.timestamp))
             setOpenDatePicker(false)
             setVal(
@@ -108,6 +110,7 @@ const CustomInput = ({
                 setVal(e.target.value)
               }
             }}
+            multiline={multiline}
             editable={!datePicker}
             onFocus={undefined}
             inputMode={undefined}

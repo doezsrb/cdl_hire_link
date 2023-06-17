@@ -10,7 +10,7 @@ import {
   ListItem,
   ListItemButton,
   ListItemText,
-} from 'app/features/common/mateiralui'
+} from 'app/features/common/functions/mateiralui'
 import { useEffect, useState } from 'react'
 import DesktopDrawer from '../DesktopDrawer/DesktopDrawer'
 
@@ -19,7 +19,7 @@ const DesktopHeader = () => {
   const sx = useSx()
   const router = useRouter()
   useEffect(() => {
-    console.log(router.route)
+    console.log(router.asPath)
   }, [])
   const { theme } = useDripsyTheme()
   const style = StyleSheet.create({
@@ -112,7 +112,7 @@ const DesktopHeader = () => {
             <Text
               style={[
                 sx(style.menuButton),
-                sx({ color: router.route == '/' ? 'secondary' : 'white' }),
+                sx({ color: router.asPath == '/' ? 'secondary' : 'white' }),
               ]}
             >
               HOME
@@ -160,22 +160,25 @@ const DesktopHeader = () => {
         <View sx={style.buttonBox}>
           <TouchableOpacity
             onPress={() => {
-              router.push('/apply-as-a-driver')
+              router.push('/apply/driver')
             }}
           >
             <Text
               style={[
                 sx(style.headerButton),
                 sx({
-                  color:
-                    router.route == '/apply-as-a-driver' ? 'white' : 'primary',
+                  color: router.asPath == '/apply/driver' ? 'white' : 'primary',
                 }),
               ]}
             >
               APPLY AS A DRIVER
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => {}}>
+          <TouchableOpacity
+            onPress={() => {
+              router.push('/apply/carrier')
+            }}
+          >
             <Text
               style={[
                 sx(style.headerButton),
@@ -183,7 +186,7 @@ const DesktopHeader = () => {
                   ml: [0, 0, 0, 0, 10],
                   marginTop: [6, 6, 6, 6, 0],
                   color:
-                    router.route == '/apply-as-a-carrier' ? 'white' : 'primary',
+                    router.asPath == '/apply/carrier' ? 'white' : 'primary',
                 }),
               ]}
             >

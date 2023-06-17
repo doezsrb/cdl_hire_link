@@ -1,8 +1,11 @@
 import { NativeNavigation } from 'app/navigation/native'
 import { Provider } from 'app/provider'
 import messaging from '@react-native-firebase/messaging'
+import { MobileLoadingProvider } from './context/mobileLoadingContext'
+import { useState } from 'react'
 
 export default function App() {
+  const [loading, setLoading] = useState(true)
   const requestUserPermission = async () => {
     const authStatus = await messaging().requestPermission()
     const enabled =
@@ -14,8 +17,10 @@ export default function App() {
     }
   }
   return (
-    <Provider>
-      <NativeNavigation />
-    </Provider>
+    <MobileLoadingProvider value={{ loading: loading, setLoading: setLoading }}>
+      <Provider>
+        <NativeNavigation />
+      </Provider>
+    </MobileLoadingProvider>
   )
 }

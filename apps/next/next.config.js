@@ -21,6 +21,8 @@ const nextConfig = {
     'react-native-gesture-handler',
     'react-native-input-select',
     'react-native-svg',
+    'react-native-drawer-layout',
+    'react-native-radio-buttons-group',
   ],
 }
 

@@ -4,18 +4,18 @@ import {
   DrawerItem,
   DrawerItemList,
 } from '@react-navigation/drawer'
-import { useEffect } from 'react'
+import { useContext, useEffect } from 'react'
 import { View, Text } from 'dripsy'
 import Logo from 'app/features/common/components/Logo/logo'
+
+import MobileLoadingContext from '../../context/mobileLoadingContext'
 
 interface DrawerMenuProps {
   drawerProps: DrawerContentComponentProps
 }
 const DrawerMenu = ({ drawerProps }: DrawerMenuProps) => {
-  useEffect(() => {
-    /* console.log('dsdddddddddddddddddddddddddddddd')
-    console.log(drawerProps.descriptors) */
-  }, [])
+  const mobileLoadingContext: any = useContext(MobileLoadingContext)
+  useEffect(() => {}, [])
   return (
     <DrawerContentScrollView style={{ backgroundColor: '#005199', padding: 5 }}>
       <View sx={{ padding: '$3', width: '100%', alignItems: 'center' }}>
@@ -33,7 +33,10 @@ const DrawerMenu = ({ drawerProps }: DrawerMenuProps) => {
             labelStyle={{ color: focused ? '#66CC8F' : 'white' }}
             label={title == undefined ? '' : title.toUpperCase()}
             onPress={() => {
-              alert(it)
+              mobileLoadingContext.setLoading(true)
+              setTimeout(() => {
+                drawerProps.navigation.navigate(it.name)
+              }, 1)
             }}
           />
         )

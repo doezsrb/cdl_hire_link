@@ -7317,6 +7317,7 @@ __metadata:
     react: 18.2.0
     react-dom: 18.2.0
     react-native: 0.71.7
+    react-native-drawer-layout: ^3.2.0
     react-native-gesture-handler: ~2.9.0
     react-native-input-select: ^0.32.0
     react-native-reanimated: ~2.14.4
@@ -12267,6 +12268,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-native-drawer-layout@npm:^3.2.0":
+  version: 3.2.0
+  resolution: "react-native-drawer-layout@npm:3.2.0"
+  dependencies:
+    use-latest-callback: ^0.1.5
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+    react-native-gesture-handler: ">= 1.0.0"
+    react-native-reanimated: ">= 1.0.0"
+  checksum: 67237e650e1245297ec08b9cf90c74aed25dfefbf66c972dae6be5913df78d98f04c5e90e98e396e8ea2b97eca8df0db1872a7608509e29f86491b5d3db36b3a
+  languageName: node
+  linkType: hard
+
 "react-native-gesture-handler@npm:~2.9.0":
   version: 2.9.0
   resolution: "react-native-gesture-handler@npm:2.9.0"
@@ -12297,6 +12312,13 @@ __metadata:
     react: "*"
     react-native: "*"
   checksum: 271acd73117b59506b5ed57ed642f069e8c1c407016ac8051616131fe03ce9d88f39a0785b4846aa81c2f4d5ea7b98417a3dc76c43aedd1ad616c9a14f64956e
+  languageName: node
+  linkType: hard
+
+"react-native-radio-buttons-group@npm:^3.0.2":
+  version: 3.0.2
+  resolution: "react-native-radio-buttons-group@npm:3.0.2"
+  checksum: fc41d95d37e22593f9cc22a37a9e8b54c34d01553268d5c785cf43abb605572b7068e0e8cad142fbbe64af2aebc81fc4cb7a5c4b3e013a2c8c8d1a95bb52d732
   languageName: node
   linkType: hard
 
@@ -13304,6 +13326,7 @@ __metadata:
     "@types/react-native": ^0.69.5
     eslint: ^8.21.0
     react-icons: ^4.9.0
+    react-native-radio-buttons-group: ^3.0.2
     turbo: ^1.4.2
     typescript: ^4.7.4
   languageName: unknown

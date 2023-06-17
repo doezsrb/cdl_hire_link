@@ -7,6 +7,7 @@ interface CustomRadioProps {
   setVal: Function
   error: boolean
   required?: boolean
+
   currentValue: any
 }
 const CustomRadio = ({
@@ -14,6 +15,7 @@ const CustomRadio = ({
   setVal,
   error,
   required = false,
+
   currentValue,
 }: CustomRadioProps) => {
   const [value, setValue] = useState<any>(
@@ -45,6 +47,7 @@ const CustomRadio = ({
     container: {
       display: 'flex',
       flexDirection: 'column',
+      width: '100%',
       paddingLeft: 2,
       paddingRight: 2,
       paddingTop: 5,

@@ -7,7 +7,9 @@ import DrawerMenu from '../../../../apps/expo/components/Drawer/drawer'
 import { Button, Pressable } from 'react-native'
 import { Image, useDripsyTheme } from 'dripsy'
 import Logo from '../../features/common/components/Logo/logo'
-import ApplyAsADriver from 'app/features/pages/apply-as-a-driver/screen'
+
+import ApplyScreen from '../../../../apps/next/pages/apply/[as]'
+import AvailableJobsScreen from 'app/features/pages/jobs/jobs-screen'
 
 /* const Stack = createNativeStackNavigator<{
   home: undefined
@@ -20,7 +22,12 @@ const Drawer = createDrawerNavigator<{
   'about-us': undefined
   careers: undefined
   'contact-us': undefined
-  'apply-as-a-driver': undefined
+  apply: {
+    as: string
+  }
+  'apply/driver': undefined
+  'apply/carrier': undefined
+  'available-jobs': undefined
 }>()
 export function NativeNavigation() {
   const { theme } = useDripsyTheme()
@@ -62,19 +69,55 @@ export function NativeNavigation() {
       drawerContent={(props) => <DrawerMenu drawerProps={props} />}
     >
       <Drawer.Screen
-        name="apply-as-a-driver"
-        options={{
-          title: 'Apply as a driver',
+        name="available-jobs"
+        listeners={{
+          drawerItemPress: (e: any) => {
+            console.log('PRESS')
+          },
         }}
-        component={ApplyAsADriver}
+        options={{
+          title: 'Available Jobs',
+        }}
+        component={AvailableJobsScreen}
       />
       <Drawer.Screen
         name="home"
+        listeners={{
+          drawerItemPress: (e: any) => {
+            console.log('PRESS')
+          },
+        }}
         options={{
           title: 'Home',
         }}
         component={HomeScreen}
       />
+      <Drawer.Screen
+        name="apply/driver"
+        listeners={{
+          drawerItemPress: (e: any) => {
+            console.log('PRESS')
+          },
+        }}
+        options={({ route }) => {
+          return {
+            title: 'Apply as a driver',
+          }
+        }}
+        initialParams={{ as: 'driver' } as any}
+        component={ApplyScreen}
+      />
+      <Drawer.Screen
+        name="apply/carrier"
+        options={({ route }) => {
+          return {
+            title: 'Apply as a carrier',
+          }
+        }}
+        initialParams={{ as: 'carrier' } as any}
+        component={ApplyScreen}
+      />
+
       <Drawer.Screen
         name="about-us"
         options={{

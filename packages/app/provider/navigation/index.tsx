@@ -17,7 +17,7 @@ export function NavigationProvider({
             screens: {
               home: '',
               'user-detail': 'user/:id',
-              'apply-as-a-driver': 'apply-as-a-driver',
+              'available-jobs': 'available-jobs',
             },
           },
         }),

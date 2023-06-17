@@ -17,11 +17,14 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from 'react-native'
-import database, { dbRef, onValue } from '../../common/db'
-import { useEffect } from 'react'
+import database, { dbRef, onValue } from '../../common/functions/db'
+import { useEffect, useContext } from 'react'
 import * as ImagePicker from 'expo-image-picker'
 import * as FileSystem from 'expo-file-system'
-import storage, { storageRef, uploadBytes } from '../../common/storage'
+import storage, {
+  storageRef,
+  uploadBytes,
+} from '../../common/functions/storage'
 import { Dimensions } from 'react-native'
 import ApplyStepInd from 'app/features/common/components/ApplyStepInd/ApplyStepInd'
 import ApplyCard from 'app/features/common/components/ApplyCard/ApplyCard'
@@ -30,8 +33,12 @@ import dynamic from 'next/dynamic'
 import FrontSlider from 'app/features/common/components/FrontSlider/FrontSlider'
 import HeaderSlider from 'app/features/common/components/HeaderSlider/HeaderSlider'
 import { useRouter } from 'solito/router'
-export function HomeScreen() {
+
+import routerListener from 'app/features/common/functions/routerListener'
+import MobileLoadingContext from '../../../../../apps/expo/context/mobileLoadingContext'
+export function HomeScreen({ navigation }) {
   const sx = useSx()
+  const mobileLoadingContext: any = useContext(MobileLoadingContext)
   const { theme } = useDripsyTheme()
   const router = useRouter()
   const style = StyleSheet.create({
@@ -79,6 +86,9 @@ export function HomeScreen() {
       flexDirection: ['column', 'row'] as any,
     },
   })
+  useEffect(() => {
+    routerListener(navigation, mobileLoadingContext)
+  }, [navigation])
   useEffect(() => {
     /*   if (ref != null || onValue != null) {
       var userDataRef = ref(database, 'users/1')
@@ -141,21 +151,33 @@ export function HomeScreen() {
             <View sx={style.sliderButtonContainer}>
               <TouchableOpacity
                 onPress={() => {
-                  router.push('/apply-as-a-driver')
+                  if (Platform.OS == 'web') {
+                    router.push('/apply/driver')
+                  } else {
+                    navigation.navigate('apply/driver')
+                  }
                 }}
               >
                 <View sx={theme.buttons.bigButton}>
                   <Text variant="buttonBig">APPLY AS DRIVER</Text>
                 </View>
               </TouchableOpacity>
-              <TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  if (Platform.OS == 'web') {
+                    router.push('/apply/carrier')
+                  } else {
+                    navigation.navigate('apply/carrier')
+                  }
+                }}
+              >
                 <View
                   style={[
                     theme.buttons.bigButton,
                     sx({ marginLeft: [0, 20], marginTop: [20, 0] }),
                   ]}
                 >
-                  <Text variant="buttonBig">APPLY AS DRIVER</Text>
+                  <Text variant="buttonBig">APPLY AS CARRIER</Text>
                 </View>
               </TouchableOpacity>
             </View>
