@@ -23,6 +23,7 @@ const nextConfig = {
     'react-native-svg',
     'react-native-drawer-layout',
     'react-native-radio-buttons-group',
+    'react-native-bouncy-checkbox',
   ],
 }
 

@@ -1,6 +1,6 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { Entypo, Fontisto } from '@expo/vector-icons'
-import { HomeScreen } from '../../features/pages/home/screen'
+import { HomeScreen } from '../../features/pages/home/home-screen'
 import { UserDetailScreen } from '../../features/pages/user/detail-screen'
 import { createDrawerNavigator } from '@react-navigation/drawer'
 import DrawerMenu from '../../../../apps/expo/components/Drawer/drawer'

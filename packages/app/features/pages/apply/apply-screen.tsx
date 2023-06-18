@@ -20,6 +20,7 @@ import { createParam } from 'solito'
 
 import routerListener from 'app/features/common/functions/routerListener'
 import MobileLoadingContext from '../../../../../apps/expo/context/mobileLoadingContext'
+import Layout from 'app/features/common/components/Layout/Layout'
 
 const { useParam } = createParam<{ as: 'carrier' | 'driver' }>()
 /* import { DateTimePickerAndroid } from '@react-native-community/datetimepicker' */
@@ -893,332 +894,301 @@ const ApplyScreen = ({ navigation }) => {
   return (
     <>
       {as == undefined ? null : (
-        <SafeAreaView>
-          <ScrollView>
-            <HeaderSlider>
-              <View sx={style.sliderTextContainer}>
-                <Text variant="sliderText">APPLY AS A {as.toUpperCase()}</Text>
-              </View>
-            </HeaderSlider>
-            <View sx={style.container}>
-              <View sx={style.containerChild}>
-                <StepInd
-                  stepName={stepData[as as string]['step' + step].name}
-                  current={step}
-                  steps={allSteps}
-                />
-                <View ref={scrollToStepRef} />
-                {Object.keys(stepData[as as string]['step' + step].groups).map(
-                  (it: any, index: number) => {
-                    var group: any =
-                      stepData[as as string]['step' + step].groups[it]
-                    return (
-                      <BorderInput key={index} text={group.name}>
-                        <View
-                          sx={{
-                            flexDirection: ['column', 'row'],
-                            flexWrap: ['nowrap', 'wrap'],
-                          }}
-                        >
-                          {Object.keys(group.data).map(
-                            (it2: any, index: any) => {
-                              var response
-                              if (group.data[it2].type == 'text') {
-                                response = (
-                                  <Fragment key={step + it + it2}>
-                                    <CustomInput
-                                      currentValue={group.data[it2].value}
-                                      label={group.data[it2].name}
-                                      error={group.data[it2].error}
-                                      setVal={(val: any) => {
-                                        updateState(val, it, it2)
-                                      }}
-                                      required={group.data[it2].required}
-                                      multiline={
-                                        group.data[it2].multiline != undefined
-                                      }
-                                    />
-                                  </Fragment>
-                                )
-                              } else if (group.data[it2].type == 'date') {
-                                response = (
-                                  <Fragment key={step + it + it2}>
-                                    <CustomInput
-                                      datePicker
-                                      currentValue={group.data[it2].value}
-                                      label={group.data[it2].name}
-                                      error={group.data[it2].error}
-                                      setVal={(val: any) => {
-                                        updateState(val, it, it2)
-                                      }}
-                                      required={group.data[it2].required}
-                                    />
-                                  </Fragment>
-                                )
-                              } else if (group.data[it2].type == 'select') {
-                                response = (
-                                  <Fragment key={step + it + it2}>
-                                    <CustomSelectInput
-                                      currentValue={group.data[it2].value}
-                                      error={group.data[it2].error}
-                                      required={group.data[it2].required}
-                                      fullWidth={
-                                        group.data[it2].name == 'State'
-                                      }
-                                      label={group.data[it2].name}
-                                      data={group.data[it2].data}
-                                      setVal={(val: any) => {
-                                        updateState(val, it, it2)
-                                      }}
-                                    />
-                                  </Fragment>
-                                )
-                              } else if (group.data[it2].type == 'file') {
-                                response = (
-                                  <Fragment key={step + it + it2}>
-                                    <CustomUploadFile
-                                      value={group.data[it2].value}
-                                      required={group.data[it2].required}
-                                      error={group.data[it2].error}
-                                      name={group.data[it2].name}
-                                      setVal={(val: any) => {
-                                        updateState(val, it, it2)
-                                      }}
-                                    />
-                                  </Fragment>
-                                )
-                              } else if (group.data[it2].type == 'radio') {
-                                response = (
-                                  <Fragment key={step + it + it2}>
-                                    <CustomRadio
-                                      currentValue={group.data[it2].value}
-                                      error={group.data[it2].error}
-                                      name={group.data[it2].name}
-                                      setVal={(val: any) => {
-                                        updateState(val, it, it2)
-                                      }}
-                                      required={group.data[it2].required}
-                                    />
-                                  </Fragment>
-                                )
-                              }
-                              return response
-                            }
-                          )}
-                        </View>
-                        {group.subgroup != null
-                          ? Object.keys(group.subgroup).map(
-                              (it2: any, index: number) => {
-                                var subgroup = group.subgroup[it2]
-                                return (
-                                  <BorderInput key={index} text={subgroup.name}>
-                                    <View
-                                      sx={{
-                                        flexDirection: ['column', 'row'],
-                                        flexWrap: ['nowrap', 'wrap'],
-                                      }}
-                                    >
-                                      {Object.keys(subgroup.data).map(
-                                        (it3: any, index: number) => {
-                                          if (
-                                            subgroup.data[it3].type == 'text'
-                                          ) {
-                                            return (
-                                              <Fragment key={step + it2 + it3}>
-                                                <CustomInput
-                                                  currentValue={
-                                                    subgroup.data[it3].value
-                                                  }
-                                                  error={
-                                                    subgroup.data[it3].error
-                                                  }
-                                                  setVal={(val: any) => {
-                                                    updateStateSubgroup(
-                                                      val,
-                                                      it,
-                                                      it2,
-                                                      it3
-                                                    )
-                                                  }}
-                                                  label={
-                                                    subgroup.data[it3].name
-                                                  }
-                                                  required={
-                                                    subgroup.data[it3].required
-                                                  }
-                                                  multiline={
-                                                    subgroup.data[it3]
-                                                      .multiline != undefined
-                                                  }
-                                                />
-                                              </Fragment>
-                                            )
-                                          } else if (
-                                            subgroup.data[it3].type == 'date'
-                                          ) {
-                                            return (
-                                              <Fragment key={step + it2 + it3}>
-                                                <CustomInput
-                                                  datePicker
-                                                  currentValue={
-                                                    subgroup.data[it3].value
-                                                  }
-                                                  error={
-                                                    subgroup.data[it3].error
-                                                  }
-                                                  setVal={(val: any) => {
-                                                    updateStateSubgroup(
-                                                      val,
-                                                      it,
-                                                      it2,
-                                                      it3
-                                                    )
-                                                  }}
-                                                  label={
-                                                    subgroup.data[it3].name
-                                                  }
-                                                  required={
-                                                    subgroup.data[it3].required
-                                                  }
-                                                />
-                                              </Fragment>
-                                            )
-                                          } else if (
-                                            subgroup.data[it3].type == 'select'
-                                          ) {
-                                            return (
-                                              <Fragment key={step + it2 + it3}>
-                                                <CustomSelectInput
-                                                  currentValue={
-                                                    subgroup.data[it3].value
-                                                  }
-                                                  error={
-                                                    subgroup.data[it3].error
-                                                  }
-                                                  required={
-                                                    subgroup.data[it3].required
-                                                  }
-                                                  setVal={(val: any) => {
-                                                    updateStateSubgroup(
-                                                      val,
-                                                      it,
-                                                      it2,
-                                                      it3
-                                                    )
-                                                  }}
-                                                  label={
-                                                    subgroup.data[it3].name
-                                                  }
-                                                  data={subgroup.data[it3].data}
-                                                />
-                                              </Fragment>
-                                            )
-                                          } else if (
-                                            subgroup.data[it3].type == 'file'
-                                          ) {
-                                            return (
-                                              <Fragment key={step + it2 + it3}>
-                                                <CustomUploadFile
-                                                  value={
-                                                    subgroup.data[it3].value
-                                                  }
-                                                  required={
-                                                    subgroup.data[it3].required
-                                                  }
-                                                  error={
-                                                    subgroup.data[it3].error
-                                                  }
-                                                  setVal={(val: any) => {
-                                                    updateStateSubgroup(
-                                                      val,
-                                                      it,
-                                                      it2,
-                                                      it3
-                                                    )
-                                                  }}
-                                                  name={subgroup.data[it3].name}
-                                                />
-                                              </Fragment>
-                                            )
-                                          } else if (
-                                            subgroup.data[it3].type == 'radio'
-                                          ) {
-                                            return (
-                                              <Fragment key={step + it2 + it3}>
-                                                <CustomRadio
-                                                  currentValue={
-                                                    subgroup.data[it3].value
-                                                  }
-                                                  error={
-                                                    subgroup.data[it3].error
-                                                  }
-                                                  name={subgroup.data[it3].name}
-                                                  setVal={(val: any) => {
-                                                    updateStateSubgroup(
-                                                      val,
-                                                      it,
-                                                      it2,
-                                                      it3
-                                                    )
-                                                  }}
-                                                  required={
-                                                    subgroup.data[it3].required
-                                                  }
-                                                />
-                                              </Fragment>
-                                            )
-                                          }
-                                        }
-                                      )}
-                                    </View>
-                                  </BorderInput>
-                                )
-                              }
+        <Layout title={'APPLY AS A ' + as.toUpperCase()}>
+          <View sx={style.container}>
+            <View sx={style.containerChild}>
+              <StepInd
+                stepName={stepData[as as string]['step' + step].name}
+                current={step}
+                steps={allSteps}
+              />
+              <View ref={scrollToStepRef} />
+              {Object.keys(stepData[as as string]['step' + step].groups).map(
+                (it: any, index: number) => {
+                  var group: any =
+                    stepData[as as string]['step' + step].groups[it]
+                  return (
+                    <BorderInput key={index} text={group.name}>
+                      <View
+                        sx={{
+                          flexDirection: ['column', 'row'],
+                          flexWrap: ['nowrap', 'wrap'],
+                        }}
+                      >
+                        {Object.keys(group.data).map((it2: any, index: any) => {
+                          var response
+                          if (group.data[it2].type == 'text') {
+                            response = (
+                              <Fragment key={step + it + it2}>
+                                <CustomInput
+                                  currentValue={group.data[it2].value}
+                                  label={group.data[it2].name}
+                                  error={group.data[it2].error}
+                                  setVal={(val: any) => {
+                                    updateState(val, it, it2)
+                                  }}
+                                  required={group.data[it2].required}
+                                  multiline={
+                                    group.data[it2].multiline != undefined
+                                  }
+                                />
+                              </Fragment>
                             )
-                          : null}
-                      </BorderInput>
-                    )
-                  }
-                )}
+                          } else if (group.data[it2].type == 'date') {
+                            response = (
+                              <Fragment key={step + it + it2}>
+                                <CustomInput
+                                  datePicker
+                                  currentValue={group.data[it2].value}
+                                  label={group.data[it2].name}
+                                  error={group.data[it2].error}
+                                  setVal={(val: any) => {
+                                    updateState(val, it, it2)
+                                  }}
+                                  required={group.data[it2].required}
+                                />
+                              </Fragment>
+                            )
+                          } else if (group.data[it2].type == 'select') {
+                            response = (
+                              <Fragment key={step + it + it2}>
+                                <CustomSelectInput
+                                  currentValue={group.data[it2].value}
+                                  error={group.data[it2].error}
+                                  required={group.data[it2].required}
+                                  fullWidth={group.data[it2].name == 'State'}
+                                  label={group.data[it2].name}
+                                  data={group.data[it2].data}
+                                  setVal={(val: any) => {
+                                    updateState(val, it, it2)
+                                  }}
+                                />
+                              </Fragment>
+                            )
+                          } else if (group.data[it2].type == 'file') {
+                            response = (
+                              <Fragment key={step + it + it2}>
+                                <CustomUploadFile
+                                  value={group.data[it2].value}
+                                  required={group.data[it2].required}
+                                  error={group.data[it2].error}
+                                  name={group.data[it2].name}
+                                  setVal={(val: any) => {
+                                    updateState(val, it, it2)
+                                  }}
+                                />
+                              </Fragment>
+                            )
+                          } else if (group.data[it2].type == 'radio') {
+                            response = (
+                              <Fragment key={step + it + it2}>
+                                <CustomRadio
+                                  currentValue={group.data[it2].value}
+                                  error={group.data[it2].error}
+                                  name={group.data[it2].name}
+                                  setVal={(val: any) => {
+                                    updateState(val, it, it2)
+                                  }}
+                                  required={group.data[it2].required}
+                                />
+                              </Fragment>
+                            )
+                          }
+                          return response
+                        })}
+                      </View>
+                      {group.subgroup != null
+                        ? Object.keys(group.subgroup).map(
+                            (it2: any, index: number) => {
+                              var subgroup = group.subgroup[it2]
+                              return (
+                                <BorderInput key={index} text={subgroup.name}>
+                                  <View
+                                    sx={{
+                                      flexDirection: ['column', 'row'],
+                                      flexWrap: ['nowrap', 'wrap'],
+                                    }}
+                                  >
+                                    {Object.keys(subgroup.data).map(
+                                      (it3: any, index: number) => {
+                                        if (subgroup.data[it3].type == 'text') {
+                                          return (
+                                            <Fragment key={step + it2 + it3}>
+                                              <CustomInput
+                                                currentValue={
+                                                  subgroup.data[it3].value
+                                                }
+                                                error={subgroup.data[it3].error}
+                                                setVal={(val: any) => {
+                                                  updateStateSubgroup(
+                                                    val,
+                                                    it,
+                                                    it2,
+                                                    it3
+                                                  )
+                                                }}
+                                                label={subgroup.data[it3].name}
+                                                required={
+                                                  subgroup.data[it3].required
+                                                }
+                                                multiline={
+                                                  subgroup.data[it3]
+                                                    .multiline != undefined
+                                                }
+                                              />
+                                            </Fragment>
+                                          )
+                                        } else if (
+                                          subgroup.data[it3].type == 'date'
+                                        ) {
+                                          return (
+                                            <Fragment key={step + it2 + it3}>
+                                              <CustomInput
+                                                datePicker
+                                                currentValue={
+                                                  subgroup.data[it3].value
+                                                }
+                                                error={subgroup.data[it3].error}
+                                                setVal={(val: any) => {
+                                                  updateStateSubgroup(
+                                                    val,
+                                                    it,
+                                                    it2,
+                                                    it3
+                                                  )
+                                                }}
+                                                label={subgroup.data[it3].name}
+                                                required={
+                                                  subgroup.data[it3].required
+                                                }
+                                              />
+                                            </Fragment>
+                                          )
+                                        } else if (
+                                          subgroup.data[it3].type == 'select'
+                                        ) {
+                                          return (
+                                            <Fragment key={step + it2 + it3}>
+                                              <CustomSelectInput
+                                                currentValue={
+                                                  subgroup.data[it3].value
+                                                }
+                                                error={subgroup.data[it3].error}
+                                                required={
+                                                  subgroup.data[it3].required
+                                                }
+                                                setVal={(val: any) => {
+                                                  updateStateSubgroup(
+                                                    val,
+                                                    it,
+                                                    it2,
+                                                    it3
+                                                  )
+                                                }}
+                                                label={subgroup.data[it3].name}
+                                                data={subgroup.data[it3].data}
+                                              />
+                                            </Fragment>
+                                          )
+                                        } else if (
+                                          subgroup.data[it3].type == 'file'
+                                        ) {
+                                          return (
+                                            <Fragment key={step + it2 + it3}>
+                                              <CustomUploadFile
+                                                value={subgroup.data[it3].value}
+                                                required={
+                                                  subgroup.data[it3].required
+                                                }
+                                                error={subgroup.data[it3].error}
+                                                setVal={(val: any) => {
+                                                  updateStateSubgroup(
+                                                    val,
+                                                    it,
+                                                    it2,
+                                                    it3
+                                                  )
+                                                }}
+                                                name={subgroup.data[it3].name}
+                                              />
+                                            </Fragment>
+                                          )
+                                        } else if (
+                                          subgroup.data[it3].type == 'radio'
+                                        ) {
+                                          return (
+                                            <Fragment key={step + it2 + it3}>
+                                              <CustomRadio
+                                                currentValue={
+                                                  subgroup.data[it3].value
+                                                }
+                                                error={subgroup.data[it3].error}
+                                                name={subgroup.data[it3].name}
+                                                setVal={(val: any) => {
+                                                  updateStateSubgroup(
+                                                    val,
+                                                    it,
+                                                    it2,
+                                                    it3
+                                                  )
+                                                }}
+                                                required={
+                                                  subgroup.data[it3].required
+                                                }
+                                              />
+                                            </Fragment>
+                                          )
+                                        }
+                                      }
+                                    )}
+                                  </View>
+                                </BorderInput>
+                              )
+                            }
+                          )
+                        : null}
+                    </BorderInput>
+                  )
+                }
+              )}
 
-                <View sx={style.containerButtons}>
-                  <Pressable
-                    style={[
-                      theme.buttons.bigButton,
-                      { opacity: step > 1 ? 1 : 0, backgroundColor: 'white' },
-                    ]}
-                    onPress={() => {
-                      if (step <= 1) {
+              <View sx={style.containerButtons}>
+                <Pressable
+                  style={[
+                    theme.buttons.bigButton,
+                    { opacity: step > 1 ? 1 : 0, backgroundColor: 'white' },
+                  ]}
+                  onPress={() => {
+                    if (step <= 1) {
+                      return
+                    }
+                    setStep((old) => old - 1)
+                  }}
+                >
+                  <Text variant="buttonBig">BACK</Text>
+                </Pressable>
+                <Pressable
+                  style={[
+                    theme.buttons.bigButton,
+                    { opacity: step >= allSteps && step != allSteps ? 0 : 1 },
+                  ]}
+                  onPress={() => {
+                    if (checkData()) {
+                      if (step >= allSteps) {
                         return
                       }
-                      setStep((old) => old - 1)
-                    }}
-                  >
-                    <Text variant="buttonBig">BACK</Text>
-                  </Pressable>
-                  <Pressable
-                    style={[
-                      theme.buttons.bigButton,
-                      { opacity: step >= allSteps && step != allSteps ? 0 : 1 },
-                    ]}
-                    onPress={() => {
-                      if (checkData()) {
-                        if (step >= allSteps) {
-                          return
-                        }
-                        setStep((old) => old + 1)
-                      }
-                    }}
-                  >
-                    <Text variant="buttonBig">
-                      {step == allSteps ? 'SUBMIT' : 'NEXT STEP'}
-                    </Text>
-                  </Pressable>
-                </View>
+                      setStep((old) => old + 1)
+                    }
+                  }}
+                >
+                  <Text variant="buttonBig">
+                    {step == allSteps ? 'SUBMIT' : 'NEXT STEP'}
+                  </Text>
+                </Pressable>
               </View>
             </View>
-          </ScrollView>
-        </SafeAreaView>
+          </View>
+        </Layout>
       )}
     </>
   )

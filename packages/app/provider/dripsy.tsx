@@ -20,6 +20,7 @@ const theme = makeTheme({
     $6: 128,
     $7: 256,
   },
+
   buttons: {
     bigButton: {
       borderColor: primary,

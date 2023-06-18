@@ -1,6 +1,7 @@
 import routerListener from 'app/features/common/functions/routerListener'
 import { SafeAreaView, Text, View, useDripsyTheme } from 'dripsy'
 import { useContext, useEffect, useState } from 'react'
+
 import MobileLoadingContext from '../../../../../apps/expo/context/mobileLoadingContext'
 import {
   Dimensions,
@@ -12,8 +13,14 @@ import {
 import FilterDrawerMobile from 'app/features/common/components/FilterDrawer/FilterDrawerMobile'
 import FilterDrawerDesktop from 'app/features/common/components/FilterDrawer/FilterDrawerDesktop'
 import RadioGroup from 'react-native-radio-buttons-group'
+import JobCard from 'app/features/common/components/JobCard/JobCard'
+import Layout from 'app/features/common/components/Layout/Layout'
+
+import BouncyCheckbox from 'react-native-bouncy-checkbox'
+import useRouter from 'app/features/common/functions/nextrouter'
 const AvailableJobsScreen = ({ navigation }) => {
   const mobileLoadingContext = useContext(MobileLoadingContext)
+  const router = useRouter()
   const [openFilter, setOpenFilter] = useState<boolean>(false)
   useEffect(() => {
     routerListener(navigation, mobileLoadingContext)
@@ -31,10 +38,11 @@ const AvailableJobsScreen = ({ navigation }) => {
       width: '100%',
       minHeight: 800,
       backgroundColor: 'white',
+      paddingVertical: '$3',
     },
     topButtons: {
-      mt: '$2',
-      ml: '$2',
+      mt: '$1',
+      ml: '$3',
       width: '100%',
       display: 'flex',
       flexDirection: 'row',
@@ -45,7 +53,7 @@ const AvailableJobsScreen = ({ navigation }) => {
       fontSize: 20,
       paddingLeft: 20,
       paddingRight: 20,
-      paddingTop: 5,
+      paddingTop: Platform.OS == 'web' ? 5 : 8,
       paddingBottom: 8,
       textAlign: 'center',
       borderRadius: 10,
@@ -56,7 +64,75 @@ const AvailableJobsScreen = ({ navigation }) => {
     },
   })
   const { theme } = useDripsyTheme()
-  const [selectedId, setSelectedId] = useState<string>()
+
+  const [division, setSelectedDivision] = useState({
+    dry_van: {
+      name: 'Dry van',
+      value: false,
+    },
+    reefer: {
+      name: 'Reefer',
+      value: false,
+    },
+    flatbed: {
+      name: 'Flatbed',
+      value: false,
+    },
+    box_truck: {
+      name: 'Box truck',
+      value: false,
+    },
+  })
+  const [selectedTypes, setSelectedTypes] = useState({
+    company_driver: {
+      name: 'Company driver',
+      value: false,
+    },
+    lease_to_purchase: {
+      name: 'Lease to purchase',
+      value: false,
+    },
+    rental_lease: {
+      name: 'Rental lease',
+      value: false,
+    },
+    owner_operator: {
+      name: 'Owner operator',
+      value: false,
+    },
+  })
+  const [solo_team, setSelectedSoloTeam] = useState({
+    solo: {
+      name: 'Solo',
+      value: false,
+    },
+    team: {
+      name: 'Team',
+      value: false,
+    },
+  })
+  const [experience, setSelectedExperience] = useState({
+    less_1: {
+      name: 'Less than 1 year',
+      value: false,
+    },
+    less_2: {
+      name: 'Less than 2 years',
+      value: false,
+    },
+    more_2: {
+      name: '2+ years',
+      value: false,
+    },
+  })
+  useEffect(() => {
+    if (Platform.OS == 'web') {
+      let typeQuery = router.query.type
+      let stQuery = router.query.st
+      let divisionQuery = router.query.division
+      let experienceQuery = router.query.experience
+    }
+  }, [selectedTypes, division, experience, solo_team])
   const buttons = {
     type: [
       {
@@ -158,49 +234,142 @@ const AvailableJobsScreen = ({ navigation }) => {
       },
     ],
   }
-  const radioGroup = (btns: any[]) => {
+  const FiltersContent = () => {
     return (
       <View>
         <Text sx={style.title}>Type:</Text>
-        <RadioGroup
-          containerStyle={{
-            alignItems: 'flex-start',
-          }}
-          radioButtons={buttons.type}
-          onPress={setSelectedId}
-          selectedId={selectedId}
-        />
+
+        <View>
+          {Object.keys(selectedTypes).map((it: any, index: any) => {
+            return (
+              <View key={index} sx={{ marginLeft: '$2', marginTop: '$2' }}>
+                <BouncyCheckbox
+                  useNativeDriver={Platform.OS != 'web'}
+                  size={25}
+                  fillColor={theme.colors.primary}
+                  unfillColor="#FFFFFF"
+                  text={selectedTypes[it].name}
+                  textStyle={{
+                    textDecorationLine: 'none',
+                    color: theme.colors.primary,
+                  }}
+                  isChecked={selectedTypes[it].value}
+                  iconStyle={{ borderColor: 'green' }}
+                  innerIconStyle={{ borderWidth: 2 }}
+                  onPress={(isChecked: boolean) => {
+                    var newObj = { ...selectedTypes }
+                    newObj[it].value = isChecked
+                    setSelectedTypes(newObj)
+                  }}
+                />
+              </View>
+            )
+          })}
+        </View>
         <Text sx={style.title}>Solo/Team:</Text>
-        <RadioGroup
-          containerStyle={{
-            alignItems: 'flex-start',
-          }}
-          radioButtons={buttons.solo_team}
-          onPress={setSelectedId}
-          selectedId={selectedId}
-        />
+        {Object.keys(solo_team).map((it: any, index: any) => {
+          return (
+            <View key={index} sx={{ marginLeft: '$2', marginTop: '$2' }}>
+              <BouncyCheckbox
+                useNativeDriver={Platform.OS != 'web'}
+                size={25}
+                fillColor={theme.colors.primary}
+                unfillColor="#FFFFFF"
+                text={solo_team[it].name}
+                textStyle={{
+                  textDecorationLine: 'none',
+                  color: theme.colors.primary,
+                }}
+                isChecked={solo_team[it].value}
+                disableBuiltInState={true}
+                iconStyle={{ borderColor: 'green' }}
+                innerIconStyle={{ borderWidth: 2 }}
+                onPress={(isChecked: boolean) => {
+                  var newObj = { ...solo_team }
+                  if (newObj[it].value) {
+                    newObj[it].value = false
+                  } else {
+                    Object.keys(newObj).map((it: any) => {
+                      newObj[it].value = false
+                    })
+
+                    newObj[it].value = true
+                  }
+
+                  setSelectedSoloTeam(newObj)
+                }}
+              />
+            </View>
+          )
+        })}
         <Text sx={style.title}>Division:</Text>
-        <RadioGroup
-          containerStyle={{
-            alignItems: 'flex-start',
-          }}
-          radioButtons={buttons.division}
-          onPress={setSelectedId}
-          selectedId={selectedId}
-        />
+        <View>
+          {Object.keys(division).map((it: any, index: any) => {
+            return (
+              <View key={index} sx={{ marginLeft: '$2', marginTop: '$2' }}>
+                <BouncyCheckbox
+                  useNativeDriver={Platform.OS != 'web'}
+                  size={25}
+                  fillColor={theme.colors.primary}
+                  unfillColor="#FFFFFF"
+                  text={division[it].name}
+                  textStyle={{
+                    textDecorationLine: 'none',
+                    color: theme.colors.primary,
+                  }}
+                  isChecked={division[it].value}
+                  iconStyle={{ borderColor: 'green' }}
+                  innerIconStyle={{ borderWidth: 2 }}
+                  onPress={(isChecked: boolean) => {
+                    var newObj = { ...division }
+                    newObj[it].value = isChecked
+                    setSelectedDivision(newObj)
+                  }}
+                />
+              </View>
+            )
+          })}
+        </View>
         <Text sx={style.title}>Experience:</Text>
-        <RadioGroup
-          containerStyle={{
-            alignItems: 'flex-start',
-          }}
-          radioButtons={buttons.experience}
-          onPress={setSelectedId}
-          selectedId={selectedId}
-        />
+        {Object.keys(experience).map((it: any, index: any) => {
+          return (
+            <View key={index} sx={{ marginLeft: '$2', marginTop: '$2' }}>
+              <BouncyCheckbox
+                useNativeDriver={Platform.OS != 'web'}
+                size={25}
+                fillColor={theme.colors.primary}
+                unfillColor="#FFFFFF"
+                text={experience[it].name}
+                textStyle={{
+                  textDecorationLine: 'none',
+                  color: theme.colors.primary,
+                }}
+                isChecked={experience[it].value}
+                disableBuiltInState={true}
+                iconStyle={{ borderColor: 'green' }}
+                innerIconStyle={{ borderWidth: 2 }}
+                onPress={(isChecked: boolean) => {
+                  var newObj = { ...experience }
+                  if (newObj[it].value) {
+                    newObj[it].value = false
+                  } else {
+                    Object.keys(newObj).map((it: any) => {
+                      newObj[it].value = false
+                    })
+
+                    newObj[it].value = true
+                  }
+
+                  setSelectedExperience(newObj)
+                }}
+              />
+            </View>
+          )
+        })}
       </View>
     )
   }
-  const content = () => {
+  const Content = () => {
     return (
       <View sx={style.container}>
         <View sx={style.topButtons}>
@@ -208,33 +377,50 @@ const AvailableJobsScreen = ({ navigation }) => {
             <Text sx={style.button}>FILTERS</Text>
           </TouchableOpacity>
         </View>
+        <View
+          sx={{
+            mt: '$3',
+            display: 'flex',
+            flexDirection: ['column', 'row'],
+            rowGap: 15,
+            columnGap: [null, '1.2%'],
+            flexWrap: 'wrap',
+            width: '100%',
+            paddingHorizontal: '$3',
+          }}
+        >
+          <JobCard />
+          <JobCard />
+          <JobCard />
+          <JobCard />
+          <JobCard />
+          <JobCard />
+        </View>
       </View>
     )
   }
   return (
-    <SafeAreaView>
-      <ScrollView>
-        {Platform.OS == 'web' ? (
-          <>
-            <FilterDrawerDesktop
-              radioGroup={radioGroup}
-              open={openFilter}
-              setOpen={setOpenFilter}
-            />
-            {content()}
-          </>
-        ) : (
-          <FilterDrawerMobile
-            radioGroup={radioGroup}
-            buttons={buttons}
+    <>
+      {Platform.OS == 'web' ? (
+        <Layout title="AVAILABLE JOBS">
+          <FilterDrawerDesktop
+            radioGroup={FiltersContent}
             open={openFilter}
             setOpen={setOpenFilter}
-          >
-            {content()}
-          </FilterDrawerMobile>
-        )}
-      </ScrollView>
-    </SafeAreaView>
+          />
+          {Content()}
+        </Layout>
+      ) : (
+        <FilterDrawerMobile
+          radioGroup={FiltersContent}
+          buttons={buttons}
+          open={openFilter}
+          setOpen={setOpenFilter}
+        >
+          <Layout title="AVAILABLE JOBS">{Content()}</Layout>
+        </FilterDrawerMobile>
+      )}
+    </>
   )
 }
 

@@ -12256,6 +12256,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-native-bouncy-checkbox@npm:^3.0.7":
+  version: 3.0.7
+  resolution: "react-native-bouncy-checkbox@npm:3.0.7"
+  peerDependencies:
+    react: ">= 16.x.x"
+    react-native: ">= 0.55.x"
+  checksum: f30d18971ebbaafdd17046d87e324ddf5142ac283280d95a7ccb023bf960ddaaa251922b521e56a30d32b2f9b2e313ea1dd71bdd38814fd0106523f2cb164b06
+  languageName: node
+  linkType: hard
+
 "react-native-codegen@npm:^0.71.5":
   version: 0.71.5
   resolution: "react-native-codegen@npm:0.71.5"
@@ -13326,6 +13336,7 @@ __metadata:
     "@types/react-native": ^0.69.5
     eslint: ^8.21.0
     react-icons: ^4.9.0
+    react-native-bouncy-checkbox: ^3.0.7
     react-native-radio-buttons-group: ^3.0.2
     turbo: ^1.4.2
     typescript: ^4.7.4

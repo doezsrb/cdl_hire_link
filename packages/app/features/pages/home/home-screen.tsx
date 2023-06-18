@@ -36,11 +36,11 @@ import { useRouter } from 'solito/router'
 
 import routerListener from 'app/features/common/functions/routerListener'
 import MobileLoadingContext from '../../../../../apps/expo/context/mobileLoadingContext'
+import Layout from 'app/features/common/components/Layout/Layout'
 export function HomeScreen({ navigation }) {
   const sx = useSx()
   const mobileLoadingContext: any = useContext(MobileLoadingContext)
-  const { theme } = useDripsyTheme()
-  const router = useRouter()
+
   const style = StyleSheet.create({
     chooseContainer: {
       width: '100%',
@@ -139,93 +139,49 @@ export function HomeScreen({ navigation }) {
     */
   }, [])
   return (
-    <SafeAreaView>
-      <ScrollView>
-        <HeaderSlider homepage>
-          <View sx={style.sliderTextContainer}>
-            <View sx={style.sliderTextBox}>
-              <Text variant="sliderText">
-                IF YOU NEED A JOB, WE ARE HERE TO HELP YOU!
-              </Text>
-            </View>
-            <View sx={style.sliderButtonContainer}>
-              <TouchableOpacity
-                onPress={() => {
-                  if (Platform.OS == 'web') {
-                    router.push('/apply/driver')
-                  } else {
-                    navigation.navigate('apply/driver')
-                  }
-                }}
-              >
-                <View sx={theme.buttons.bigButton}>
-                  <Text variant="buttonBig">APPLY AS DRIVER</Text>
-                </View>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => {
-                  if (Platform.OS == 'web') {
-                    router.push('/apply/carrier')
-                  } else {
-                    navigation.navigate('apply/carrier')
-                  }
-                }}
-              >
-                <View
-                  style={[
-                    theme.buttons.bigButton,
-                    sx({ marginLeft: [0, 20], marginTop: [20, 0] }),
-                  ]}
-                >
-                  <Text variant="buttonBig">APPLY AS CARRIER</Text>
-                </View>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </HeaderSlider>
-        <View sx={style.applyContainer}>
-          <Text variant="title" sx={{ color: 'white' }}>
-            HOW TO APPLY?
-          </Text>
-          <View sx={{ flex: 1, flexDirection: ['column', 'row'] }}>
-            <ApplyCard
-              step={1}
-              text={`Lorem ipsum blablablablalba lbalb aw egaewkgpaowekgapoewkgaopewgja aewgkape.`}
-              title={'FILL OUT AN APPLICATION'}
-            />
-            <ApplyCard
-              step={2}
-              text={`Lorem ipsum blablablablalba lbalb aw egaewkgpaowekgapoewkgaopewgja aewgkape.`}
-              title={'FILL OUT AN APPLICATION'}
-            />
-            <ApplyCard
-              step={3}
-              text={`Lorem ipsum blablablablalba lbalb aw egaewkgpaowekgapoewkgaopewgja aewgkape.`}
-              title={'FILL OUT AN APPLICATION'}
-            />
-          </View>
-        </View>
-
-        <View sx={style.chooseContainer}>
-          <Text variant="title" sx={{ color: 'primary' }}>
-            WHY CHOOSE CDL HIRE LINK?
-          </Text>
-          <WhyChooseCard
-            title="OUR MISSION"
-            text={`Lorem ipsum blablablablalba lbalb aw egaewkgpaowekgapoewkgaopewgja aewgkape. Lorem ipsum blabla blablalba lbalb aw egaew kgpaow ekga poewk gaopewgja aewgkape. Lorem ipsum blabla blablalba lbalb awegaewkgpa owek gapoew kgaope wgja aewgkape.`}
+    <Layout homepage navigation={navigation}>
+      <View sx={style.applyContainer}>
+        <Text variant="title" sx={{ color: 'white' }}>
+          HOW TO APPLY?
+        </Text>
+        <View sx={{ flex: 1, flexDirection: ['column', 'row'] }}>
+          <ApplyCard
+            step={1}
+            text={`Lorem ipsum blablablablalba lbalb aw egaewkgpaowekgapoewkgaopewgja aewgkape.`}
+            title={'FILL OUT AN APPLICATION'}
           />
-
-          <WhyChooseCard
-            reverse
-            title="OUR MISSION"
-            text={`Lorem ipsum blablablablalba lbalb aw egaewkgpaowekgapoewkgaopewgja aewgkape. Lorem ipsum blabla blablalba lbalb aw egaew kgpaow ekga poewk gaopewgja aewgkape. Lorem ipsum blabla blablalba lbalb awegaewkgpa owek gapoew kgaope wgja aewgkape.`}
+          <ApplyCard
+            step={2}
+            text={`Lorem ipsum blablablablalba lbalb aw egaewkgpaowekgapoewkgaopewgja aewgkape.`}
+            title={'FILL OUT AN APPLICATION'}
           />
-          <WhyChooseCard
-            title="OUR MISSION"
-            text={`Lorem ipsum blablablablalba lbalb aw egaewkgpaowekgapoewkgaopewgja aewgkape. Lorem ipsum blabla blablalba lbalb aw egaew kgpaow ekga poewk gaopewgja aewgkape. Lorem ipsum blabla blablalba lbalb awegaewkgpa owek gapoew kgaope wgja aewgkape.`}
+          <ApplyCard
+            step={3}
+            text={`Lorem ipsum blablablablalba lbalb aw egaewkgpaowekgapoewkgaopewgja aewgkape.`}
+            title={'FILL OUT AN APPLICATION'}
           />
         </View>
-      </ScrollView>
-    </SafeAreaView>
+      </View>
+
+      <View sx={style.chooseContainer}>
+        <Text variant="title" sx={{ color: 'primary' }}>
+          WHY CHOOSE CDL HIRE LINK?
+        </Text>
+        <WhyChooseCard
+          title="OUR MISSION"
+          text={`Lorem ipsum blablablablalba lbalb aw egaewkgpaowekgapoewkgaopewgja aewgkape. Lorem ipsum blabla blablalba lbalb aw egaew kgpaow ekga poewk gaopewgja aewgkape. Lorem ipsum blabla blablalba lbalb awegaewkgpa owek gapoew kgaope wgja aewgkape.`}
+        />
+
+        <WhyChooseCard
+          reverse
+          title="OUR MISSION"
+          text={`Lorem ipsum blablablablalba lbalb aw egaewkgpaowekgapoewkgaopewgja aewgkape. Lorem ipsum blabla blablalba lbalb aw egaew kgpaow ekga poewk gaopewgja aewgkape. Lorem ipsum blabla blablalba lbalb awegaewkgpa owek gapoew kgaope wgja aewgkape.`}
+        />
+        <WhyChooseCard
+          title="OUR MISSION"
+          text={`Lorem ipsum blablablablalba lbalb aw egaewkgpaowekgapoewkgaopewgja aewgkape. Lorem ipsum blabla blablalba lbalb aw egaew kgpaow ekga poewk gaopewgja aewgkape. Lorem ipsum blabla blablalba lbalb awegaewkgpa owek gapoew kgaope wgja aewgkape.`}
+        />
+      </View>
+    </Layout>
   )
 }
