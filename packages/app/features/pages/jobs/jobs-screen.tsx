@@ -127,10 +127,33 @@ const AvailableJobsScreen = ({ navigation }) => {
   })
   useEffect(() => {
     if (Platform.OS == 'web') {
-      let typeQuery = router.query.type
-      let stQuery = router.query.st
-      let divisionQuery = router.query.division
-      let experienceQuery = router.query.experience
+      let url = '/available-jobs'
+      let typeQuery = Object.keys(selectedTypes)
+        .map((it: any) => {
+          return selectedTypes[it]
+        })
+        .filter((it: any) => it.value)
+      console.log(typeQuery)
+      let stQuery = Object.keys(solo_team)
+        .map((it: any) => {
+          return solo_team[it]
+        })
+        .filter((it: any) => it.value)
+      let divisionQuery = Object.keys(division)
+        .map((it: any) => {
+          return division[it]
+        })
+        .filter((it: any) => it.value)
+      let experienceQuery = Object.keys(experience)
+        .map((it: any) => {
+          return experience[it]
+        })
+        .filter((it: any) => it.value)
+      url += '?type=' + typeQuery.map((it: any) => it.name)
+      url += '?st=' + stQuery.map((it: any) => it.name)
+      url += '?division=' + divisionQuery.map((it: any) => it.name)
+      url += '?experience=' + experienceQuery.map((it: any) => it.name)
+      router.push(url)
     }
   }, [selectedTypes, division, experience, solo_team])
   const buttons = {
