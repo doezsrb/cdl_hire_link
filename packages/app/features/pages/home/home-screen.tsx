@@ -37,11 +37,24 @@ import { useRouter } from 'solito/router'
 import routerListener from 'app/features/common/functions/routerListener'
 import MobileLoadingContext from '../../../../../apps/expo/context/mobileLoadingContext'
 import Layout from 'app/features/common/components/Layout/Layout'
+import TestimonialsSlider from 'app/features/common/components/TestimonialsSlider/Testimonials'
 export function HomeScreen({ navigation }) {
   const sx = useSx()
   const mobileLoadingContext: any = useContext(MobileLoadingContext)
 
   const style = StyleSheet.create({
+    testimonialsContainer: {
+      width: '100%',
+      mt: '$3',
+
+      display: 'flex',
+      flexDirection: 'column',
+      paddingLeft: 20,
+      position: 'relative',
+      paddingRight: 20,
+      paddingBottom: 20,
+      backgroundColor: 'white',
+    },
     chooseContainer: {
       width: '100%',
       alignItems: 'center',
@@ -182,6 +195,14 @@ export function HomeScreen({ navigation }) {
           text={`Lorem ipsum blablablablalba lbalb aw egaewkgpaowekgapoewkgaopewgja aewgkape. Lorem ipsum blabla blablalba lbalb aw egaew kgpaow ekga poewk gaopewgja aewgkape. Lorem ipsum blabla blablalba lbalb awegaewkgpa owek gapoew kgaope wgja aewgkape.`}
         />
       </View>
+      {Platform.OS == 'web' && (
+        <View sx={style.testimonialsContainer}>
+          <Text variant="title" sx={{ color: 'primary' }}>
+            TESTIMONIALS
+          </Text>
+          <TestimonialsSlider />
+        </View>
+      )}
     </Layout>
   )
 }

@@ -50,7 +50,6 @@ const DesktopHeader = () => {
       display: ['none', 'none', 'none', 'flex'] as any,
       flexDirection: 'row',
       alignItems: 'center',
-      ml: 20,
     },
     menuButton: {
       paddingLeft: [15, 5, 5, 20] as any,
@@ -94,7 +93,7 @@ const DesktopHeader = () => {
     <>
       <DesktopDrawer setOpenDrawer={setOpenDrawer} openDrawer={openDrawer} />
       <View style={[sx(style.container)]}>
-        <View>
+        <View sx={{ width: 150 }}>
           <TouchableOpacity
             onPress={() => {
               router.push('/')
@@ -116,6 +115,23 @@ const DesktopHeader = () => {
               ]}
             >
               HOME
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              router.push('/available-jobs')
+            }}
+          >
+            <Text
+              style={[
+                sx(style.menuButton),
+                sx({
+                  color:
+                    router.route == '/available-jobs' ? 'secondary' : 'white',
+                }),
+              ]}
+            >
+              JOBS
             </Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => {}}>

@@ -80,6 +80,24 @@ const DesktopDrawer = ({ openDrawer, setOpenDrawer }: DesktopDrawerProps) => {
           <ListItem disablePadding>
             <ListItemButton
               onClick={() => {
+                router.push('/available-jobs')
+                setOpenDrawer(false)
+              }}
+            >
+              <ListItemText
+                sx={{
+                  color:
+                    router.route == '/available-jobs'
+                      ? theme.colors.secondary
+                      : 'white',
+                }}
+                primary="JOBS"
+              />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton
+              onClick={() => {
                 console.log('dsda')
               }}
             >
