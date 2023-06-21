@@ -24,7 +24,7 @@ import Layout from 'app/features/common/components/Layout/Layout'
 
 const { useParam } = createParam<{ as: 'carrier' | 'driver' }>()
 /* import { DateTimePickerAndroid } from '@react-native-community/datetimepicker' */
-const ApplyScreen = ({ navigation }) => {
+const ApplyScreen = ({ navigation }: any) => {
   const mobileLoadingContext: any = useContext(MobileLoadingContext)
   const [as, setAs] = useParam('as')
   const scrollToStepRef: any = useRef()
@@ -834,6 +834,7 @@ const ApplyScreen = ({ navigation }) => {
       val
     setStepData(newObj)
   }
+  const submit = () => {}
   const checkData = (): boolean => {
     const checkStep = 'step' + step
     var err = 0
@@ -1175,6 +1176,7 @@ const ApplyScreen = ({ navigation }) => {
                   onPress={() => {
                     if (checkData()) {
                       if (step >= allSteps) {
+                        submit()
                         return
                       }
                       setStep((old) => old + 1)

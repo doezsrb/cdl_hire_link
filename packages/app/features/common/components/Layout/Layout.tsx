@@ -3,6 +3,7 @@ import {
   Dimensions,
   Platform,
   ScrollView,
+  StatusBar,
   StyleSheet,
   TouchableOpacity,
 } from 'react-native'
@@ -52,6 +53,7 @@ const Layout = ({
   return (
     <SafeAreaView>
       <ScrollView>
+        <StatusBar backgroundColor={theme.colors.primary} />
         {homepage ? (
           <HeaderSlider homepage>
             <View sx={style.sliderTextContainer}>

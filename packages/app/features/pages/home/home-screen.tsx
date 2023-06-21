@@ -38,7 +38,7 @@ import routerListener from 'app/features/common/functions/routerListener'
 import MobileLoadingContext from '../../../../../apps/expo/context/mobileLoadingContext'
 import Layout from 'app/features/common/components/Layout/Layout'
 import TestimonialsSlider from 'app/features/common/components/TestimonialsSlider/Testimonials'
-export function HomeScreen({ navigation }) {
+export function HomeScreen({ navigation }: any) {
   const sx = useSx()
   const mobileLoadingContext: any = useContext(MobileLoadingContext)
 

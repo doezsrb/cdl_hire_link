@@ -18,7 +18,7 @@ import Layout from 'app/features/common/components/Layout/Layout'
 
 import BouncyCheckbox from 'react-native-bouncy-checkbox'
 import useRouter from 'app/features/common/functions/nextrouter'
-const AvailableJobsScreen = ({ navigation }) => {
+const AvailableJobsScreen = ({ navigation }: any) => {
   const mobileLoadingContext = useContext(MobileLoadingContext)
   const router = useRouter()
   const [openFilter, setOpenFilter] = useState<boolean>(false)
@@ -65,7 +65,7 @@ const AvailableJobsScreen = ({ navigation }) => {
   })
   const { theme } = useDripsyTheme()
 
-  const [division, setSelectedDivision] = useState({
+  const [division, setSelectedDivision] = useState<any>({
     dry_van: {
       name: 'Dry van',
       value: false,
@@ -83,7 +83,7 @@ const AvailableJobsScreen = ({ navigation }) => {
       value: false,
     },
   })
-  const [selectedTypes, setSelectedTypes] = useState({
+  const [selectedTypes, setSelectedTypes] = useState<any>({
     company_driver: {
       name: 'Company driver',
       value: false,
@@ -101,7 +101,7 @@ const AvailableJobsScreen = ({ navigation }) => {
       value: false,
     },
   })
-  const [solo_team, setSelectedSoloTeam] = useState({
+  const [solo_team, setSelectedSoloTeam] = useState<any>({
     solo: {
       name: 'Solo',
       value: false,
@@ -111,7 +111,7 @@ const AvailableJobsScreen = ({ navigation }) => {
       value: false,
     },
   })
-  const [experience, setSelectedExperience] = useState({
+  const [experience, setSelectedExperience] = useState<any>({
     less_1: {
       name: 'Less than 1 year',
       value: false,
@@ -127,8 +127,8 @@ const AvailableJobsScreen = ({ navigation }) => {
   })
   useEffect(() => {
     if (Platform.OS == 'web') {
-      let url = '/available-jobs'
-      let typeQuery = Object.keys(selectedTypes)
+      let url: any = '/available-jobs'
+      let typeQuery: any = Object.keys(selectedTypes)
         .map((it: any) => {
           return selectedTypes[it]
         })

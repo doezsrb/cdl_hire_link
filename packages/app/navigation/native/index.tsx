@@ -49,6 +49,7 @@ export function NativeNavigation() {
       />
     </Stack.Navigator> */
     <Drawer.Navigator
+      backBehavior="history"
       screenOptions={({ navigation }) => ({
         drawerPosition: 'right',
 
