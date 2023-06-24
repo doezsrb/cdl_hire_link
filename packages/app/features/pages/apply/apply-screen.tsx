@@ -5,7 +5,7 @@ import CustomSelectInput from 'app/features/common/components/CustomSelectInput/
 import CustomUploadFile from 'app/features/common/components/CustomUploadFile/CustomUploadFile'
 import StepInd from 'app/features/common/components/StepInd/StepInd'
 import { Pressable, SafeAreaView, Text, View } from 'dripsy'
-
+import { addData } from 'app/features/common/functions/firestore'
 import { useDripsyTheme } from 'dripsy'
 import {
   Dimensions,
@@ -21,11 +21,14 @@ import { createParam } from 'solito'
 import routerListener from 'app/features/common/functions/routerListener'
 import MobileLoadingContext from '../../../../../apps/expo/context/mobileLoadingContext'
 import Layout from 'app/features/common/components/Layout/Layout'
+import LoadingContext from '../../../../../apps/next/context/loadingContext'
 
 const { useParam } = createParam<{ as: 'carrier' | 'driver' }>()
 /* import { DateTimePickerAndroid } from '@react-native-community/datetimepicker' */
 const ApplyScreen = ({ navigation }: any) => {
   const mobileLoadingContext: any = useContext(MobileLoadingContext)
+  const scrollRef = useRef<any>()
+  const desktopLoadingContext: any = useContext(LoadingContext)
   const [as, setAs] = useParam('as')
   const scrollToStepRef: any = useRef()
   const { theme } = useDripsyTheme()
@@ -772,6 +775,22 @@ const ApplyScreen = ({ navigation }: any) => {
       setAllSteps(4)
     }
   }, [as])
+  const scrollToTop = () => {
+    if (Platform.OS == 'web') {
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: 'smooth',
+      })
+    } else {
+      if (scrollRef != undefined) {
+        scrollRef.current.scrollTo({
+          y: 0,
+          animated: true,
+        })
+      }
+    }
+  }
   const style = StyleSheet.create({
     container: {
       width: '100%',
@@ -834,8 +853,93 @@ const ApplyScreen = ({ navigation }: any) => {
       val
     setStepData(newObj)
   }
-  const submit = () => {}
+
+  const submit = () => {
+    if (as != undefined) {
+      var dataObject = {}
+      Object.keys(stepData[as]).map((checkStep: any) => {
+        var stepName = stepData[as][checkStep].name
+        var groups = stepData[as][checkStep].groups
+        dataObject[stepName] = {}
+        Object.keys(groups).map((it: any) => {
+          var fieldName = groups[it].name
+          var stepName = stepData[as][checkStep].name
+          dataObject[stepName][fieldName] = {}
+          Object.keys(groups[it].data).map((it2: any) => {
+            var field = groups[it].data[it2]
+            if (field.type == 'file') {
+              if (field.value != '') {
+                dataObject[stepName][fieldName][field.name] = field.value.name
+              } else {
+                dataObject[stepName][fieldName][field.name] = null
+              }
+            } else {
+              dataObject[stepName][fieldName][field.name] = field.value
+            }
+
+            /*  console.log(
+                stepData[as][checkStep].groups[it].data[it2].name +
+                  ': ' +
+                  stepData[as][checkStep].groups[it].data[it2].value
+              ) */
+          })
+          if (groups[it].subgroup != null) {
+            dataObject[stepName][fieldName]['subgroup'] = {}
+            Object.keys(groups[it].subgroup).map((it3: any) => {
+              var subgroupName = groups[it].subgroup[it3].name
+              dataObject[stepName][fieldName]['subgroup'][subgroupName] = {}
+              Object.keys(groups[it].subgroup[it3].data).map((it4: any) => {
+                var field = groups[it].subgroup[it3].data[it4]
+
+                if (field.type == 'file') {
+                  if (field.value != '') {
+                    dataObject[stepName][fieldName]['subgroup'][subgroupName][
+                      field.name
+                    ] = field.value.name
+                  } else {
+                    dataObject[stepName][fieldName]['subgroup'][subgroupName][
+                      field.name
+                    ] = null
+                  }
+                } else {
+                  dataObject[stepName][fieldName]['subgroup'][subgroupName][
+                    field.name
+                  ] = field.value
+                }
+
+                /* console.log(
+                    stepData[as][checkStep].groups[it].subgroup[it3].data[it4]
+                      .name +
+                      ':' +
+                      stepData[as][checkStep].groups[it].subgroup[it3].data[it4]
+                        .value
+                  ) */
+              })
+            })
+          }
+        })
+      })
+      console.log(dataObject)
+      addData(dataObject, as, toggleLoading)
+    }
+  }
+  const toggleLoading = (loading: boolean) => {
+    if (loading) {
+      if (Platform.OS == 'web') {
+        desktopLoadingContext.setLoading(true)
+      } else {
+        mobileLoadingContext.setLoading(true)
+      }
+    } else {
+      if (Platform.OS == 'web') {
+        desktopLoadingContext.setLoading(false)
+      } else {
+        mobileLoadingContext.setLoading(false)
+      }
+    }
+  }
   const checkData = (): boolean => {
+    scrollToTop()
     const checkStep = 'step' + step
     var err = 0
     const newStepData: any = { ...stepData }
@@ -892,10 +996,11 @@ const ApplyScreen = ({ navigation }: any) => {
     }) */
     return false
   }
+
   return (
     <>
       {as == undefined ? null : (
-        <Layout title={'APPLY AS A ' + as.toUpperCase()}>
+        <Layout title={'APPLY AS A ' + as.toUpperCase()} scrollRef={scrollRef}>
           <View sx={style.container}>
             <View sx={style.containerChild}>
               <StepInd

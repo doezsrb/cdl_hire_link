@@ -1,4 +1,4 @@
 import database from '@react-native-firebase/database'
 import storage from '@react-native-firebase/storage'
-
-export { database, storage }
+import firestore from '@react-native-firebase/firestore'
+export { database, storage, firestore }

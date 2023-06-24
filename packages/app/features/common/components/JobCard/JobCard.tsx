@@ -1,5 +1,6 @@
 import { Text, View } from 'dripsy'
-import { Platform, StyleSheet } from 'react-native'
+import { useEffect } from 'react'
+import { PixelRatio, Platform, StyleSheet } from 'react-native'
 
 const JobCard = () => {
   const style = StyleSheet.create({
@@ -10,7 +11,7 @@ const JobCard = () => {
       justifyContent: 'space-between',
 
       width: ['100%', '100%', '48.5%', '48.5%', '32.5%'] as any,
-      height: 180,
+      height: ['auto', 'auto', 160] as any,
       shadowOffset: { width: 0, height: 5 },
       shadowColor: 'black',
       shadowRadius: 10,
@@ -18,18 +19,19 @@ const JobCard = () => {
       elevation: 4,
     },
     title: {
-      fontSize: 30,
+      fontSize: 23,
       fontWeight: 'bold',
 
       color: 'secondary',
     },
     subtitle: {
-      fontSize: 18,
+      fontSize: 14,
       fontStyle: 'italic',
 
       color: 'primary',
     },
     tagContainer: {
+      marginTop: ['$3', '$3', 0] as any,
       display: 'flex',
       width: '100%',
       flexDirection: 'row',
@@ -48,7 +50,14 @@ const JobCard = () => {
         }}
       >
         <View sx={{ width: 15, height: 15, backgroundColor: 'lightgray' }} />
-        <Text sx={{ fontSize: 16, marginLeft: '$2', color: 'primary' }}>
+        <Text
+          sx={{
+            fontSize: 1,
+
+            marginLeft: '$2',
+            color: 'primary',
+          }}
+        >
           {name}
         </Text>
       </View>

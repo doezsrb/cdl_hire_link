@@ -1,8 +1,18 @@
 import { initializeApp } from 'firebase/app'
 import { getDatabase } from 'firebase/database'
+
 import { getStorage } from 'firebase/storage'
 import { ref as dbRef, onValue } from 'firebase/database'
 import { ref as storageRef, uploadBytes } from 'firebase/storage'
+import {
+  getFirestore,
+  query,
+  addDoc,
+  onSnapshot,
+  collection,
+  doc,
+} from 'firebase/firestore'
+
 const firebaseConfig = {
   apiKey: 'AIzaSyCsAc5WW8d0WE9L0iVHgYf0cSLe3tE8FKY',
   authDomain: 'cdlhirelink.firebaseapp.com',
@@ -16,5 +26,8 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig)
 const database = getDatabase(app)
+
 const storage = getStorage(app)
-export { database, storage, onValue, dbRef, storageRef, uploadBytes }
+const firestore = getFirestore(app)
+
+export { database, storage, onValue, dbRef, storageRef, uploadBytes, firestore }

@@ -4042,6 +4042,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-native-firebase/firestore@npm:^18.0.0":
+  version: 18.0.0
+  resolution: "@react-native-firebase/firestore@npm:18.0.0"
+  peerDependencies:
+    "@react-native-firebase/app": 18.0.0
+  checksum: 0e5cbcdb3e94f3b4dcdc4d868b6625d82a985176616923c4c47a5ad786e218df966ecb67be551692d9882bc6baddac283aa591feafa216dfc75278ff060c74a7
+  languageName: node
+  linkType: hard
+
 "@react-native-firebase/messaging@npm:^17.5.0":
   version: 17.5.0
   resolution: "@react-native-firebase/messaging@npm:17.5.0"
@@ -7298,6 +7307,7 @@ __metadata:
     "@react-native-community/datetimepicker": 6.7.3
     "@react-native-firebase/app": ^17.5.0
     "@react-native-firebase/database": ^17.5.0
+    "@react-native-firebase/firestore": ^18.0.0
     "@react-native-firebase/messaging": ^17.5.0
     "@react-native-firebase/storage": ^17.5.0
     "@react-navigation/drawer": ^6.6.2

@@ -1,5 +1,6 @@
 import { Text, View } from 'dripsy'
 import { useEffect, useState } from 'react'
+import { ScrollView } from 'react-native'
 import { Dimensions, TouchableOpacity } from 'react-native'
 import { Drawer } from 'react-native-drawer-layout'
 import RadioGroup from 'react-native-radio-buttons-group'
@@ -28,24 +29,27 @@ const FilterDrawerMobile = ({
       onClose={() => setOpen(false)}
       renderDrawerContent={() => {
         return (
-          <View
-            sx={{
-              backgroundColor: 'white',
-              height: '100%',
-            }}
-          >
-            <Text
+          <ScrollView>
+            <View
               sx={{
-                fontSize: 30,
-                textAlign: 'center',
-                color: 'primary',
-                mt: '$2',
+                backgroundColor: 'white',
+                height: '100%',
+                paddingBottom: '$4',
               }}
             >
-              FILTERS
-            </Text>
-            <View sx={{ mt: '$2' }}>{radioGroup()}</View>
-          </View>
+              <Text
+                sx={{
+                  fontSize: 30,
+                  textAlign: 'center',
+                  color: 'primary',
+                  mt: '$2',
+                }}
+              >
+                FILTERS
+              </Text>
+              <View sx={{ mt: '$2' }}>{radioGroup()}</View>
+            </View>
+          </ScrollView>
         )
       }}
     >

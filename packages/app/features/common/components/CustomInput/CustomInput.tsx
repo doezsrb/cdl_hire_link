@@ -7,7 +7,7 @@ import {
   DateTimePicker,
   LocalizationProvider,
 } from '../../functions/datepicker'
-
+import dayjs from '../../functions/dayjs'
 interface CustomInputProps {
   label: string
   required?: boolean
@@ -27,6 +27,13 @@ const CustomInput = ({
   multiline = false,
 }: CustomInputProps) => {
   const [date, setDate] = useState<any>(new Date())
+  const [desktopDate, setDesktopDate] = useState<any>(
+    Platform.OS == 'web'
+      ? currentValue == '' || currentValue == null
+        ? null
+        : dayjs(currentValue)
+      : null
+  )
   const [value, setValue] = useState(currentValue)
   const { theme } = useDripsyTheme()
   const [openDatePicker, setOpenDatePicker] = useState(false)
@@ -49,6 +56,7 @@ const CustomInput = ({
       padding: 10,
     },
   })
+
   return (
     <View sx={style.container}>
       {openDatePicker && Platform.OS != 'web' && (
@@ -77,14 +85,16 @@ const CustomInput = ({
       {Platform.OS == 'web' && datePicker ? (
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DatePicker
+            value={desktopDate}
             onChange={(e: any) => {
               setVal(e.$M + 1 + '/' + e.$D + '/' + e.$y)
+              setDesktopDate(e.$M + 1 + '/' + e.$D + '/' + e.$y)
             }}
             sx={{
               '& .MuiInputBase-root': {
                 borderRadius: 30,
                 height: 40,
-                borderColor: 'red !important',
+                borderColor: ' !important',
                 marginTop: theme.space.$1 + 'px',
               },
               '& .MuiOutlinedInput-notchedOutline': {
@@ -104,11 +114,9 @@ const CustomInput = ({
           <TextInput
             sx={style.textInput}
             value={value}
-            onChange={(e: any) => {
-              {
-                setValue(e.target.value)
-                setVal(e.target.value)
-              }
+            onChangeText={(text: any) => {
+              setValue(text)
+              setVal(text)
             }}
             multiline={multiline}
             editable={!datePicker}

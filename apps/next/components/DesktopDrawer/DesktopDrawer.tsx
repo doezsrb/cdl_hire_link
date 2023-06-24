@@ -52,6 +52,7 @@ const DesktopDrawer = ({ openDrawer, setOpenDrawer }: DesktopDrawerProps) => {
   })
   return (
     <Drawer
+      disableScrollLock={true}
       open={openDrawer}
       anchor="right"
       onClose={() => setOpenDrawer(false)}

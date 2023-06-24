@@ -9,19 +9,23 @@ import {
 } from 'react-native'
 import HeaderSlider from '../HeaderSlider/HeaderSlider'
 import { useRouter } from 'solito/router'
+import { useRef } from 'react'
 interface LayoutProps {
   title?: string
   homepage?: boolean
   navigation?: any
   children: any
+  scrollRef?: any
 }
 const Layout = ({
   title = '',
   homepage = false,
   navigation = null,
   children,
+  scrollRef,
 }: LayoutProps) => {
   const router = useRouter()
+
   const { theme } = useDripsyTheme()
   const sx = useSx()
   const style = StyleSheet.create({
@@ -50,9 +54,10 @@ const Layout = ({
       flexDirection: ['column', 'row'] as any,
     },
   })
+
   return (
     <SafeAreaView>
-      <ScrollView>
+      <ScrollView ref={scrollRef}>
         <StatusBar backgroundColor={theme.colors.primary} />
         {homepage ? (
           <HeaderSlider homepage>

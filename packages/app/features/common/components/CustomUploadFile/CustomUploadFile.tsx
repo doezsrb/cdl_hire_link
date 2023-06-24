@@ -17,7 +17,7 @@ const CustomUploadFile = ({
   value,
 }: CustomUploadFileProps) => {
   const { theme } = useDripsyTheme()
-  const [filename, setFilename] = useState<any>(value == '' ? null : value)
+  const [filename, setFilename] = useState<any>(value == '' ? null : value.name)
   const style = StyleSheet.create({
     uploadFileButton: {
       paddingLeft: [10, 20] as any,
@@ -62,7 +62,7 @@ const CustomUploadFile = ({
         onPress={async () => {
           if (Platform.OS != 'web') {
             var data: any = await DocumentPicker.getDocumentAsync()
-
+            setVal(data)
             setFilename(data.name)
           }
         }}
@@ -109,7 +109,7 @@ const CustomUploadFile = ({
           onChange={(e: any) => {
             if (e.target.files.lenght != 0) {
               setFilename(e.target.files[0].name)
-              setVal(e.target.files[0].name)
+              setVal(e.target.files[0])
             }
           }}
           style={{ display: 'none' }}
