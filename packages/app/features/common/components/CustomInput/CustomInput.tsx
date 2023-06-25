@@ -16,6 +16,7 @@ interface CustomInputProps {
   currentValue: any
   datePicker?: boolean
   multiline?: boolean
+  type?: 'numeric' | 'email' | 'text'
 }
 const CustomInput = ({
   label,
@@ -25,6 +26,7 @@ const CustomInput = ({
   currentValue,
   datePicker = false,
   multiline = false,
+  type = 'text',
 }: CustomInputProps) => {
   const [date, setDate] = useState<any>(new Date())
   const [desktopDate, setDesktopDate] = useState<any>(
@@ -121,7 +123,7 @@ const CustomInput = ({
             multiline={multiline}
             editable={!datePicker}
             onFocus={undefined}
-            inputMode={undefined}
+            inputMode={type}
             onPressIn={undefined}
             onPressOut={undefined}
             id={undefined}

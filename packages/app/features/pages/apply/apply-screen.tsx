@@ -157,14 +157,14 @@ const ApplyScreen = ({ navigation }: any) => {
               },
               contact_number: {
                 name: 'Contact Number',
-                type: 'text',
+                type: 'numeric',
                 value: '',
                 error: false,
                 required: true,
               },
               email: {
                 name: 'E-mail',
-                type: 'text',
+                type: 'email',
                 value: '',
                 error: false,
                 required: true,
@@ -191,7 +191,7 @@ const ApplyScreen = ({ navigation }: any) => {
                 required: true,
               },
               zip_code: {
-                type: 'text',
+                type: 'numeric',
                 name: 'Zip Code',
                 value: '',
                 error: false,
@@ -281,14 +281,14 @@ const ApplyScreen = ({ navigation }: any) => {
               },
               contact_number: {
                 name: 'Contact Number',
-                type: 'text',
+                type: 'numeric',
                 value: '',
                 error: false,
                 required: true,
               },
               email: {
                 name: 'E-mail',
-                type: 'text',
+                type: 'email',
                 value: '',
                 error: false,
                 required: true,
@@ -947,14 +947,30 @@ const ApplyScreen = ({ navigation }: any) => {
     Object.keys(newStepData[as][checkStep].groups).map((it: any) => {
       Object.keys(newStepData[as][checkStep].groups[it].data).map(
         (it2: any) => {
-          if (
-            newStepData[as][checkStep].groups[it].data[it2].required &&
-            newStepData[as][checkStep].groups[it].data[it2].value == ''
-          ) {
-            newStepData[as][checkStep].groups[it].data[it2].error = true
+          var validRegex =
+            /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)*$/
+
+          var field = newStepData[as][checkStep].groups[it].data[it2]
+          if (field.required && field.value == '') {
+            field.error = true
             err = 1
           } else {
-            newStepData[as][checkStep].groups[it].data[it2].error = false
+            if (field.type == 'numeric') {
+              if (Number.isInteger(parseInt(field.value))) {
+                field.error = false
+              } else {
+                field.error = true
+              }
+            } else if (field.type == 'email') {
+              var email: string = field.value
+              if (email.match(validRegex)) {
+                field.error = false
+              } else {
+                field.error = true
+              }
+            } else {
+              field.error = false
+            }
           }
         }
       )
@@ -964,20 +980,21 @@ const ApplyScreen = ({ navigation }: any) => {
             Object.keys(
               newStepData[as][checkStep].groups[it].subgroup[it3].data
             ).map((it4: any) => {
-              if (
+              var field =
                 newStepData[as][checkStep].groups[it].subgroup[it3].data[it4]
-                  .required &&
-                newStepData[as][checkStep].groups[it].subgroup[it3].data[it4]
-                  .value == ''
-              ) {
-                newStepData[as][checkStep].groups[it].subgroup[it3].data[
-                  it4
-                ].error = true
+              if (field.required && field.value == '') {
+                field.error = true
                 err = 1
               } else {
-                newStepData[as][checkStep].groups[it].subgroup[it3].data[
-                  it4
-                ].error = false
+                if (field.type == 'numeric') {
+                  if (Number.isInteger(parseInt(field.value))) {
+                    field.error = false
+                  } else {
+                    field.error = true
+                  }
+                } else {
+                  field.error = false
+                }
               }
             })
           }
@@ -1023,7 +1040,11 @@ const ApplyScreen = ({ navigation }: any) => {
                       >
                         {Object.keys(group.data).map((it2: any, index: any) => {
                           var response
-                          if (group.data[it2].type == 'text') {
+                          if (
+                            group.data[it2].type == 'text' ||
+                            group.data[it2].type == 'email' ||
+                            group.data[it2].type == 'numeric'
+                          ) {
                             response = (
                               <Fragment key={step + it + it2}>
                                 <CustomInput
@@ -1033,6 +1054,7 @@ const ApplyScreen = ({ navigation }: any) => {
                                   setVal={(val: any) => {
                                     updateState(val, it, it2)
                                   }}
+                                  type={group.data[it2].type}
                                   required={group.data[it2].required}
                                   multiline={
                                     group.data[it2].multiline != undefined
@@ -1117,7 +1139,11 @@ const ApplyScreen = ({ navigation }: any) => {
                                   >
                                     {Object.keys(subgroup.data).map(
                                       (it3: any, index: number) => {
-                                        if (subgroup.data[it3].type == 'text') {
+                                        if (
+                                          subgroup.data[it3].type == 'text' ||
+                                          subgroup.data[it3].type == 'email' ||
+                                          subgroup.data[it3].type == 'numeric'
+                                        ) {
                                           return (
                                             <Fragment key={step + it2 + it3}>
                                               <CustomInput
@@ -1133,6 +1159,7 @@ const ApplyScreen = ({ navigation }: any) => {
                                                     it3
                                                   )
                                                 }}
+                                                type={subgroup.data[it3].type}
                                                 label={subgroup.data[it3].name}
                                                 required={
                                                   subgroup.data[it3].required
