@@ -1,4 +1,4 @@
-import { SafeAreaView, Text, View, useDripsyTheme, useSx } from 'dripsy'
+import { Box, SafeAreaView, Text, View, useDripsyTheme, useSx } from 'dripsy'
 import {
   Dimensions,
   Platform,
@@ -10,6 +10,8 @@ import {
 import HeaderSlider from '../HeaderSlider/HeaderSlider'
 import { useRouter } from 'solito/router'
 import { useRef } from 'react'
+import Footer from '../Footer/Footer'
+import scrollToTop from '../../functions/scrolltotop'
 interface LayoutProps {
   title?: string
   homepage?: boolean
@@ -25,7 +27,7 @@ const Layout = ({
   scrollRef,
 }: LayoutProps) => {
   const router = useRouter()
-
+  const scrollRef_ = useRef()
   const { theme } = useDripsyTheme()
   const sx = useSx()
   const style = StyleSheet.create({
@@ -56,8 +58,8 @@ const Layout = ({
   })
 
   return (
-    <SafeAreaView>
-      <ScrollView ref={scrollRef}>
+    <SafeAreaView sx={{ backgroundColor: 'white' }}>
+      <ScrollView ref={scrollRef == null ? scrollRef_ : scrollRef}>
         <StatusBar backgroundColor={theme.colors.primary} />
         {homepage ? (
           <HeaderSlider homepage>
@@ -113,6 +115,11 @@ const Layout = ({
         )}
 
         {children}
+        <Footer
+          scrollToTop={() =>
+            scrollToTop(scrollRef == null ? scrollRef_ : scrollRef)
+          }
+        />
       </ScrollView>
     </SafeAreaView>
   )

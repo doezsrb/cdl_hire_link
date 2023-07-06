@@ -36,7 +36,7 @@ const AvailableJobsScreen = ({ navigation }: any) => {
     container: {
       display: 'flex',
       width: '100%',
-      minHeight: 800,
+
       backgroundColor: 'white',
       paddingVertical: '$3',
     },

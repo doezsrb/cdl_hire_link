@@ -22,6 +22,7 @@ import routerListener from 'app/features/common/functions/routerListener'
 import MobileLoadingContext from '../../../../../apps/expo/context/mobileLoadingContext'
 import Layout from 'app/features/common/components/Layout/Layout'
 import LoadingContext from '../../../../../apps/next/context/loadingContext'
+import scrollToTop from 'app/features/common/functions/scrolltotop'
 
 const { useParam } = createParam<{ as: 'carrier' | 'driver' }>()
 /* import { DateTimePickerAndroid } from '@react-native-community/datetimepicker' */
@@ -768,6 +769,7 @@ const ApplyScreen = ({ navigation }: any) => {
     routerListener(navigation, mobileLoadingContext)
   }, [navigation])
   useEffect(() => {
+    setStep(1)
     const as_parram = as
     if (as_parram == 'driver') {
       setAllSteps(2)
@@ -775,22 +777,7 @@ const ApplyScreen = ({ navigation }: any) => {
       setAllSteps(4)
     }
   }, [as])
-  const scrollToTop = () => {
-    if (Platform.OS == 'web') {
-      window.scrollTo({
-        top: 0,
-        left: 0,
-        behavior: 'smooth',
-      })
-    } else {
-      if (scrollRef != undefined) {
-        scrollRef.current.scrollTo({
-          y: 0,
-          animated: true,
-        })
-      }
-    }
-  }
+
   const style = StyleSheet.create({
     container: {
       width: '100%',
@@ -939,7 +926,7 @@ const ApplyScreen = ({ navigation }: any) => {
     }
   }
   const checkData = (): boolean => {
-    scrollToTop()
+    scrollToTop(scrollRef)
     const checkStep = 'step' + step
     var err = 0
     const newStepData: any = { ...stepData }
@@ -959,6 +946,7 @@ const ApplyScreen = ({ navigation }: any) => {
               if (Number.isInteger(parseInt(field.value))) {
                 field.error = false
               } else {
+                err = 1
                 field.error = true
               }
             } else if (field.type == 'email') {
@@ -966,6 +954,7 @@ const ApplyScreen = ({ navigation }: any) => {
               if (email.match(validRegex)) {
                 field.error = false
               } else {
+                err = 1
                 field.error = true
               }
             } else {
@@ -990,6 +979,7 @@ const ApplyScreen = ({ navigation }: any) => {
                   if (Number.isInteger(parseInt(field.value))) {
                     field.error = false
                   } else {
+                    err = 1
                     field.error = true
                   }
                 } else {

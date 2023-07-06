@@ -1,5 +1,5 @@
 import { ActivityIndicator, View } from 'dripsy'
-import { Dimensions } from 'react-native'
+import { Dimensions, Platform } from 'react-native'
 
 const LoadingScreen = () => {
   return (
@@ -8,7 +8,7 @@ const LoadingScreen = () => {
         width: '100%',
         height: Dimensions.get('screen').height,
         backgroundColor: 'rgba(0,0,0,0.3)',
-        position: 'absolute',
+        position: Platform.OS == 'web' ? 'fixed' : 'absolute',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
