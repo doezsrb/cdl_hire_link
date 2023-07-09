@@ -1,5 +1,11 @@
 import { View, Text, Pressable, useSx, useDripsyTheme } from 'dripsy'
-import { Button, Dimensions, StyleSheet, TouchableOpacity } from 'react-native'
+import {
+  Button,
+  Dimensions,
+  Platform,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native'
 import { SolitoImage } from 'solito/image'
 import { RxHamburgerMenu } from 'react-icons/rx'
 import Logo from 'app/features/common/components/Logo/logo'

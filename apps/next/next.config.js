@@ -25,6 +25,9 @@ const nextConfig = {
     'react-native-radio-buttons-group',
     'react-native-bouncy-checkbox',
   ],
+  images: {
+    domains: ['firebasestorage.googleapis.com'],
+  },
 }
 
 module.exports = withExpo(nextConfig)

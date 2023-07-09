@@ -12,9 +12,12 @@ import { useRouter } from 'solito/router'
 import { useRef } from 'react'
 import Footer from '../Footer/Footer'
 import scrollToTop from '../../functions/scrolltotop'
+import HeaderImage from '../HeaderImage/HeaderImage'
 interface LayoutProps {
   title?: string
   homepage?: boolean
+  jobscreen?: boolean
+  jobscreenimage?: string | null
   navigation?: any
   children: any
   scrollRef?: any
@@ -22,7 +25,9 @@ interface LayoutProps {
 const Layout = ({
   title = '',
   homepage = false,
+  jobscreen = false,
   navigation = null,
+  jobscreenimage = null,
   children,
   scrollRef,
 }: LayoutProps) => {
@@ -106,12 +111,20 @@ const Layout = ({
               </View>
             </View>
           </HeaderSlider>
-        ) : (
-          <HeaderSlider>
+        ) : jobscreen ? (
+          <HeaderImage url={jobscreenimage}>
             <View sx={style.sliderTextContainer}>
               <Text variant="sliderText">{title}</Text>
             </View>
-          </HeaderSlider>
+          </HeaderImage>
+        ) : (
+          <>
+            <HeaderSlider>
+              <View sx={style.sliderTextContainer}>
+                <Text variant="sliderText">{title}</Text>
+              </View>
+            </HeaderSlider>
+          </>
         )}
 
         {children}

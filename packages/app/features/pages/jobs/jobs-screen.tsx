@@ -1,5 +1,12 @@
 import routerListener from 'app/features/common/functions/routerListener'
-import { SafeAreaView, Text, View, useDripsyTheme } from 'dripsy'
+import {
+  SafeAreaView,
+  Text,
+  View,
+  useDripsyTheme,
+  Box,
+  ActivityIndicator,
+} from 'dripsy'
 import { useContext, useEffect, useState } from 'react'
 
 import MobileLoadingContext from '../../../../../apps/expo/context/mobileLoadingContext'
@@ -18,12 +25,31 @@ import Layout from 'app/features/common/components/Layout/Layout'
 
 import BouncyCheckbox from 'react-native-bouncy-checkbox'
 import useRouter from 'app/features/common/functions/nextrouter'
+import { getData } from 'app/features/common/functions/firestore'
+import LoadingScreen from 'app/features/common/components/LoadingScreen/LoadingScreen'
 const AvailableJobsScreen = ({ navigation }: any) => {
   const mobileLoadingContext = useContext(MobileLoadingContext)
   const router = useRouter()
   const [openFilter, setOpenFilter] = useState<boolean>(false)
+  const [loading, setLoading] = useState(true)
+  const [data, setData] = useState([])
+  const fetchData = () => {
+    getData('jobs')
+      .then((data_: any) => {
+        console.log(data_)
+        setData(data_)
+      })
+      .catch((e: any) => {
+        console.log('error')
+        console.log(e)
+      })
+      .finally(() => {
+        setLoading(false)
+      })
+  }
   useEffect(() => {
     routerListener(navigation, mobileLoadingContext)
+    fetchData()
   }, [])
   const style = StyleSheet.create({
     title: {
@@ -34,6 +60,7 @@ const AvailableJobsScreen = ({ navigation }: any) => {
       marginTop: '$2',
     },
     container: {
+      position: 'relative',
       display: 'flex',
       width: '100%',
 
@@ -395,30 +422,50 @@ const AvailableJobsScreen = ({ navigation }: any) => {
   const Content = () => {
     return (
       <View sx={style.container}>
-        <View sx={style.topButtons}>
-          <TouchableOpacity onPress={() => setOpenFilter(true)}>
-            <Text sx={style.button}>FILTERS</Text>
-          </TouchableOpacity>
-        </View>
-        <View
-          sx={{
-            mt: '$3',
-            display: 'flex',
-            flexDirection: ['column', 'row'],
-            rowGap: 15,
-            columnGap: [null, '1.2%'],
-            flexWrap: 'wrap',
-            width: '100%',
-            paddingHorizontal: '$3',
-          }}
-        >
-          <JobCard />
-          <JobCard />
-          <JobCard />
-          <JobCard />
-          <JobCard />
-          <JobCard />
-        </View>
+        {loading ? (
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: '100%',
+              height: Dimensions.get('window').height / 1.5,
+
+              zIndex: 3,
+            }}
+          >
+            <ActivityIndicator color="primary" size="large" />
+          </Box>
+        ) : (
+          <>
+            <View sx={style.topButtons}>
+              <TouchableOpacity onPress={() => setOpenFilter(true)}>
+                <Text sx={style.button}>FILTERS</Text>
+              </TouchableOpacity>
+            </View>
+            <View
+              sx={{
+                mt: '$3',
+                display: 'flex',
+                flexDirection: ['column', 'row'],
+                rowGap: 15,
+                columnGap: [null, '1.2%'],
+                flexWrap: 'wrap',
+                width: '100%',
+                paddingHorizontal: '$3',
+              }}
+            >
+              {data.map((it: any) => (
+                <JobCard
+                  id={it.id}
+                  imageName={it.data.imageName}
+                  name={it.data.name}
+                  key={it.id}
+                />
+              ))}
+            </View>
+          </>
+        )}
       </View>
     )
   }

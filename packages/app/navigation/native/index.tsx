@@ -10,6 +10,7 @@ import Logo from '../../features/common/components/Logo/logo'
 
 import ApplyScreen from '../../../../apps/next/pages/apply/[as]'
 import AvailableJobsScreen from 'app/features/pages/jobs/jobs-screen'
+import JobScreen from '../../../../apps/next/pages/job/[job]'
 
 /* const Stack = createNativeStackNavigator<{
   home: undefined
@@ -24,6 +25,9 @@ const Drawer = createDrawerNavigator<{
   'contact-us': undefined
   apply: {
     as: string
+  }
+  job: {
+    job: string
   }
   'apply/driver': undefined
   'apply/carrier': undefined
@@ -92,6 +96,17 @@ export function NativeNavigation() {
           title: 'Home',
         }}
         component={HomeScreen}
+      />
+      <Drawer.Screen
+        name="job"
+        options={({ route }) => {
+          var job = route['params']['job']
+          return {
+            title: 'Job',
+          }
+        }}
+        initialParams={{ job: 'none' } as any}
+        component={JobScreen}
       />
       <Drawer.Screen
         name="apply/driver"

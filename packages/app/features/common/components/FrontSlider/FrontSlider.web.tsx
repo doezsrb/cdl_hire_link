@@ -37,7 +37,9 @@ const FrontSlider = ({ homepage = false }: FrontSliderProps) => {
     >
       <View
         sx={{
-          height: homepage ? Dimensions.get('window').height - 80 : '30vh',
+          height: homepage
+            ? Dimensions.get('window').height - 80
+            : Dimensions.get('window').height / 3,
         }}
       >
         <SolitoImage

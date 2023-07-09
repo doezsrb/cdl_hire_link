@@ -26,6 +26,8 @@ const DrawerMenu = ({ drawerProps }: DrawerMenuProps) => {
         const focused = index === drawerProps.state.index
         const { title, drawerLabel, drawerIcon } =
           drawerProps.descriptors[it.key]!.options
+
+        if (title == 'Job') return null
         return (
           <DrawerItem
             focused={focused}

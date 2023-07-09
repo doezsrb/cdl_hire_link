@@ -1,17 +1,44 @@
 import { Text, View } from 'dripsy'
-import { useEffect } from 'react'
-import { PixelRatio, Platform, StyleSheet } from 'react-native'
+import { useEffect, useState } from 'react'
+import {
+  PixelRatio,
+  Platform,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native'
+import { SolitoImage } from 'solito/image'
+import { getImage } from '../../functions/firestore'
+import { useRouter } from 'solito/router'
 
-const JobCard = () => {
+interface JobCardProps {
+  name: string
+  imageName: string
+  id: string
+}
+const JobCard = ({ name, imageName, id }: JobCardProps) => {
+  const router = useRouter()
+  const [image, setImage] = useState<any>(null)
+  useEffect(() => {
+    getImage(imageName)
+      .then((res: any) => {
+        console.log('rsses')
+        setImage(res)
+      })
+      .catch((e: any) => {
+        console.log(e)
+      })
+  }, [])
+
   const style = StyleSheet.create({
     container: {
       backgroundColor: 'white',
       paddingHorizontal: '$2',
       paddingBottom: '$2',
+      paddingTop: '$2',
       justifyContent: 'space-between',
 
       width: ['100%', '100%', '48.5%', '48.5%', '32.5%'] as any,
-      height: ['auto', 'auto', 160] as any,
+      height: ['auto', 'auto', 360] as any,
       shadowOffset: { width: 0, height: 5 },
       shadowColor: 'black',
       shadowRadius: 10,
@@ -65,17 +92,33 @@ const JobCard = () => {
   }
   return (
     <View sx={style.container}>
-      <View sx={{ flexDirection: 'column' }}>
-        <Text sx={style.title}>Leader Freight Systems</Text>
-        <Text sx={style.subtitle}>Compandy driver, Dry van</Text>
-      </View>
-      <View sx={style.tagContainer}>
-        {Tag('$1300-$2000 per week')}
-        {Tag('2+ years experience')}
-        {Tag('$1300-$2000 per week')}
-        {Tag('$1300-$2000 per week')}
-        {Tag('2+ years experience')}
-      </View>
+      <TouchableOpacity
+        onPress={() => {
+          router.push('/job/' + id)
+        }}
+      >
+        <View sx={{ flexDirection: 'column' }}>
+          <View sx={{ width: '100%', height: 200, backgroundColor: 'white' }}>
+            {image != null && (
+              <SolitoImage
+                alt={name + ' image'}
+                resizeMode="contain"
+                src={image}
+                fill
+              />
+            )}
+          </View>
+          <Text sx={style.title}>{name}</Text>
+          <Text sx={style.subtitle}>Compandy driver, Dry van</Text>
+        </View>
+        <View sx={style.tagContainer}>
+          {Tag('$1300-$2000 per week')}
+          {Tag('2+ years experience')}
+          {Tag('$1300-$2000 per week')}
+          {Tag('$1300-$2000 per week')}
+          {Tag('2+ years experience')}
+        </View>
+      </TouchableOpacity>
     </View>
   )
 }
