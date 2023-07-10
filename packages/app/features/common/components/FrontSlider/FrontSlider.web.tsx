@@ -39,7 +39,7 @@ const FrontSlider = ({ homepage = false }: FrontSliderProps) => {
         sx={{
           height: homepage
             ? Dimensions.get('window').height - 80
-            : Dimensions.get('window').height / 3,
+            : Dimensions.get('window').height / 2,
         }}
       >
         <SolitoImage
@@ -52,7 +52,9 @@ const FrontSlider = ({ homepage = false }: FrontSliderProps) => {
       </View>
       <View
         sx={{
-          height: homepage ? Dimensions.get('window').height - 80 : '30vh',
+          height: homepage
+            ? Dimensions.get('window').height - 80
+            : Dimensions.get('window').height / 2,
         }}
       >
         <SolitoImage
@@ -65,7 +67,9 @@ const FrontSlider = ({ homepage = false }: FrontSliderProps) => {
       </View>
       <View
         sx={{
-          height: homepage ? Dimensions.get('window').height - 80 : '30vh',
+          height: homepage
+            ? Dimensions.get('window').height - 80
+            : Dimensions.get('window').height / 2,
         }}
       >
         <SolitoImage

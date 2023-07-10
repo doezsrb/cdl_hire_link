@@ -36,11 +36,9 @@ const AvailableJobsScreen = ({ navigation }: any) => {
   const fetchData = () => {
     getData('jobs')
       .then((data_: any) => {
-        console.log(data_)
         setData(data_)
       })
       .catch((e: any) => {
-        console.log('error')
         console.log(e)
       })
       .finally(() => {
@@ -63,7 +61,7 @@ const AvailableJobsScreen = ({ navigation }: any) => {
       position: 'relative',
       display: 'flex',
       width: '100%',
-
+      minHeight: Dimensions.get('window').height,
       backgroundColor: 'white',
       paddingVertical: '$3',
     },
@@ -457,6 +455,7 @@ const AvailableJobsScreen = ({ navigation }: any) => {
             >
               {data.map((it: any) => (
                 <JobCard
+                  tags={it.data.tags}
                   id={it.id}
                   imageName={it.data.imageName}
                   name={it.data.name}

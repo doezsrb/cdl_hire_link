@@ -1,7 +1,9 @@
-import { Text, View, useDripsyTheme, useSx } from 'dripsy'
+import { ActivityIndicator, Text, View, useDripsyTheme, useSx } from 'dripsy'
 import FrontSlider from '../FrontSlider/FrontSlider'
 import { Dimensions, PixelRatio, Platform, StyleSheet } from 'react-native'
 import { SolitoImage } from 'solito/image'
+import { useState } from 'react'
+import ImageLoader from '../ImageLoader/ImageLoader'
 
 interface HeaderImageProps {
   url: string | null
@@ -10,13 +12,14 @@ interface HeaderImageProps {
 const HeaderImage = ({ url, children }: HeaderImageProps) => {
   const { theme } = useDripsyTheme()
   const sx = useSx()
+  const [loading, setLoading] = useState(true)
   const style = StyleSheet.create({
     imageContainer: {
       position: 'relative',
       backgroundColor: 'black',
 
       width: '100%',
-      height: Dimensions.get('window').height / 3,
+      height: Dimensions.get('window').height / 2,
       zIndex: 1,
     },
     sliderTextBox: {
@@ -54,13 +57,18 @@ const HeaderImage = ({ url, children }: HeaderImageProps) => {
   return (
     <View sx={{ position: 'relative' }}>
       <View sx={style.imageContainer}>
+        {loading && <ImageLoader />}
         {url != null && (
           <SolitoImage
             alt="company image"
             src={url}
             fill
+            contentPosition={{ top: '65%' }}
             resizeMode="cover"
             style={{ opacity: 0.2 }}
+            onLoadingComplete={() => {
+              setLoading(false)
+            }}
           />
         )}
       </View>

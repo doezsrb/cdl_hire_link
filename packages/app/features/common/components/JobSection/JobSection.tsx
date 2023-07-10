@@ -1,6 +1,6 @@
 import { Text, View } from 'dripsy'
 import { Dimensions } from 'react-native'
-
+import { useEffect } from 'react'
 const JobSection = ({ title, texts }: { title: string; texts: string[] }) => {
   return (
     <View
@@ -23,9 +23,26 @@ const JobSection = ({ title, texts }: { title: string; texts: string[] }) => {
       <View sx={{ paddingLeft: 20 }}>
         {texts.map((it: any, index: any) => {
           return (
-            <Text key={index + 'texts'} sx={{ color: 'primary', fontSize: 20 }}>
-              {it}
-            </Text>
+            <View
+              key={index + 'texts'}
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+              }}
+            >
+              {it.split('<row>').map((split: any, indexSplit: any) => {
+                if (split != '') {
+                  return (
+                    <Text
+                      sx={{ width: '100%', color: 'primary', fontSize: 20 }}
+                      key={indexSplit + 'split'}
+                    >
+                      {split.replace('\n', '')}
+                    </Text>
+                  )
+                }
+              })}
+            </View>
           )
         })}
       </View>

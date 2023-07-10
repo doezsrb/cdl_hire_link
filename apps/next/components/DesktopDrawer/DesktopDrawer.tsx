@@ -97,29 +97,17 @@ const DesktopDrawer = ({ openDrawer, setOpenDrawer }: DesktopDrawerProps) => {
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton
-              onClick={() => {
-                console.log('dsda')
-              }}
-            >
+            <ListItemButton onClick={() => {}}>
               <ListItemText sx={{ color: 'white' }} primary="ABOUT US" />
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton
-              onClick={() => {
-                console.log('dsda')
-              }}
-            >
+            <ListItemButton onClick={() => {}}>
               <ListItemText sx={{ color: 'white' }} primary="CAREERS" />
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton
-              onClick={() => {
-                console.log('dsda')
-              }}
-            >
+            <ListItemButton onClick={() => {}}>
               <ListItemText sx={{ color: 'white' }} primary="CONTACT US" />
             </ListItemButton>
           </ListItem>

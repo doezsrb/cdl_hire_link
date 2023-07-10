@@ -9,9 +9,7 @@ interface FrontSliderProps {
 }
 const FrontSlider = ({ homepage = false }: FrontSliderProps) => {
   const isCarousel = useRef<any>()
-  useEffect(() => {
-    console.log(StatusBar.currentHeight)
-  }, [])
+
   const renderItem = ({ item }: any) => {
     return (
       <View

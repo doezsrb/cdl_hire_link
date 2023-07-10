@@ -1,5 +1,5 @@
-import { View, Text } from 'dripsy'
-import { Dimensions, Pressable } from 'react-native'
+import { View, Text, useDripsyTheme } from 'dripsy'
+import { Dimensions, Platform, Pressable, TouchableOpacity } from 'react-native'
 import { createParam } from 'solito'
 import { TextLink } from 'solito/link'
 import { useContext, useEffect } from 'react'
@@ -12,9 +12,12 @@ import {
   getSingleData,
 } from 'app/features/common/functions/firestore'
 import { useState } from 'react'
+import { useRouter } from 'solito/router'
 const { useParam } = createParam<{ job: string }>()
 
 export function JobScreen({ navigation }) {
+  const router = useRouter()
+  const { theme } = useDripsyTheme()
   const [job, setJob] = useParam('job')
   const [jobData, setJobData] = useState<any>(null)
   const [image, setImage] = useState(null)
@@ -50,7 +53,11 @@ export function JobScreen({ navigation }) {
           <View
             sx={{
               minHeight: Dimensions.get('window').height,
+              paddingBottom: 50,
               width: '100%',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'flex-start',
             }}
           >
             {jobData.data.texts.map((it: any, index: any) => {
@@ -62,6 +69,20 @@ export function JobScreen({ navigation }) {
                 />
               )
             })}
+            <TouchableOpacity
+              style={{ marginTop: 50, alignSelf: 'center' }}
+              onPress={() => {
+                if (Platform.OS == 'web') {
+                  router.push('/apply/driver')
+                } else {
+                  navigation.navigate('apply/driver')
+                }
+              }}
+            >
+              <View sx={theme.buttons.bigButton}>
+                <Text variant="buttonBig">APPLY AS DRIVER</Text>
+              </View>
+            </TouchableOpacity>
           </View>
         </Layout>
       )}

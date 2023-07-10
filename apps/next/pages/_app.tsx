@@ -17,7 +17,6 @@ function MyApp({ Component, pageProps }: SolitoAppProps) {
   }
   const changeComplete = () => {
     setLoading(false)
-    console.log('dasd')
   }
   useEffect(() => {
     router.events.on('routeChangeStart', changeStart)
