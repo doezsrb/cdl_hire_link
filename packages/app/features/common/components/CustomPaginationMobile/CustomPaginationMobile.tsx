@@ -9,9 +9,7 @@ const CustomPaginationMobile = () => {
   const [value, setValue] = useState(1)
   const { theme } = useDripsyTheme()
   const sx = useSx()
-  useEffect(() => {
-    console.log(value)
-  }, [value])
+
   return (
     <View
       sx={{

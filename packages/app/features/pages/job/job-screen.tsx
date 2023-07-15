@@ -15,7 +15,7 @@ import { useState } from 'react'
 import { useRouter } from 'solito/router'
 const { useParam } = createParam<{ job: string }>()
 
-export function JobScreen({ navigation }) {
+export function JobScreen({ navigation }: any) {
   const router = useRouter()
   const { theme } = useDripsyTheme()
   const [job, setJob] = useParam('job')

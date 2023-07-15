@@ -8,7 +8,7 @@ import MobileLoadingContext from '../../../../../apps/expo/context/mobileLoading
 import { Dimensions, StyleSheet } from 'react-native'
 import AboutUsChooseCard from 'app/features/common/components/AboutUsChooseCard/AboutUsChooseCard'
 
-const AboutScreen = ({ navigation }) => {
+const AboutScreen = ({ navigation }: any) => {
   const { theme } = useDripsyTheme()
   const sx = useSx()
   const mobileLoadingContext: any = useContext(MobileLoadingContext)

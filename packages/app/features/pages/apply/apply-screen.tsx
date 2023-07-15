@@ -855,7 +855,7 @@ const ApplyScreen = ({ route, navigation }: any) => {
 
   const submit = () => {
     if (as != undefined) {
-      var dataObject = {}
+      var dataObject: any = {}
       Object.keys(stepData[as]).map((checkStep: any) => {
         var stepName = stepData[as][checkStep].name
         var groups = stepData[as][checkStep].groups

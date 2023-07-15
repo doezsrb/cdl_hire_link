@@ -14,8 +14,7 @@ import Footer from '../Footer/Footer'
 import scrollToTop from '../../functions/scrolltotop'
 import HeaderImage from '../HeaderImage/HeaderImage'
 
-import CustomPaginationMobile from '../CustomPaginationMobile/CustomPaginationMobile'
-import CustomPagination from '../../functions/pagination'
+import Pagination from '../../functions/pagination'
 interface LayoutProps {
   title?: string
   homepage?: boolean
@@ -174,7 +173,7 @@ const Layout = ({
             alignItems: 'center',
           }}
         >
-          <CustomPagination />
+          <Pagination />
         </Box>
         <Footer
           scrollToTop={() =>

@@ -50,7 +50,7 @@ const getData = (col: string) => {
         var dataArray: any[] = []
 
         snap.forEach((it: any) => {
-          var obj = {}
+          var obj: any = {}
           obj['id'] = it.id
           obj['data'] = it.data()
           dataArray.push(obj)

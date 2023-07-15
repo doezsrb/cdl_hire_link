@@ -9,7 +9,7 @@ import { Dimensions, Platform, TouchableOpacity } from 'react-native'
 import MobileLoadingContext from '../../../../../apps/expo/context/mobileLoadingContext'
 import LoadingContext from '../../../../../apps/next/context/loadingContext'
 
-const ContactScreen = ({ navigation }) => {
+const ContactScreen = ({ navigation }: any) => {
   const { theme } = useDripsyTheme()
   const sx = useSx()
   const mobileLoadingContext: any = useContext(MobileLoadingContext)
@@ -52,7 +52,7 @@ const ContactScreen = ({ navigation }) => {
     }
   }
   const updateData = (key: any, value: any) => {
-    var oldData = { ...data }
+    var oldData: any = { ...data }
     oldData[key].value = value
     setData(data)
   }
@@ -60,7 +60,7 @@ const ContactScreen = ({ navigation }) => {
     toggleLoading(true)
   }
   const checkData = () => {
-    var data_ = { ...data }
+    var data_: any = { ...data }
     var err = 0
     Object.keys(data_).map((it: any) => {
       if (data_[it].value == '') {
