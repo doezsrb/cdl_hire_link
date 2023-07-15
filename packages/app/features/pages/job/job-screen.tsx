@@ -49,7 +49,16 @@ export function JobScreen({ navigation }) {
   return (
     <>
       {jobData == null ? null : (
-        <Layout title={jobData.data.name} jobscreen jobscreenimage={image}>
+        <Layout
+          title={jobData.data.name}
+          jobTypes={jobData.data.type}
+          division={jobData.data.division}
+          solo_team_experience={
+            jobData.data.solo_team + ', ' + jobData.data.experience
+          }
+          jobscreen
+          jobscreenimage={image}
+        >
           <View
             sx={{
               minHeight: Dimensions.get('window').height,
@@ -73,9 +82,11 @@ export function JobScreen({ navigation }) {
               style={{ marginTop: 50, alignSelf: 'center' }}
               onPress={() => {
                 if (Platform.OS == 'web') {
-                  router.push('/apply/driver')
+                  router.push('/apply/driver?company=' + jobData.id)
                 } else {
-                  navigation.navigate('apply/driver')
+                  navigation.navigate('apply/driver', {
+                    company: jobData.id,
+                  })
                 }
               }}
             >

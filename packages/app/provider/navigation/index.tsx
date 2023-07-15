@@ -18,6 +18,8 @@ export function NavigationProvider({
               home: '',
               'user-detail': 'user/:id',
               job: 'job/:job',
+              'contact-us': 'contact-us',
+              'about-us': 'about-us',
               'available-jobs': 'available-jobs',
             },
           },

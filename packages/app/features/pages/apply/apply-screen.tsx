@@ -23,14 +23,19 @@ import MobileLoadingContext from '../../../../../apps/expo/context/mobileLoading
 import Layout from 'app/features/common/components/Layout/Layout'
 import LoadingContext from '../../../../../apps/next/context/loadingContext'
 import scrollToTop from 'app/features/common/functions/scrolltotop'
+import useRouter from 'app/features/common/functions/nextrouter'
 
-const { useParam } = createParam<{ as: 'carrier' | 'driver' }>()
+const { useParam } = createParam<{
+  as: 'carrier' | 'driver'
+}>()
 /* import { DateTimePickerAndroid } from '@react-native-community/datetimepicker' */
-const ApplyScreen = ({ navigation }: any) => {
+const ApplyScreen = ({ route, navigation }: any) => {
   const mobileLoadingContext: any = useContext(MobileLoadingContext)
   const scrollRef = useRef<any>()
   const desktopLoadingContext: any = useContext(LoadingContext)
   const [as, setAs] = useParam('as')
+  const router = useRouter()
+
   const scrollToStepRef: any = useRef()
   const { theme } = useDripsyTheme()
   const [step, setStep] = useState(1)
@@ -766,6 +771,13 @@ const ApplyScreen = ({ navigation }: any) => {
     },
   })
   useEffect(() => {
+    if (Platform.OS == 'android' || Platform.OS == 'ios') {
+      console.log(route)
+    }
+    if (Platform.OS == 'web') {
+      console.log(router)
+    }
+
     routerListener(navigation, mobileLoadingContext)
   }, [navigation])
   useEffect(() => {

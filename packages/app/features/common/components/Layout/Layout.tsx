@@ -13,6 +13,9 @@ import { useRef } from 'react'
 import Footer from '../Footer/Footer'
 import scrollToTop from '../../functions/scrolltotop'
 import HeaderImage from '../HeaderImage/HeaderImage'
+
+import CustomPaginationMobile from '../CustomPaginationMobile/CustomPaginationMobile'
+import CustomPagination from '../../functions/pagination'
 interface LayoutProps {
   title?: string
   homepage?: boolean
@@ -21,6 +24,9 @@ interface LayoutProps {
   navigation?: any
   children: any
   scrollRef?: any
+  solo_team_experience?: string
+  jobTypes?: any[]
+  division?: any[]
 }
 const Layout = ({
   title = '',
@@ -28,6 +34,9 @@ const Layout = ({
   jobscreen = false,
   navigation = null,
   jobscreenimage = null,
+  solo_team_experience = '',
+  jobTypes = [],
+  division = [],
   children,
   scrollRef,
 }: LayoutProps) => {
@@ -115,6 +124,35 @@ const Layout = ({
           <HeaderImage url={jobscreenimage}>
             <View sx={style.sliderTextContainer}>
               <Text variant="sliderText">{title}</Text>
+              <Text sx={{ color: 'lightgray', fontSize: 18 }}>
+                {jobTypes.map((it: any, index: any) => {
+                  if (jobTypes.length == 1) {
+                    return it
+                  } else {
+                    if (index + 1 == jobTypes.length) {
+                      return it
+                    } else {
+                      return it + ', '
+                    }
+                  }
+                })}
+              </Text>
+              <Text sx={{ color: 'lightgray', fontSize: 16 }}>
+                {division.map((it: any, index: any) => {
+                  if (division.length == 1) {
+                    return it
+                  } else {
+                    if (index + 1 == division.length) {
+                      return it
+                    } else {
+                      return it + ', '
+                    }
+                  }
+                })}
+              </Text>
+              <Text sx={{ color: 'lightgray', fontSize: 14 }}>
+                {solo_team_experience}
+              </Text>
             </View>
           </HeaderImage>
         ) : (
@@ -128,6 +166,16 @@ const Layout = ({
         )}
 
         {children}
+        <Box
+          sx={{
+            width: '100%',
+            paddingVertical: 20,
+            display: 'flex',
+            alignItems: 'center',
+          }}
+        >
+          <CustomPagination />
+        </Box>
         <Footer
           scrollToTop={() =>
             scrollToTop(scrollRef == null ? scrollRef_ : scrollRef)

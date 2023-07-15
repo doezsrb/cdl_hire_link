@@ -140,7 +140,11 @@ const DesktopHeader = () => {
               JOBS
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => {}}>
+          <TouchableOpacity
+            onPress={() => {
+              router.push('/about-us')
+            }}
+          >
             <Text
               style={[
                 sx(style.menuButton),
@@ -166,7 +170,11 @@ const DesktopHeader = () => {
             </Text>
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => {}}>
+          <TouchableOpacity
+            onPress={() => {
+              router.push('/contact-us')
+            }}
+          >
             <Text
               style={[
                 sx(style.menuButton),

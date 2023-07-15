@@ -15,7 +15,7 @@ const Footer = ({ scrollToTop }: { scrollToTop: Function }) => {
         shadowColor: Platform.OS == 'web' ? 'secondary' : 'black',
         shadowRadius: 15,
         shadowOpacity: 0.8,
-        mt: 40,
+
         elevation: 15,
         flexDirection: 'column',
         backgroundColor: 'white',

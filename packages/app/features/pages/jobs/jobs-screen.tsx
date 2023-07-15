@@ -453,15 +453,18 @@ const AvailableJobsScreen = ({ navigation }: any) => {
                 paddingHorizontal: '$3',
               }}
             >
-              {data.map((it: any) => (
-                <JobCard
-                  tags={it.data.tags}
-                  id={it.id}
-                  imageName={it.data.imageName}
-                  name={it.data.name}
-                  key={it.id}
-                />
-              ))}
+              {data.map((it: any) => {
+                return (
+                  <JobCard
+                    types={it.data.type}
+                    tags={it.data.tags}
+                    id={it.id}
+                    imageName={it.data.imageName}
+                    name={it.data.name}
+                    key={it.id}
+                  />
+                )
+              })}
             </View>
           </>
         )}

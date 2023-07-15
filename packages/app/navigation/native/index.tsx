@@ -11,6 +11,8 @@ import Logo from '../../features/common/components/Logo/logo'
 import ApplyScreen from '../../../../apps/next/pages/apply/[as]'
 import AvailableJobsScreen from 'app/features/pages/jobs/jobs-screen'
 import JobScreen from '../../../../apps/next/pages/job/[job]'
+import ContactScreen from 'app/features/pages/contact-us/contact-screen'
+import AboutScreen from '../../../../apps/next/pages/about-us'
 
 /* const Stack = createNativeStackNavigator<{
   home: undefined
@@ -74,6 +76,25 @@ export function NativeNavigation() {
       drawerContent={(props) => <DrawerMenu drawerProps={props} />}
     >
       <Drawer.Screen
+        name="about-us"
+        options={{
+          title: 'About Us',
+        }}
+        component={AboutScreen}
+      />
+      <Drawer.Screen
+        name="contact-us"
+        listeners={{
+          drawerItemPress: (e: any) => {
+            console.log('PRESS')
+          },
+        }}
+        options={{
+          title: 'Contact Us',
+        }}
+        component={ContactScreen}
+      />
+      <Drawer.Screen
         name="available-jobs"
         listeners={{
           drawerItemPress: (e: any) => {
@@ -135,23 +156,9 @@ export function NativeNavigation() {
       />
 
       <Drawer.Screen
-        name="about-us"
-        options={{
-          title: 'About Us',
-        }}
-        component={UserDetailScreen}
-      />
-      <Drawer.Screen
         name="careers"
         options={{
           title: 'Careers',
-        }}
-        component={UserDetailScreen}
-      />
-      <Drawer.Screen
-        name="contact-us"
-        options={{
-          title: 'Contact Us',
         }}
         component={UserDetailScreen}
       />

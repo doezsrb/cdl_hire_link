@@ -7383,11 +7383,13 @@ __metadata:
     react-native-drawer-layout: ^3.2.0
     react-native-gesture-handler: ~2.9.0
     react-native-input-select: ^0.32.0
+    react-native-modal-dropdown: ^1.0.2
     react-native-reanimated: ~2.14.4
     react-native-safe-area-context: 4.5.0
     react-native-screens: ~3.20.0
     react-native-snap-carousel: 4.0.0-beta.6
     react-native-svg: 13.4.0
+    react-native-vector-icons: ^9.2.0
     react-native-web: ~0.18.11
     typescript: ^4.9.4
   languageName: unknown
@@ -12103,7 +12105,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prop-types@npm:*, prop-types@npm:^15.6.2, prop-types@npm:^15.7.2, prop-types@npm:^15.8.1":
+"prop-types@npm:*, prop-types@npm:^15.6.0, prop-types@npm:^15.6.2, prop-types@npm:^15.7.2, prop-types@npm:^15.8.1":
   version: 15.8.1
   resolution: "prop-types@npm:15.8.1"
   dependencies:
@@ -12426,6 +12428,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-native-modal-dropdown@npm:^1.0.2":
+  version: 1.0.2
+  resolution: "react-native-modal-dropdown@npm:1.0.2"
+  dependencies:
+    prop-types: ^15.6.0
+  checksum: 5fa87939451c2903fae3d1aaaa1cd404cc34ae32a854f212f31be2cd7d692bf9f26e6ee792f4db43c050017c96efb14d86045e497d2e637e9e21bb90016bee83
+  languageName: node
+  linkType: hard
+
 "react-native-radio-buttons-group@npm:^3.0.2":
   version: 3.0.2
   resolution: "react-native-radio-buttons-group@npm:3.0.2"
@@ -12498,6 +12509,19 @@ __metadata:
     react: "*"
     react-native: "*"
   checksum: e630c057d6a0947c4d729538f643585a1fd9380975c1cf9adffad7647822b35219a9e1e60407f422b2b70592ed7f7e8766fab15df74f9cfce0b1c8a1c3544676
+  languageName: node
+  linkType: hard
+
+"react-native-vector-icons@npm:^9.2.0":
+  version: 9.2.0
+  resolution: "react-native-vector-icons@npm:9.2.0"
+  dependencies:
+    prop-types: ^15.7.2
+    yargs: ^16.1.1
+  bin:
+    fa5-upgrade: bin/fa5-upgrade.sh
+    generate-icon: bin/generate-icon.js
+  checksum: 222baf88c3f269234c08a41680e6400a4bf1f4c170f7c2ffac34b2c1c089cdb1084223db2a7d9cc54ee212eec20ff1478f3f482df19062e3057c328642da0be2
   languageName: node
   linkType: hard
 
@@ -15155,7 +15179,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"yargs@npm:^16.2.0":
+"yargs@npm:^16.1.1, yargs@npm:^16.2.0":
   version: 16.2.0
   resolution: "yargs@npm:16.2.0"
   dependencies:
