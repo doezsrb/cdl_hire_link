@@ -53,9 +53,8 @@ export function JobScreen({ navigation }: any) {
           title={jobData.data.name}
           jobTypes={jobData.data.type}
           division={jobData.data.division}
-          solo_team_experience={
-            jobData.data.solo_team + ', ' + jobData.data.experience
-          }
+          solo_team={jobData.data.solo_team}
+          experience={jobData.data.experience}
           jobscreen
           jobscreenimage={image}
         >

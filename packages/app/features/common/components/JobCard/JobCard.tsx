@@ -26,11 +26,6 @@ const JobCard = ({ name, imageName, id, tags, types }: JobCardProps) => {
   const sx = useSx()
 
   useEffect(() => {
-    console.log('types')
-    console.log(types)
-    console.log('LOAding update; ' + loading)
-  }, [loading])
-  useEffect(() => {
     getImage(imageName)
       .then((res: any) => {
         setImage(res)

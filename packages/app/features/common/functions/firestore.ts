@@ -41,21 +41,42 @@ const getSingleData = (id: string, col: string) => {
       })
   })
 }
-const getData = (col: string) => {
+const getCountData = (col: string) => {
   return new Promise((resolve, reject) => {
     firestore()
       .collection(col)
+      .count()
+      .get()
+      .then((snap: any) => {
+        resolve(snap.data().count)
+      })
+      .catch((e: any) => {
+        resolve(null)
+      })
+  })
+}
+const getData = (col: string, lastDoc?: any) => {
+  return new Promise((resolve, reject) => {
+    var query_ =
+      lastDoc == null
+        ? firestore().collection(col).limit(1)
+        : firestore().collection(col).startAfter(lastDoc).limit(1)
+    query_
       .get()
       .then((snap: any) => {
         var dataArray: any[] = []
-
+        var lastDoc = snap.docs[snap.docs.length - 1]
         snap.forEach((it: any) => {
           var obj: any = {}
           obj['id'] = it.id
           obj['data'] = it.data()
           dataArray.push(obj)
         })
-        resolve(dataArray)
+        var responseObj = {
+          data: dataArray,
+          lastDoc: lastDoc,
+        }
+        resolve(responseObj)
       })
       .catch((e: any) => {
         console.log('Error')
@@ -81,4 +102,4 @@ const addData = (data: any, as: string, toggleLoading: Function) => {
       toggleLoading(false)
     })
 }
-export { addData, getData, getImage, getSingleData }
+export { addData, getData, getImage, getSingleData, getCountData }

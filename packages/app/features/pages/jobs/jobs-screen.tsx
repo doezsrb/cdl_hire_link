@@ -25,29 +25,42 @@ import Layout from 'app/features/common/components/Layout/Layout'
 
 import BouncyCheckbox from 'react-native-bouncy-checkbox'
 import useRouter from 'app/features/common/functions/nextrouter'
-import { getData } from 'app/features/common/functions/firestore'
+import { getCountData, getData } from 'app/features/common/functions/firestore'
 import LoadingScreen from 'app/features/common/components/LoadingScreen/LoadingScreen'
 const AvailableJobsScreen = ({ navigation }: any) => {
   const mobileLoadingContext = useContext(MobileLoadingContext)
   const router = useRouter()
   const [openFilter, setOpenFilter] = useState<boolean>(false)
   const [loading, setLoading] = useState(true)
+
+  const [lastDoc, setLastDoc] = useState<any>(null)
   const [data, setData] = useState([])
-  const fetchData = () => {
-    getData('jobs')
+  const fetchData = (lastDoc, callback?: Function) => {
+    if (lastDoc == 'finish') return
+    getData('jobs', lastDoc)
       .then((data_: any) => {
-        setData(data_)
+        if (data_.lastDoc == undefined) {
+          setLastDoc('finish')
+        } else {
+          setLastDoc(data_.lastDoc)
+        }
+        var oldData: any = data
+
+        oldData = oldData.concat(data_.data)
+
+        setData(oldData)
       })
       .catch((e: any) => {
         console.log(e)
       })
       .finally(() => {
         setLoading(false)
+        if (callback != undefined) callback()
       })
   }
   useEffect(() => {
     routerListener(navigation, mobileLoadingContext)
-    fetchData()
+    fetchData(lastDoc)
   }, [])
   const style = StyleSheet.create({
     title: {
@@ -67,7 +80,8 @@ const AvailableJobsScreen = ({ navigation }: any) => {
     },
     topButtons: {
       mt: '$1',
-      ml: '$3',
+
+      paddingHorizontal: '$3',
       width: '100%',
       display: 'flex',
       flexDirection: 'row',
@@ -158,7 +172,7 @@ const AvailableJobsScreen = ({ navigation }: any) => {
           return selectedTypes[it]
         })
         .filter((it: any) => it.value)
-      console.log(typeQuery)
+
       let stQuery = Object.keys(solo_team)
         .map((it: any) => {
           return solo_team[it]
@@ -471,10 +485,11 @@ const AvailableJobsScreen = ({ navigation }: any) => {
       </View>
     )
   }
+
   return (
     <>
       {Platform.OS == 'web' ? (
-        <Layout title="AVAILABLE JOBS">
+        <Layout title="AVAILABLE JOBS" fetchData={fetchData} lastDoc={lastDoc}>
           <FilterDrawerDesktop
             radioGroup={FiltersContent}
             open={openFilter}
@@ -489,7 +504,13 @@ const AvailableJobsScreen = ({ navigation }: any) => {
           open={openFilter}
           setOpen={setOpenFilter}
         >
-          <Layout title="AVAILABLE JOBS">{Content()}</Layout>
+          <Layout
+            title="AVAILABLE JOBS"
+            fetchData={fetchData}
+            lastDoc={lastDoc}
+          >
+            {Content()}
+          </Layout>
         </FilterDrawerMobile>
       )}
     </>

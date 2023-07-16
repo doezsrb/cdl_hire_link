@@ -3,7 +3,17 @@ import { Platform, TouchableOpacity } from 'react-native'
 import ModalDropdown from 'react-native-modal-dropdown'
 import { useState, useEffect } from 'react'
 import Icon from 'react-native-vector-icons/AntDesign'
-const CustomPaginationMobile = () => {
+
+interface CustomPaginationMobileProps {
+  numPages: number
+  setCurrentPage: Function
+  currentPage: number
+}
+const CustomPaginationMobile = ({
+  numPages,
+  setCurrentPage,
+  currentPage,
+}: CustomPaginationMobileProps) => {
   const data = [{ number: 1 }]
   const maxPages = 10
   const [value, setValue] = useState(1)

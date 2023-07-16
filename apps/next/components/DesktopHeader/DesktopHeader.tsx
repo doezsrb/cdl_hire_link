@@ -24,9 +24,7 @@ const DesktopHeader = () => {
   const [openDrawer, setOpenDrawer] = useState(false)
   const sx = useSx()
   const router = useRouter()
-  useEffect(() => {
-    console.log(router.asPath)
-  }, [])
+
   const { theme } = useDripsyTheme()
   const style = StyleSheet.create({
     numberStyleDrawer: {
