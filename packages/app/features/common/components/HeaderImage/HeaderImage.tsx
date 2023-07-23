@@ -63,7 +63,6 @@ const HeaderImage = ({ url, children }: HeaderImageProps) => {
             alt="company image"
             src={url}
             fill
-            contentPosition={{ top: '65%' }}
             resizeMode="cover"
             style={{ opacity: 0.2 }}
             onLoadingComplete={() => {

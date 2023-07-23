@@ -4,24 +4,29 @@ import { ScrollView } from 'react-native'
 import { Dimensions, TouchableOpacity } from 'react-native'
 import { Drawer } from 'react-native-drawer-layout'
 import RadioGroup from 'react-native-radio-buttons-group'
+import FilterList from '../FilterList/FilterList'
 interface FilterDrawerMobileProps {
   open: boolean
   setOpen: Function
-  buttons: any
-  radioGroup: any
+  changeFilter: Function
+  selectedTypes: any[]
+  selectedExperience: any[]
+  selectedDivision: any[]
+  selectedSoloTeam: any[]
   children: any
 }
 const FilterDrawerMobile = ({
   open,
   setOpen,
-  buttons,
-  radioGroup,
+  changeFilter,
+  selectedTypes,
+  selectedDivision,
+  selectedExperience,
+  selectedSoloTeam,
   children,
 }: FilterDrawerMobileProps) => {
   const [selectedId, setSelectedId] = useState<string>()
-  useEffect(() => {
-    console.log('open')
-  }, [open])
+
   return (
     <Drawer
       open={open}
@@ -47,7 +52,15 @@ const FilterDrawerMobile = ({
               >
                 FILTERS
               </Text>
-              <View sx={{ mt: '$2' }}>{radioGroup()}</View>
+              <View sx={{ mt: '$2' }}>
+                <FilterList
+                  changeFilter={changeFilter}
+                  selectedTypes={selectedTypes}
+                  selectedExperience={selectedExperience}
+                  selectedDivision={selectedDivision}
+                  selectedSoloTeam={selectedSoloTeam}
+                />
+              </View>
             </View>
           </ScrollView>
         )

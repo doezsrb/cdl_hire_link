@@ -51,7 +51,7 @@ const Layout = ({
   const router = useRouter()
   const scrollRef_ = useRef()
   const [footerHeight, setFooterHeight] = useState(0)
-
+  const [footerPosition, setFooterPosition] = useState(0)
   const [pageHeight, setPageHeight] = useState(0)
   const { theme } = useDripsyTheme()
   const sx = useSx()
@@ -86,7 +86,7 @@ const Layout = ({
       allowFetch = true
     }, 1500)
   }
-  function handleInfinityScroll(event) {
+  function handleInfinityScroll(event: any) {
     let mHeight = event.nativeEvent.layoutMeasurement.height
     let cSize = event.nativeEvent.contentSize.height - footerHeight
     let Y = event.nativeEvent.contentOffset.y
@@ -94,10 +94,13 @@ const Layout = ({
     return false
   }
   useEffect(() => {
-    if (pageHeight == 0 || footerHeight == 0) return
+    if (pageHeight == 0 || footerPosition == 0) return
 
-    const handleScroll = (event) => {
-      if (window.scrollY >= pageHeight - footerHeight * 2) {
+    const handleScroll = (event: any) => {
+      if (
+        window.scrollY >=
+        pageHeight - (footerPosition + footerHeight) / 1.2
+      ) {
         if (allowFetch) {
           allowFetch = false
           if (fetchData != undefined) {
@@ -118,7 +121,7 @@ const Layout = ({
         window.removeEventListener('scroll', handleScroll)
       }
     }
-  }, [pageHeight, footerHeight, lastDoc])
+  }, [pageHeight, footerHeight, footerPosition, lastDoc])
   return (
     <SafeAreaView sx={{ backgroundColor: 'white' }}>
       <ScrollView
@@ -126,7 +129,7 @@ const Layout = ({
           var { height } = event.nativeEvent.layout
           setPageHeight(height)
         }}
-        onScroll={(e) => {
+        onScroll={(e: any) => {
           if (handleInfinityScroll(e)) {
             if (allowFetch) {
               allowFetch = false
@@ -274,7 +277,8 @@ const Layout = ({
         </Box> */}
         <NativeView
           onLayout={(event) => {
-            var { height } = event.nativeEvent.layout
+            var { y, height } = event.nativeEvent.layout
+            setFooterPosition(y)
             setFooterHeight(height)
           }}
         >

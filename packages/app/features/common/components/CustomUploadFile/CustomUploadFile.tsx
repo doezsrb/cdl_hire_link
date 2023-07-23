@@ -2,6 +2,8 @@ import { View, Text, useDripsyTheme } from 'dripsy'
 import { useEffect, useRef, useState } from 'react'
 import { Platform, StyleSheet } from 'react-native'
 import DocumentPicker from '../../functions/docpicker'
+import { createFileName } from '../../functions/common'
+import { uploadImage } from '../../functions/firestore'
 interface CustomUploadFileProps {
   name: string
   setVal: Function
@@ -62,6 +64,18 @@ const CustomUploadFile = ({
         onPress={async () => {
           if (Platform.OS != 'web') {
             var data: any = await DocumentPicker.getDocumentAsync()
+            /* var filename = createFileName(data.name)
+            if (filename != null) {
+              uploadImage(data.uri, filename)
+                .then((snap: any) => {
+                  console.log(snap)
+                })
+                .catch((e: any) => {
+                  console.log('ERR: ' + e)
+                })
+            
+            } */
+
             setVal(data)
             setFilename(data.name)
           }

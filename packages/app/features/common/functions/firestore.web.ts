@@ -11,22 +11,43 @@ import {
   startAfter,
   startAt,
   getCountFromServer,
+  where,
+  and,
 } from 'firebase/firestore'
-import { getDownloadURL, ref } from 'firebase/storage'
-const addData = (data: any, as: string, toggleLoading: Function) => {
-  const colRef = collection(firestore, as)
-  toggleLoading(true)
-  addDoc(colRef, {
-    data,
+import { getDownloadURL, ref, uploadString } from 'firebase/storage'
+
+const uploadImage = (file: any, filename: string) => {
+  return new Promise((resolve, reject) => {
+    var storageRef = ref(storage, '/images/' + filename)
+    uploadString(storageRef, file, 'data_url')
+      .then((snap: any) => {
+        resolve('success')
+      })
+      .catch((e: any) => {
+        resolve('failed')
+      })
   })
-    .then(() => {
-      console.log('Success')
-      toggleLoading(false)
+}
+const addData = (
+  data: any,
+  as: string,
+
+  job: string | null
+) => {
+  return new Promise((resolve, reject) => {
+    const colRef = collection(firestore, as)
+
+    addDoc(colRef, {
+      data,
+      job,
     })
-    .catch((e: any) => {
-      console.log(e)
-      toggleLoading(false)
-    })
+      .then(() => {
+        resolve('success')
+      })
+      .catch((e: any) => {
+        resolve('failed')
+      })
+  })
 }
 const getSingleData = (id: string, col: string) => {
   return new Promise((resolve, reject) => {
@@ -46,11 +67,9 @@ const getImage = (url: string) => {
 
     getDownloadURL(imgRef)
       .then((res: any) => {
-        console.log(res)
         resolve(res)
       })
       .catch((e: any) => {
-        console.log('error')
         console.log(e)
         resolve(null)
       })
@@ -68,17 +87,41 @@ const getCountData = (col: string) => {
       })
   })
 }
-const getData = (col: string, lastDoc?: any) => {
+const getData = (col: string, filters: any[], lastDoc?: any) => {
   return new Promise((resolve, reject) => {
+    var type = ['Company driver', 'Rental lease']
+    var solo_team = ['Solo']
+    var division = ['Dry van']
+    var experience = ['2+ years']
     var colRef = collection(firestore, col)
+    var queries: any
+
     var query_ =
       lastDoc == null
-        ? query(colRef, limit(1))
-        : query(colRef, startAfter(lastDoc), limit(1))
+        ? filters.length != 0
+          ? query(
+              colRef,
+              where('filters', 'array-contains-any', filters),
+              limit(20)
+            )
+          : query(
+              colRef,
+
+              limit(20)
+            )
+        : filters.length != 0
+        ? query(
+            colRef,
+            where('filters', 'array-contains-any', filters),
+            startAfter(lastDoc),
+            limit(20)
+          )
+        : query(colRef, startAfter(lastDoc), limit(20))
 
     getDocs(query_)
       .then((snap: any) => {
         var dataArray: any[] = []
+
         var lastDoc = snap.docs[snap.docs.length - 1]
 
         snap.forEach((it: any) => {
@@ -95,8 +138,9 @@ const getData = (col: string, lastDoc?: any) => {
         resolve(responseObj)
       })
       .catch((e: any) => {
+        console.log(e)
         resolve(null)
       })
   })
 }
-export { addData, getData, getImage, getSingleData, getCountData }
+export { addData, getData, getImage, getSingleData, getCountData, uploadImage }

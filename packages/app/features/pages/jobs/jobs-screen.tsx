@@ -27,7 +27,7 @@ import BouncyCheckbox from 'react-native-bouncy-checkbox'
 import useRouter from 'app/features/common/functions/nextrouter'
 import { getCountData, getData } from 'app/features/common/functions/firestore'
 import LoadingScreen from 'app/features/common/components/LoadingScreen/LoadingScreen'
-const AvailableJobsScreen = ({ navigation }: any) => {
+const AvailableJobsScreen = ({ route, navigation }: any) => {
   const mobileLoadingContext = useContext(MobileLoadingContext)
   const router = useRouter()
   const [openFilter, setOpenFilter] = useState<boolean>(false)
@@ -35,20 +35,62 @@ const AvailableJobsScreen = ({ navigation }: any) => {
 
   const [lastDoc, setLastDoc] = useState<any>(null)
   const [data, setData] = useState([])
-  const fetchData = (lastDoc, callback?: Function) => {
+  const { theme } = useDripsyTheme()
+  const [selectedTypes, setSelectedTypes] = useState<any[]>([])
+  const [selectedDivision, setSelectedDivision] = useState([])
+  const [selectedSoloTeam, setSelectedSoloTeam] = useState([])
+  const [selectedExperience, setSelectedExperience] = useState([])
+  const fetchData = (
+    lastDoc: any,
+    callback?: Function,
+    selectedTypes_?: any[],
+    selectedDivision_?: any[],
+    selectedSoloTeam_?: any[],
+    selectedExperience_?: any[],
+    nonpagination?: boolean
+  ) => {
     if (lastDoc == 'finish') return
-    getData('jobs', lastDoc)
+
+    var filters: any = []
+    if (selectedTypes_ != undefined) {
+      filters = filters.concat(selectedTypes_)
+    } else {
+      filters = filters.concat(selectedTypes)
+    }
+    if (selectedDivision_ != undefined) {
+      filters = filters.concat(selectedDivision_)
+    } else {
+      filters = filters.concat(selectedDivision)
+    }
+    if (selectedSoloTeam_ != undefined) {
+      filters = filters.concat(selectedSoloTeam_)
+    } else {
+      filters = filters.concat(selectedSoloTeam)
+    }
+    if (selectedExperience_ != undefined) {
+      filters = filters.concat(selectedExperience_)
+    } else {
+      filters = filters.concat(selectedExperience)
+    }
+    if (nonpagination) {
+      setLoading(true)
+    }
+    getData('jobs', filters, lastDoc)
       .then((data_: any) => {
-        if (data_.lastDoc == undefined) {
+        if (data_.lastDoc == undefined || data_.data.length < 20) {
           setLastDoc('finish')
         } else {
           setLastDoc(data_.lastDoc)
         }
-        var oldData: any = data
 
-        oldData = oldData.concat(data_.data)
-
-        setData(oldData)
+        if (nonpagination) {
+          setData([])
+          setData(data_.data)
+        } else {
+          var oldData: any = data
+          oldData = oldData.concat(data_.data)
+          setData(oldData)
+        }
       })
       .catch((e: any) => {
         console.log(e)
@@ -58,10 +100,49 @@ const AvailableJobsScreen = ({ navigation }: any) => {
         if (callback != undefined) callback()
       })
   }
+
   useEffect(() => {
     routerListener(navigation, mobileLoadingContext)
-    fetchData(lastDoc)
   }, [])
+  useEffect(() => {
+    var universalRouter: any
+    var types: any = []
+    var solo_team: any = []
+    var division: any = []
+    var experience: any = []
+    if (Platform.OS == 'web') {
+      if (!router.isReady) return
+      universalRouter = router.query
+    } else {
+      universalRouter = route.params
+    }
+
+    if (universalRouter != undefined) {
+      types =
+        universalRouter.type != undefined && universalRouter.type != ''
+          ? universalRouter.type.split(',')
+          : []
+      solo_team =
+        universalRouter.st != undefined && universalRouter.st != ''
+          ? universalRouter.st.split(',')
+          : []
+      division =
+        universalRouter.division != undefined && universalRouter.division != ''
+          ? universalRouter.division.split(',')
+          : []
+      experience =
+        universalRouter.experience != undefined &&
+        universalRouter.experience != ''
+          ? universalRouter.experience.split(',')
+          : []
+    }
+    setSelectedTypes(types)
+    setSelectedSoloTeam(solo_team)
+    setSelectedDivision(division)
+    setSelectedExperience(experience)
+
+    fetchData(null, undefined, types, division, solo_team, experience, true)
+  }, [router, route])
   const style = StyleSheet.create({
     title: {
       marginLeft: '$2',
@@ -102,335 +183,7 @@ const AvailableJobsScreen = ({ navigation }: any) => {
       backgroundColor: 'primary',
     },
   })
-  const { theme } = useDripsyTheme()
 
-  const [division, setSelectedDivision] = useState<any>({
-    dry_van: {
-      name: 'Dry van',
-      value: false,
-    },
-    reefer: {
-      name: 'Reefer',
-      value: false,
-    },
-    flatbed: {
-      name: 'Flatbed',
-      value: false,
-    },
-    box_truck: {
-      name: 'Box truck',
-      value: false,
-    },
-  })
-  const [selectedTypes, setSelectedTypes] = useState<any>({
-    company_driver: {
-      name: 'Company driver',
-      value: false,
-    },
-    lease_to_purchase: {
-      name: 'Lease to purchase',
-      value: false,
-    },
-    rental_lease: {
-      name: 'Rental lease',
-      value: false,
-    },
-    owner_operator: {
-      name: 'Owner operator',
-      value: false,
-    },
-  })
-  const [solo_team, setSelectedSoloTeam] = useState<any>({
-    solo: {
-      name: 'Solo',
-      value: false,
-    },
-    team: {
-      name: 'Team',
-      value: false,
-    },
-  })
-  const [experience, setSelectedExperience] = useState<any>({
-    less_1: {
-      name: 'Less than 1 year',
-      value: false,
-    },
-    less_2: {
-      name: 'Less than 2 years',
-      value: false,
-    },
-    more_2: {
-      name: '2+ years',
-      value: false,
-    },
-  })
-  useEffect(() => {
-    if (Platform.OS == 'web') {
-      let url: any = '/available-jobs'
-      let typeQuery: any = Object.keys(selectedTypes)
-        .map((it: any) => {
-          return selectedTypes[it]
-        })
-        .filter((it: any) => it.value)
-
-      let stQuery = Object.keys(solo_team)
-        .map((it: any) => {
-          return solo_team[it]
-        })
-        .filter((it: any) => it.value)
-      let divisionQuery = Object.keys(division)
-        .map((it: any) => {
-          return division[it]
-        })
-        .filter((it: any) => it.value)
-      let experienceQuery = Object.keys(experience)
-        .map((it: any) => {
-          return experience[it]
-        })
-        .filter((it: any) => it.value)
-      url += '?type=' + typeQuery.map((it: any) => it.name)
-      url += '?st=' + stQuery.map((it: any) => it.name)
-      url += '?division=' + divisionQuery.map((it: any) => it.name)
-      url += '?experience=' + experienceQuery.map((it: any) => it.name)
-      router.push(url)
-    }
-  }, [selectedTypes, division, experience, solo_team])
-  const buttons = {
-    type: [
-      {
-        id: '1', // acts as primary key, should be unique and non-empty string
-        label: 'Company driver',
-        value: 'Company driver',
-        color: theme.colors.primary,
-        labelStyle: { color: theme.colors.primary },
-      },
-      {
-        id: '2',
-        label: 'Lease to purchase',
-        value: 'Lease to purchase',
-        color: theme.colors.primary,
-        labelStyle: { color: theme.colors.primary },
-      },
-      {
-        id: '3',
-        label: 'Rental lease',
-        value: 'Rental lease',
-        color: theme.colors.primary,
-        labelStyle: { color: theme.colors.primary },
-      },
-      {
-        id: '4',
-        label: 'Owner operator',
-        value: 'Owner operator',
-        color: theme.colors.primary,
-        labelStyle: { color: theme.colors.primary },
-      },
-    ],
-    solo_team: [
-      {
-        id: '1', // acts as primary key, should be unique and non-empty string
-        label: 'Team',
-        value: 'Team',
-        color: theme.colors.primary,
-        labelStyle: { color: theme.colors.primary },
-      },
-      {
-        id: '2',
-        label: 'Solo',
-        value: 'Solo',
-        color: theme.colors.primary,
-        labelStyle: { color: theme.colors.primary },
-      },
-    ],
-    division: [
-      {
-        id: '1',
-        label: 'Dry van',
-        value: 'Dry van',
-        color: theme.colors.primary,
-        labelStyle: { color: theme.colors.primary },
-      },
-      {
-        id: '2',
-        label: 'Reefer',
-        value: 'Reefer',
-        color: theme.colors.primary,
-        labelStyle: { color: theme.colors.primary },
-      },
-      {
-        id: '3',
-        label: 'Flatbed',
-        value: 'Flatbed',
-        color: theme.colors.primary,
-        labelStyle: { color: theme.colors.primary },
-      },
-      {
-        id: '4',
-        label: 'Box truck',
-        value: 'Box truck',
-        color: theme.colors.primary,
-        labelStyle: { color: theme.colors.primary },
-      },
-    ],
-    experience: [
-      {
-        id: '1',
-        label: 'Less than 1 year',
-        value: 'Less than 1 year',
-        color: theme.colors.primary,
-        labelStyle: { color: theme.colors.primary },
-      },
-      {
-        id: '2',
-        label: 'Less than 2 years',
-        value: 'Less than 2 years',
-        color: theme.colors.primary,
-        labelStyle: { color: theme.colors.primary },
-      },
-      {
-        id: '3',
-        label: '2+ years',
-        value: '2+ years',
-        color: theme.colors.primary,
-        labelStyle: { color: theme.colors.primary },
-      },
-    ],
-  }
-  const FiltersContent = () => {
-    return (
-      <View>
-        <Text sx={style.title}>Type:</Text>
-
-        <View>
-          {Object.keys(selectedTypes).map((it: any, index: any) => {
-            return (
-              <View key={index} sx={{ marginLeft: '$2', marginTop: '$2' }}>
-                <BouncyCheckbox
-                  useNativeDriver={Platform.OS != 'web'}
-                  size={25}
-                  fillColor={theme.colors.primary}
-                  unfillColor="#FFFFFF"
-                  text={selectedTypes[it].name}
-                  textStyle={{
-                    textDecorationLine: 'none',
-                    color: theme.colors.primary,
-                  }}
-                  isChecked={selectedTypes[it].value}
-                  iconStyle={{ borderColor: 'green' }}
-                  innerIconStyle={{ borderWidth: 2 }}
-                  onPress={(isChecked: boolean) => {
-                    var newObj = { ...selectedTypes }
-                    newObj[it].value = isChecked
-                    setSelectedTypes(newObj)
-                  }}
-                />
-              </View>
-            )
-          })}
-        </View>
-        <Text sx={style.title}>Solo/Team:</Text>
-        {Object.keys(solo_team).map((it: any, index: any) => {
-          return (
-            <View key={index} sx={{ marginLeft: '$2', marginTop: '$2' }}>
-              <BouncyCheckbox
-                useNativeDriver={Platform.OS != 'web'}
-                size={25}
-                fillColor={theme.colors.primary}
-                unfillColor="#FFFFFF"
-                text={solo_team[it].name}
-                textStyle={{
-                  textDecorationLine: 'none',
-                  color: theme.colors.primary,
-                }}
-                isChecked={solo_team[it].value}
-                disableBuiltInState={true}
-                iconStyle={{ borderColor: 'green' }}
-                innerIconStyle={{ borderWidth: 2 }}
-                onPress={(isChecked: boolean) => {
-                  var newObj = { ...solo_team }
-                  if (newObj[it].value) {
-                    newObj[it].value = false
-                  } else {
-                    Object.keys(newObj).map((it: any) => {
-                      newObj[it].value = false
-                    })
-
-                    newObj[it].value = true
-                  }
-
-                  setSelectedSoloTeam(newObj)
-                }}
-              />
-            </View>
-          )
-        })}
-        <Text sx={style.title}>Division:</Text>
-        <View>
-          {Object.keys(division).map((it: any, index: any) => {
-            return (
-              <View key={index} sx={{ marginLeft: '$2', marginTop: '$2' }}>
-                <BouncyCheckbox
-                  useNativeDriver={Platform.OS != 'web'}
-                  size={25}
-                  fillColor={theme.colors.primary}
-                  unfillColor="#FFFFFF"
-                  text={division[it].name}
-                  textStyle={{
-                    textDecorationLine: 'none',
-                    color: theme.colors.primary,
-                  }}
-                  isChecked={division[it].value}
-                  iconStyle={{ borderColor: 'green' }}
-                  innerIconStyle={{ borderWidth: 2 }}
-                  onPress={(isChecked: boolean) => {
-                    var newObj = { ...division }
-                    newObj[it].value = isChecked
-                    setSelectedDivision(newObj)
-                  }}
-                />
-              </View>
-            )
-          })}
-        </View>
-        <Text sx={style.title}>Experience:</Text>
-        {Object.keys(experience).map((it: any, index: any) => {
-          return (
-            <View key={index} sx={{ marginLeft: '$2', marginTop: '$2' }}>
-              <BouncyCheckbox
-                useNativeDriver={Platform.OS != 'web'}
-                size={25}
-                fillColor={theme.colors.primary}
-                unfillColor="#FFFFFF"
-                text={experience[it].name}
-                textStyle={{
-                  textDecorationLine: 'none',
-                  color: theme.colors.primary,
-                }}
-                isChecked={experience[it].value}
-                disableBuiltInState={true}
-                iconStyle={{ borderColor: 'green' }}
-                innerIconStyle={{ borderWidth: 2 }}
-                onPress={(isChecked: boolean) => {
-                  var newObj = { ...experience }
-                  if (newObj[it].value) {
-                    newObj[it].value = false
-                  } else {
-                    Object.keys(newObj).map((it: any) => {
-                      newObj[it].value = false
-                    })
-
-                    newObj[it].value = true
-                  }
-
-                  setSelectedExperience(newObj)
-                }}
-              />
-            </View>
-          )
-        })}
-      </View>
-    )
-  }
   const Content = () => {
     return (
       <View sx={style.container}>
@@ -486,12 +239,98 @@ const AvailableJobsScreen = ({ navigation }: any) => {
     )
   }
 
+  const universalChangeFilter = (filterGroup: string, filter: string) => {
+    var types: any[] = []
+    var solo_team: any[] = []
+    var division: any[] = []
+    var experience: any[] = []
+    var webRouter: any
+
+    var universalRouter: any
+    if (Platform.OS == 'web') {
+      universalRouter = router.query
+      webRouter = router
+    } else {
+      universalRouter = route.params
+    }
+
+    if (universalRouter != undefined) {
+      types =
+        universalRouter.type != undefined && universalRouter.type != ''
+          ? universalRouter.type.split(',')
+          : []
+      division =
+        universalRouter.division != undefined && universalRouter.division != ''
+          ? universalRouter.division.split(',')
+          : []
+      solo_team =
+        universalRouter.st != undefined && universalRouter.st != ''
+          ? universalRouter.st.split(',')
+          : []
+      experience =
+        universalRouter.experience != undefined &&
+        universalRouter.experience != ''
+          ? universalRouter.experience.split(',')
+          : []
+    }
+    switch (filterGroup) {
+      case 'Type':
+        if (types.includes(filter)) {
+          types = types.filter((it: any) => it != filter)
+        } else {
+          types.push(filter)
+        }
+        break
+      case 'Division':
+        if (division.includes(filter)) {
+          division = division.filter((it: any) => it != filter)
+        } else {
+          division.push(filter)
+        }
+        break
+      case 'Experience':
+        if (experience.includes(filter)) {
+          experience = []
+        } else {
+          experience = [filter]
+        }
+        break
+      case 'SoloTeam':
+        if (solo_team.includes(filter)) {
+          solo_team = []
+        } else {
+          solo_team = [filter]
+        }
+        break
+    }
+    if (Platform.OS == 'web') {
+      let url: any = '/available-jobs'
+      url += '?type=' + types.join(',')
+      url += '&division=' + division.join(',')
+      url += '&st=' + solo_team.join(',')
+      url += '&experience=' + experience.join(',')
+      url = url.replace('+', '%2B')
+      webRouter.push(url)
+    } else {
+      navigation.navigate('available-jobs', {
+        type: types.join(','),
+        division: division.join(','),
+        st: solo_team.join(','),
+        experience: experience.join(','),
+      })
+    }
+  }
+
   return (
     <>
       {Platform.OS == 'web' ? (
         <Layout title="AVAILABLE JOBS" fetchData={fetchData} lastDoc={lastDoc}>
           <FilterDrawerDesktop
-            radioGroup={FiltersContent}
+            changeFilter={universalChangeFilter}
+            selectedTypes={selectedTypes}
+            selectedDivision={selectedDivision}
+            selectedSoloTeam={selectedSoloTeam}
+            selectedExperience={selectedExperience}
             open={openFilter}
             setOpen={setOpenFilter}
           />
@@ -499,8 +338,11 @@ const AvailableJobsScreen = ({ navigation }: any) => {
         </Layout>
       ) : (
         <FilterDrawerMobile
-          radioGroup={FiltersContent}
-          buttons={buttons}
+          changeFilter={universalChangeFilter}
+          selectedTypes={selectedTypes}
+          selectedDivision={selectedDivision}
+          selectedSoloTeam={selectedSoloTeam}
+          selectedExperience={selectedExperience}
           open={openFilter}
           setOpen={setOpenFilter}
         >

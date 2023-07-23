@@ -65,7 +65,6 @@ const CustomPaginationMobile = ({
       <TouchableOpacity
         onPress={() => {
           if (value >= maxPages) {
-            console.log('dsada')
             return
           } else {
             setValue((old: any) => old + 1)

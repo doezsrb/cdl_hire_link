@@ -5,10 +5,11 @@ import CustomSelectInput from 'app/features/common/components/CustomSelectInput/
 import CustomUploadFile from 'app/features/common/components/CustomUploadFile/CustomUploadFile'
 import StepInd from 'app/features/common/components/StepInd/StepInd'
 import { Pressable, SafeAreaView, Text, View } from 'dripsy'
-import { addData } from 'app/features/common/functions/firestore'
+import { addData, uploadImage } from 'app/features/common/functions/firestore'
 import { useDripsyTheme } from 'dripsy'
 import {
   Dimensions,
+  Modal,
   Platform,
   ScrollView,
   StyleSheet,
@@ -24,18 +25,24 @@ import Layout from 'app/features/common/components/Layout/Layout'
 import LoadingContext from '../../../../../apps/next/context/loadingContext'
 import scrollToTop from 'app/features/common/functions/scrolltotop'
 import useRouter from 'app/features/common/functions/nextrouter'
+import ModalErrorSuccess from 'app/features/common/components/ModalErrorSuccess/ModalErrorSuccess'
+import { createFileName } from 'app/features/common/functions/common'
 
 const { useParam } = createParam<{
   as: 'carrier' | 'driver'
 }>()
 /* import { DateTimePickerAndroid } from '@react-native-community/datetimepicker' */
+
+//!TODO: 2. download slika u panel 3. search za sve stranice
 const ApplyScreen = ({ route, navigation }: any) => {
   const mobileLoadingContext: any = useContext(MobileLoadingContext)
+  const [error, setError] = useState(false)
+  const [success, setSuccess] = useState(false)
   const scrollRef = useRef<any>()
   const desktopLoadingContext: any = useContext(LoadingContext)
   const [as, setAs] = useParam('as')
   const router = useRouter()
-
+  const [companyId, setCompanyId] = useState<any>(null)
   const scrollToStepRef: any = useRef()
   const { theme } = useDripsyTheme()
   const [step, setStep] = useState(1)
@@ -772,10 +779,10 @@ const ApplyScreen = ({ route, navigation }: any) => {
   })
   useEffect(() => {
     if (Platform.OS == 'android' || Platform.OS == 'ios') {
-      console.log(route)
+      setCompanyId(route.params.company)
     }
     if (Platform.OS == 'web') {
-      console.log(router)
+      setCompanyId(router.query.company)
     }
 
     routerListener(navigation, mobileLoadingContext)
@@ -852,10 +859,20 @@ const ApplyScreen = ({ route, navigation }: any) => {
       val
     setStepData(newObj)
   }
-
-  const submit = () => {
+  const getDataURL = (file: any) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader()
+      reader.onloadend = () => {
+        resolve(reader.result)
+      }
+      reader.readAsDataURL(file)
+    })
+  }
+  const submit = async () => {
     if (as != undefined) {
       var dataObject: any = {}
+      var forUpload: any[] = []
+      var errorFile = 0
       Object.keys(stepData[as]).map((checkStep: any) => {
         var stepName = stepData[as][checkStep].name
         var groups = stepData[as][checkStep].groups
@@ -868,7 +885,16 @@ const ApplyScreen = ({ route, navigation }: any) => {
             var field = groups[it].data[it2]
             if (field.type == 'file') {
               if (field.value != '') {
-                dataObject[stepName][fieldName][field.name] = field.value.name
+                var newImageName = createFileName(field.value.name)
+                if (newImageName == null) {
+                  errorFile++
+                } else {
+                  forUpload.push({
+                    name: newImageName,
+                    file: field.value,
+                  })
+                  dataObject[stepName][fieldName][field.name] = newImageName
+                }
               } else {
                 dataObject[stepName][fieldName][field.name] = null
               }
@@ -892,9 +918,18 @@ const ApplyScreen = ({ route, navigation }: any) => {
 
                 if (field.type == 'file') {
                   if (field.value != '') {
-                    dataObject[stepName][fieldName]['subgroup'][subgroupName][
-                      field.name
-                    ] = field.value.name
+                    var newImageName = createFileName(field.value.name)
+                    if (newImageName == null) {
+                      errorFile++
+                    } else {
+                      forUpload.push({
+                        name: newImageName,
+                        file: field.value,
+                      })
+                      dataObject[stepName][fieldName]['subgroup'][subgroupName][
+                        field.name
+                      ] = newImageName
+                    }
                   } else {
                     dataObject[stepName][fieldName]['subgroup'][subgroupName][
                       field.name
@@ -918,8 +953,113 @@ const ApplyScreen = ({ route, navigation }: any) => {
           }
         })
       })
-      console.log(dataObject)
-      addData(dataObject, as, toggleLoading)
+
+      if (errorFile != 0) {
+        setError(true)
+      } else {
+        toggleLoading(true)
+        if (Platform.OS == 'web') {
+          Promise.all(
+            forUpload.map(async (it: any): Promise<any> => {
+              var dataURL = await getDataURL(it.file)
+              var response = await uploadImage(dataURL, it.name)
+              if (response != 'success') {
+                throw 'failed upload'
+              }
+              return true
+            })
+          )
+            .then(() => {
+              if (as == 'driver') {
+                var job = companyId == undefined ? null : companyId
+                addData(dataObject, as, job)
+                  .then((res: any) => {
+                    if (res == 'success') {
+                      setSuccess(true)
+                    } else {
+                      setError(true)
+                    }
+                  })
+                  .catch((e: any) => {
+                    setError(true)
+                  })
+                  .finally(() => {
+                    toggleLoading(false)
+                  })
+              } else {
+                addData(dataObject, as, null)
+                  .then((res: any) => {
+                    if (res == 'success') {
+                      setSuccess(true)
+                    } else {
+                      setError(true)
+                    }
+                  })
+                  .catch((e: any) => {
+                    setError(true)
+                  })
+                  .finally(() => {
+                    toggleLoading(false)
+                  })
+              }
+            })
+            .catch((e: any) => {
+              setError(true)
+              toggleLoading(false)
+            })
+        } else {
+          Promise.all(
+            forUpload.map(async (it: any): Promise<any> => {
+              var response = await uploadImage(it.file.uri, it.name)
+              if (response != 'success') {
+                throw 'failed upload'
+              }
+              return true
+            })
+          )
+            .then(() => {
+              if (as == 'driver') {
+                var job = companyId == undefined ? null : companyId
+                addData(dataObject, as, job)
+                  .then((res: any) => {
+                    if (res == 'success') {
+                      setSuccess(true)
+                    } else {
+                      setError(true)
+                    }
+                  })
+                  .catch((e: any) => {
+                    setError(true)
+                  })
+                  .finally(() => {
+                    toggleLoading(false)
+                  })
+              } else {
+                addData(dataObject, as, null)
+                  .then((res: any) => {
+                    if (res == 'success') {
+                      setSuccess(true)
+                    } else {
+                      setError(true)
+                    }
+                  })
+                  .catch((e: any) => {
+                    setError(true)
+                  })
+                  .finally(() => {
+                    toggleLoading(false)
+                  })
+              }
+            })
+            .catch((e: any) => {
+              setError(true)
+              toggleLoading(false)
+            })
+        }
+      }
+
+      /* toggleLoading(true)
+       */
     }
   }
   const toggleLoading = (loading: boolean) => {
@@ -1020,6 +1160,13 @@ const ApplyScreen = ({ route, navigation }: any) => {
     <>
       {as == undefined ? null : (
         <Layout title={'APPLY AS A ' + as.toUpperCase()} scrollRef={scrollRef}>
+          {error && (
+            <ModalErrorSuccess success={false} close={() => setError(false)} />
+          )}
+          {success && (
+            <ModalErrorSuccess success={true} close={() => setSuccess(false)} />
+          )}
+
           <View sx={style.container}>
             <View sx={style.containerChild}>
               <StepInd

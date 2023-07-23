@@ -2,15 +2,24 @@ import { Text, View, useDripsyTheme } from 'dripsy'
 import { Drawer } from '../../functions/mateiralui'
 import { Dimensions } from 'react-native'
 import RadioGroup from 'react-native-radio-buttons-group'
+import FilterList from '../FilterList/FilterList'
 interface FilterDrawerDesktopProps {
   open: boolean
   setOpen: Function
-  radioGroup: any
+  changeFilter: Function
+  selectedTypes: any[]
+  selectedExperience: any[]
+  selectedDivision: any[]
+  selectedSoloTeam: any[]
 }
 const FilterDrawerDesktop = ({
   open,
   setOpen,
-  radioGroup,
+  changeFilter,
+  selectedTypes,
+  selectedDivision,
+  selectedExperience,
+  selectedSoloTeam,
 }: FilterDrawerDesktopProps) => {
   const { theme } = useDripsyTheme()
   return (
@@ -41,7 +50,15 @@ const FilterDrawerDesktop = ({
         >
           FILTERS
         </Text>
-        <View>{radioGroup()}</View>
+        <View>
+          <FilterList
+            changeFilter={changeFilter}
+            selectedTypes={selectedTypes}
+            selectedExperience={selectedExperience}
+            selectedDivision={selectedDivision}
+            selectedSoloTeam={selectedSoloTeam}
+          />
+        </View>
       </View>
     </Drawer>
   )

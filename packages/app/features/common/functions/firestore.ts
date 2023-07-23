@@ -15,6 +15,29 @@ const testData = () => {
     }) */
   console.log('Test')
 }
+const uploadImage = (file: any, filename: string) => {
+  return new Promise((resolve, reject) => {
+    const ref = storage().ref('/images/' + filename)
+    ref
+      .putFile(file)
+      .then((snap: any) => {
+        resolve('success')
+      })
+      .catch((e: any) => {
+        console.log('RROR')
+        console.log(e)
+        resolve('failed')
+      })
+    /* var storageRef = ref(storage, "/images/" + filename);
+    uploadString(storageRef, file, "data_url")
+      .then((snap: any) => {
+        resolve("success");
+      })
+      .catch((e: any) => {
+        resolve("failed");
+      }); */
+  })
+}
 const getImage = (url: string) => {
   return new Promise(async (resolve, reject) => {
     try {
@@ -55,12 +78,23 @@ const getCountData = (col: string) => {
       })
   })
 }
-const getData = (col: string, lastDoc?: any) => {
+const getData = (col: string, filters: any[], lastDoc?: any) => {
   return new Promise((resolve, reject) => {
     var query_ =
-      lastDoc == null
-        ? firestore().collection(col).limit(1)
-        : firestore().collection(col).startAfter(lastDoc).limit(1)
+      lastDoc == undefined
+        ? filters.length != 0
+          ? firestore()
+              .collection(col)
+              .where('filters', 'array-contains-any', filters)
+              .limit(20)
+          : firestore().collection(col).limit(20)
+        : filters.length != 0
+        ? firestore()
+            .collection(col)
+            .where('filters', 'array-contains-any', filters)
+            .startAfter(lastDoc)
+            .limit(20)
+        : firestore().collection(col).startAfter(lastDoc).limit(20)
     query_
       .get()
       .then((snap: any) => {
@@ -76,6 +110,7 @@ const getData = (col: string, lastDoc?: any) => {
           data: dataArray,
           lastDoc: lastDoc,
         }
+
         resolve(responseObj)
       })
       .catch((e: any) => {
@@ -85,21 +120,27 @@ const getData = (col: string, lastDoc?: any) => {
       })
   })
 }
-const addData = (data: any, as: string, toggleLoading: Function) => {
-  toggleLoading(true)
-  firestore()
-    .collection(as)
-    .add({
-      data,
-    })
-    .then(() => {
-      console.log('SUCCESS')
-      toggleLoading(false)
-    })
-    .catch((e: any) => {
-      console.log('ERR')
-      console.log(e)
-      toggleLoading(false)
-    })
+const addData = (
+  data: any,
+  as: string,
+
+  job: string | null
+) => {
+  return new Promise((resolve, reject) => {
+    firestore()
+      .collection(as)
+      .add({
+        data,
+        job,
+      })
+      .then(() => {
+        resolve('success')
+      })
+      .catch((e: any) => {
+        console.log('FAILED')
+        console.log(e)
+        resolve('failed')
+      })
+  })
 }
-export { addData, getData, getImage, getSingleData, getCountData }
+export { addData, getData, getImage, getSingleData, getCountData, uploadImage }
