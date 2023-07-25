@@ -6,6 +6,7 @@ import {
   useDripsyTheme,
   Box,
   ActivityIndicator,
+  TextInput,
 } from 'dripsy'
 import { useContext, useEffect, useState } from 'react'
 
@@ -27,15 +28,17 @@ import BouncyCheckbox from 'react-native-bouncy-checkbox'
 import useRouter from 'app/features/common/functions/nextrouter'
 import { getCountData, getData } from 'app/features/common/functions/firestore'
 import LoadingScreen from 'app/features/common/components/LoadingScreen/LoadingScreen'
+import SearchInput from 'app/features/common/components/SearchInput/SearchInput'
 const AvailableJobsScreen = ({ route, navigation }: any) => {
   const mobileLoadingContext = useContext(MobileLoadingContext)
   const router = useRouter()
   const [openFilter, setOpenFilter] = useState<boolean>(false)
   const [loading, setLoading] = useState(true)
-
+  const [firstTime, setFirstTime] = useState(true)
   const [lastDoc, setLastDoc] = useState<any>(null)
   const [data, setData] = useState([])
   const { theme } = useDripsyTheme()
+  const [search, setSearch] = useState('')
   const [selectedTypes, setSelectedTypes] = useState<any[]>([])
   const [selectedDivision, setSelectedDivision] = useState([])
   const [selectedSoloTeam, setSelectedSoloTeam] = useState([])
@@ -47,7 +50,8 @@ const AvailableJobsScreen = ({ route, navigation }: any) => {
     selectedDivision_?: any[],
     selectedSoloTeam_?: any[],
     selectedExperience_?: any[],
-    nonpagination?: boolean
+    nonpagination?: boolean,
+    search?: string
   ) => {
     if (lastDoc == 'finish') return
 
@@ -75,7 +79,7 @@ const AvailableJobsScreen = ({ route, navigation }: any) => {
     if (nonpagination) {
       setLoading(true)
     }
-    getData('jobs', filters, lastDoc)
+    getData('jobs', filters, lastDoc, search)
       .then((data_: any) => {
         if (data_.lastDoc == undefined || data_.data.length < 20) {
           setLastDoc('finish')
@@ -101,6 +105,27 @@ const AvailableJobsScreen = ({ route, navigation }: any) => {
       })
   }
 
+  useEffect(() => {
+    if (firstTime) {
+      setFirstTime(false)
+      return
+    }
+    const getData = setTimeout(() => {
+      fetchData(
+        null,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        true,
+        search
+      )
+    }, 1000)
+    return () => {
+      clearTimeout(getData)
+    }
+  }, [search])
   useEffect(() => {
     routerListener(navigation, mobileLoadingContext)
   }, [])
@@ -141,7 +166,16 @@ const AvailableJobsScreen = ({ route, navigation }: any) => {
     setSelectedDivision(division)
     setSelectedExperience(experience)
 
-    fetchData(null, undefined, types, division, solo_team, experience, true)
+    fetchData(
+      null,
+      undefined,
+      types,
+      division,
+      solo_team,
+      experience,
+      true,
+      search
+    )
   }, [router, route])
   const style = StyleSheet.create({
     title: {
@@ -187,6 +221,12 @@ const AvailableJobsScreen = ({ route, navigation }: any) => {
   const Content = () => {
     return (
       <View sx={style.container}>
+        <View sx={style.topButtons}>
+          <TouchableOpacity onPress={() => setOpenFilter(true)}>
+            <Text sx={style.button}>FILTERS</Text>
+          </TouchableOpacity>
+          <SearchInput search={search} setSearch={setSearch} />
+        </View>
         {loading ? (
           <Box
             sx={{
@@ -203,11 +243,6 @@ const AvailableJobsScreen = ({ route, navigation }: any) => {
           </Box>
         ) : (
           <>
-            <View sx={style.topButtons}>
-              <TouchableOpacity onPress={() => setOpenFilter(true)}>
-                <Text sx={style.button}>FILTERS</Text>
-              </TouchableOpacity>
-            </View>
             <View
               sx={{
                 mt: '$3',

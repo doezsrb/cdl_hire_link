@@ -78,23 +78,46 @@ const getCountData = (col: string) => {
       })
   })
 }
-const getData = (col: string, filters: any[], lastDoc?: any) => {
+const getData = (
+  col: string,
+  filters: any[],
+  lastDoc?: any,
+  search: string = ''
+) => {
   return new Promise((resolve, reject) => {
+    var searchUpper = search.charAt(0).toUpperCase() + search.slice(1)
     var query_ =
       lastDoc == undefined
         ? filters.length != 0
           ? firestore()
               .collection(col)
+              .orderBy('name')
+              .startAt(searchUpper)
+              .endAt(searchUpper + '\uf8ff')
               .where('filters', 'array-contains-any', filters)
               .limit(20)
-          : firestore().collection(col).limit(20)
+          : firestore()
+              .collection(col)
+              .orderBy('name')
+              .startAt(searchUpper)
+              .endAt(searchUpper + '\uf8ff')
+              .limit(20)
         : filters.length != 0
         ? firestore()
             .collection(col)
+            .orderBy('name')
+            .startAt(searchUpper)
+            .endAt(searchUpper + '\uf8ff')
             .where('filters', 'array-contains-any', filters)
             .startAfter(lastDoc)
             .limit(20)
-        : firestore().collection(col).startAfter(lastDoc).limit(20)
+        : firestore()
+            .collection(col)
+            .orderBy('name')
+            .startAt(searchUpper)
+            .endAt(searchUpper + '\uf8ff')
+            .startAfter(lastDoc)
+            .limit(20)
     query_
       .get()
       .then((snap: any) => {

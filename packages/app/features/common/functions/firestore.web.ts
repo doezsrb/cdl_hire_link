@@ -9,7 +9,9 @@ import {
   getDocs,
   limit,
   startAfter,
+  orderBy,
   startAt,
+  endAt,
   getCountFromServer,
   where,
   and,
@@ -87,36 +89,53 @@ const getCountData = (col: string) => {
       })
   })
 }
-const getData = (col: string, filters: any[], lastDoc?: any) => {
+const getData = (
+  col: string,
+  filters: any[],
+  lastDoc?: any,
+  search: string = ''
+) => {
   return new Promise((resolve, reject) => {
-    var type = ['Company driver', 'Rental lease']
-    var solo_team = ['Solo']
-    var division = ['Dry van']
-    var experience = ['2+ years']
     var colRef = collection(firestore, col)
-    var queries: any
+
+    var searchUpper = search.charAt(0).toUpperCase() + search.slice(1)
 
     var query_ =
       lastDoc == null
         ? filters.length != 0
           ? query(
               colRef,
+              orderBy('name'),
+              startAt(searchUpper),
+              endAt(searchUpper + '\uf8ff'),
               where('filters', 'array-contains-any', filters),
               limit(20)
             )
           : query(
               colRef,
-
+              orderBy('name'),
+              startAt(searchUpper),
+              endAt(searchUpper + '\uf8ff'),
               limit(20)
             )
         : filters.length != 0
         ? query(
             colRef,
+            orderBy('name'),
+            startAt(searchUpper),
+            endAt(searchUpper + '\uf8ff'),
             where('filters', 'array-contains-any', filters),
             startAfter(lastDoc),
             limit(20)
           )
-        : query(colRef, startAfter(lastDoc), limit(20))
+        : query(
+            colRef,
+            orderBy('name'),
+            startAt(searchUpper),
+            endAt(searchUpper + '\uf8ff'),
+            startAfter(lastDoc),
+            limit(20)
+          )
 
     getDocs(query_)
       .then((snap: any) => {
@@ -138,6 +157,7 @@ const getData = (col: string, filters: any[], lastDoc?: any) => {
         resolve(responseObj)
       })
       .catch((e: any) => {
+        console.log('ERRRRRR')
         console.log(e)
         resolve(null)
       })

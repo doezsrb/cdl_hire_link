@@ -899,7 +899,13 @@ const ApplyScreen = ({ route, navigation }: any) => {
                 dataObject[stepName][fieldName][field.name] = null
               }
             } else {
-              dataObject[stepName][fieldName][field.name] = field.value
+              if (field.name == 'First Name' || field.name == 'Company Name') {
+                var firstLetterUpper =
+                  field.value.charAt(0).toUpperCase() + field.value.slice(1)
+                dataObject[stepName][fieldName][field.name] = firstLetterUpper
+              } else {
+                dataObject[stepName][fieldName][field.name] = field.value
+              }
             }
 
             /*  console.log(
