@@ -2211,6 +2211,7 @@ const ApplyScreen = ({ route, navigation }: any) => {
     containerChild: {
       width: ['100%', '80%', '80%', '80%', '50%'] as any,
       minHeight: Dimensions.get('window').height,
+
       display: 'flex',
       backgroundColor: 'white',
       alignItems: 'flex-end',
