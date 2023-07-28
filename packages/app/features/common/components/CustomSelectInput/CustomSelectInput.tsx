@@ -12,6 +12,9 @@ interface CustomSelectInputProps {
   required?: boolean
   setVal: Function
   currentValue: any
+  optionValue: string
+  optionLabel: string
+  multiple?: boolean
 }
 const CustomSelectInput = ({
   label,
@@ -21,13 +24,12 @@ const CustomSelectInput = ({
   required = false,
   setVal,
   currentValue,
+  optionLabel,
+  optionValue,
+  multiple = false,
 }: CustomSelectInputProps) => {
   const [value, setValue] = useState(
-    currentValue == ''
-      ? null
-      : data.findIndex((obj) => {
-          return obj.name == currentValue
-        }) + 1
+    multiple && currentValue != '' ? currentValue.split(',') : currentValue
   )
   const { theme } = useDripsyTheme()
 
@@ -42,9 +44,13 @@ const CustomSelectInput = ({
       }}
     >
       <Dropdown
+        modalProps={{
+          animationType: 'none',
+        }}
         label={label + (required ? ' *' : '')}
         placeholder="Select an option..."
         options={data}
+        isMultiple={multiple}
         dropdownIcon={Platform.OS == 'web' && <AiOutlineDown />}
         labelStyle={{
           marginBottom: 5,
@@ -63,7 +69,7 @@ const CustomSelectInput = ({
           justifyContent: 'center',
         }}
         modalOptionsContainerStyle={{
-          width: 200,
+          width: 'auto',
           paddingBottom: 20,
           borderBottomEndRadius: 15,
           borderBottomStartRadius: 15,
@@ -76,13 +82,21 @@ const CustomSelectInput = ({
           borderColor: error ? 'red' : theme.colors.primary,
           borderRadius: 30,
         }}
-        optionLabel={'name'}
-        optionValue={'code'}
+        optionLabel={optionLabel}
+        optionValue={optionValue}
         selectedValue={value}
         onValueChange={(value: any) => {
           setValue(value)
-
-          setVal(data[value - 1].name)
+          var value_ = ''
+          if (multiple) {
+            value_ = value.join(',')
+          } else {
+            value_ = value
+          }
+          if (value_ == null) {
+            value_ = ''
+          }
+          setVal(value_)
         }}
         primaryColor={theme.colors.primary}
       />

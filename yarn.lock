@@ -7413,7 +7413,7 @@ __metadata:
     react-native: 0.71.7
     react-native-drawer-layout: ^3.2.0
     react-native-gesture-handler: ~2.9.0
-    react-native-input-select: ^0.32.0
+    react-native-input-select: ^1.1.2
     react-native-modal-dropdown: ^1.0.2
     react-native-reanimated: ~2.14.4
     react-native-safe-area-context: 4.5.0
@@ -12449,13 +12449,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-input-select@npm:^0.32.0":
-  version: 0.32.0
-  resolution: "react-native-input-select@npm:0.32.0"
+"react-native-input-select@npm:^1.1.2":
+  version: 1.1.2
+  resolution: "react-native-input-select@npm:1.1.2"
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 271acd73117b59506b5ed57ed642f069e8c1c407016ac8051616131fe03ce9d88f39a0785b4846aa81c2f4d5ea7b98417a3dc76c43aedd1ad616c9a14f64956e
+  checksum: 3fae820558d54553ba8e91790fbc1d9ae6396474387cdcfae6551e82f912d53a2f1d9fdbebc993b560aa6eceace1fce849f97cef729c86d9feafb9cd001eb4d8
   languageName: node
   linkType: hard
 

@@ -41,7 +41,7 @@ const CustomInput = ({
   const [openDatePicker, setOpenDatePicker] = useState(false)
   const style = StyleSheet.create({
     container: {
-      minWidth: '50%',
+      minWidth: multiline ? '100%' : '50%',
       paddingLeft: 2,
       paddingRight: 2,
       paddingBottom: 10,

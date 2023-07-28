@@ -5,6 +5,7 @@ const JobSection = ({ title, texts }: { title: string; texts: string[] }) => {
   return (
     <View
       sx={{
+        width: '100%',
         paddingHorizontal: [
           20,
           20,
@@ -20,7 +21,7 @@ const JobSection = ({ title, texts }: { title: string; texts: string[] }) => {
       <Text sx={{ fontSize: 30, color: 'primary', fontWeight: 'bold' }}>
         {title}
       </Text>
-      <View sx={{ paddingLeft: 20 }}>
+      <View sx={{ width: '100%', paddingLeft: 20 }}>
         {texts.map((it: any, index: any) => {
           return (
             <View
@@ -34,7 +35,11 @@ const JobSection = ({ title, texts }: { title: string; texts: string[] }) => {
                 if (split != '') {
                   return (
                     <Text
-                      sx={{ width: '100%', color: 'primary', fontSize: 20 }}
+                      sx={{
+                        width: '100%',
+                        color: 'primary',
+                        fontSize: 20,
+                      }}
                       key={indexSplit + 'split'}
                     >
                       {split.replace('\n', '')}

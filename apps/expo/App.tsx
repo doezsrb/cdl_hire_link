@@ -3,7 +3,7 @@ import { Provider } from 'app/provider'
 import messaging from '@react-native-firebase/messaging'
 import { MobileLoadingProvider } from './context/mobileLoadingContext'
 import { useEffect, useState } from 'react'
-
+import * as SplashScreen from 'expo-splash-screen'
 import * as Notifications from 'expo-notifications'
 
 Notifications.setNotificationHandler({

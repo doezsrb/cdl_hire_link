@@ -1,5 +1,5 @@
 import { View, Text, Pressable, useSx } from 'dripsy'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { StyleSheet } from 'react-native'
 
 interface CustomRadioProps {
@@ -19,8 +19,9 @@ const CustomRadio = ({
   currentValue,
 }: CustomRadioProps) => {
   const [value, setValue] = useState<any>(
-    currentValue == '' ? null : currentValue
+    currentValue == '' ? null : currentValue == 'Yes' ? true : false
   )
+
   const sx = useSx()
   const style = StyleSheet.create({
     textStyle: {

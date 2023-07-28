@@ -76,6 +76,18 @@ export function NativeNavigation() {
       drawerContent={(props) => <DrawerMenu drawerProps={props} />}
     >
       <Drawer.Screen
+        name="home"
+        listeners={{
+          drawerItemPress: (e: any) => {
+            console.log('PRESS')
+          },
+        }}
+        options={{
+          title: 'Home',
+        }}
+        component={HomeScreen}
+      />
+      <Drawer.Screen
         name="available-jobs"
         listeners={{
           drawerItemPress: (e: any) => {
@@ -107,18 +119,6 @@ export function NativeNavigation() {
         component={ContactScreen}
       />
 
-      <Drawer.Screen
-        name="home"
-        listeners={{
-          drawerItemPress: (e: any) => {
-            console.log('PRESS')
-          },
-        }}
-        options={{
-          title: 'Home',
-        }}
-        component={HomeScreen}
-      />
       <Drawer.Screen
         name="job"
         options={({ route }) => {

@@ -5,6 +5,12 @@
     "version": "1.0.0",
     "scheme": "cdlhirelink",
     "platforms": ["ios", "android"],
+    "icon": "./images/icon.png",
+    "splash": {
+      "image": "./images/splash.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#ffffff"
+    },
     "ios": {
       "bundleIdentifier": "com.cdlhire.link"
     },
@@ -15,7 +21,11 @@
     },
     "android": {
       "googleServicesFile": "./google-services.json",
-      "package": "com.cdlhire.link"
+      "package": "com.cdlhire.link",
+      "adaptiveIcon": {
+        "foregroundImage": "./images/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      }
     }
   }
 }

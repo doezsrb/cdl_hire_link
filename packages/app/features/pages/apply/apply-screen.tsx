@@ -75,15 +75,227 @@ const ApplyScreen = ({ route, navigation }: any) => {
           route_details: {
             name: 'Route Details',
             subgroup: {
-              compensation_lease: {
-                name: 'Comensation Lease',
+              accident_info: {
+                add_accident: true,
+                parent_radio: 'accidents_3_years',
+                parent_radio_value: 'Yes',
+                name: 'Accident info',
                 data: {
-                  upload_cv: {
-                    name: "Upload CV or MVR, PSP, Driver's license",
-                    type: 'file',
+                  type_of_accident: {
+                    name: 'Type of Accident/incident',
+                    type: 'select',
                     value: '',
                     error: false,
                     required: true,
+                    multiple: true,
+                    optionLabel: 'name',
+                    optionValue: 'name',
+                    arrayData: [
+                      { name: 'Non-injury' },
+                      { name: 'Injury' },
+                      { name: 'Fatality' },
+                    ],
+                  },
+                  date_of_accident: {
+                    name: 'Date of Accident/Incident',
+                    type: 'date',
+                    value: '',
+                    error: false,
+                    required: true,
+                  },
+                  state_accident: {
+                    type: 'select',
+                    name: 'State',
+                    value: '',
+                    error: false,
+                    required: true,
+                    optionLabel: 'name',
+                    optionValue: 'name',
+                    multiple: false,
+                    arrayData: [
+                      { name: 'Alabama', abbreviation: 'AL' },
+                      { name: 'Alaska', abbreviation: 'AK' },
+                      { name: 'Arizona', abbreviation: 'AZ' },
+                      { name: 'Arkansas', abbreviation: 'AR' },
+                      { name: 'California', abbreviation: 'CA' },
+                      { name: 'Colorado', abbreviation: 'CO' },
+                      { name: 'Connecticut', abbreviation: 'CT' },
+                      { name: 'Delaware', abbreviation: 'DE' },
+                      { name: 'Florida', abbreviation: 'FL' },
+                      { name: 'Georgia', abbreviation: 'GA' },
+                      { name: 'Hawaii', abbreviation: 'HI' },
+                      { name: 'Idaho', abbreviation: 'ID' },
+                      { name: 'Illinois', abbreviation: 'IL' },
+                      { name: 'Indiana', abbreviation: 'IN' },
+                      { name: 'Iowa', abbreviation: 'IA' },
+                      { name: 'Kansas', abbreviation: 'KS' },
+                      { name: 'Kentucky', abbreviation: 'KY' },
+                      { name: 'Louisiana', abbreviation: 'LA' },
+                      { name: 'Maine', abbreviation: 'ME' },
+                      { name: 'Maryland', abbreviation: 'MD' },
+                      { name: 'Massachusetts', abbreviation: 'MA' },
+                      { name: 'Michigan', abbreviation: 'MI' },
+                      { name: 'Minnesota', abbreviation: 'MN' },
+                      { name: 'Mississippi', abbreviation: 'MS' },
+                      { name: 'Missouri', abbreviation: 'MO' },
+                      { name: 'Montana', abbreviation: 'MT' },
+                      { name: 'Nebraska', abbreviation: 'NE' },
+                      { name: 'Nevada', abbreviation: 'NV' },
+                      { name: 'New Hampshire', abbreviation: 'NH' },
+                      { name: 'New Jersey', abbreviation: 'NJ' },
+                      { name: 'New Mexico', abbreviation: 'NM' },
+                      { name: 'New York', abbreviation: 'NY' },
+                      { name: 'North Carolina', abbreviation: 'NC' },
+                      { name: 'North Dakota', abbreviation: 'ND' },
+                      { name: 'Ohio', abbreviation: 'OH' },
+                      { name: 'Oklahoma', abbreviation: 'OK' },
+                      { name: 'Oregon', abbreviation: 'OR' },
+                      { name: 'Pennsylvania', abbreviation: 'PA' },
+                      { name: 'Rhode Island', abbreviation: 'RI' },
+                      { name: 'South Carolina', abbreviation: 'SC' },
+                      { name: 'South Dakota', abbreviation: 'SD' },
+                      { name: 'Tennessee', abbreviation: 'TN' },
+                      { name: 'Texas', abbreviation: 'TX' },
+                      { name: 'Utah', abbreviation: 'UT' },
+                      { name: 'Vermont', abbreviation: 'VT' },
+                      { name: 'Virginia', abbreviation: 'VA' },
+                      { name: 'Washington', abbreviation: 'WA' },
+                      { name: 'West Virginia', abbreviation: 'WV' },
+                      { name: 'Wisconsin', abbreviation: 'WI' },
+                      { name: 'Wyoming', abbreviation: 'WY' },
+                    ],
+                  },
+                  comm_vehicle: {
+                    name: 'Were you in commercial vehicle?',
+                    type: 'radio',
+                    value: '',
+                    error: false,
+                    required: false,
+                    data: ['Yes', 'No'],
+                  },
+                  at_fault: {
+                    name: 'Were you at fault?',
+                    type: 'radio',
+                    value: '',
+                    error: false,
+                    required: false,
+                    data: ['Yes', 'No'],
+                  },
+                  ticketed: {
+                    name: 'Were you ticketed?',
+                    type: 'radio',
+                    value: '',
+                    error: false,
+                    required: false,
+                    data: ['Yes', 'No'],
+                  },
+                  detailed_info: {
+                    name: 'Please enter detailed information about the Accident',
+                    type: 'text',
+                    value: '',
+                    error: false,
+                    required: false,
+                    multiline: true,
+                  },
+                },
+              },
+              moving_violations: {
+                add_violation: true,
+                parent_radio: 'moving_violations',
+                parent_radio_value: 'Yes',
+                name: 'Violations info',
+                data: {
+                  type_of_violation: {
+                    name: 'Type of violation',
+                    type: 'select',
+                    value: '',
+                    error: false,
+                    required: true,
+                    multiple: true,
+                    optionLabel: 'name',
+                    optionValue: 'name',
+                    arrayData: [
+                      { name: 'Non-injury' },
+                      { name: 'Injury' },
+                      { name: 'Fatality' },
+                    ],
+                  },
+                  date_of_violation: {
+                    name: 'Date of violation',
+                    type: 'date',
+                    value: '',
+                    error: false,
+                    required: true,
+                  },
+                  state_violation: {
+                    type: 'select',
+                    name: 'State',
+                    value: '',
+                    error: false,
+                    required: true,
+                    optionLabel: 'name',
+                    optionValue: 'name',
+                    multiple: false,
+                    arrayData: [
+                      { name: 'Alabama', abbreviation: 'AL' },
+                      { name: 'Alaska', abbreviation: 'AK' },
+                      { name: 'Arizona', abbreviation: 'AZ' },
+                      { name: 'Arkansas', abbreviation: 'AR' },
+                      { name: 'California', abbreviation: 'CA' },
+                      { name: 'Colorado', abbreviation: 'CO' },
+                      { name: 'Connecticut', abbreviation: 'CT' },
+                      { name: 'Delaware', abbreviation: 'DE' },
+                      { name: 'Florida', abbreviation: 'FL' },
+                      { name: 'Georgia', abbreviation: 'GA' },
+                      { name: 'Hawaii', abbreviation: 'HI' },
+                      { name: 'Idaho', abbreviation: 'ID' },
+                      { name: 'Illinois', abbreviation: 'IL' },
+                      { name: 'Indiana', abbreviation: 'IN' },
+                      { name: 'Iowa', abbreviation: 'IA' },
+                      { name: 'Kansas', abbreviation: 'KS' },
+                      { name: 'Kentucky', abbreviation: 'KY' },
+                      { name: 'Louisiana', abbreviation: 'LA' },
+                      { name: 'Maine', abbreviation: 'ME' },
+                      { name: 'Maryland', abbreviation: 'MD' },
+                      { name: 'Massachusetts', abbreviation: 'MA' },
+                      { name: 'Michigan', abbreviation: 'MI' },
+                      { name: 'Minnesota', abbreviation: 'MN' },
+                      { name: 'Mississippi', abbreviation: 'MS' },
+                      { name: 'Missouri', abbreviation: 'MO' },
+                      { name: 'Montana', abbreviation: 'MT' },
+                      { name: 'Nebraska', abbreviation: 'NE' },
+                      { name: 'Nevada', abbreviation: 'NV' },
+                      { name: 'New Hampshire', abbreviation: 'NH' },
+                      { name: 'New Jersey', abbreviation: 'NJ' },
+                      { name: 'New Mexico', abbreviation: 'NM' },
+                      { name: 'New York', abbreviation: 'NY' },
+                      { name: 'North Carolina', abbreviation: 'NC' },
+                      { name: 'North Dakota', abbreviation: 'ND' },
+                      { name: 'Ohio', abbreviation: 'OH' },
+                      { name: 'Oklahoma', abbreviation: 'OK' },
+                      { name: 'Oregon', abbreviation: 'OR' },
+                      { name: 'Pennsylvania', abbreviation: 'PA' },
+                      { name: 'Rhode Island', abbreviation: 'RI' },
+                      { name: 'South Carolina', abbreviation: 'SC' },
+                      { name: 'South Dakota', abbreviation: 'SD' },
+                      { name: 'Tennessee', abbreviation: 'TN' },
+                      { name: 'Texas', abbreviation: 'TX' },
+                      { name: 'Utah', abbreviation: 'UT' },
+                      { name: 'Vermont', abbreviation: 'VT' },
+                      { name: 'Virginia', abbreviation: 'VA' },
+                      { name: 'Washington', abbreviation: 'WA' },
+                      { name: 'West Virginia', abbreviation: 'WV' },
+                      { name: 'Wisconsin', abbreviation: 'WI' },
+                      { name: 'Wyoming', abbreviation: 'WY' },
+                    ],
+                  },
+                  comm_vehicle: {
+                    name: 'Were you in commercial vehicle?',
+                    type: 'radio',
+                    value: '',
+                    error: false,
+                    required: false,
+                    data: ['Yes', 'No'],
                   },
                 },
               },
@@ -110,16 +322,48 @@ const ApplyScreen = ({ route, navigation }: any) => {
                 type: 'radio',
                 value: '',
                 error: false,
-                required: true,
+                required: false,
                 data: ['Yes', 'No'],
+              },
+              dui_dwi_date: {
+                sibling_radio: 'dui_dwi',
+                sibling_radio_value: 'Yes',
+                name: 'DUI or DWI date',
+                type: 'date',
+                value: '',
+                error: false,
+                required: false,
               },
               sap: {
                 name: 'Do you have SAP program?',
                 type: 'radio',
                 value: '',
                 error: false,
-                required: true,
+                required: false,
                 data: ['Yes', 'No'],
+              },
+              desc_sap: {
+                sibling_radio: 'sap',
+                sibling_radio_value: 'Yes',
+                name: 'Please describe',
+                type: 'text',
+                value: '',
+                error: false,
+                required: false,
+                multiline: true,
+              },
+            },
+          },
+          upload_file: {
+            name: 'Upload Resume optional or any supporting documents like MVR, PSP, copy of driving license',
+            subgroup: null,
+            data: {
+              upload_cv: {
+                name: 'Upload resume',
+                type: 'file',
+                value: '',
+                error: false,
+                required: false,
               },
             },
           },
@@ -130,29 +374,7 @@ const ApplyScreen = ({ route, navigation }: any) => {
         groups: {
           contact_information: {
             name: 'Contact Information',
-            subgroup: {
-              compensation_lease: {
-                name: 'Compensation Lease',
-                data: {
-                  test_radio: {
-                    name: 'Test Radio',
-                    type: 'radio',
-                    value: '',
-                    error: false,
-                    required: true,
-                    data: ['Yes', 'No'],
-                  },
-
-                  upload_file: {
-                    name: "Upload CV or MVR, PSP, Driver's license",
-                    type: 'file',
-                    value: '',
-                    error: false,
-                    required: false,
-                  },
-                },
-              },
-            },
+            subgroup: null,
             data: {
               first_name: {
                 name: 'First Name',
@@ -182,14 +404,6 @@ const ApplyScreen = ({ route, navigation }: any) => {
                 error: false,
                 required: true,
               },
-              test_radio: {
-                name: 'Test Radio',
-                type: 'radio',
-                value: '',
-                error: false,
-                required: true,
-                data: ['Yes', 'No'],
-              },
             },
           },
           route_details: {
@@ -216,9 +430,60 @@ const ApplyScreen = ({ route, navigation }: any) => {
                 value: '',
                 error: false,
                 required: true,
-                data: [
-                  { name: 'text', code: 1 },
-                  { name: 'testt', code: 2 },
+                optionLabel: 'name',
+                optionValue: 'name',
+                multiple: false,
+                arrayData: [
+                  { name: 'Alabama', abbreviation: 'AL' },
+                  { name: 'Alaska', abbreviation: 'AK' },
+                  { name: 'Arizona', abbreviation: 'AZ' },
+                  { name: 'Arkansas', abbreviation: 'AR' },
+                  { name: 'California', abbreviation: 'CA' },
+                  { name: 'Colorado', abbreviation: 'CO' },
+                  { name: 'Connecticut', abbreviation: 'CT' },
+                  { name: 'Delaware', abbreviation: 'DE' },
+                  { name: 'Florida', abbreviation: 'FL' },
+                  { name: 'Georgia', abbreviation: 'GA' },
+                  { name: 'Hawaii', abbreviation: 'HI' },
+                  { name: 'Idaho', abbreviation: 'ID' },
+                  { name: 'Illinois', abbreviation: 'IL' },
+                  { name: 'Indiana', abbreviation: 'IN' },
+                  { name: 'Iowa', abbreviation: 'IA' },
+                  { name: 'Kansas', abbreviation: 'KS' },
+                  { name: 'Kentucky', abbreviation: 'KY' },
+                  { name: 'Louisiana', abbreviation: 'LA' },
+                  { name: 'Maine', abbreviation: 'ME' },
+                  { name: 'Maryland', abbreviation: 'MD' },
+                  { name: 'Massachusetts', abbreviation: 'MA' },
+                  { name: 'Michigan', abbreviation: 'MI' },
+                  { name: 'Minnesota', abbreviation: 'MN' },
+                  { name: 'Mississippi', abbreviation: 'MS' },
+                  { name: 'Missouri', abbreviation: 'MO' },
+                  { name: 'Montana', abbreviation: 'MT' },
+                  { name: 'Nebraska', abbreviation: 'NE' },
+                  { name: 'Nevada', abbreviation: 'NV' },
+                  { name: 'New Hampshire', abbreviation: 'NH' },
+                  { name: 'New Jersey', abbreviation: 'NJ' },
+                  { name: 'New Mexico', abbreviation: 'NM' },
+                  { name: 'New York', abbreviation: 'NY' },
+                  { name: 'North Carolina', abbreviation: 'NC' },
+                  { name: 'North Dakota', abbreviation: 'ND' },
+                  { name: 'Ohio', abbreviation: 'OH' },
+                  { name: 'Oklahoma', abbreviation: 'OK' },
+                  { name: 'Oregon', abbreviation: 'OR' },
+                  { name: 'Pennsylvania', abbreviation: 'PA' },
+                  { name: 'Rhode Island', abbreviation: 'RI' },
+                  { name: 'South Carolina', abbreviation: 'SC' },
+                  { name: 'South Dakota', abbreviation: 'SD' },
+                  { name: 'Tennessee', abbreviation: 'TN' },
+                  { name: 'Texas', abbreviation: 'TX' },
+                  { name: 'Utah', abbreviation: 'UT' },
+                  { name: 'Vermont', abbreviation: 'VT' },
+                  { name: 'Virginia', abbreviation: 'VA' },
+                  { name: 'Washington', abbreviation: 'WA' },
+                  { name: 'West Virginia', abbreviation: 'WV' },
+                  { name: 'Wisconsin', abbreviation: 'WI' },
+                  { name: 'Wyoming', abbreviation: 'WY' },
                 ],
               },
               position: {
@@ -227,42 +492,41 @@ const ApplyScreen = ({ route, navigation }: any) => {
                 value: '',
                 error: false,
                 required: true,
-                data: [
-                  { name: 'text', code: 1 },
-                  { name: 'testt', code: 2 },
+                optionLabel: 'name',
+                optionValue: 'name',
+                multiple: true,
+                arrayData: [
+                  { name: 'Company Driver' },
+                  { name: 'Owner Operator' },
+                  { name: 'Rent' },
+                  { name: 'Lease Purchase' },
                 ],
               },
-              route_preference: {
-                type: 'select',
-                name: 'Route Preference',
-                value: '',
-                error: false,
-                required: true,
-                data: [
-                  { name: 'text', code: 1 },
-                  { name: 'testt', code: 2 },
-                ],
-              },
+
               hauler_experience: {
                 type: 'select',
                 name: 'Hauler Experience',
                 value: '',
                 error: false,
                 required: true,
-                data: [
-                  { name: 'text', code: 1 },
-                  { name: 'testt', code: 2 },
-                ],
-              },
-              endorsements: {
-                type: 'select',
-                name: 'Endorsements',
-                value: '',
-                error: false,
-                required: false,
-                data: [
-                  { name: 'text', code: 1 },
-                  { name: 'testt', code: 2 },
+                multiple: true,
+                optionLabel: 'name',
+                optionValue: 'name',
+                arrayData: [
+                  { name: 'Box' },
+                  { name: 'Car Hauler' },
+                  { name: 'Drop and Hook' },
+                  { name: 'Dry bulk' },
+                  { name: 'Dry Van' },
+                  { name: 'Flatbed' },
+                  { name: 'Hopper Bottom' },
+                  { name: 'Intermodal' },
+                  { name: 'Oil Field' },
+                  { name: 'Oversize Load' },
+                  { name: 'Refrigerated' },
+                  { name: 'Tanker' },
+                  { name: 'Reefer' },
+                  { name: 'Dump truck' },
                 ],
               },
             },
@@ -279,7 +543,7 @@ const ApplyScreen = ({ route, navigation }: any) => {
             subgroup: null,
             data: {
               company_name: {
-                name: 'Company Name',
+                name: 'Carrier Name',
                 type: 'text',
                 value: '',
                 error: false,
@@ -312,9 +576,59 @@ const ApplyScreen = ({ route, navigation }: any) => {
                 value: '',
                 error: false,
                 required: true,
-                data: [
-                  { name: 'text', code: 1 },
-                  { name: 'testt', code: 2 },
+                optionLabel: 'name',
+                optionValue: 'name',
+                arrayData: [
+                  { name: 'Alabama', abbreviation: 'AL' },
+                  { name: 'Alaska', abbreviation: 'AK' },
+                  { name: 'Arizona', abbreviation: 'AZ' },
+                  { name: 'Arkansas', abbreviation: 'AR' },
+                  { name: 'California', abbreviation: 'CA' },
+                  { name: 'Colorado', abbreviation: 'CO' },
+                  { name: 'Connecticut', abbreviation: 'CT' },
+                  { name: 'Delaware', abbreviation: 'DE' },
+                  { name: 'Florida', abbreviation: 'FL' },
+                  { name: 'Georgia', abbreviation: 'GA' },
+                  { name: 'Hawaii', abbreviation: 'HI' },
+                  { name: 'Idaho', abbreviation: 'ID' },
+                  { name: 'Illinois', abbreviation: 'IL' },
+                  { name: 'Indiana', abbreviation: 'IN' },
+                  { name: 'Iowa', abbreviation: 'IA' },
+                  { name: 'Kansas', abbreviation: 'KS' },
+                  { name: 'Kentucky', abbreviation: 'KY' },
+                  { name: 'Louisiana', abbreviation: 'LA' },
+                  { name: 'Maine', abbreviation: 'ME' },
+                  { name: 'Maryland', abbreviation: 'MD' },
+                  { name: 'Massachusetts', abbreviation: 'MA' },
+                  { name: 'Michigan', abbreviation: 'MI' },
+                  { name: 'Minnesota', abbreviation: 'MN' },
+                  { name: 'Mississippi', abbreviation: 'MS' },
+                  { name: 'Missouri', abbreviation: 'MO' },
+                  { name: 'Montana', abbreviation: 'MT' },
+                  { name: 'Nebraska', abbreviation: 'NE' },
+                  { name: 'Nevada', abbreviation: 'NV' },
+                  { name: 'New Hampshire', abbreviation: 'NH' },
+                  { name: 'New Jersey', abbreviation: 'NJ' },
+                  { name: 'New Mexico', abbreviation: 'NM' },
+                  { name: 'New York', abbreviation: 'NY' },
+                  { name: 'North Carolina', abbreviation: 'NC' },
+                  { name: 'North Dakota', abbreviation: 'ND' },
+                  { name: 'Ohio', abbreviation: 'OH' },
+                  { name: 'Oklahoma', abbreviation: 'OK' },
+                  { name: 'Oregon', abbreviation: 'OR' },
+                  { name: 'Pennsylvania', abbreviation: 'PA' },
+                  { name: 'Rhode Island', abbreviation: 'RI' },
+                  { name: 'South Carolina', abbreviation: 'SC' },
+                  { name: 'South Dakota', abbreviation: 'SD' },
+                  { name: 'Tennessee', abbreviation: 'TN' },
+                  { name: 'Texas', abbreviation: 'TX' },
+                  { name: 'Utah', abbreviation: 'UT' },
+                  { name: 'Vermont', abbreviation: 'VT' },
+                  { name: 'Virginia', abbreviation: 'VA' },
+                  { name: 'Washington', abbreviation: 'WA' },
+                  { name: 'West Virginia', abbreviation: 'WV' },
+                  { name: 'Wisconsin', abbreviation: 'WI' },
+                  { name: 'Wyoming', abbreviation: 'WY' },
                 ],
               },
               carrier_city: {
@@ -377,21 +691,39 @@ const ApplyScreen = ({ route, navigation }: any) => {
                 value: '',
                 error: false,
                 required: true,
-                data: [
-                  { name: 'text', code: 1 },
-                  { name: 'testt', code: 2 },
-                ],
+                optionLabel: 'name',
+                optionValue: 'name',
+                arrayData: [{ name: 'Weekly' }, { name: 'Other' }],
               },
               what_day: {
+                sibling_radio: 'how_frequent',
+                sibling_radio_value: 'Weekly',
                 name: 'What day is payday?',
                 type: 'select',
                 value: '',
                 error: false,
                 required: true,
-                data: [
-                  { name: 'text', code: 1 },
-                  { name: 'testt', code: 2 },
+                optionLabel: 'name',
+                optionValue: 'name',
+                arrayData: [
+                  { name: 'Monday' },
+                  { name: 'Tuesday' },
+                  { name: 'Wednesday' },
+                  { name: 'Thursday' },
+                  { name: 'Friday' },
+                  { name: 'Saturday' },
+                  { name: 'Sunday' },
                 ],
+              },
+              desc_day: {
+                sibling_radio: 'how_frequent',
+                sibling_radio_value: 'Other',
+                name: 'Description',
+                type: 'text',
+                value: '',
+                error: false,
+                required: false,
+                multiline: true,
               },
               paid_orientation: {
                 name: 'Paid orientation?',
@@ -401,6 +733,16 @@ const ApplyScreen = ({ route, navigation }: any) => {
                 required: true,
                 data: ['Yes', 'No'],
               },
+              desc_paid: {
+                sibling_radio: 'paid_orientation',
+                sibling_radio_value: 'Yes',
+                name: 'Description',
+                type: 'text',
+                value: '',
+                error: false,
+                required: false,
+                multiline: true,
+              },
               travel_provided: {
                 name: 'Travel provided',
                 type: 'radio',
@@ -408,6 +750,23 @@ const ApplyScreen = ({ route, navigation }: any) => {
                 error: false,
                 required: true,
                 data: ['Yes', 'No'],
+              },
+              select_travel_provided: {
+                sibling_radio: 'travel_provided',
+                sibling_radio_value: 'Yes',
+                name: 'Travel provided',
+                type: 'select',
+                value: '',
+                error: false,
+                required: true,
+                optionLabel: 'name',
+                optionValue: 'name',
+                arrayData: [
+                  { name: 'Rental car' },
+                  { name: 'Flight ticket' },
+                  { name: 'Bus' },
+                  { name: 'Train' },
+                ],
               },
               require: {
                 name: 'Do you require: deposits, escrows or hold extra pay checks?',
@@ -417,15 +776,30 @@ const ApplyScreen = ({ route, navigation }: any) => {
                 required: true,
                 data: ['Yes', 'No'],
               },
+              desc_require: {
+                sibling_radio: 'require',
+                sibling_radio_value: 'Yes',
+                name: 'Description',
+                type: 'text',
+                value: '',
+                error: false,
+                required: false,
+                multiline: true,
+              },
               home_time: {
                 name: 'What is home time for drivers?',
                 type: 'select',
                 value: '',
                 error: false,
                 required: false,
-                data: [
-                  { name: 'text', code: 1 },
-                  { name: 'testt', code: 2 },
+                optionLabel: 'name',
+                optionValue: 'name',
+                arrayData: [
+                  { name: 'Every weekend' },
+                  { name: 'Every 2nd week' },
+                  { name: 'Every 3rd week' },
+                  { name: 'Every 4th week' },
+                  { name: 'Other' },
                 ],
               },
             },
@@ -439,16 +813,36 @@ const ApplyScreen = ({ route, navigation }: any) => {
                 type: 'radio',
                 value: '',
                 error: false,
-                required: true,
+                required: false,
                 data: ['Yes', 'No'],
+              },
+              desc_dedicated: {
+                sibling_radio: 'dedicated',
+                sibling_radio_value: 'Yes',
+                name: 'Description',
+                type: 'text',
+                value: '',
+                error: false,
+                required: false,
+                multiline: true,
               },
               drop_hook: {
                 name: 'Any drop & hook?',
                 type: 'radio',
                 value: '',
                 error: false,
-                required: true,
+                required: false,
                 data: ['Yes', 'No'],
+              },
+              desc_drop_hook: {
+                sibling_radio: 'drop_hook',
+                sibling_radio_value: 'Yes',
+                name: 'Description',
+                type: 'text',
+                value: '',
+                error: false,
+                required: false,
+                multiline: true,
               },
             },
           },
@@ -463,7 +857,7 @@ const ApplyScreen = ({ route, navigation }: any) => {
                     type: 'file',
                     value: '',
                     error: false,
-                    required: true,
+                    required: false,
                   },
                 },
               },
@@ -474,7 +868,7 @@ const ApplyScreen = ({ route, navigation }: any) => {
                 type: 'radio',
                 value: '',
                 error: false,
-                required: true,
+                required: false,
                 data: ['Yes', 'No'],
               },
               repair_shop: {
@@ -482,7 +876,7 @@ const ApplyScreen = ({ route, navigation }: any) => {
                 type: 'radio',
                 value: '',
                 error: false,
-                required: true,
+                required: false,
                 data: ['Yes', 'No'],
               },
               provide_fuel: {
@@ -490,8 +884,18 @@ const ApplyScreen = ({ route, navigation }: any) => {
                 type: 'radio',
                 value: '',
                 error: false,
-                required: true,
+                required: false,
                 data: ['Yes', 'No'],
+              },
+              desc_fuel: {
+                sibling_radio: 'provide_fuel',
+                sibling_radio_value: 'Yes',
+                name: 'Description',
+                type: 'text',
+                value: '',
+                error: false,
+                required: false,
+                multiline: true,
               },
             },
           },
@@ -503,8 +907,242 @@ const ApplyScreen = ({ route, navigation }: any) => {
           compensation_information: {
             name: 'Compensation Information',
             subgroup: {
-              compensation_lease: {
-                name: 'Compensation Lease',
+              w2_company_driver: {
+                parent_select: 'compensation_for',
+                name: 'W2 Company Driver',
+                data: {
+                  occupational_select: {
+                    name: 'Compensation type',
+                    type: 'select',
+                    value: '',
+                    error: false,
+                    required: false,
+                    optionLabel: 'name',
+                    optionValue: 'name',
+                    multiple: true,
+                    arrayData: [
+                      { name: 'Cpm' },
+                      { name: 'Flat rate' },
+                      { name: '% from Gross' },
+                      { name: 'per/hr' },
+                    ],
+                  },
+                  desc_cpm: {
+                    sibling_select: 'occupational_select',
+                    name: 'Description Cpm',
+                    type: 'text',
+                    value: '',
+                    error: false,
+                    required: false,
+                    multiline: true,
+                  },
+                  desc_flat_rate: {
+                    sibling_select: 'occupational_select',
+                    name: 'Description Flat rate',
+                    type: 'text',
+                    value: '',
+                    error: false,
+                    required: false,
+                    multiline: true,
+                  },
+                  desc_from_gros: {
+                    sibling_select: 'occupational_select',
+                    name: 'Description % from Gross',
+                    type: 'text',
+                    value: '',
+                    error: false,
+                    required: false,
+                    multiline: true,
+                  },
+                  desc_per_hr: {
+                    sibling_select: 'occupational_select',
+                    name: 'Description per/hr',
+                    type: 'text',
+                    value: '',
+                    error: false,
+                    required: false,
+                    multiline: true,
+                  },
+                },
+              },
+              independent_contractor: {
+                parent_select: 'compensation_for',
+                name: '1099 Independent Contractor(IC)',
+                data: {
+                  occupational_select: {
+                    name: 'Compensation type',
+                    type: 'select',
+                    value: '',
+                    error: false,
+                    required: false,
+                    multiple: true,
+                    optionLabel: 'name',
+                    optionValue: 'name',
+                    arrayData: [
+                      { name: 'Cpm' },
+                      { name: 'Flat rate' },
+                      { name: '% from Gross' },
+                      { name: 'per/hr' },
+                    ],
+                  },
+                  desc_cpm: {
+                    sibling_select: 'occupational_select',
+                    name: 'Description Cpm',
+                    type: 'text',
+                    value: '',
+                    error: false,
+                    required: false,
+                    multiline: true,
+                  },
+
+                  desc_flat_rate: {
+                    sibling_select: 'occupational_select',
+                    name: 'Description Flat rate',
+                    type: 'text',
+                    value: '',
+                    error: false,
+                    required: false,
+                    multiline: true,
+                  },
+                  desc_from_gros: {
+                    sibling_select: 'occupational_select',
+                    name: 'Description % from Gross',
+                    type: 'text',
+                    value: '',
+                    error: false,
+                    required: false,
+                    multiline: true,
+                  },
+                  desc_per_hr: {
+                    sibling_select: 'occupational_select',
+                    name: 'Description Per/Hr',
+                    type: 'text',
+                    value: '',
+                    error: false,
+                    required: false,
+                    multiline: true,
+                  },
+                },
+              },
+              w2_team: {
+                parent_select: 'compensation_for',
+                name: 'W2 Team',
+                data: {
+                  occupational_select: {
+                    name: 'Compensation type',
+                    type: 'select',
+                    value: '',
+                    error: false,
+                    required: false,
+                    multiple: true,
+                    optionLabel: 'name',
+                    optionValue: 'name',
+                    arrayData: [
+                      { name: 'Cpm' },
+                      { name: 'Flat rate' },
+                      { name: '% from Gross' },
+                      { name: 'per/hr' },
+                    ],
+                  },
+                  desc_cpm: {
+                    sibling_select: 'occupational_select',
+                    name: 'Description Cpm',
+                    type: 'text',
+                    value: '',
+                    error: false,
+                    required: false,
+                    multiline: true,
+                  },
+                  desc_flat_rate: {
+                    sibling_select: 'occupational_select',
+                    name: 'Description Flat rate',
+                    type: 'text',
+                    value: '',
+                    error: false,
+                    required: false,
+                    multiline: true,
+                  },
+                  desc_from_gros: {
+                    sibling_select: 'occupational_select',
+                    name: 'Description % from Gross',
+                    type: 'text',
+                    value: '',
+                    error: false,
+                    required: false,
+                    multiline: true,
+                  },
+                  desc_per_hr: {
+                    sibling_select: 'occupational_select',
+                    name: 'Description Per/Hr',
+                    type: 'text',
+                    value: '',
+                    error: false,
+                    required: false,
+                    multiline: true,
+                  },
+                },
+              },
+              team_ic: {
+                parent_select: 'compensation_for',
+                name: '1099 Team IC',
+                data: {
+                  occupational_select: {
+                    name: 'Compensation type',
+                    type: 'select',
+                    value: '',
+                    error: false,
+                    required: false,
+                    multiple: true,
+                    optionLabel: 'name',
+                    optionValue: 'name',
+                    arrayData: [
+                      { name: 'Cpm' },
+                      { name: 'Flat rate' },
+                      { name: '% from Gross' },
+                      { name: 'per/hr' },
+                    ],
+                  },
+                  desc_cpm: {
+                    sibling_select: 'occupational_select',
+                    name: 'Description Cpm',
+                    type: 'text',
+                    value: '',
+                    error: false,
+                    required: false,
+                    multiline: true,
+                  },
+                  desc_flat_rate: {
+                    sibling_select: 'occupational_select',
+                    name: 'Description Flat rate',
+                    type: 'text',
+                    value: '',
+                    error: false,
+                    required: false,
+                    multiline: true,
+                  },
+                  desc_from_gros: {
+                    sibling_select: 'occupational_select',
+                    name: 'Description % from Gross',
+                    type: 'text',
+                    value: '',
+                    error: false,
+                    required: false,
+                    multiline: true,
+                  },
+                  desc_per_hr: {
+                    sibling_select: 'occupational_select',
+                    name: 'Description Per/Hr',
+                    type: 'text',
+                    value: '',
+                    error: false,
+                    required: false,
+                    multiline: true,
+                  },
+                },
+              },
+              owner_operator: {
+                parent_select: 'compensation_for',
+                name: 'Owner Operator',
                 data: {
                   from_gross: {
                     name: '% from Gross',
@@ -542,10 +1180,9 @@ const ApplyScreen = ({ route, navigation }: any) => {
                     value: '',
                     error: false,
                     required: false,
-                    data: [
-                      { name: 'text', code: 1 },
-                      { name: 'testt', code: 2 },
-                    ],
+                    optionLabel: 'name',
+                    optionValue: 'name',
+                    arrayData: [{ name: 'Per week' }, { name: 'Per month' }],
                   },
                   eld: {
                     name: 'ELD',
@@ -560,12 +1197,99 @@ const ApplyScreen = ({ route, navigation }: any) => {
                     value: '',
                     error: false,
                     required: false,
-                    data: [
-                      { name: 'text', code: 1 },
-                      { name: 'testt', code: 2 },
-                    ],
+                    optionLabel: 'name',
+                    optionValue: 'name',
+                    arrayData: [{ name: 'Per week' }, { name: 'Per month' }],
                   },
-                  trailer_rend: {
+                  provide_pre_pass: {
+                    name: 'Do you provide Pre pass?',
+                    type: 'radio',
+                    value: '',
+                    error: false,
+                    required: false,
+                    data: ['Yes', 'No'],
+                  },
+                  pre_pass: {
+                    name: 'Pre Pass cost',
+                    type: 'text',
+                    value: '',
+                    error: false,
+                    required: false,
+                  },
+                  pre_pass_period: {
+                    name: 'Pre Pass Period',
+                    type: 'select',
+                    value: '',
+                    error: false,
+                    required: false,
+                    optionLabel: 'name',
+                    optionValue: 'name',
+                    arrayData: [{ name: 'Per week' }, { name: 'Per month' }],
+                  },
+                  weekly_miles: {
+                    name: 'Average weekly miles',
+                    type: 'text',
+                    value: '',
+                    error: false,
+                    required: false,
+                  },
+                  weekly_gross: {
+                    name: 'Average weekly Gross',
+                    type: 'text',
+                    value: '',
+                    error: false,
+                    required: false,
+                  },
+                  other_charges: {
+                    name: 'Other charges',
+                    type: 'text',
+                    value: '',
+                    error: false,
+                    required: false,
+                  },
+                },
+              },
+              lease: {
+                parent_select: 'compensation_for',
+                name: 'Lease',
+                data: {
+                  from_gross: {
+                    name: '% from Gross',
+                    type: 'text',
+                    value: '',
+                    error: false,
+                    required: false,
+                  },
+                  cargo: {
+                    name: 'Cargo insurance included in %',
+                    type: 'radio',
+                    value: '',
+                    error: false,
+                    required: false,
+                    data: ['Yes', 'No'],
+                  },
+                  cargo_insurance_cost: {
+                    sibling_radio: 'cargo',
+                    sibling_radio_value: 'No',
+                    name: 'Cargo Insurance cost',
+                    type: 'text',
+                    value: '',
+                    error: false,
+                    required: false,
+                  },
+                  cargo_insurance_period: {
+                    sibling_radio: 'cargo',
+                    sibling_radio_value: 'No',
+                    name: 'Cargo Insurance Period',
+                    type: 'select',
+                    value: '',
+                    error: false,
+                    required: false,
+                    optionLabel: 'name',
+                    optionValue: 'name',
+                    arrayData: [{ name: 'Per week' }, { name: 'Per month' }],
+                  },
+                  trailer: {
                     name: 'Trailer rent included in %',
                     type: 'radio',
                     value: '',
@@ -573,26 +1297,430 @@ const ApplyScreen = ({ route, navigation }: any) => {
                     required: false,
                     data: ['Yes', 'No'],
                   },
-                  average_weekly_miles: {
+                  trailer_cost: {
+                    sibling_radio: 'trailer',
+                    sibling_radio_value: 'No',
+                    name: 'Trailer rent cost',
+                    type: 'text',
+                    value: '',
+                    error: false,
+                    required: false,
+                  },
+                  trailer_period: {
+                    sibling_radio: 'trailer',
+                    sibling_radio_value: 'No',
+                    name: 'Trailer rent Period',
+                    type: 'select',
+                    value: '',
+                    error: false,
+                    required: false,
+                    optionLabel: 'name',
+                    optionValue: 'name',
+                    arrayData: [{ name: 'Per week' }, { name: 'Per month' }],
+                  },
+                  occupational: {
+                    name: 'Occupational Accident Insurance Cost',
+                    type: 'text',
+                    value: '',
+                    error: false,
+                    required: false,
+                  },
+                  occupational_select: {
+                    name: 'Occupational Accident Insurance Period',
+                    type: 'select',
+                    value: '',
+                    error: false,
+                    required: false,
+                    optionLabel: 'name',
+                    optionValue: 'name',
+                    arrayData: [{ name: 'Per week' }, { name: 'Per month' }],
+                  },
+                  eld: {
+                    name: 'ELD',
+                    type: 'text',
+                    value: '',
+                    error: false,
+                    required: false,
+                  },
+                  eld_period: {
+                    name: 'ELD Period',
+                    type: 'select',
+                    value: '',
+                    error: false,
+                    required: false,
+                    optionLabel: 'name',
+                    optionValue: 'name',
+                    arrayData: [{ name: 'Per week' }, { name: 'Per month' }],
+                  },
+                  provide_pre_pass: {
+                    name: 'Do you provide Pre pass?',
+                    type: 'radio',
+                    value: '',
+                    error: false,
+                    required: false,
+                    data: ['Yes', 'No'],
+                  },
+                  pre_pass: {
+                    sibling_radio: 'provide_pre_pass',
+                    sibling_radio_value: 'Yes',
+                    name: 'Pre Pass cost',
+                    type: 'text',
+                    value: '',
+                    error: false,
+                    required: false,
+                  },
+                  pre_pass_period: {
+                    sibling_radio: 'provide_pre_pass',
+                    sibling_radio_value: 'Yes',
+                    name: 'Pre Pass Period',
+                    type: 'select',
+                    value: '',
+                    error: false,
+                    required: false,
+                    optionLabel: 'name',
+                    optionValue: 'name',
+                    arrayData: [{ name: 'Per week' }, { name: 'Per month' }],
+                  },
+                  weekly_miles: {
                     name: 'Average weekly miles',
                     type: 'text',
                     value: '',
                     error: false,
                     required: false,
                   },
-                  average_weekly_gross: {
-                    name: 'Average weekly gross',
+                  weekly_gross: {
+                    name: 'Average weekly Gross',
                     type: 'text',
                     value: '',
                     error: false,
                     required: false,
                   },
-                  other: {
+                  other_charges: {
                     name: 'Other charges',
                     type: 'text',
                     value: '',
                     error: false,
                     required: false,
+                  },
+                },
+              },
+              lease_purchase: {
+                parent_select: 'compensation_for',
+                name: 'Lease Purchase',
+                data: {
+                  from_gross: {
+                    name: '% from Gross',
+                    type: 'text',
+                    value: '',
+                    error: false,
+                    required: false,
+                  },
+                  cargo: {
+                    name: 'Cargo insurance included in %',
+                    type: 'radio',
+                    value: '',
+                    error: false,
+                    required: false,
+                    data: ['Yes', 'No'],
+                  },
+                  cargo_insurance_cost: {
+                    sibling_radio: 'cargo',
+                    sibling_radio_value: 'No',
+                    name: 'Cargo Insurance cost',
+                    type: 'text',
+                    value: '',
+                    error: false,
+                    required: false,
+                  },
+                  cargo_insurance_period: {
+                    sibling_radio: 'cargo',
+                    sibling_radio_value: 'No',
+                    name: 'Cargo Insurance Period',
+                    type: 'select',
+                    value: '',
+                    error: false,
+                    required: false,
+                    optionLabel: 'name',
+                    optionValue: 'name',
+                    arrayData: [{ name: 'Per week' }, { name: 'Per month' }],
+                  },
+                  trailer: {
+                    name: 'Trailer rent included in %',
+                    type: 'radio',
+                    value: '',
+                    error: false,
+                    required: false,
+                    data: ['Yes', 'No'],
+                  },
+                  trailer_cost: {
+                    sibling_radio: 'trailer',
+                    sibling_radio_value: 'No',
+                    name: 'Trailer rent cost',
+                    type: 'text',
+                    value: '',
+                    error: false,
+                    required: false,
+                  },
+                  trailer_period: {
+                    sibling_radio: 'trailer',
+                    sibling_radio_value: 'No',
+                    name: 'Trailer rent Period',
+                    type: 'select',
+                    value: '',
+                    error: false,
+                    required: false,
+                    optionLabel: 'name',
+                    optionValue: 'name',
+                    arrayData: [{ name: 'Per week' }, { name: 'Per month' }],
+                  },
+                  occupational: {
+                    name: 'Occupational Accident Insurance Cost',
+                    type: 'text',
+                    value: '',
+                    error: false,
+                    required: false,
+                  },
+                  occupational_select: {
+                    name: 'Occupational Accident Insurance Period',
+                    type: 'select',
+                    value: '',
+                    error: false,
+                    required: false,
+                    optionLabel: 'name',
+                    optionValue: 'name',
+                    arrayData: [{ name: 'Per week' }, { name: 'Per month' }],
+                  },
+                  eld: {
+                    name: 'ELD',
+                    type: 'text',
+                    value: '',
+                    error: false,
+                    required: false,
+                  },
+                  eld_period: {
+                    name: 'ELD Period',
+                    type: 'select',
+                    value: '',
+                    error: false,
+                    required: false,
+                    optionLabel: 'name',
+                    optionValue: 'name',
+                    arrayData: [{ name: 'Per week' }, { name: 'Per month' }],
+                  },
+                  provide_pre_pass: {
+                    name: 'Do you provide Pre pass?',
+                    type: 'radio',
+                    value: '',
+                    error: false,
+                    required: false,
+                    data: ['Yes', 'No'],
+                  },
+                  pre_pass: {
+                    sibling_radio: 'provide_pre_pass',
+                    sibling_radio_value: 'Yes',
+                    name: 'Pre Pass cost',
+                    type: 'text',
+                    value: '',
+                    error: false,
+                    required: false,
+                  },
+                  pre_pass_period: {
+                    sibling_radio: 'provide_pre_pass',
+                    sibling_radio_value: 'Yes',
+                    name: 'Pre Pass Period',
+                    type: 'select',
+                    value: '',
+                    error: false,
+                    required: false,
+                    optionLabel: 'name',
+                    optionValue: 'name',
+                    arrayData: [{ name: 'Per week' }, { name: 'Per month' }],
+                  },
+                  weekly_miles: {
+                    name: 'Average weekly miles',
+                    type: 'text',
+                    value: '',
+                    error: false,
+                    required: false,
+                  },
+                  weekly_gross: {
+                    name: 'Average weekly Gross',
+                    type: 'text',
+                    value: '',
+                    error: false,
+                    required: false,
+                  },
+                  other_charges: {
+                    name: 'Other charges',
+                    type: 'text',
+                    value: '',
+                    error: false,
+                    required: false,
+                  },
+                },
+              },
+              w2_local: {
+                parent_select: 'compensation_for',
+                name: 'W2 Local',
+                data: {
+                  occupational_select: {
+                    name: 'Compensation type',
+                    type: 'select',
+                    value: '',
+                    error: false,
+                    required: false,
+                    optionLabel: 'name',
+                    optionValue: 'name',
+                    multiple: true,
+                    arrayData: [
+                      { name: 'Cpm' },
+                      { name: 'Flat rate' },
+                      { name: '% from Gross' },
+                      { name: 'per/hr' },
+                    ],
+                  },
+                  desc_cpm: {
+                    sibling_select: 'occupational_select',
+                    name: 'Description Cpm',
+                    type: 'text',
+                    value: '',
+                    error: false,
+                    required: false,
+                    multiline: true,
+                  },
+                  desc_flat_rate: {
+                    sibling_select: 'occupational_select',
+                    name: 'Description Flat rate',
+                    type: 'text',
+                    value: '',
+                    error: false,
+                    required: false,
+                    multiline: true,
+                  },
+                  desc_from_gros: {
+                    sibling_select: 'occupational_select',
+                    name: 'Description % from Gross',
+                    type: 'text',
+                    value: '',
+                    error: false,
+                    required: false,
+                    multiline: true,
+                  },
+                  desc_per_hr: {
+                    sibling_select: 'occupational_select',
+                    name: 'Description Per/Hr',
+                    type: 'text',
+                    value: '',
+                    error: false,
+                    required: false,
+                    multiline: true,
+                  },
+                },
+              },
+              local_1099: {
+                parent_select: 'compensation_for',
+                name: '1099 Local',
+                data: {
+                  occupational_select: {
+                    name: 'Compensation type',
+                    type: 'select',
+                    value: '',
+                    error: false,
+                    required: false,
+                    optionLabel: 'name',
+                    optionValue: 'name',
+                    multiple: true,
+                    arrayData: [
+                      { name: 'Cpm' },
+                      { name: 'Flat rate' },
+                      { name: '% from Gross' },
+                      { name: 'per/hr' },
+                    ],
+                  },
+                  desc_cpm: {
+                    sibling_select: 'occupational_select',
+                    name: 'Description Cpm',
+                    type: 'text',
+                    value: '',
+                    error: false,
+                    required: false,
+                    multiline: true,
+                  },
+                  desc_flat_rate: {
+                    sibling_select: 'occupational_select',
+                    name: 'Description Flat rate',
+                    type: 'text',
+                    value: '',
+                    error: false,
+                    required: false,
+                    multiline: true,
+                  },
+                  desc_from_gros: {
+                    sibling_select: 'occupational_select',
+                    name: 'Description % from Gross',
+                    type: 'text',
+                    value: '',
+                    error: false,
+                    required: false,
+                    multiline: true,
+                  },
+                  desc_per_hr: {
+                    sibling_select: 'occupational_select',
+                    name: 'Description Per/Hr',
+                    type: 'text',
+                    value: '',
+                    error: false,
+                    required: false,
+                    multiline: true,
+                  },
+                },
+              },
+              students: {
+                parent_select: 'compensation_for',
+                name: 'Students',
+                data: {
+                  occupational_select: {
+                    name: 'Compensation type',
+                    type: 'select',
+                    value: '',
+                    error: false,
+                    required: false,
+                    optionLabel: 'name',
+                    optionValue: 'name',
+                    multiple: true,
+                    arrayData: [
+                      { name: 'Cpm' },
+                      { name: 'Flat rate' },
+                      { name: '% from Gross' },
+                      { name: 'per/hr' },
+                    ],
+                  },
+                  desc_flat_rate: {
+                    sibling_select: 'occupational_select',
+                    name: 'Description Flat rate',
+                    type: 'text',
+                    value: '',
+                    error: false,
+                    required: false,
+                    multiline: true,
+                  },
+                  desc_from_gros: {
+                    sibling_select: 'occupational_select',
+                    name: 'Description % from Gross',
+                    type: 'text',
+                    value: '',
+                    error: false,
+                    required: false,
+                    multiline: true,
+                  },
+                  desc_per_hr: {
+                    sibling_select: 'occupational_select',
+                    name: 'Description Per/Hr',
+                    type: 'text',
+                    value: '',
+                    error: false,
+                    required: false,
+                    multiline: true,
                   },
                 },
               },
@@ -604,9 +1732,20 @@ const ApplyScreen = ({ route, navigation }: any) => {
                 value: '',
                 error: false,
                 required: false,
-                data: [
-                  { name: 'text', code: 1 },
-                  { name: 'testt', code: 2 },
+                multiple: true,
+                optionLabel: 'name',
+                optionValue: 'name',
+                arrayData: [
+                  { name: 'W2 Company Driver' },
+                  { name: '1099 Independent Contractor(IC)' },
+                  { name: 'W2 Team' },
+                  { name: '1099 Team IC' },
+                  { name: 'Owner Operator' },
+                  { name: 'Lease' },
+                  { name: 'Lease Purchase' },
+                  { name: 'W2 Local' },
+                  { name: '1099 Local' },
+                  { name: 'Students' },
                 ],
               },
             },
@@ -626,9 +1765,18 @@ const ApplyScreen = ({ route, navigation }: any) => {
                 value: '',
                 error: false,
                 required: true,
-                data: [
-                  { name: 'text', code: 1 },
-                  { name: 'testt', code: 2 },
+                multiple: true,
+                optionLabel: 'name',
+                optionValue: 'name',
+                arrayData: [
+                  { name: 'Dry Van' },
+                  { name: 'Reefer' },
+                  { name: 'Flatbed' },
+                  { name: 'Tanker' },
+                  { name: 'Intermodal' },
+                  { name: 'Auto Hauler' },
+                  { name: 'Step deck' },
+                  { name: 'Other' },
                 ],
               },
               driver_type: {
@@ -637,13 +1785,24 @@ const ApplyScreen = ({ route, navigation }: any) => {
                 value: '',
                 error: false,
                 required: true,
-                data: [
-                  { name: 'text', code: 1 },
-                  { name: 'testt', code: 2 },
+                multiple: true,
+                optionLabel: 'name',
+                optionValue: 'name',
+                arrayData: [
+                  { name: 'W2 Company driver' },
+                  { name: '1099 Independent Contractor (IC)' },
+                  { name: 'W2 Team' },
+                  { name: '1099 Team IC' },
+                  { name: 'Owner Operator' },
+                  { name: 'Lease' },
+                  { name: 'Lease Purchase' },
+                  { name: 'W2 Local' },
+                  { name: '1099 Local' },
+                  { name: 'Students' },
                 ],
               },
               how_many_drivers: {
-                name: 'How many drivers do you need?',
+                name: 'How many drivers do you need currently?',
                 type: 'text',
                 value: '',
                 error: false,
@@ -655,25 +1814,106 @@ const ApplyScreen = ({ route, navigation }: any) => {
                 value: '',
                 error: false,
                 required: true,
-                data: [
-                  { name: 'text', code: 1 },
-                  { name: 'testt', code: 2 },
+                multiple: true,
+                optionLabel: 'name',
+                optionValue: 'name',
+                arrayData: [
+                  { name: 'none' },
+                  { name: '1-5 months' },
+                  { name: '6-11 months' },
+                  { name: '1 year' },
+                  { name: '2 years' },
+                  { name: '3 years' },
+                  { name: '4+ years' },
                 ],
               },
               required_endorsements: {
-                name: 'Required endorsements',
+                name: 'Required Endorsements',
                 type: 'radio',
                 value: '',
                 error: false,
-                required: true,
+                required: false,
                 data: ['Yes', 'No'],
               },
-              hiring_location: {
-                name: 'Hiring Location by',
-                type: 'text',
+              select_required_endorsements: {
+                sibling_radio: 'required_endorsements',
+                sibling_radio_value: 'Yes',
+                name: 'Required Endorsements',
+                type: 'select',
                 value: '',
                 error: false,
                 required: false,
+                multiple: true,
+                optionLabel: 'name',
+                optionValue: 'name',
+                arrayData: [
+                  { name: 'H-Hazmat' },
+                  { name: 'N-Tank Vehicle' },
+                  { name: 'T-Double/triple trailers' },
+                  { name: 'X-Tank+Hazardous' },
+                ],
+              },
+              hiring_location: {
+                name: 'Hiring Location by',
+                type: 'select',
+                value: '',
+                error: false,
+                required: false,
+                multiple: true,
+                optionLabel: 'name',
+                optionValue: 'name',
+                arrayData: [
+                  { name: 'Alabama', abbreviation: 'AL' },
+                  { name: 'Alaska', abbreviation: 'AK' },
+                  { name: 'Arizona', abbreviation: 'AZ' },
+                  { name: 'Arkansas', abbreviation: 'AR' },
+                  { name: 'California', abbreviation: 'CA' },
+                  { name: 'Colorado', abbreviation: 'CO' },
+                  { name: 'Connecticut', abbreviation: 'CT' },
+                  { name: 'Delaware', abbreviation: 'DE' },
+                  { name: 'Florida', abbreviation: 'FL' },
+                  { name: 'Georgia', abbreviation: 'GA' },
+                  { name: 'Hawaii', abbreviation: 'HI' },
+                  { name: 'Idaho', abbreviation: 'ID' },
+                  { name: 'Illinois', abbreviation: 'IL' },
+                  { name: 'Indiana', abbreviation: 'IN' },
+                  { name: 'Iowa', abbreviation: 'IA' },
+                  { name: 'Kansas', abbreviation: 'KS' },
+                  { name: 'Kentucky', abbreviation: 'KY' },
+                  { name: 'Louisiana', abbreviation: 'LA' },
+                  { name: 'Maine', abbreviation: 'ME' },
+                  { name: 'Maryland', abbreviation: 'MD' },
+                  { name: 'Massachusetts', abbreviation: 'MA' },
+                  { name: 'Michigan', abbreviation: 'MI' },
+                  { name: 'Minnesota', abbreviation: 'MN' },
+                  { name: 'Mississippi', abbreviation: 'MS' },
+                  { name: 'Missouri', abbreviation: 'MO' },
+                  { name: 'Montana', abbreviation: 'MT' },
+                  { name: 'Nebraska', abbreviation: 'NE' },
+                  { name: 'Nevada', abbreviation: 'NV' },
+                  { name: 'New Hampshire', abbreviation: 'NH' },
+                  { name: 'New Jersey', abbreviation: 'NJ' },
+                  { name: 'New Mexico', abbreviation: 'NM' },
+                  { name: 'New York', abbreviation: 'NY' },
+                  { name: 'North Carolina', abbreviation: 'NC' },
+                  { name: 'North Dakota', abbreviation: 'ND' },
+                  { name: 'Ohio', abbreviation: 'OH' },
+                  { name: 'Oklahoma', abbreviation: 'OK' },
+                  { name: 'Oregon', abbreviation: 'OR' },
+                  { name: 'Pennsylvania', abbreviation: 'PA' },
+                  { name: 'Rhode Island', abbreviation: 'RI' },
+                  { name: 'South Carolina', abbreviation: 'SC' },
+                  { name: 'South Dakota', abbreviation: 'SD' },
+                  { name: 'Tennessee', abbreviation: 'TN' },
+                  { name: 'Texas', abbreviation: 'TX' },
+                  { name: 'Utah', abbreviation: 'UT' },
+                  { name: 'Vermont', abbreviation: 'VT' },
+                  { name: 'Virginia', abbreviation: 'VA' },
+                  { name: 'Washington', abbreviation: 'WA' },
+                  { name: 'West Virginia', abbreviation: 'WV' },
+                  { name: 'Wisconsin', abbreviation: 'WI' },
+                  { name: 'Wyoming', abbreviation: 'WY' },
+                ],
               },
             },
           },
@@ -689,6 +1929,78 @@ const ApplyScreen = ({ route, navigation }: any) => {
                 required: false,
                 data: ['Yes', 'No'],
               },
+              what_trucks: {
+                sibling_radio: 'equipment_information',
+                sibling_radio_value: 'Yes',
+                name: 'What trucks do you have?',
+                type: 'select',
+                value: '',
+                error: false,
+                required: false,
+                multiple: true,
+                optionLabel: 'name',
+                optionValue: 'name',
+                arrayData: [
+                  { name: 'Freightliner' },
+                  { name: 'Volvo' },
+                  { name: 'Peterbilt' },
+                  { name: 'Kenworth' },
+                  { name: 'Western Star' },
+                  { name: 'International' },
+                  { name: '4+ years' },
+                ],
+              },
+              transmission: {
+                sibling_radio: 'equipment_information',
+                sibling_radio_value: 'Yes',
+                name: 'Transmission',
+                type: 'select',
+                value: '',
+                error: false,
+                required: false,
+                multiple: true,
+                optionLabel: 'name',
+                optionValue: 'name',
+                arrayData: [{ name: 'Automatic' }, { name: 'Manual' }],
+              },
+              do_your_trucks_have: {
+                sibling_radio: 'equipment_information',
+                sibling_radio_value: 'Yes',
+                name: 'Do your trucks have',
+                type: 'select',
+                value: '',
+                error: false,
+                required: false,
+                multiple: true,
+                optionLabel: 'name',
+                optionValue: 'name',
+                arrayData: [
+                  { name: 'Inverter' },
+                  { name: 'APU units' },
+                  { name: 'Fridge' },
+                  { name: 'Microwave' },
+                  { name: 'Driver facing cameras' },
+                  { name: 'Crash mitigation' },
+                ],
+              },
+              max_speed: {
+                sibling_radio: 'equipment_information',
+                sibling_radio_value: 'Yes',
+                name: 'What is max speed of trucks?',
+                type: 'text',
+                value: '',
+                error: false,
+                required: true,
+              },
+              year_of_trucks: {
+                sibling_radio: 'equipment_information',
+                sibling_radio_value: 'Yes',
+                name: 'Year of trucks',
+                type: 'text',
+                value: '',
+                error: false,
+                required: false,
+              },
             },
           },
           benefits: {
@@ -703,6 +2015,40 @@ const ApplyScreen = ({ route, navigation }: any) => {
                 required: false,
                 data: ['Yes', 'No'],
               },
+              describe: {
+                sibling_radio: 'offer_benefits',
+                sibling_radio_value: 'Yes',
+                name: 'Describe',
+                type: 'text',
+                value: '',
+                error: false,
+                required: false,
+                multiline: true,
+              },
+              which_benefits: {
+                sibling_radio: 'offer_benefits',
+                sibling_radio_value: 'Yes',
+                name: 'Which benefits you offer?',
+                type: 'select',
+                value: '',
+                error: false,
+                required: false,
+                multiple: true,
+                optionLabel: 'name',
+                optionValue: 'name',
+                arrayData: [
+                  { name: 'Vision Benefits' },
+                  { name: 'Dental Benefits' },
+                  { name: 'Retirement benefits' },
+                  { name: 'Sign on bonus' },
+                  { name: 'Any safety' },
+                  { name: 'Layover Pay' },
+                  { name: 'Breakdown Pay' },
+                  { name: 'Pay Loading/unloading' },
+                  { name: 'Pay extra pick up' },
+                  { name: 'Health Insurance' },
+                ],
+              },
             },
           },
           offense: {
@@ -716,6 +2062,54 @@ const ApplyScreen = ({ route, navigation }: any) => {
                 error: false,
                 required: false,
                 data: ['Yes', 'No'],
+              },
+              max_number_of_preentable: {
+                sibling_radio: 'drivers_with_tickets',
+                sibling_radio_value: 'Yes',
+                name: 'Max number of preventable accidents in the past 3 years?',
+                type: 'select',
+                value: '',
+                error: false,
+                required: false,
+
+                optionLabel: 'name',
+                optionValue: 'name',
+                arrayData: [
+                  { name: '1' },
+                  { name: '2' },
+                  { name: '3' },
+                  { name: '4' },
+                  { name: '5' },
+                  { name: '6' },
+                  { name: '7' },
+                  { name: '8' },
+                  { name: '9' },
+                  { name: '10' },
+                ],
+              },
+              max_number_of_moving: {
+                sibling_radio: 'drivers_with_tickets',
+                sibling_radio_value: 'Yes',
+                name: 'Max number of moving violations in the past 3 years?',
+                type: 'select',
+                value: '',
+                error: false,
+                required: false,
+
+                optionLabel: 'name',
+                optionValue: 'name',
+                arrayData: [
+                  { name: '1' },
+                  { name: '2' },
+                  { name: '3' },
+                  { name: '4' },
+                  { name: '5' },
+                  { name: '6' },
+                  { name: '7' },
+                  { name: '8' },
+                  { name: '9' },
+                  { name: '10' },
+                ],
               },
               drivers_with_criminal: {
                 name: 'Allow drivers with criminal record?',
@@ -755,6 +2149,15 @@ const ApplyScreen = ({ route, navigation }: any) => {
                 required: false,
                 data: ['Yes', 'No'],
               },
+              pet_policy: {
+                sibling_radio: 'allow_pets',
+                sibling_radio_value: 'Yes',
+                name: 'What is your pet policy?',
+                type: 'text',
+                value: '',
+                error: false,
+                required: false,
+              },
               rider_policy: {
                 name: 'Do you have a Rider Policy?',
                 type: 'radio',
@@ -763,13 +2166,14 @@ const ApplyScreen = ({ route, navigation }: any) => {
                 required: false,
                 data: ['Yes', 'No'],
               },
-              training_available: {
-                name: 'Training available?',
-                type: 'radio',
+              indicate_minimum_age: {
+                sibling_radio: 'rider_policy',
+                sibling_radio_value: 'Yes',
+                name: 'Please, indicate minimum age',
+                type: 'text',
                 value: '',
                 error: false,
-                required: false,
-                data: ['Yes', 'No'],
+                required: true,
               },
             },
           },
@@ -883,6 +2287,15 @@ const ApplyScreen = ({ route, navigation }: any) => {
           dataObject[stepName][fieldName] = {}
           Object.keys(groups[it].data).map((it2: any) => {
             var field = groups[it].data[it2]
+            let groupData = groups[it].data
+            if (field.sibling_radio != undefined) {
+              if (
+                groupData[field.sibling_radio].value !=
+                field.sibling_radio_value
+              ) {
+                return
+              }
+            }
             if (field.type == 'file') {
               if (field.value != '') {
                 var newImageName = createFileName(field.value.name)
@@ -917,11 +2330,47 @@ const ApplyScreen = ({ route, navigation }: any) => {
           if (groups[it].subgroup != null) {
             dataObject[stepName][fieldName]['subgroup'] = {}
             Object.keys(groups[it].subgroup).map((it3: any) => {
+              let group = groups[it]
+              let subgroup = groups[it].subgroup[it3]
+              if (subgroup.parent_select != undefined) {
+                if (
+                  !group.data[subgroup.parent_select].value.includes(
+                    subgroup.name
+                  )
+                ) {
+                  return
+                }
+              }
+              if (subgroup.parent_radio != undefined) {
+                if (
+                  group.data[subgroup.parent_radio].value !=
+                  subgroup.parent_radio_value
+                ) {
+                  return null
+                }
+              }
               var subgroupName = groups[it].subgroup[it3].name
               dataObject[stepName][fieldName]['subgroup'][subgroupName] = {}
               Object.keys(groups[it].subgroup[it3].data).map((it4: any) => {
+                var subgroupData = groups[it].subgroup[it3].data
                 var field = groups[it].subgroup[it3].data[it4]
-
+                if (field.sibling_radio != undefined) {
+                  if (
+                    subgroupData[field.sibling_radio].value !=
+                    field.sibling_radio_value
+                  ) {
+                    return
+                  }
+                }
+                if (field.sibling_select != undefined) {
+                  if (
+                    !subgroupData[field.sibling_select].value.includes(
+                      field.name.replace('Description ', '')
+                    )
+                  ) {
+                    return
+                  }
+                }
                 if (field.type == 'file') {
                   if (field.value != '') {
                     var newImageName = createFileName(field.value.name)
@@ -1095,7 +2544,17 @@ const ApplyScreen = ({ route, navigation }: any) => {
           var validRegex =
             /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)*$/
 
+          let groupData = newStepData[as][checkStep].groups[it].data
           var field = newStepData[as][checkStep].groups[it].data[it2]
+
+          if (field.sibling_radio != undefined) {
+            if (
+              groupData[field.sibling_radio].value != field.sibling_radio_value
+            ) {
+              return
+            }
+          }
+
           if (field.required && field.value == '') {
             field.error = true
             err = 1
@@ -1124,11 +2583,51 @@ const ApplyScreen = ({ route, navigation }: any) => {
       if (newStepData[as][checkStep].groups[it].subgroup != null) {
         Object.keys(newStepData[as][checkStep].groups[it].subgroup).map(
           (it3: any) => {
+            let group = newStepData[as][checkStep].groups[it]
+            let subgroup = newStepData[as][checkStep].groups[it].subgroup[it3]
+            if (subgroup.parent_select != undefined) {
+              if (
+                !group.data[subgroup.parent_select].value.includes(
+                  subgroup.name
+                )
+              ) {
+                return
+              }
+            }
+            if (subgroup.parent_radio != undefined) {
+              if (
+                group.data[subgroup.parent_radio].value !=
+                subgroup.parent_radio_value
+              ) {
+                return null
+              }
+            }
             Object.keys(
               newStepData[as][checkStep].groups[it].subgroup[it3].data
             ).map((it4: any) => {
               var field =
                 newStepData[as][checkStep].groups[it].subgroup[it3].data[it4]
+
+              var subgroupData =
+                newStepData[as][checkStep].groups[it].subgroup[it3].data
+              if (field.sibling_radio != undefined) {
+                if (
+                  subgroupData[field.sibling_radio].value !=
+                  field.sibling_radio_value
+                ) {
+                  return null
+                }
+              }
+              if (field.sibling_select != undefined) {
+                if (
+                  !subgroupData[field.sibling_select].value.includes(
+                    field.name.replace('Description ', '')
+                  )
+                ) {
+                  return
+                }
+              }
+
               if (field.required && field.value == '') {
                 field.error = true
                 err = 1
@@ -1185,6 +2684,7 @@ const ApplyScreen = ({ route, navigation }: any) => {
                 (it: any, index: number) => {
                   var group: any =
                     stepData[as as string]['step' + step].groups[it]
+
                   return (
                     <BorderInput key={index} text={group.name}>
                       <View
@@ -1194,6 +2694,14 @@ const ApplyScreen = ({ route, navigation }: any) => {
                         }}
                       >
                         {Object.keys(group.data).map((it2: any, index: any) => {
+                          if (group.data[it2].sibling_radio != undefined) {
+                            if (
+                              group.data[group.data[it2].sibling_radio].value !=
+                              group.data[it2].sibling_radio_value
+                            ) {
+                              return null
+                            }
+                          }
                           var response
                           if (
                             group.data[it2].type == 'text' ||
@@ -1241,7 +2749,10 @@ const ApplyScreen = ({ route, navigation }: any) => {
                                   required={group.data[it2].required}
                                   fullWidth={group.data[it2].name == 'State'}
                                   label={group.data[it2].name}
-                                  data={group.data[it2].data}
+                                  data={group.data[it2].arrayData}
+                                  optionValue={group.data[it2].optionValue}
+                                  optionLabel={group.data[it2].optionLabel}
+                                  multiple={group.data[it2].multiple}
                                   setVal={(val: any) => {
                                     updateState(val, it, it2)
                                   }}
@@ -1284,6 +2795,26 @@ const ApplyScreen = ({ route, navigation }: any) => {
                         ? Object.keys(group.subgroup).map(
                             (it2: any, index: number) => {
                               var subgroup = group.subgroup[it2]
+
+                              if (subgroup.parent_select != undefined) {
+                                if (
+                                  !group.data[
+                                    subgroup.parent_select
+                                  ].value.includes(subgroup.name)
+                                ) {
+                                  return null
+                                }
+                              }
+
+                              if (subgroup.parent_radio != undefined) {
+                                if (
+                                  group.data[subgroup.parent_radio].value !=
+                                  subgroup.parent_radio_value
+                                ) {
+                                  return null
+                                }
+                              }
+
                               return (
                                 <BorderInput key={index} text={subgroup.name}>
                                   <View
@@ -1294,6 +2825,37 @@ const ApplyScreen = ({ route, navigation }: any) => {
                                   >
                                     {Object.keys(subgroup.data).map(
                                       (it3: any, index: number) => {
+                                        if (
+                                          subgroup.data[it3].sibling_radio !=
+                                          undefined
+                                        ) {
+                                          if (
+                                            subgroup.data[
+                                              subgroup.data[it3].sibling_radio
+                                            ].value !=
+                                            subgroup.data[it3]
+                                              .sibling_radio_value
+                                          ) {
+                                            return null
+                                          }
+                                        }
+                                        if (
+                                          subgroup.data[it3].sibling_select !=
+                                          undefined
+                                        ) {
+                                          if (
+                                            !subgroup.data[
+                                              subgroup.data[it3].sibling_select
+                                            ].value.includes(
+                                              subgroup.data[it3].name.replace(
+                                                'Description ',
+                                                ''
+                                              )
+                                            )
+                                          ) {
+                                            return null
+                                          }
+                                        }
                                         if (
                                           subgroup.data[it3].type == 'text' ||
                                           subgroup.data[it3].type == 'email' ||
@@ -1374,7 +2936,18 @@ const ApplyScreen = ({ route, navigation }: any) => {
                                                   )
                                                 }}
                                                 label={subgroup.data[it3].name}
-                                                data={subgroup.data[it3].data}
+                                                data={
+                                                  subgroup.data[it3].arrayData
+                                                }
+                                                optionLabel={
+                                                  subgroup.data[it3].optionLabel
+                                                }
+                                                multiple={
+                                                  subgroup.data[it3].multiple
+                                                }
+                                                optionValue={
+                                                  subgroup.data[it3].optionValue
+                                                }
                                               />
                                             </Fragment>
                                           )
@@ -1451,6 +3024,7 @@ const ApplyScreen = ({ route, navigation }: any) => {
                       return
                     }
                     setStep((old) => old - 1)
+                    scrollToTop(scrollRef)
                   }}
                 >
                   <Text variant="buttonBig">BACK</Text>
