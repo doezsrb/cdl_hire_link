@@ -17,7 +17,11 @@ const HeaderImage = ({ url, children }: HeaderImageProps) => {
     imageContainer: {
       position: 'relative',
       backgroundColor: 'black',
-
+      shadowOffset: { width: 0, height: 10 },
+      shadowColor: Platform.OS == 'web' ? 'secondary' : 'black',
+      shadowRadius: 14,
+      shadowOpacity: 0.8,
+      elevation: 9,
       width: '100%',
       height: Dimensions.get('window').height / 2,
       zIndex: 1,

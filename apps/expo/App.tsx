@@ -5,7 +5,7 @@ import { MobileLoadingProvider } from './context/mobileLoadingContext'
 import { useEffect, useState } from 'react'
 import * as SplashScreen from 'expo-splash-screen'
 import * as Notifications from 'expo-notifications'
-
+import { PermissionsAndroid, Platform } from 'react-native'
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
     shouldShowAlert: true,
@@ -32,6 +32,15 @@ export default function App() {
       .then(() => console.log('Subscribed to topic!'))
   }
   useEffect(() => {
+    var version = parseInt(Platform.Version.toString())
+    if (!Number.isNaN(version)) {
+      if (version >= 33) {
+        if (PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS != undefined)
+          PermissionsAndroid.request(
+            PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS
+          )
+      }
+    }
     requestUserPermission()
     subscribeToTopic()
   }, [])

@@ -157,9 +157,9 @@ const getData = (
         resolve(responseObj)
       })
       .catch((e: any) => {
-        console.log('ERRRRRR')
-        console.log(e)
-        resolve(null)
+        /* console.log('ERRRRRR')
+        console.log(e) */
+        resolve([])
       })
   })
 }

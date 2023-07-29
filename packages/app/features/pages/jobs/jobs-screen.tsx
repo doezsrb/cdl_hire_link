@@ -98,6 +98,7 @@ const AvailableJobsScreen = ({ route, navigation }: any) => {
       })
       .catch((e: any) => {
         console.log(e)
+        setData([])
       })
       .finally(() => {
         setLoading(false)
@@ -110,6 +111,7 @@ const AvailableJobsScreen = ({ route, navigation }: any) => {
       setFirstTime(false)
       return
     }
+    setLoading(true)
     const getData = setTimeout(() => {
       fetchData(
         null,

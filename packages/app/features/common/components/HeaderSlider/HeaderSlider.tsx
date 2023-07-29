@@ -1,6 +1,6 @@
 import { Text, View, useDripsyTheme, useSx } from 'dripsy'
 import FrontSlider from '../FrontSlider/FrontSlider'
-import { Dimensions, PixelRatio, StyleSheet } from 'react-native'
+import { Dimensions, PixelRatio, Platform, StyleSheet } from 'react-native'
 
 interface HeaderSliderProps {
   homepage?: boolean
@@ -13,6 +13,11 @@ const HeaderSlider = ({ homepage = false, children }: HeaderSliderProps) => {
     sliderContainer: {
       position: 'relative',
       backgroundColor: 'black',
+      shadowOffset: { width: 0, height: 10 },
+      shadowColor: Platform.OS == 'web' ? 'secondary' : 'black',
+      shadowRadius: 14,
+      shadowOpacity: 0.8,
+      elevation: 9,
       zIndex: 1,
     },
     sliderTextBox: {
@@ -48,7 +53,13 @@ const HeaderSlider = ({ homepage = false, children }: HeaderSliderProps) => {
     },
   })
   return (
-    <View sx={{ position: 'relative' }}>
+    <View
+      sx={{
+        position: 'relative',
+
+        paddingBottom: homepage ? 0 : 20,
+      }}
+    >
       <View sx={style.sliderContainer}>
         <FrontSlider homepage={homepage} />
       </View>

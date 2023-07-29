@@ -41,6 +41,8 @@
     "android": {
       "googleServicesFile": "./google-services.json",
       "package": "com.cdlhire.link",
+      "useNextNotificationsApi": true,
+      "permissions": ["RECEIVE_BOOT_COMPLETED"],
       "adaptiveIcon": {
         "foregroundImage": "./images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
