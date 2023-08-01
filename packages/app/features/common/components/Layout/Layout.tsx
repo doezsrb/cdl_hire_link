@@ -65,14 +65,14 @@ const Layout = ({
       bottom: 0,
       height: [
         Dimensions.get('window').height - Dimensions.get('window').height / 10,
-        '100vh',
+        Platform.OS == 'web' ? '100vh' : Dimensions.get('window').height,
       ] as any,
       paddingBottom: 50,
       justifyContent: 'flex-end',
     },
     sliderTextBox: {
-      paddingLeft: [50, '20vw'] as any,
-      paddingRight: [50, '20vw'] as any,
+      paddingLeft: [50, Platform.OS == 'web' ? '20vw' : 50] as any,
+      paddingRight: [50, Platform.OS == 'web' ? '20vw' : 50] as any,
     },
     sliderButtonContainer: {
       width: '100%',

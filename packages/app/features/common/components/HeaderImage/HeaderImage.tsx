@@ -27,8 +27,8 @@ const HeaderImage = ({ url, children }: HeaderImageProps) => {
       zIndex: 1,
     },
     sliderTextBox: {
-      paddingLeft: [50, '20vw'] as any,
-      paddingRight: [50, '20vw'] as any,
+      paddingLeft: [50, Platform.OS == 'web' ? '20vw' : 50] as any,
+      paddingRight: [50, Platform.OS == 'web' ? '20vw' : 50] as any,
     },
     sliderTextContainer: {
       zIndex: 2,

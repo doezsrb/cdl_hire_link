@@ -7,8 +7,8 @@
     "platforms": ["ios", "android"],
     "icon": "./images/appicon.png",
     "notifications": {
-      "icon": "./images/iconnotification.png",
-      "color": "#005199",
+      "icon": "./images/notificationicon.png",
+      "color": "#ffffff",
       "iosDisplayInForeground": true,
       "androidMode": "default"
     },
@@ -16,8 +16,8 @@
       [
         "expo-notifications",
         {
-          "icon": "./images/iconnotification.png",
-          "color": "#005199"
+          "icon": "./images/notificationicon.png",
+          "color": "#ffffff"
         }
       ]
     ],
@@ -27,6 +27,10 @@
       "backgroundColor": "#005199"
     },
     "ios": {
+      "googleServicesFile": "./GoogleService-Info.plist",
+      "infoPlist": {
+        "UIBackgroundModes": ["fetch", "remote-notification"]
+      },
       "bundleIdentifier": "com.cdlhire.link",
       "supportsTablet": true
     },

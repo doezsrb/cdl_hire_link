@@ -31,6 +31,7 @@ export default function App() {
       .subscribeToTopic('jobs')
       .then(() => console.log('Subscribed to topic!'))
   }
+  //"^3.17.1",
   useEffect(() => {
     var version = parseInt(Platform.Version.toString())
     if (!Number.isNaN(version)) {

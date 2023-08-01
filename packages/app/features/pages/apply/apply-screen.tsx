@@ -2240,7 +2240,7 @@ const ApplyScreen = ({ route, navigation }: any) => {
       bottom: 0,
       height: [
         Dimensions.get('window').height - Dimensions.get('window').height / 10,
-        '100vh',
+        Platform.OS == 'web' ? '100vh' : Dimensions.get('window').height,
       ] as any,
       paddingBottom: 50,
       justifyContent: 'flex-end',

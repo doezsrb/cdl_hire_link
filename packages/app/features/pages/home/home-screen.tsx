@@ -17,22 +17,13 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from 'react-native'
-import database, { dbRef, onValue } from '../../common/functions/db'
+
 import { useEffect, useContext } from 'react'
-import * as ImagePicker from 'expo-image-picker'
-import * as FileSystem from 'expo-file-system'
-import storage, {
-  storageRef,
-  uploadBytes,
-} from '../../common/functions/storage'
+
 import { Dimensions } from 'react-native'
-import ApplyStepInd from 'app/features/common/components/ApplyStepInd/ApplyStepInd'
+
 import ApplyCard from 'app/features/common/components/ApplyCard/ApplyCard'
 import WhyChooseCard from 'app/features/common/components/WhyChooseCard/WhyChooseCard'
-import dynamic from 'next/dynamic'
-import FrontSlider from 'app/features/common/components/FrontSlider/FrontSlider'
-import HeaderSlider from 'app/features/common/components/HeaderSlider/HeaderSlider'
-import { useRouter } from 'solito/router'
 
 import routerListener from 'app/features/common/functions/routerListener'
 import MobileLoadingContext from '../../../../../apps/expo/context/mobileLoadingContext'
@@ -82,14 +73,14 @@ export function HomeScreen({ navigation }: any) {
       bottom: 0,
       height: [
         Dimensions.get('window').height - Dimensions.get('window').height / 10,
-        '100vh',
+        Platform.OS == 'web' ? '100vh' : Dimensions.get('window').width,
       ] as any,
       paddingBottom: 50,
       justifyContent: 'flex-end',
     },
     sliderTextBox: {
-      paddingLeft: [50, '20vw'] as any,
-      paddingRight: [50, '20vw'] as any,
+      paddingLeft: [50, Platform.OS == 'web' ? '20vw' : 50] as any,
+      paddingRight: [50, Platform.OS == 'web' ? '20vw' : 50] as any,
     },
 
     sliderButtonContainer: {
