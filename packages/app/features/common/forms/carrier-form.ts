@@ -314,8 +314,9 @@ const CARRIER_FORM = {
         name: 'Support Info',
         subgroup: {
           files: {
+            add: true,
             name: 'Files',
-            data: {
+            pattern: {
               upload_cv: {
                 name: 'Upload resume',
                 type: 'file',
@@ -323,6 +324,19 @@ const CARRIER_FORM = {
                 error: false,
                 required: false,
               },
+            },
+            data: {
+              array: [
+                {
+                  upload_cv: {
+                    name: 'Upload resume',
+                    type: 'file',
+                    value: '',
+                    error: false,
+                    required: false,
+                  },
+                },
+              ],
             },
           },
         },
