@@ -5,18 +5,32 @@ import InstaIcon from '../Icons/InstaIcon'
 import Logo from '../Logo/logo'
 import { SolitoImage } from 'solito/image'
 import UpArrowIcon from '../Icons/UpArrowIcon'
+import { useRouter } from 'solito/router'
+import routes from '../../routes'
 
-const Footer = ({ scrollToTop }: { scrollToTop: Function }) => {
+const Footer = ({
+  scrollToTop,
+  navigation,
+}: {
+  scrollToTop: Function
+  navigation: any
+}) => {
   const sx = useSx()
+  const router = useRouter()
   return (
     <Box
       sx={{
         shadowOffset: { width: 0, height: -5 },
-        shadowColor: Platform.OS == 'web' ? 'secondary' : 'black',
+        shadowColor:
+          Platform.OS == 'web'
+            ? 'secondary'
+            : Platform.OS == 'ios'
+            ? 'secondary'
+            : 'black',
         shadowRadius: 15,
         shadowOpacity: 0.8,
 
-        elevation: 15,
+        elevation: 20,
         flexDirection: 'column',
         backgroundColor: 'white',
         display: 'flex',
@@ -73,7 +87,34 @@ const Footer = ({ scrollToTop }: { scrollToTop: Function }) => {
             >
               NAVIGATION
             </Text>
-            <TouchableOpacity>
+            {routes.map((it: any, index: any) => {
+              if (it.hidden) return null
+              return (
+                <TouchableOpacity
+                  key={index}
+                  onPress={() => {
+                    console.log('CLICK')
+                    if (Platform.OS == 'web') {
+                      router.push(it.webLink)
+                    } else {
+                      navigation.navigate(it.mobileName)
+                    }
+                  }}
+                >
+                  <Text sx={{ color: 'primary' }}>
+                    {it.title.toUpperCase()}
+                  </Text>
+                </TouchableOpacity>
+              )
+            })}
+            {/*    <TouchableOpacity
+
+              onPress={() => {
+                if (Platform.OS == 'web') {
+                } else {
+                }
+              }}
+            >
               <Text sx={{ color: 'primary' }}>AVAILABLE JOBS</Text>
             </TouchableOpacity>
             <TouchableOpacity>
@@ -93,7 +134,7 @@ const Footer = ({ scrollToTop }: { scrollToTop: Function }) => {
             </TouchableOpacity>
             <TouchableOpacity>
               <Text sx={{ color: 'primary' }}>CONTACT US</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
           </Box>
           <Box sx={{ gap: 10 }}>
             <Text

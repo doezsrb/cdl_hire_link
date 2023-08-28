@@ -13,7 +13,7 @@ const ImageLoader = () => {
         justifyContent: 'center',
       }}
     >
-      <ActivityIndicator color="primary" />
+      <ActivityIndicator color="secondary" />
     </View>
   )
 }

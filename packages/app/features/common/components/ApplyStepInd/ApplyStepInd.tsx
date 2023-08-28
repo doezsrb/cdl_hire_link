@@ -23,13 +23,13 @@ const ApplyStepInd = ({ step }: ApplyStepIndProps) => {
     },
     line: {
       flex: 1,
-      height: step == 1 ? ([10, 0] as any) : 10,
+      height: step == 1 ? ([10, 10, 0] as any) : 10,
 
       backgroundColor: 'white',
     },
     line2: {
       flex: 1,
-      height: step == 3 ? ([10, 0] as any) : 10,
+      height: step == 3 ? ([10, 10, 0] as any) : 10,
 
       backgroundColor: 'white',
     },

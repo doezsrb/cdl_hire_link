@@ -15,28 +15,32 @@ const WhyChooseCard = ({
     container: {
       width: '100%',
       marginTop: 20,
-      flexDirection: ['column', reverse ? 'row-reverse' : 'row'] as any,
+      flexDirection: [
+        'column',
+        'column',
+        reverse ? 'row-reverse' : 'row',
+      ] as any,
     },
     image: {
-      width: ['100%', '50%'] as any,
+      width: ['100%', '100%', '50%'] as any,
       height: 200,
     },
     containerText: {
-      width: ['100%', '50%'] as any,
+      width: ['100%', '100%', '50%'] as any,
       justifyContent: 'center',
       alignItems: 'center',
     },
     title: {
       marginTop: 5,
       fontSize: 30,
-      width: '60%',
+      width: ['100%', '100%', '60%', '60%'] as any,
 
       color: 'primary',
       textAlign: 'left',
       fontWeight: 'bold',
     },
     text: {
-      width: [null, '60%'] as any,
+      width: [null, null, '60%'] as any,
       fontSize: 18,
       color: 'primary',
       textAlign: 'left',

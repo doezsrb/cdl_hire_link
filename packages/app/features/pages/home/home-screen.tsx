@@ -91,8 +91,9 @@ export function HomeScreen({ navigation }: any) {
     },
   })
   useEffect(() => {
+    console.log(Dimensions.get('screen').height)
     routerListener(navigation, mobileLoadingContext)
-  }, [navigation])
+  }, [])
   useEffect(() => {
     /*   if (ref != null || onValue != null) {
       var userDataRef = ref(database, 'users/1')
@@ -148,7 +149,7 @@ export function HomeScreen({ navigation }: any) {
         <Text variant="title" sx={{ color: 'white' }}>
           HOW TO APPLY?
         </Text>
-        <View sx={{ flex: 1, flexDirection: ['column', 'row'] }}>
+        <View sx={{ flex: 1, flexDirection: ['column', 'column', 'row'] }}>
           <ApplyCard
             step={1}
             text={`Lorem ipsum blablablablalba lbalb aw egaewkgpaowekgapoewkgaopewgja aewgkape.`}

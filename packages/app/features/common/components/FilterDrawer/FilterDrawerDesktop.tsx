@@ -35,7 +35,7 @@ const FilterDrawerDesktop = ({
         '& .MuiDrawer-paper': {
           boxSizing: 'border-box',
           width: 300,
-          backgroundColor: 'white',
+          backgroundColor: theme.colors.primary,
         },
       }}
     >
@@ -44,7 +44,7 @@ const FilterDrawerDesktop = ({
           sx={{
             fontSize: 30,
             textAlign: 'center',
-            color: 'primary',
+            color: 'white',
             mt: '$2',
           }}
         >

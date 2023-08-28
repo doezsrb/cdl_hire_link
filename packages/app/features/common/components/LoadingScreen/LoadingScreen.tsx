@@ -15,7 +15,7 @@ const LoadingScreen = () => {
         zIndex: 2,
       }}
     >
-      <ActivityIndicator color="white" size="large" />
+      <ActivityIndicator color="secondary" size="large" />
     </View>
   )
 }

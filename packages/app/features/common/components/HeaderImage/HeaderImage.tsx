@@ -18,7 +18,12 @@ const HeaderImage = ({ url, children }: HeaderImageProps) => {
       position: 'relative',
       backgroundColor: 'black',
       shadowOffset: { width: 0, height: 10 },
-      shadowColor: Platform.OS == 'web' ? 'secondary' : 'black',
+      shadowColor:
+        Platform.OS == 'web'
+          ? 'secondary'
+          : Platform.OS == 'ios'
+          ? 'secondary'
+          : 'black',
       shadowRadius: 14,
       shadowOpacity: 0.8,
       elevation: 9,

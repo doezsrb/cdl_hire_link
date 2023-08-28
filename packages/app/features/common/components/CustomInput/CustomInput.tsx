@@ -46,7 +46,7 @@ const CustomInput = ({
       paddingRight: 2,
       paddingBottom: 10,
 
-      ...(Platform.OS != 'web' && { width: '100%' }),
+      ...(Platform.OS != 'web' && { width: ['100%', '50%'] as any }),
     },
     textLabel: { fontWeight: 'bold', color: 'primary' },
     textInput: {

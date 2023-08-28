@@ -27,11 +27,11 @@ const FilterItem = ({
             height: 20,
             borderRadius: 20,
             borderWidth: 1,
-            borderColor: 'primary',
-            backgroundColor: checked ? 'primary' : 'white',
+            borderColor: 'secondary',
+            backgroundColor: checked ? 'secondary' : 'white',
           }}
         />
-        <Text sx={{ fontSize: 20, color: 'primary' }}>{text}</Text>
+        <Text sx={{ fontSize: 20, color: 'white' }}>{text}</Text>
       </View>
     </TouchableOpacity>
   )

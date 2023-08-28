@@ -50,6 +50,7 @@ export function JobScreen({ navigation }: any) {
     <>
       {jobData == null ? null : (
         <Layout
+          navigation={navigation}
           title={jobData.data.name}
           jobTypes={jobData.data.type}
           division={jobData.data.division}

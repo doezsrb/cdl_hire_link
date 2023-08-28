@@ -18,7 +18,7 @@ const FrontSlider = ({ homepage = false }: FrontSliderProps) => {
           height: homepage
             ? Platform.OS == 'web'
               ? Dimensions.get('screen').height
-              : Dimensions.get('screen').height - StatusBar.currentHeight! - 80
+              : Dimensions.get('screen').height - StatusBar.currentHeight! - 70
             : Dimensions.get('window').height / 3,
         }}
       >

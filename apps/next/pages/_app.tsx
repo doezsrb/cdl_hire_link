@@ -8,6 +8,7 @@ import type { SolitoAppProps } from 'solito'
 import DesktopHeader from '../components/DesktopHeader/DesktopHeader'
 import { LoadingProvider } from '../context/loadingContext'
 import { useRouter } from 'next/router'
+import { View } from 'react-native'
 
 function MyApp({ Component, pageProps }: SolitoAppProps) {
   const [loading, setLoading] = useState(false)
@@ -45,6 +46,7 @@ function MyApp({ Component, pageProps }: SolitoAppProps) {
       <LoadingProvider value={{ loading: loading, setLoading: setLoading }}>
         <Provider>
           <DesktopHeader />
+          <View style={{ height: 80 }} />
           <Component {...pageProps} />
         </Provider>
       </LoadingProvider>

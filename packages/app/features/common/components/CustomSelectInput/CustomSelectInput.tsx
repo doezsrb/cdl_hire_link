@@ -53,7 +53,8 @@ const CustomSelectInput = ({
         isMultiple={multiple}
         dropdownIcon={Platform.OS == 'web' && <AiOutlineDown />}
         labelStyle={{
-          marginBottom: 5,
+          marginBottom: 8,
+
           color: theme.colors.primary,
           fontWeight: 'bold',
           fontSize: 13,
@@ -61,7 +62,7 @@ const CustomSelectInput = ({
         dropdownIconStyle={{
           display: 'flex',
           justifyContent: 'center',
-          height: Platform.OS == 'web' ? '100%' : 50,
+          height: Platform.OS == 'web' ? '100%' : 42,
           top: 0,
         }}
         modalBackgroundStyle={{
@@ -71,17 +72,26 @@ const CustomSelectInput = ({
         modalOptionsContainerStyle={{
           width: 'auto',
           paddingBottom: 20,
+
           borderBottomEndRadius: 15,
           borderBottomStartRadius: 15,
         }}
+        multipleSelectedItemStyle={{
+          backgroundColor: theme.colors.primary,
+          paddingHorizontal: 10,
+          paddingVertical: 2,
+        }}
         dropdownStyle={{
-          padding: 12,
-          paddingLeft: 20,
-
+          paddingTop: 0,
+          paddingBottom: 0,
+          margin: 0,
+          height: 42,
           minHeight: 0,
           borderColor: error ? 'red' : theme.colors.primary,
-          borderRadius: 30,
+
+          borderRadius: 70,
         }}
+        dropdownHelperTextStyle={{ backgroundColor: 'red' }}
         optionLabel={optionLabel}
         optionValue={optionValue}
         selectedValue={value}

@@ -10,6 +10,7 @@ import Logo from 'app/features/common/components/Logo/logo'
 import { Dimensions, StyleSheet } from 'react-native'
 import { useRouter } from 'next/router'
 import { useDripsyTheme } from 'dripsy'
+import routes, { UniversalRoute } from 'app/features/common/routes'
 interface DesktopDrawerProps {
   openDrawer: boolean
   setOpenDrawer: Function
@@ -63,7 +64,30 @@ const DesktopDrawer = ({ openDrawer, setOpenDrawer }: DesktopDrawerProps) => {
         </View>
         <View sx={style.divider} />
         <List>
-          <ListItem disablePadding>
+          {routes.map((it: UniversalRoute, index: any) => {
+            if (it.hidden) return null
+            return (
+              <ListItem disablePadding key={index}>
+                <ListItemButton
+                  onClick={() => {
+                    router.push(it.webLink)
+                    setOpenDrawer(false)
+                  }}
+                >
+                  <ListItemText
+                    sx={{
+                      color:
+                        router.route == it.webLink
+                          ? theme.colors.secondary
+                          : 'white',
+                    }}
+                    primary={it.title.toUpperCase()}
+                  />
+                </ListItemButton>
+              </ListItem>
+            )
+          })}
+          {/* <ListItem disablePadding>
             <ListItemButton
               onClick={() => {
                 router.push('/')
@@ -146,7 +170,7 @@ const DesktopDrawer = ({ openDrawer, setOpenDrawer }: DesktopDrawerProps) => {
                 primary="APPLY AS A CARRIER"
               />
             </ListItemButton>
-          </ListItem>
+          </ListItem> */}
         </List>
         <View sx={style.divider} />
         <View sx={style.numbersDrawer}>

@@ -1,4 +1,4 @@
-import { Text, View } from 'dripsy'
+import { Text, View, useDripsyTheme } from 'dripsy'
 import { useEffect, useState } from 'react'
 import { ScrollView } from 'react-native'
 import { Dimensions, TouchableOpacity } from 'react-native'
@@ -26,7 +26,7 @@ const FilterDrawerMobile = ({
   children,
 }: FilterDrawerMobileProps) => {
   const [selectedId, setSelectedId] = useState<string>()
-
+  const { theme } = useDripsyTheme()
   return (
     <Drawer
       open={open}
@@ -34,10 +34,10 @@ const FilterDrawerMobile = ({
       onClose={() => setOpen(false)}
       renderDrawerContent={() => {
         return (
-          <ScrollView>
+          <ScrollView style={{ backgroundColor: theme.colors.primary }}>
             <View
               sx={{
-                backgroundColor: 'white',
+                backgroundColor: 'primary',
                 height: '100%',
                 paddingBottom: '$4',
               }}
@@ -46,7 +46,7 @@ const FilterDrawerMobile = ({
                 sx={{
                   fontSize: 30,
                   textAlign: 'center',
-                  color: 'primary',
+                  color: 'white',
                   mt: '$2',
                 }}
               >

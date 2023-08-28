@@ -23,12 +23,14 @@ import FilterDrawerDesktop from 'app/features/common/components/FilterDrawer/Fil
 import RadioGroup from 'react-native-radio-buttons-group'
 import JobCard from 'app/features/common/components/JobCard/JobCard'
 import Layout from 'app/features/common/components/Layout/Layout'
-
+import NetInfo from '@react-native-community/netinfo'
 import BouncyCheckbox from 'react-native-bouncy-checkbox'
 import useRouter from 'app/features/common/functions/nextrouter'
 import { getCountData, getData } from 'app/features/common/functions/firestore'
 import LoadingScreen from 'app/features/common/components/LoadingScreen/LoadingScreen'
 import SearchInput from 'app/features/common/components/SearchInput/SearchInput'
+import OfflineIcon from 'app/features/common/components/OfflineIcon/OfflineIcon'
+import CenteredBox from 'app/features/common/components/CenteredBox/CenteredBox'
 const AvailableJobsScreen = ({ route, navigation }: any) => {
   const mobileLoadingContext = useContext(MobileLoadingContext)
   const router = useRouter()
@@ -43,6 +45,7 @@ const AvailableJobsScreen = ({ route, navigation }: any) => {
   const [selectedDivision, setSelectedDivision] = useState([])
   const [selectedSoloTeam, setSelectedSoloTeam] = useState([])
   const [selectedExperience, setSelectedExperience] = useState([])
+  const [online, setOnline] = useState(true)
   const fetchData = (
     lastDoc: any,
     callback?: Function,
@@ -128,10 +131,18 @@ const AvailableJobsScreen = ({ route, navigation }: any) => {
       clearTimeout(getData)
     }
   }, [search])
+
   useEffect(() => {
+    //!TODO: UNCOMMENT
+    /* const unsubscribe = NetInfo.addEventListener((state) => {
+      setOnline(state.isConnected == null ? true : state.isConnected)
+    }) */
     routerListener(navigation, mobileLoadingContext)
+    return () => {
+      /* unsubscribe() */
+    }
   }, [])
-  useEffect(() => {
+  const setFiltersAndFetch = () => {
     var universalRouter: any
     var types: any = []
     var solo_team: any = []
@@ -178,6 +189,9 @@ const AvailableJobsScreen = ({ route, navigation }: any) => {
       true,
       search
     )
+  }
+  useEffect(() => {
+    setFiltersAndFetch()
   }, [router, route])
   const style = StyleSheet.create({
     title: {
@@ -211,68 +225,77 @@ const AvailableJobsScreen = ({ route, navigation }: any) => {
       paddingRight: 20,
       paddingTop: Platform.OS == 'web' ? 5 : 8,
       paddingBottom: 8,
+      backgroundColor: 'primary',
+      overflow: 'hidden',
       textAlign: 'center',
       borderRadius: 10,
       borderColor: 'primary',
       borderWidth: 1,
       color: 'secondary',
-      backgroundColor: 'primary',
     },
   })
 
   const Content = () => {
     return (
-      <View sx={style.container}>
-        <View sx={style.topButtons}>
-          <TouchableOpacity onPress={() => setOpenFilter(true)}>
-            <Text sx={style.button}>FILTERS</Text>
-          </TouchableOpacity>
-          <SearchInput search={search} setSearch={setSearch} />
-        </View>
-        {loading ? (
-          <Box
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              width: '100%',
-              height: Dimensions.get('window').height / 1.5,
-
-              zIndex: 3,
-            }}
-          >
-            <ActivityIndicator color="primary" size="large" />
-          </Box>
+      <>
+        {!online ? (
+          <CenteredBox>
+            <OfflineIcon />
+          </CenteredBox>
         ) : (
-          <>
-            <View
-              sx={{
-                mt: '$3',
-                display: 'flex',
-                flexDirection: ['column', 'row'],
-                rowGap: 15,
-                columnGap: [null, '1.2%'],
-                flexWrap: 'wrap',
-                width: '100%',
-                paddingHorizontal: '$3',
-              }}
-            >
-              {data.map((it: any) => {
-                return (
-                  <JobCard
-                    types={it.data.type}
-                    tags={it.data.tags}
-                    id={it.id}
-                    imageName={it.data.imageName}
-                    name={it.data.name}
-                    key={it.id}
-                  />
-                )
-              })}
+          <View sx={style.container}>
+            <View sx={style.topButtons}>
+              <TouchableOpacity onPress={() => setOpenFilter(true)}>
+                <Text sx={style.button}>FILTERS</Text>
+              </TouchableOpacity>
+              <SearchInput search={search} setSearch={setSearch} />
             </View>
-          </>
+            {loading ? (
+              <CenteredBox>
+                <ActivityIndicator color="secondary" size="large" />
+              </CenteredBox>
+            ) : data.length == 0 ? (
+              <CenteredBox>
+                <Text variant="title" sx={{ color: 'secondary' }}>
+                  NO JOBS FOUND
+                </Text>
+              </CenteredBox>
+            ) : (
+              <View sx={{ width: '100%' }}>
+                <View
+                  sx={{
+                    mt: '$3',
+                    display: 'flex',
+                    flexDirection: ['column', 'row'],
+                    rowGap: 15,
+                    columnGap: [
+                      null,
+
+                      (1.2 / 100) * Dimensions.get('window').width,
+                    ],
+                    flexWrap: 'wrap',
+                    width: '100%',
+                    paddingHorizontal: '$3',
+                  }}
+                >
+                  {data.map((it: any) => {
+                    return (
+                      <JobCard
+                        types={it.data.type}
+                        tags={it.data.tags}
+                        id={it.id}
+                        imageName={it.data.imageName}
+                        name={it.data.name}
+                        key={it.id}
+                      />
+                    )
+                  })}
+                </View>
+              </View>
+            )}
+          </View>
         )}
-      </View>
+      </>
     )
   }
 
@@ -361,7 +384,12 @@ const AvailableJobsScreen = ({ route, navigation }: any) => {
   return (
     <>
       {Platform.OS == 'web' ? (
-        <Layout title="AVAILABLE JOBS" fetchData={fetchData} lastDoc={lastDoc}>
+        <Layout
+          navigation={navigation}
+          title="AVAILABLE JOBS"
+          fetchData={fetchData}
+          lastDoc={lastDoc}
+        >
           <FilterDrawerDesktop
             changeFilter={universalChangeFilter}
             selectedTypes={selectedTypes}
@@ -384,9 +412,11 @@ const AvailableJobsScreen = ({ route, navigation }: any) => {
           setOpen={setOpenFilter}
         >
           <Layout
+            navigation={navigation}
             title="AVAILABLE JOBS"
             fetchData={fetchData}
             lastDoc={lastDoc}
+            onRefresh={setFiltersAndFetch}
           >
             {Content()}
           </Layout>

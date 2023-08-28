@@ -79,7 +79,7 @@ const ContactScreen = ({ navigation }: any) => {
     routerListener(navigation, mobileLoadingContext)
   }, [])
   return (
-    <Layout title={'CONTACT US'}>
+    <Layout navigation={navigation} title={'CONTACT US'}>
       <View
         sx={{
           width: '100%',
@@ -93,7 +93,7 @@ const ContactScreen = ({ navigation }: any) => {
       >
         <View
           sx={{
-            width: ['100%', '100%', '60%'],
+            width: ['100%', '100%', '80%', '60%'],
 
             borderWidth: 1,
             borderColor: 'secondary',

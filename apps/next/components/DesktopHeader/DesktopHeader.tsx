@@ -1,10 +1,11 @@
-import { View, Text, Pressable, useSx, useDripsyTheme } from 'dripsy'
+import { View, Text, useSx, useDripsyTheme } from 'dripsy'
 import {
   Button,
   Dimensions,
   Platform,
   StyleSheet,
   TouchableOpacity,
+  Pressable,
 } from 'react-native'
 import { SolitoImage } from 'solito/image'
 import { RxHamburgerMenu } from 'react-icons/rx'
@@ -19,8 +20,10 @@ import {
 } from 'app/features/common/functions/mateiralui'
 import { useEffect, useState } from 'react'
 import DesktopDrawer from '../DesktopDrawer/DesktopDrawer'
+import routes, { UniversalRoute } from 'app/features/common/routes'
 
 const DesktopHeader = () => {
+  const [hoverButtons, setHoverButtons] = useState<any>({})
   const [openDrawer, setOpenDrawer] = useState(false)
   const sx = useSx()
   const router = useRouter()
@@ -48,7 +51,12 @@ const DesktopHeader = () => {
       alignItems: 'center',
       paddingLeft: 20,
       paddingRight: 20,
+
       justifyContent: 'space-between',
+      shadowOffset: { width: 0, height: 10 },
+      shadowColor: 'secondary',
+      shadowRadius: 20,
+      shadowOpacity: 0.8,
     },
     menuBox: {
       display: ['none', 'none', 'none', 'flex'] as any,
@@ -67,7 +75,7 @@ const DesktopHeader = () => {
     buttonBox: {
       display: ['none', 'none', 'none', 'flex'] as any,
       flexDirection: ['column', 'column', 'column', 'column', 'row'] as any,
-
+      gap: 7,
       alignItems: 'center',
     },
     headerButton: {
@@ -94,7 +102,7 @@ const DesktopHeader = () => {
     },
   })
   return (
-    <>
+    <View sx={{ position: 'fixed', zIndex: 2, width: '100%' }}>
       <DesktopDrawer setOpenDrawer={setOpenDrawer} openDrawer={openDrawer} />
       <View style={[sx(style.container)]}>
         <View sx={{ width: 150 }}>
@@ -107,7 +115,31 @@ const DesktopHeader = () => {
           </TouchableOpacity>
         </View>
         <View sx={style.menuBox}>
-          <TouchableOpacity
+          {routes.map((it: UniversalRoute, index: any) => {
+            if (it.hidden) return null
+            if (it.webButton) return null
+            return (
+              <TouchableOpacity
+                key={index}
+                onPress={() => {
+                  router.push(it.webLink)
+                }}
+              >
+                <Text
+                  style={[
+                    sx(style.menuButton),
+                    sx({
+                      color:
+                        router.asPath == it.webLink ? 'secondary' : 'white',
+                    }),
+                  ]}
+                >
+                  {it.title.toUpperCase()}
+                </Text>
+              </TouchableOpacity>
+            )
+          })}
+          {/*  <TouchableOpacity
             onPress={() => {
               router.push('/')
             }}
@@ -183,10 +215,56 @@ const DesktopHeader = () => {
             >
               CONTACT US
             </Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
         <View sx={style.buttonBox}>
-          <TouchableOpacity
+          {routes.map((it: UniversalRoute, index: any) => {
+            if (it.hidden) return null
+            if (!it.webButton) return null
+            return (
+              <div
+                key={index}
+                style={{
+                  transition: '0.2s',
+                  transform:
+                    hoverButtons[index] != undefined &&
+                    hoverButtons[index] == true
+                      ? 'scale(0.9)'
+                      : 'scale(1)',
+                }}
+                onMouseEnter={(e: any) => {
+                  var obj = { ...hoverButtons }
+                  obj = Object.keys(obj).map((it: any) => (obj[it] = false))
+                  obj[index] = true
+                  setHoverButtons(obj)
+                }}
+                onMouseLeave={() => {
+                  var obj = { ...hoverButtons }
+                  obj[index] = false
+                  setHoverButtons(obj)
+                }}
+              >
+                <TouchableOpacity
+                  onPress={() => {
+                    router.push(it.webLink)
+                  }}
+                >
+                  <Text
+                    style={[
+                      sx(style.headerButton),
+                      sx({
+                        color:
+                          router.asPath == it.webLink ? 'white' : 'primary',
+                      }),
+                    ]}
+                  >
+                    {it.title.toUpperCase()}
+                  </Text>
+                </TouchableOpacity>
+              </div>
+            )
+          })}
+          {/* <TouchableOpacity
             onPress={() => {
               router.push('/apply/driver')
             }}
@@ -220,7 +298,7 @@ const DesktopHeader = () => {
             >
               APPLY AS A CARRIER
             </Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
         <View sx={style.numbers}>
           <Text sx={style.numberStyle}>+38115256126126</Text>
@@ -232,7 +310,7 @@ const DesktopHeader = () => {
           </TouchableOpacity>
         </View>
       </View>
-    </>
+    </View>
   )
 }
 

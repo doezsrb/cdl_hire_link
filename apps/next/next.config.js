@@ -24,6 +24,7 @@ const nextConfig = {
     'react-native-drawer-layout',
     'react-native-radio-buttons-group',
     'react-native-bouncy-checkbox',
+    '@react-native-community/netinfo',
   ],
   images: {
     domains: ['firebasestorage.googleapis.com'],

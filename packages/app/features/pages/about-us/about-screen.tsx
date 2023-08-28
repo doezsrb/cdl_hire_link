@@ -83,7 +83,7 @@ const AboutScreen = ({ navigation }: any) => {
     routerListener(navigation, mobileLoadingContext)
   }, [])
   return (
-    <Layout title={'ABOUT US'}>
+    <Layout navigation={navigation} title={'ABOUT US'}>
       <View>
         <View sx={style.whiteBoxParent}>
           <View sx={style.ourStoryContainer}>

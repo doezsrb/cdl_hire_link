@@ -1,4 +1,6 @@
 import { Text, View } from 'dripsy'
+import { Platform } from 'react-native'
+import { SolitoImage } from 'solito/image'
 
 const AboutUsChooseCard = () => {
   return (
@@ -14,10 +16,24 @@ const AboutUsChooseCard = () => {
       <View
         sx={{
           width: 200,
-          height: 200,
-          backgroundColor: 'lightgray',
+          height: 150,
         }}
-      />
+      >
+        {Platform.OS == 'web' ? (
+          // eslint-disable-next-line jsx-a11y/alt-text
+          <SolitoImage alt="test" src="/images/pngtruck2.png" fill={true} />
+        ) : (
+          // eslint-disable-next-line jsx-a11y/alt-text
+          <SolitoImage
+            alt="truck"
+            src={require('../../../../../../apps/expo/images/pngtruck2.png')}
+            style={{
+              width: '100%',
+              height: 150,
+            }}
+          />
+        )}
+      </View>
       <View
         sx={{
           width: ['100%', '100%', '50%', '100%'],

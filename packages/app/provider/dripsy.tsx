@@ -1,8 +1,48 @@
 import { DripsyProvider, makeTheme } from 'dripsy'
-import { PixelRatio } from 'react-native'
+import { Dimensions, PixelRatio, Platform } from 'react-native'
 
 const primary = '#005199'
 const secondary = '#66CC8F'
+const BASE_WIDTH = 423
+const BASE_HEIGHT = 847
+const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('screen')
+const widthBaseScale = SCREEN_WIDTH / BASE_WIDTH
+const heightBaseScale = SCREEN_HEIGHT / BASE_HEIGHT
+function normalize(size: any, based = 'width') {
+  const newSize =
+    based === 'height' ? size * heightBaseScale : size * widthBaseScale
+  return Math.round(PixelRatio.roundToNearestPixel(newSize))
+}
+/* function normalize(size) {
+
+  const newSize = size * heightBaseScale
+
+  if (Platform.OS === 'ios') {
+    return Math.round(PixelRatio.roundToNearestPixel(newSize))
+  } else {
+    return Math.round(PixelRatio.roundToNearestPixel(newSize)) - 2
+  }
+} */
+//for width  pixel
+/* const widthPixel = (size) => {
+  return normalize(size, 'width');
+}; */
+//for height  pixel
+/* const heightPixel = (size) => {
+  return normalize(size, 'height');
+}; */
+//for font  pixel
+/* const fontPixel = (size) => {
+  return heightPixel(size);
+}; */
+//for Margin and Padding vertical pixel
+/* const pixelSizeVertical = (size) => {
+  return heightPixel(size);
+}; */
+//for Margin and Padding horizontal pixel
+/* const pixelSizeHorizontal = (size) => {
+  return widthPixel(size);
+}; */
 const theme = makeTheme({
   // https://www.dripsy.xyz/usage/theming/create
   colors: {
@@ -37,14 +77,24 @@ const theme = makeTheme({
   view: {},
   text: {
     sliderText: {
-      fontSize: [
-        48 / PixelRatio.getFontScale(),
-        58 / PixelRatio.getFontScale(),
-      ],
+      fontSize: [normalize(70, 'height')],
       fontWeight: 'bold',
       textAlign: 'center',
 
       color: 'secondary',
+    },
+    smallBtn: {
+      paddingHorizontal: 20,
+      paddingVertical: 5,
+      color: 'primary',
+      backgroundColor: 'secondary',
+      borderWidth: 1,
+      borderColor: 'primary',
+      borderRadius: 20,
+      fontWeight: 'bold',
+    },
+    errBtn: {
+      color: 'red',
     },
     title: {
       paddingTop: '$2',

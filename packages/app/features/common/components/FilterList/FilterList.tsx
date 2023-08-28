@@ -40,7 +40,7 @@ const FilterList = ({
     title: {
       marginLeft: '$2',
       fontSize: 25,
-      color: 'primary',
+      color: 'white',
       marginBottom: '$2',
       marginTop: '$2',
     },

@@ -35,7 +35,9 @@ const DrawerMenu = ({ drawerProps }: DrawerMenuProps) => {
             labelStyle={{ color: focused ? '#66CC8F' : 'white' }}
             label={title == undefined ? '' : title.toUpperCase()}
             onPress={() => {
+              if (focused) return
               mobileLoadingContext.setLoading(true)
+
               setTimeout(() => {
                 drawerProps.navigation.navigate(it.name)
               }, 1)

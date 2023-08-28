@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "cdlhirelink",
-    "slug": "cdlhirelink",
+    "slug": "cdlHireLink",
     "version": "1.0.0",
     "scheme": "cdlhirelink",
     "platforms": ["ios", "android"],
@@ -13,11 +13,21 @@
       "androidMode": "default"
     },
     "plugins": [
+      "@react-native-firebase/app",
+
       [
         "expo-notifications",
         {
           "icon": "./images/notificationicon.png",
           "color": "#ffffff"
+        }
+      ],
+      [
+        "expo-build-properties",
+        {
+          "ios": {
+            "useFrameworks": "static"
+          }
         }
       ]
     ],

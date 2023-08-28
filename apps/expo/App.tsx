@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react'
 import * as SplashScreen from 'expo-splash-screen'
 import * as Notifications from 'expo-notifications'
 import { PermissionsAndroid, Platform } from 'react-native'
+
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
     shouldShowAlert: true,
@@ -13,10 +14,29 @@ Notifications.setNotificationHandler({
     shouldSetBadge: true,
   }),
 })
-
-export default function App() {
+//!TODO: ADD DATETIME TO job database, job ids+name from database (create notifications panel form)
+export default function App({ navigation }: any) {
   const [loading, setLoading] = useState(true)
-
+  const [changeRoute, setChangeRoute] = useState({
+    route: '',
+    param: '',
+  })
+  const [newNotification, setNewNotification] = useState({
+    title: '',
+    body: '',
+    route: '',
+    param: '',
+    show: false,
+  })
+  const resetNewNotification = () => {
+    setNewNotification({
+      title: '',
+      body: '',
+      route: '',
+      param: '',
+      show: false,
+    })
+  }
   const [enabledNotifications, setEnabledNotifications] = useState(false)
   const requestUserPermission = async () => {
     const authStatus = await messaging().requestPermission()
@@ -45,17 +65,32 @@ export default function App() {
     requestUserPermission()
     subscribeToTopic()
   }, [])
+
   useEffect(() => {
     var unsubscribe: any = null
     if (enabledNotifications) {
-      unsubscribe = messaging().onMessage(async (remoteMessage) => {
-        console.log('A new FCM message arrived!', JSON.stringify(remoteMessage))
+      unsubscribe = messaging().onMessage(async (remoteMessage: any) => {
+        var url = remoteMessage.data.link
+        var urlParam = remoteMessage.data.linkParam
+        var title = remoteMessage.notification.title
+        var body = remoteMessage.notification.body
+
+        setNewNotification({
+          title,
+          body,
+          route: url,
+          param: urlParam,
+          show: true,
+        })
       })
       messaging().setBackgroundMessageHandler(async (remoteMessage) => {
         console.log('Message handled in the background!', remoteMessage)
       })
 
       messaging().onNotificationOpenedApp((remoteMessage) => {
+        console.log('REMOTE1')
+        console.log(remoteMessage.notification)
+        console.log(remoteMessage)
         console.log(
           'Notification caused app to open from background state:',
           remoteMessage.notification
@@ -63,14 +98,22 @@ export default function App() {
       })
 
       // Check whether an initial notification is available
+
       messaging()
         .getInitialNotification()
-        .then((remoteMessage) => {
+        .then((remoteMessage: any) => {
           if (remoteMessage) {
+            var url = remoteMessage.data.link
+            var urlParam = remoteMessage.data.linkParam
+            if (url != '-') {
+              setChangeRoute({ route: url, param: urlParam })
+            }
+            /* console.log(remoteMessage.notification)
+            console.log(remoteMessage)
             console.log(
               'Notification caused app to open from quit state:',
               remoteMessage.notification
-            )
+            ) */
           }
         })
     }
@@ -79,7 +122,16 @@ export default function App() {
     }
   }, [enabledNotifications])
   return (
-    <MobileLoadingProvider value={{ loading: loading, setLoading: setLoading }}>
+    <MobileLoadingProvider
+      value={{
+        loading: loading,
+        setLoading: setLoading,
+        changeRoute: changeRoute,
+        setChangeRoute: setChangeRoute,
+        resetNewNotification: resetNewNotification,
+        newNotification: newNotification,
+      }}
+    >
       <Provider>
         <NativeNavigation />
       </Provider>
