@@ -52,7 +52,7 @@ const ApplyScreen = ({ route, navigation }: any) => {
   const [companyId, setCompanyId] = useState<any>(null)
   const scrollToStepRef: any = useRef()
   const { theme } = useDripsyTheme()
-  const [step, setStep] = useState(1)
+  const [step, setStep] = useState(2)
   const [allSteps, setAllSteps] = useState(0)
 
   const [stepData, setStepData] = useState<any>({
@@ -70,7 +70,7 @@ const ApplyScreen = ({ route, navigation }: any) => {
     routerListener(navigation, mobileLoadingContext)
   }, [navigation])
   useEffect(() => {
-    setStep(1)
+    setStep(2)
     const as_parram = as
     if (as_parram == 'driver') {
       setAllSteps(2)

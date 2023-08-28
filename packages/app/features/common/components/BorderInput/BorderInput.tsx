@@ -12,15 +12,15 @@ const BorderInput = ({ text, children }: BorderInputProps) => {
       width: '100%',
       padding: 10,
       borderWidth: 2,
-      marginTop: 20,
+      marginTop: 10,
       borderColor: theme.colors.secondary,
       borderRadius: 2,
     },
     text: {
       fontWeight: 'bold',
-      position: 'absolute',
+      width: 'auto',
       color: 'secondary',
-      top: -11,
+      marginTop: -21,
       left: 7,
       backgroundColor: 'white',
       paddingLeft: 5,
@@ -29,7 +29,9 @@ const BorderInput = ({ text, children }: BorderInputProps) => {
   })
   return (
     <View sx={style.container}>
-      <Text sx={style.text}>{text}</Text>
+      <View sx={{ alignItems: 'flex-start' }}>
+        <Text sx={style.text}>{text}</Text>
+      </View>
       {children}
     </View>
   )
