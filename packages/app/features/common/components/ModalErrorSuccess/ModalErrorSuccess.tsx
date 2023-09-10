@@ -2,6 +2,9 @@ import { Text, View } from 'dripsy'
 import { Modal } from 'react-native'
 import { useEffect } from 'react'
 import { useRouter } from 'solito/router'
+import SuccessIcon from '../SuccessIcon/SuccessIcon'
+import ErrorIcon from '../ErrorIcon/ErrorIcon'
+
 const ModalErrorSuccess = ({
   success,
   close,
@@ -33,7 +36,7 @@ const ModalErrorSuccess = ({
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          backgroundColor: 'rgba(0,0,0,0.4)',
+          backgroundColor: 'rgba(0,0,0,0.7)',
         }}
       >
         <View
@@ -41,35 +44,32 @@ const ModalErrorSuccess = ({
             width: 200,
             paddingTop: 20,
             paddingBottom: 20,
-            backgroundColor: success ? 'secondary' : 'red',
-            borderWidth: 2,
-            borderStyle: 'solid',
-            borderColor: 'primary',
+
             borderRadius: 10,
           }}
         >
           {success ? (
-            <Text
+            <View
               sx={{
-                fontSize: 20,
-                color: 'primary',
-                textAlign: 'center',
-                fontWeight: 'bold',
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'center',
               }}
             >
-              SUCCESS
-            </Text>
+              <SuccessIcon />
+            </View>
           ) : (
-            <Text
+            <View
               sx={{
-                fontSize: 20,
-                color: 'white',
-                textAlign: 'center',
-                fontWeight: 'bold',
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'center',
               }}
             >
-              ERROR
-            </Text>
+              <ErrorIcon />
+            </View>
           )}
         </View>
       </View>

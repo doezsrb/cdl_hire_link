@@ -11117,6 +11117,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"moti@npm:^0.26.0":
+  version: 0.26.0
+  resolution: "moti@npm:0.26.0"
+  dependencies:
+    framer-motion: ^6.5.1
+  peerDependencies:
+    react-native-reanimated: "*"
+  checksum: 0f6459fc4eedf775fe1455e1925365b018d43d7bd6b17727db5e9ff4fad2219086389e35b36b6f2d6ad5bb680cc93fd77cb9e4aa134e548f4d31f66d325f1c5a
+  languageName: node
+  linkType: hard
+
 "moti@npm:latest":
   version: 0.24.2
   resolution: "moti@npm:0.24.2"
@@ -13662,6 +13673,7 @@ __metadata:
     "@types/react": ^18.0.17
     "@types/react-native": ^0.69.5
     eslint: ^8.21.0
+    moti: ^0.26.0
     react-icons: ^4.9.0
     react-native-bouncy-checkbox: ^3.0.7
     react-native-radio-buttons-group: ^3.0.2

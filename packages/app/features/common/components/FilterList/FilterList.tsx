@@ -54,9 +54,10 @@ const FilterList = ({
   ])
   const [types, setTypes] = useState<any>([
     'Company driver',
-    'Lease to purchase',
-    'Rental lease',
     'Owner operator',
+    'Rental lease',
+
+    'Lease to purchase',
   ])
   const [solo_team, setSoloTeam] = useState<any>(['Solo', 'Team'])
   const [experience, setExperience] = useState<any>([

@@ -35,11 +35,8 @@ function MyApp({ Component, pageProps }: SolitoAppProps) {
   return (
     <>
       <Head>
-        <title>Solito Example App</title>
-        <meta
-          name="description"
-          content="Expo + Next.js with Solito. By Fernando Rojo."
-        />
+        <title>CDL HIRE LINK</title>
+        <meta name="description" content="CDL HIRE LINK" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 

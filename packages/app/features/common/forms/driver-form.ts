@@ -20,14 +20,14 @@ const DRIVER_FORM = {
             error: false,
             required: true,
           },
-          contact_number: {
+          contact_number_driver: {
             name: 'Contact Number',
             type: 'numeric',
             value: '',
             error: false,
             required: true,
           },
-          email: {
+          email_driver: {
             name: 'E-mail',
             type: 'email',
             value: '',
@@ -149,11 +149,11 @@ const DRIVER_FORM = {
               { name: 'Dry bulk' },
               { name: 'Dry Van' },
               { name: 'Flatbed' },
-              { name: 'Hopper Bottom' },
+
               { name: 'Intermodal' },
-              { name: 'Oil Field' },
+
               { name: 'Oversize Load' },
-              { name: 'Refrigerated' },
+
               { name: 'Tanker' },
               { name: 'Reefer' },
               { name: 'Dump truck' },
@@ -443,36 +443,13 @@ const DRIVER_FORM = {
             pattern: {
               type_of_violation: {
                 name: 'Type of violation',
-                type: 'select',
+                type: 'text',
                 value: '',
                 error: false,
                 required: true,
-                multiple: true,
+                multiline: true,
                 optionLabel: 'name',
                 optionValue: 'name',
-                arrayData: [
-                  { name: 'Careless driving' },
-                  { name: 'DUI/DWI' },
-                  { name: 'Speeding' },
-                  { name: 'Seat Belt' },
-                  { name: 'Improper turn' },
-                  { name: 'Improper passing' },
-                  { name: 'Failure to yield' },
-                  { name: 'Too fast for conditions' },
-                  { name: 'Failure to obey signal' },
-                  { name: 'Following too closely' },
-                  { name: 'Improper lane change' },
-                  { name: 'Improper backing' },
-                  { name: 'Lane violation' },
-                  { name: 'Cell phone usage' },
-                  { name: 'Texting while driving' },
-                  { name: 'Inattentive driving' },
-                  { name: 'Driving with a suspended license' },
-                  { name: 'No insurance' },
-                  { name: 'Leaving Scene of accident' },
-                  { name: 'Overweigh' },
-                  { name: 'Other' },
-                ],
               },
               date_of_violation: {
                 name: 'Date of violation',
@@ -557,18 +534,13 @@ const DRIVER_FORM = {
                 {
                   type_of_violation: {
                     name: 'Type of violation',
-                    type: 'select',
+                    type: 'text',
                     value: '',
                     error: false,
                     required: true,
-                    multiple: true,
+                    multiline: true,
                     optionLabel: 'name',
                     optionValue: 'name',
-                    arrayData: [
-                      { name: 'Non-injury' },
-                      { name: 'Injury' },
-                      { name: 'Fatality' },
-                    ],
                   },
                   date_of_violation: {
                     name: 'Date of violation',
@@ -687,7 +659,7 @@ const DRIVER_FORM = {
             required: false,
           },
           sap: {
-            name: 'Do you have SAP program?',
+            name: 'Are you in the SAP program?',
             type: 'radio',
             value: '',
             error: false,

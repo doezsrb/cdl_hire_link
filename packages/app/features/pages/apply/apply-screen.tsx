@@ -699,6 +699,7 @@ const ApplyScreen = ({ route, navigation }: any) => {
                 current={step}
                 steps={allSteps}
               />
+
               <View ref={scrollToStepRef} />
               <Animated.View
                 style={{

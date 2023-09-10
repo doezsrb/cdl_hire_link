@@ -1,12 +1,14 @@
 import { Text, View, useDripsyTheme, useSx } from 'dripsy'
 import { StyleSheet } from 'react-native'
 import { Fragment } from 'react'
+import { MotiView } from 'moti'
 interface StepIndProps {
   current: number
   steps: number
   stepName: string
 }
 const StepInd = ({ current, steps, stepName }: StepIndProps) => {
+  const { theme } = useDripsyTheme()
   const style = StyleSheet.create({
     circle: {
       marginLeft: 5,
@@ -19,6 +21,7 @@ const StepInd = ({ current, steps, stepName }: StepIndProps) => {
     line: {
       flex: 1,
       height: 10,
+      backgroundColor: theme.colors.$lightGray,
     },
     line2: {
       flex: 1,
@@ -36,7 +39,7 @@ const StepInd = ({ current, steps, stepName }: StepIndProps) => {
   const sx = useSx()
   const number = 4
   const step = 1
-  const { theme } = useDripsyTheme()
+
   return (
     <View sx={{ width: '100%', display: 'flex', flexDirection: 'column' }}>
       <Text sx={style.stepName}>{stepName}</Text>
@@ -63,14 +66,19 @@ const StepInd = ({ current, steps, stepName }: StepIndProps) => {
           }
           return (
             <Fragment key={index}>
-              <View
-                style={[
-                  style.line,
-                  current > index
-                    ? sx({ backgroundColor: 'secondary' })
-                    : { backgroundColor: theme.colors.$lightGray },
-                ]}
-              />
+              <View style={[style.line]}>
+                <MotiView
+                  transition={{
+                    type: 'timing',
+                    duration: 2000,
+                  }}
+                  animate={{
+                    width: current > index ? '100%' : '0%',
+                    height: '100%',
+                    backgroundColor: theme.colors.secondary,
+                  }}
+                />
+              </View>
               <View
                 style={[
                   style.circle,
