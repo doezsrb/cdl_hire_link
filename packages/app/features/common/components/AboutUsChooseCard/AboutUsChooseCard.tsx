@@ -1,7 +1,7 @@
 import { Text, View } from 'dripsy'
 import { Platform } from 'react-native'
 import { SolitoImage } from 'solito/image'
-import TruckIcon from '../TruckIcon/TruckIcon'
+import TruckIcon from '../TruckIcon/TruckIcon1'
 
 const AboutUsChooseCard = ({ title, icon }: { title: String; icon: any }) => {
   return (

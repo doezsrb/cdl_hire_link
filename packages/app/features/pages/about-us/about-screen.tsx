@@ -9,7 +9,7 @@ import { Dimensions, StyleSheet, Platform } from 'react-native'
 import AboutUsChooseCard from 'app/features/common/components/AboutUsChooseCard/AboutUsChooseCard'
 import { SolitoImage } from 'solito/image'
 import Logo from 'app/features/common/components/Logo/logo'
-import TruckIcon from 'app/features/common/components/TruckIcon/TruckIcon'
+import TruckIcon1 from 'app/features/common/components/TruckIcon/TruckIcon1'
 import TruckIcon2 from 'app/features/common/components/TruckIcon/TruckIcon2'
 import TruckIcon3 from 'app/features/common/components/TruckIcon/TruckIcon3'
 
@@ -136,13 +136,13 @@ const AboutScreen = ({ navigation }: any) => {
           <Text sx={style.titleBlue}>WHY YOU NEED TO CHOOSE US?</Text>
           <View sx={style.chooseBox}>
             <AboutUsChooseCard
-              icon={<TruckIcon color={theme.colors.secondary} />}
+              icon={<TruckIcon2 color={theme.colors.secondary} />}
               title={
                 'Choose CDL-HIRE-LINK because we connect you with the best opportunities in the trucking industry. '
               }
             />
             <AboutUsChooseCard
-              icon={<TruckIcon2 color={theme.colors.secondary} />}
+              icon={<TruckIcon1 color={theme.colors.secondary} />}
               title={
                 "Our expertise ensures you'll find the perfect match for your driving career, whether you're seeking long-haul routes, local deliveries, or specialized transport roles."
               }

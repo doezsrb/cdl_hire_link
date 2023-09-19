@@ -1,7 +1,7 @@
 import { Text, View } from 'dripsy'
 import { Dimensions, Platform, StyleSheet } from 'react-native'
 import { SolitoImage } from 'solito/image'
-import TruckIcon from '../TruckIcon/TruckIcon'
+import TruckIcon from '../TruckIcon/TruckIcon1'
 import TruckIcon2 from '../TruckIcon/TruckIcon2'
 interface WhyChooseCardProps {
   text: string

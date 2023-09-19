@@ -29,11 +29,13 @@ import routerListener from 'app/features/common/functions/routerListener'
 import MobileLoadingContext from '../../../../../apps/expo/context/mobileLoadingContext'
 import Layout from 'app/features/common/components/Layout/Layout'
 import TestimonialsSlider from 'app/features/common/components/TestimonialsSlider/Testimonials'
-import TruckIcon from 'app/features/common/components/TruckIcon/TruckIcon'
+import TruckIcon1 from 'app/features/common/components/TruckIcon/TruckIcon1'
 import TruckIcon2 from 'app/features/common/components/TruckIcon/TruckIcon2'
 import TruckIcon3 from 'app/features/common/components/TruckIcon/TruckIcon3'
+
 export function HomeScreen({ navigation }: any) {
   const sx = useSx()
+
   const mobileLoadingContext: any = useContext(MobileLoadingContext)
   const { theme } = useDripsyTheme()
   const style = StyleSheet.create({
@@ -93,6 +95,7 @@ export function HomeScreen({ navigation }: any) {
       flexDirection: ['column', 'row'] as any,
     },
   })
+
   useEffect(() => {
     routerListener(navigation, mobileLoadingContext)
   }, [])
@@ -175,19 +178,19 @@ export function HomeScreen({ navigation }: any) {
           WHY CHOOSE CDL HIRE LINK?
         </Text>
         <WhyChooseCard
-          icon={<TruckIcon color={theme.colors.primary} />}
+          icon={<TruckIcon1 color="primary" />}
           title="OUR MISSION"
           text={`Connect employers with top truck drivers and empower driver careers in the demanding sector, recognizing truck driving as a way of life.`}
         />
 
         <WhyChooseCard
-          icon={<TruckIcon2 color={theme.colors.primary} />}
+          icon={<TruckIcon2 color="primary" />}
           reverse
           title="WHAT SETS US APART?"
           text={`Our expert team understands transportation industry needs and challenges. We swiftly find top drivers from our nationwide network. We offer personalized solutions, valuing uniqueness. CDL-HIRE-LINK is accountable to clients and drivers, upholding high standards.`}
         />
         <WhyChooseCard
-          icon={<TruckIcon3 color={theme.colors.primary} />}
+          icon={<TruckIcon3 color="primary" />}
           title="HOW WE WORK?"
           text={`We analyze your needs, find ideal matches, and prioritize long-term partnerships. Whether you're a small business looking to expand your fleet or a large logistics company in need of specialized drivers, CDL-HIRE-LINK has the expertise to match you with the perfect candidates.`}
         />
