@@ -1,8 +1,9 @@
 import { Text, View } from 'dripsy'
 import { Platform } from 'react-native'
 import { SolitoImage } from 'solito/image'
+import TruckIcon from '../TruckIcon/TruckIcon'
 
-const AboutUsChooseCard = () => {
+const AboutUsChooseCard = ({ title, icon }: { title: String; icon: any }) => {
   return (
     <View
       sx={{
@@ -19,7 +20,8 @@ const AboutUsChooseCard = () => {
           height: 150,
         }}
       >
-        {Platform.OS == 'web' ? (
+        {icon}
+        {/* {Platform.OS == 'web' ? (
           // eslint-disable-next-line jsx-a11y/alt-text
           <SolitoImage alt="test" src="/images/pngtruck2.png" fill={true} />
         ) : (
@@ -32,14 +34,14 @@ const AboutUsChooseCard = () => {
               height: 150,
             }}
           />
-        )}
+        )} */}
       </View>
       <View
         sx={{
           width: ['100%', '100%', '50%', '100%'],
         }}
       >
-        <Text
+        {/*  <Text
           sx={{
             color: 'white',
             fontSize: 25,
@@ -48,7 +50,7 @@ const AboutUsChooseCard = () => {
           }}
         >
           COMMITMENT
-        </Text>
+        </Text> */}
         <Text
           sx={{
             color: 'white',
@@ -57,10 +59,7 @@ const AboutUsChooseCard = () => {
             textAlign: 'center',
           }}
         >
-          Lorem ipsum blablablablalba lbalb aw egaewkgpaowekgapoewkgaopewgja
-          aewgkape. Lorem ipsum blabla blablalba lbalb aw egaew kgpaow ekga
-          poewk gaopewgja aewgkape. Lorem ipsum blabla blablalba lbalb
-          awegaewkgpa owek gapoew kgaope wgja aewgkape.
+          {title}
         </Text>
       </View>
     </View>

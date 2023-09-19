@@ -77,7 +77,7 @@ const theme = makeTheme({
   view: {},
   text: {
     sliderText: {
-      fontSize: [normalize(70, 'height')],
+      fontSize: [normalize(53, 'height'), normalize(63, 'height')],
       fontWeight: 'bold',
       textAlign: 'center',
 
@@ -114,6 +114,7 @@ const theme = makeTheme({
       color: 'primary',
       fontWeight: 'bold',
       fontSize: 20,
+      paddingBottom: 2,
     },
     p: {
       fontSize: 16,

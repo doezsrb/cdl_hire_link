@@ -39,7 +39,7 @@ const ApplyCard = ({ title, step, text }: ApplyCardProps) => {
     <View sx={style.container}>
       <ApplyStepInd step={step} />
       <View sx={style.childContainer}>
-        <View sx={style.image}>
+        {/*  <View sx={style.image}>
           {Platform.OS == 'web' ? (
             // eslint-disable-next-line jsx-a11y/alt-text
             <SolitoImage alt="test" src="/images/pngtruck2.png" fill={true} />
@@ -54,7 +54,7 @@ const ApplyCard = ({ title, step, text }: ApplyCardProps) => {
               }}
             />
           )}
-        </View>
+        </View> */}
         <Text sx={style.title}>{title}</Text>
         <Text sx={style.text}>{text}</Text>
       </View>

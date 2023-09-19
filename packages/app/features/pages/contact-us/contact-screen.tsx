@@ -57,6 +57,7 @@ const ContactScreen = ({ navigation }: any) => {
     setData(data)
   }
   const submitData = () => {
+    console.log(data)
     toggleLoading(true)
   }
   const checkData = () => {

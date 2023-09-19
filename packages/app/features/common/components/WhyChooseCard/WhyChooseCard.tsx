@@ -1,14 +1,18 @@
 import { Text, View } from 'dripsy'
 import { Dimensions, Platform, StyleSheet } from 'react-native'
 import { SolitoImage } from 'solito/image'
+import TruckIcon from '../TruckIcon/TruckIcon'
+import TruckIcon2 from '../TruckIcon/TruckIcon2'
 interface WhyChooseCardProps {
   text: string
   title: string
+  icon: any
   reverse?: boolean
 }
 const WhyChooseCard = ({
   title,
   text,
+  icon,
   reverse = false,
 }: WhyChooseCardProps) => {
   const style = StyleSheet.create({
@@ -28,7 +32,7 @@ const WhyChooseCard = ({
     containerText: {
       width: ['100%', '100%', '50%'] as any,
       justifyContent: 'center',
-      alignItems: 'center',
+      alignItems: ['center'] as any,
     },
     title: {
       marginTop: 5,
@@ -36,7 +40,7 @@ const WhyChooseCard = ({
       width: ['100%', '100%', '60%', '60%'] as any,
 
       color: 'primary',
-      textAlign: 'left',
+      textAlign: ['center', 'center', 'left'] as any,
       fontWeight: 'bold',
     },
     text: {
@@ -49,7 +53,8 @@ const WhyChooseCard = ({
   return (
     <View sx={style.container}>
       <View sx={style.image}>
-        {Platform.OS == 'web' ? (
+        {icon}
+        {/* {Platform.OS == 'web' ? (
           // eslint-disable-next-line jsx-a11y/alt-text
           <SolitoImage alt="test" src="/images/pngtruck2.png" fill={true} />
         ) : (
@@ -62,7 +67,7 @@ const WhyChooseCard = ({
               height: 200,
             }}
           />
-        )}
+        )} */}
       </View>
       <View sx={style.containerText}>
         <Text sx={style.title}>{title}</Text>
