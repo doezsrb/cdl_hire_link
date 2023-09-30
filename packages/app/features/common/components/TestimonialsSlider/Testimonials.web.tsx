@@ -1,6 +1,7 @@
 import { Text, View } from 'dripsy'
 import Carousel from 'react-multi-carousel'
 import { StyleSheet } from 'react-native'
+import TestimonialsItem from '../TestimonialsItem/TestimonialsItem'
 const responsive = {
   superLargeDesktop: {
     breakpoint: { max: 4000, min: 3000 },
@@ -59,6 +60,15 @@ const style = StyleSheet.create({
   textName: { fontSize: 20, color: 'secondary', fontWeight: 'bold' },
   firmName: { color: 'white', fontStyle: 'italic' },
 })
+
+const testimonialsData = [
+  {
+    img: 'test1.png',
+    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    name: 'John Doe',
+    firm: 'Random Firm Trucking',
+  },
+]
 const TestimonialsSlider = () => {
   return (
     <Carousel
@@ -69,66 +79,17 @@ const TestimonialsSlider = () => {
       autoPlaySpeed={5000}
       arrows={true}
     >
-      <View sx={style.containerItem}>
-        <View sx={style.item}>
-          <View sx={style.circle}></View>
-          <View sx={style.textContainer}>
-            <Text sx={style.mainText}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </Text>
-            <View sx={style.nameFirmContainer}>
-              <Text sx={style.textName}>John Doe</Text>
-              <Text sx={style.firmName}>Random Trucking Firm</Text>
-            </View>
-          </View>
-        </View>
-      </View>
-      <View sx={style.containerItem}>
-        <View sx={style.item}>
-          <View sx={style.circle}></View>
-          <View sx={style.textContainer}>
-            <Text sx={style.mainText}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </Text>
-            <View sx={style.nameFirmContainer}>
-              <Text sx={style.textName}>John Doe</Text>
-              <Text sx={style.firmName}>Random Trucking Firm</Text>
-            </View>
-          </View>
-        </View>
-      </View>
-      <View sx={style.containerItem}>
-        <View sx={style.item}>
-          <View sx={style.circle}></View>
-          <View sx={style.textContainer}>
-            <Text sx={style.mainText}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </Text>
-            <View sx={style.nameFirmContainer}>
-              <Text sx={style.textName}>John Doe</Text>
-              <Text sx={style.firmName}>Random Trucking Firm</Text>
-            </View>
-          </View>
-        </View>
-      </View>
+      {testimonialsData.map((it: any, index: any) => {
+        return (
+          <TestimonialsItem
+            key={index}
+            text={it.text}
+            name={it.name}
+            firm={it.firm}
+            img={it.img}
+          />
+        )
+      })}
     </Carousel>
   )
 }

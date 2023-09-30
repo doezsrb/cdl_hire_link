@@ -1,10 +1,11 @@
-import { SafeAreaView, View, useDripsyTheme, useSx } from 'dripsy'
+import { SafeAreaView, Text, View, useDripsyTheme, useSx } from 'dripsy'
 import {
   View as NativeView,
   Platform,
   ScrollView,
   StatusBar,
   RefreshControl,
+  Dimensions,
 } from 'react-native'
 
 import { useRouter } from 'solito/router'
@@ -13,9 +14,11 @@ import Footer from '../Footer/Footer'
 import scrollToTop from '../../functions/scrolltotop'
 
 import MobileLoadingContext from '../../../../../../apps/expo/context/mobileLoadingContext'
-import HomePageSlider from '../HomePageSlider/HomePageSlider'
+
 import JobHeaderImage from '../JobHeaderImage/JobHeaderImage'
-import DefaultHeaderSlider from '../DefaultHeaderSlider/DefaultHeaderSlider'
+
+import FrontSlider from '../FrontSlider/FrontSlider'
+import HeaderImage from '../HeaderImage/HeaderImage'
 
 var allowFetch = true
 interface LayoutProps {
@@ -127,6 +130,22 @@ const Layout = ({
       }
     }
   }, [pageHeight, footerHeight, footerPosition, lastDoc])
+  const items = [
+    {
+      text: 'IF YOU NEED A JOB, WE ARE HERE TO HELP YOU!',
+      img:
+        Platform.OS == 'web'
+          ? '/images/background2.jpg'
+          : require('../../../../../../apps/expo/images/background2.jpg'),
+    },
+    {
+      text: 'LOOKING FOR A JOB? YOU ARE ON THE RIGHT PLACE!',
+      img:
+        Platform.OS == 'web'
+          ? '/images/background2.jpg'
+          : require('../../../../../../apps/expo/images/background2.jpg'),
+    },
+  ]
   return (
     <SafeAreaView sx={{ backgroundColor: 'white' }}>
       <ScrollView
@@ -152,9 +171,16 @@ const Layout = ({
       >
         <StatusBar backgroundColor={theme.colors.primary} />
         {homepage ? (
-          <HomePageSlider
+          /*  <HomePageSlider
             navigation={navigation}
             router={router}
+            mobileLoadingContext={mobileLoadingContext}
+          /> */
+          <FrontSlider
+            homepage
+            items={items}
+            router={router}
+            navigation={navigation}
             mobileLoadingContext={mobileLoadingContext}
           />
         ) : jobscreen ? (
@@ -167,8 +193,37 @@ const Layout = ({
             title={title}
           />
         ) : (
-          <DefaultHeaderSlider title={title} />
+          <HeaderImage
+            url={
+              Platform.OS == 'web'
+                ? '/images/background2.jpg'
+                : require('../../../../../../apps/expo/images/background2.jpg')
+            }
+          >
+            <View
+              sx={{
+                zIndex: 2,
+                position: 'absolute',
+                flexDirection: 'column',
+                width: '100%',
+                alignItems: 'center',
+                bottom: 0,
+                height: [
+                  Dimensions.get('window').height -
+                    Dimensions.get('window').height / 10,
+                  Platform.OS == 'web'
+                    ? '100vh'
+                    : Dimensions.get('window').height,
+                ] as any,
+                paddingBottom: 50,
+                justifyContent: 'flex-end',
+              }}
+            >
+              <Text variant="sliderText">{title}</Text>
+            </View>
+          </HeaderImage>
         )}
+        {/* <DefaultHeaderSlider title={title} /> */}
         {children}
 
         <NativeView

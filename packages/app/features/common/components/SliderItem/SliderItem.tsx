@@ -1,34 +1,39 @@
 import { Text, View, useDripsyTheme, useSx } from 'dripsy'
+
 import {
   Dimensions,
+  TouchableOpacity,
+  StatusBar,
   Platform,
   StyleSheet,
-  TouchableOpacity,
 } from 'react-native'
-import HeaderSlider from '../HeaderSlider/HeaderSlider'
 
-const HomePageSlider = ({
-  navigation,
+import { SolitoImage } from 'solito/image'
+
+const SliderItem = ({
+  item,
   router,
+  navigation,
   mobileLoadingContext,
+  homepage,
 }: {
-  navigation: any
-  router: any
+  item: any
+  router?: any
+  navigation?: any
   mobileLoadingContext: any
+  homepage?: boolean
 }) => {
   const { theme } = useDripsyTheme()
+  const sx = useSx()
   const style = StyleSheet.create({
     sliderTextContainer: {
       zIndex: 2,
-      position: 'absolute',
+
       flexDirection: 'column',
       width: '100%',
       alignItems: 'center',
       bottom: 0,
-      height: [
-        Dimensions.get('window').height - Dimensions.get('window').height / 10,
-        Platform.OS == 'web' ? '100vh' : Dimensions.get('window').height,
-      ] as any,
+      height: '100%',
       paddingBottom: 50,
       justifyContent: 'flex-end',
     },
@@ -43,14 +48,25 @@ const HomePageSlider = ({
       flexDirection: ['column', 'row'] as any,
     },
   })
-  const sx = useSx()
   return (
-    <HeaderSlider homepage>
+    <View
+      sx={{
+        width: '100%',
+        backgroundColor: 'black',
+
+        height: Dimensions.get('window').height - 80,
+      }}
+    >
+      <SolitoImage
+        alt=""
+        fill
+        resizeMode="cover"
+        style={{ opacity: 0.2, position: 'absolute' }}
+        src={item.img}
+      />
       <View sx={style.sliderTextContainer}>
         <View sx={style.sliderTextBox}>
-          <Text variant="sliderText">
-            IF YOU NEED A JOB, WE ARE HERE TO HELP YOU!
-          </Text>
+          <Text variant="sliderText">{item.text}</Text>
         </View>
         <View sx={style.sliderButtonContainer}>
           <TouchableOpacity
@@ -96,8 +112,7 @@ const HomePageSlider = ({
           </TouchableOpacity>
         </View>
       </View>
-    </HeaderSlider>
+    </View>
   )
 }
-
-export default HomePageSlider
+export default SliderItem

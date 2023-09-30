@@ -3,48 +3,42 @@ import { useEffect, useRef } from 'react'
 import { Dimensions, Platform, StatusBar } from 'react-native'
 import Carousel from 'react-native-snap-carousel'
 import { SolitoImage } from 'solito/image'
+import SliderItem from '../SliderItem/SliderItem'
 
 interface FrontSliderProps {
+  items: any
+  mobileLoadingContext: any
+  router?: any
+  navigation?: any
   homepage?: boolean
 }
-const FrontSlider = ({ homepage = false }: FrontSliderProps) => {
+const FrontSlider = ({
+  items,
+  mobileLoadingContext,
+  router,
+  navigation,
+  homepage = false,
+}: FrontSliderProps) => {
   const isCarousel = useRef<any>()
 
   const renderItem = ({ item }: any) => {
     return (
-      <View
-        sx={{
-          width: '100%',
-          height: homepage
-            ? Platform.OS == 'web'
-              ? Dimensions.get('screen').height
-              : Dimensions.get('screen').height - StatusBar.currentHeight! - 70
-            : Dimensions.get('window').height / 3,
-        }}
-      >
-        <SolitoImage
-          alt="slider-img"
-          src={item.img}
-          style={{
-            opacity: 0.2,
-          }}
-          fill
-          resizeMode="cover"
-        />
-      </View>
+      <SliderItem
+        item={item}
+        homepage={homepage}
+        mobileLoadingContext={mobileLoadingContext}
+        router={router}
+        navigation={navigation}
+      />
     )
   }
   return (
     <Carousel
-      autoplayInterval={8000}
+      autoplayInterval={5000}
       autoplay
-      autoplayDelay={8000}
+      autoplayDelay={5000}
       ref={isCarousel}
-      data={[
-        { img: require('../../../../../../apps/expo/images/background.jpg') },
-        { img: require('../../../../../../apps/expo/images/background.jpg') },
-        { img: require('../../../../../../apps/expo/images/background.jpg') },
-      ]}
+      data={items}
       renderItem={renderItem}
       sliderWidth={Dimensions.get('screen').width}
       itemWidth={Dimensions.get('screen').width}

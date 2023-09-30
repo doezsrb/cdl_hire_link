@@ -3,6 +3,7 @@ import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css'
 import { Dimensions } from 'react-native'
 import { SolitoImage } from 'solito/image'
+import SliderItem from '../SliderItem/SliderItem'
 const responsive = {
   superLargeDesktop: {
     breakpoint: { max: 4000, min: 3000 },
@@ -23,9 +24,20 @@ const responsive = {
 }
 
 interface FrontSliderProps {
+  items: any
+  mobileLoadingContext: any
+  router?: any
+  navigation?: any
   homepage?: boolean
 }
-const FrontSlider = ({ homepage = false }: FrontSliderProps) => {
+
+const FrontSlider = ({
+  items,
+  mobileLoadingContext,
+  router,
+  navigation,
+  homepage = false,
+}: FrontSliderProps) => {
   return (
     <Carousel
       ssr
@@ -35,7 +47,19 @@ const FrontSlider = ({ homepage = false }: FrontSliderProps) => {
       autoPlaySpeed={5000}
       arrows={false}
     >
-      <View
+      {items.map((it: any, index: any) => {
+        return (
+          <SliderItem
+            key={index}
+            item={it}
+            homepage={homepage}
+            mobileLoadingContext={mobileLoadingContext}
+            router={router}
+            navigation={navigation}
+          />
+        )
+      })}
+      {/*  <View
         sx={{
           height: homepage
             ? Dimensions.get('window').height - 80
@@ -49,37 +73,7 @@ const FrontSlider = ({ homepage = false }: FrontSliderProps) => {
           resizeMode="cover"
           style={{ opacity: 0.2 }}
         />
-      </View>
-      <View
-        sx={{
-          height: homepage
-            ? Dimensions.get('window').height - 80
-            : Dimensions.get('window').height / 2,
-        }}
-      >
-        <SolitoImage
-          src="/images/background.jpg"
-          fill={true}
-          alt="truck slider"
-          resizeMode="cover"
-          style={{ opacity: 0.2 }}
-        />
-      </View>
-      <View
-        sx={{
-          height: homepage
-            ? Dimensions.get('window').height - 80
-            : Dimensions.get('window').height / 2,
-        }}
-      >
-        <SolitoImage
-          src="/images/background.jpg"
-          fill={true}
-          alt="truck slider"
-          resizeMode="cover"
-          style={{ opacity: 0.2 }}
-        />
-      </View>
+      </View> */}
     </Carousel>
   )
 }

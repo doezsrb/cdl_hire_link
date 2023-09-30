@@ -17,7 +17,7 @@ import {
   Animated,
 } from 'react-native'
 import { useState, useEffect, Fragment, useRef, useContext } from 'react'
-import HeaderSlider from 'app/features/common/components/HeaderSlider/HeaderSlider'
+
 import { createParam } from 'solito'
 
 import routerListener from 'app/features/common/functions/routerListener'
@@ -358,6 +358,8 @@ const ApplyScreen = ({ route, navigation }: any) => {
       if (errorFile != 0) {
         setError(true)
       } else {
+        scrollToTop(scrollRef)
+
         toggleLoading(true)
         if (Platform.OS == 'web') {
           Promise.all(
