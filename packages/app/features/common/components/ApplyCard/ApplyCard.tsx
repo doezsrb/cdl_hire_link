@@ -6,33 +6,32 @@ import { SolitoImage } from 'solito/image'
 interface ApplyCardProps {
   title: string
   step: number
-  text: string
+  button: any
 }
-const ApplyCard = ({ title, step, text }: ApplyCardProps) => {
+const ApplyCard = ({ title, step, button }: ApplyCardProps) => {
   const style = StyleSheet.create({
     container: { flex: 1, flexDirection: ['column'] as any, marginTop: 10 },
     childContainer: {
       flex: 1,
+      paddingBottom: 20,
       alignItems: 'center',
-
-      marginTop: [10] as any,
     },
     image: {
       width: '100%',
       height: 150,
     },
     title: {
-      fontSize: 30,
+      fontSize: 20,
       color: 'white',
       textAlign: 'center',
       fontWeight: 'bold',
+      width: '80%',
     },
     text: {
       fontSize: 18,
       color: 'white',
       textAlign: 'center',
       flexWrap: 'wrap',
-      width: '80%',
     },
   })
   return (
@@ -55,8 +54,33 @@ const ApplyCard = ({ title, step, text }: ApplyCardProps) => {
             />
           )}
         </View> */}
-        <Text sx={style.title}>{title}</Text>
-        <Text sx={style.text}>{text}</Text>
+        <View
+          sx={{
+            width: '100%',
+            height: 80,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <Text sx={style.title}>{title}</Text>
+        </View>
+        {/* <Text sx={style.text}>{text}</Text> */}
+        <View
+          sx={{
+            width: '100%',
+
+            height: 40,
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <View sx={{ flexDirection: 'column' }}>
+            {button}
+            <View
+              sx={{ width: 'auto', height: 3, backgroundColor: 'secondary' }}
+            />
+          </View>
+        </View>
       </View>
     </View>
   )

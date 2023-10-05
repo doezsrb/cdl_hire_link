@@ -131,13 +131,13 @@ const Layout = ({
     }
   }, [pageHeight, footerHeight, footerPosition, lastDoc])
   const items = [
-    {
+    /* {
       text: 'IF YOU NEED A JOB, WE ARE HERE TO HELP YOU!',
       img:
         Platform.OS == 'web'
           ? '/images/background2.jpg'
           : require('../../../../../../apps/expo/images/background2.jpg'),
-    },
+    }, */
     {
       text: 'LOOKING FOR A JOB? YOU ARE ON THE RIGHT PLACE!',
       img:

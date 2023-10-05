@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "cdlhirelink",
-    "slug": "cdlHireLink",
+    "name": "CDL HIRE LINK",
+    "slug": "cdlhirelink",
     "version": "1.0.0",
     "scheme": "cdlhirelink",
     "platforms": ["ios", "android"],

@@ -18,6 +18,12 @@
     "production": {}
   },
   "submit": {
-    "production": {}
+    "production": {
+      "ios": {
+        "appleId": "stefanovicmiljan5@gmail.com",
+        "ascAppId": "6468799888",
+        "appleTeamId": "3Y22T2K9JS"
+      }
+    }
   }
 }

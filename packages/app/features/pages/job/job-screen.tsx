@@ -91,7 +91,7 @@ export function JobScreen({ navigation }: any) {
               }}
             >
               <View sx={theme.buttons.bigButton}>
-                <Text variant="buttonBig">APPLY AS DRIVER</Text>
+                <Text variant="buttonBig">APPLY AS A DRIVER</Text>
               </View>
             </TouchableOpacity>
           </View>

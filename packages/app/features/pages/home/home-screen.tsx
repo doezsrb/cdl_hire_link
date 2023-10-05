@@ -32,10 +32,11 @@ import TestimonialsSlider from 'app/features/common/components/TestimonialsSlide
 import TruckIcon1 from 'app/features/common/components/TruckIcon/TruckIcon1'
 import TruckIcon2 from 'app/features/common/components/TruckIcon/TruckIcon2'
 import TruckIcon3 from 'app/features/common/components/TruckIcon/TruckIcon3'
+import { useRouter } from 'solito/router'
 
 export function HomeScreen({ navigation }: any) {
   const sx = useSx()
-
+  const router = useRouter()
   const mobileLoadingContext: any = useContext(MobileLoadingContext)
   const { theme } = useDripsyTheme()
   const style = StyleSheet.create({
@@ -61,7 +62,7 @@ export function HomeScreen({ navigation }: any) {
     },
     applyContainer: {
       width: '100%',
-      paddingBottom: 40,
+      paddingBottom: 10,
       backgroundColor: 'primary',
     },
     sliderContainer: {
@@ -152,23 +153,74 @@ export function HomeScreen({ navigation }: any) {
     <Layout homepage navigation={navigation}>
       <View sx={style.applyContainer}>
         <Text variant="title" sx={{ color: 'white' }}>
-          HOW TO APPLY?
+          APPLY NOW!
         </Text>
         <View sx={{ flex: 1, flexDirection: ['column', 'column', 'row'] }}>
           <ApplyCard
             step={1}
-            text={`Lorem ipsum blablablablalba lbalb aw egaewkgpaowekgapoewkgaopewgja aewgkape.`}
-            title={'FILL OUT AN APPLICATION'}
+            title={`Find the best job opportunities on the market!`}
+            button={
+              <TouchableOpacity
+                onPress={() => {
+                  if (Platform.OS == 'web') {
+                    router.push('/apply/driver')
+                  } else {
+                    if (navigation != null) {
+                      mobileLoadingContext.setLoading(true)
+                      setTimeout(() => {
+                        navigation.navigate('apply/driver')
+                      }, 1)
+                    }
+                  }
+                }}
+              >
+                <Text variant="applyNowBtn">APPLY AS A DRIVER</Text>
+              </TouchableOpacity>
+            }
           />
           <ApplyCard
             step={2}
-            text={`Lorem ipsum blablablablalba lbalb aw egaewkgpaowekgapoewkgaopewgja aewgkape.`}
-            title={'FILL OUT AN APPLICATION'}
+            title={`We’re connected with a large group of skilled driver professionals!`}
+            button={
+              <TouchableOpacity
+                onPress={() => {
+                  if (Platform.OS == 'web') {
+                    router.push('/apply/carrier')
+                  } else {
+                    if (navigation != null) {
+                      mobileLoadingContext.setLoading(true)
+                      setTimeout(() => {
+                        navigation.navigate('apply/carrier')
+                      }, 1)
+                    }
+                  }
+                }}
+              >
+                <Text variant="applyNowBtn">APPLY AS A CARRIER</Text>
+              </TouchableOpacity>
+            }
           />
           <ApplyCard
             step={3}
-            text={`Lorem ipsum blablablablalba lbalb aw egaewkgpaowekgapoewkgaopewgja aewgkape.`}
-            title={'FILL OUT AN APPLICATION'}
+            title={`Join us in making a difference and be part of our team’s success!`}
+            button={
+              <TouchableOpacity
+                onPress={() => {
+                  if (Platform.OS == 'web') {
+                    router.push('/available-jobs')
+                  } else {
+                    if (navigation != null) {
+                      mobileLoadingContext.setLoading(true)
+                      setTimeout(() => {
+                        navigation.navigate('available-jobs')
+                      }, 1)
+                    }
+                  }
+                }}
+              >
+                <Text variant="applyNowBtn">AVAILABLE JOBS</Text>
+              </TouchableOpacity>
+            }
           />
         </View>
       </View>

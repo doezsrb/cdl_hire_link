@@ -88,7 +88,7 @@ const ContactScreen = ({ navigation }: any) => {
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          paddingHorizontal: ['$2', '$2', '$6'],
+          paddingHorizontal: ['$2', '$2', '$4', '$5'],
           paddingVertical: '$4',
         }}
       >

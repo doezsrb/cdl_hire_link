@@ -86,7 +86,6 @@ export default function App({ navigation }: any) {
       messaging().setBackgroundMessageHandler(async (remoteMessage) => {
         console.log('Message handled in the background!', remoteMessage)
       })
-
       messaging().onNotificationOpenedApp((remoteMessage) => {
         console.log('REMOTE1')
         console.log(remoteMessage.notification)
@@ -96,9 +95,7 @@ export default function App({ navigation }: any) {
           remoteMessage.notification
         )
       })
-
       // Check whether an initial notification is available
-
       messaging()
         .getInitialNotification()
         .then((remoteMessage: any) => {
@@ -108,12 +105,12 @@ export default function App({ navigation }: any) {
             if (url != '-') {
               setChangeRoute({ route: url, param: urlParam })
             }
-            /* console.log(remoteMessage.notification)
+            console.log(remoteMessage.notification)
             console.log(remoteMessage)
             console.log(
               'Notification caused app to open from quit state:',
               remoteMessage.notification
-            ) */
+            )
           }
         })
     }

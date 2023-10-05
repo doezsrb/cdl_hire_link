@@ -19,6 +19,7 @@ const WhyChooseCard = ({
     container: {
       width: '100%',
       marginTop: 20,
+      alignItems: 'center',
       flexDirection: [
         'column',
         'column',

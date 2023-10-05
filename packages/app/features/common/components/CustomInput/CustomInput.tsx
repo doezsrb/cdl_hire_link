@@ -62,23 +62,43 @@ const CustomInput = ({
   return (
     <View sx={style.container}>
       {openDatePicker && Platform.OS != 'web' && (
-        <DateTimePicker
-          testID="dateTimePicker"
-          value={date}
-          mode={'date'}
-          is24Hour={true}
-          onChange={(e: any) => {
-            var date = new Date(e.nativeEvent.timestamp)
-            setDate(new Date(e.nativeEvent.timestamp))
-            setOpenDatePicker(false)
-            setVal(
-              date.getMonth() + '/' + date.getDate() + '/' + date.getFullYear()
-            )
-            setValue(
-              date.getMonth() + '/' + date.getDate() + '/' + date.getFullYear()
-            )
+        <View
+          sx={{
+            width: '101%',
+            height: '100%',
+
+            position: 'absolute',
+            zIndex: 2,
+            alignItems: 'center',
+            justifyContent: 'center',
           }}
-        />
+        >
+          <DateTimePicker
+            testID="dateTimePicker"
+            value={date}
+            mode={'date'}
+            is24Hour={true}
+            onChange={(e: any) => {
+              var date = new Date(e.nativeEvent.timestamp)
+              setDate(new Date(e.nativeEvent.timestamp))
+              setOpenDatePicker(false)
+              setVal(
+                date.getMonth() +
+                  '/' +
+                  date.getDate() +
+                  '/' +
+                  date.getFullYear()
+              )
+              setValue(
+                date.getMonth() +
+                  '/' +
+                  date.getDate() +
+                  '/' +
+                  date.getFullYear()
+              )
+            }}
+          />
+        </View>
       )}
 
       <Text sx={style.textLabel}>
@@ -124,7 +144,11 @@ const CustomInput = ({
             editable={!datePicker}
             onFocus={undefined}
             inputMode={type}
-            onPressIn={undefined}
+            onPressIn={() => {
+              if (datePicker) {
+                setOpenDatePicker(true)
+              }
+            }}
             onPressOut={undefined}
             id={undefined}
             href={undefined}

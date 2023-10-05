@@ -124,7 +124,7 @@ const AboutScreen = ({ navigation }: any) => {
           <View sx={style.textBox}>
             <Text sx={style.title}>PROFESSIONAL TEAM</Text>
             <Text sx={style.paragraph}>
-              At CDL Hire Link, we don’t just find jobs; we forge careers and
+              At CDL Hire Link, we don’t just find jobs, we forge careers and
               create success stories. Whether you’re a CDL driver seeking your
               dream job or a trucking company in need of top talent, we’re here
               to be your trusted link in the world of CDL recruitment. Welcome

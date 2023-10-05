@@ -10,6 +10,7 @@ import Logo from '../../features/common/components/Logo/logo'
 
 import routes, { UniversalRoute } from 'app/features/common/routes'
 import COMPONENTS from 'app/features/common/routesComponents'
+import { normalize } from 'app/provider/dripsy'
 
 /* const Stack = createNativeStackNavigator<{
   home: undefined
@@ -41,7 +42,9 @@ export function NativeNavigation() {
       screenOptions={({ navigation }) => ({
         drawerPosition: 'right',
 
-        headerStyle: { backgroundColor: theme.colors.primary },
+        headerStyle: {
+          backgroundColor: theme.colors.primary,
+        },
         headerTitle: () => <Logo />,
         headerLeft: () => null,
         headerRight: (props) => {

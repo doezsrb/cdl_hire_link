@@ -1,3 +1,4 @@
+import { normalize } from 'app/provider/dripsy'
 import { Text, View, useDripsyTheme, useSx } from 'dripsy'
 
 import {
@@ -28,7 +29,7 @@ const SliderItem = ({
   const style = StyleSheet.create({
     sliderTextContainer: {
       zIndex: 2,
-
+      gap: 10,
       flexDirection: 'column',
       width: '100%',
       alignItems: 'center',
@@ -44,17 +45,22 @@ const SliderItem = ({
     sliderButtonContainer: {
       width: '100%',
       alignItems: 'center',
+
       justifyContent: 'center',
       flexDirection: ['column', 'row'] as any,
     },
   })
+
   return (
     <View
       sx={{
         width: '100%',
         backgroundColor: 'black',
 
-        height: Dimensions.get('window').height - 80,
+        height:
+          Platform.OS == 'web'
+            ? Dimensions.get('window').height - 80
+            : Dimensions.get('window').height - 60,
       }}
     >
       <SolitoImage
@@ -84,7 +90,7 @@ const SliderItem = ({
             }}
           >
             <View sx={theme.buttons.bigButton}>
-              <Text variant="buttonBig">APPLY AS DRIVER</Text>
+              <Text variant="buttonBig">APPLY AS A DRIVER</Text>
             </View>
           </TouchableOpacity>
           <TouchableOpacity
@@ -107,7 +113,7 @@ const SliderItem = ({
                 sx({ marginLeft: [0, 20], marginTop: [20, 0] }),
               ]}
             >
-              <Text variant="buttonBig">APPLY AS CARRIER</Text>
+              <Text variant="buttonBig">APPLY AS A CARRIER</Text>
             </View>
           </TouchableOpacity>
         </View>
