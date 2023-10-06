@@ -8,12 +8,16 @@ import { useContext, useEffect, useState } from 'react'
 import { Dimensions, Platform, TouchableOpacity } from 'react-native'
 import MobileLoadingContext from '../../../../../apps/expo/context/mobileLoadingContext'
 import LoadingContext from '../../../../../apps/next/context/loadingContext'
+import ModalErrorSuccess from 'app/features/common/components/ModalErrorSuccess/ModalErrorSuccess'
 
 const ContactScreen = ({ navigation }: any) => {
   const { theme } = useDripsyTheme()
+
   const sx = useSx()
   const mobileLoadingContext: any = useContext(MobileLoadingContext)
   const desktopLoadingContext: any = useContext(LoadingContext)
+  const [error, setError] = useState(false)
+  const [success, setSuccess] = useState(true)
   const [data, setData] = useState({
     firstname: {
       value: '',
@@ -59,6 +63,24 @@ const ContactScreen = ({ navigation }: any) => {
   const submitData = () => {
     console.log(data)
     toggleLoading(true)
+    fetch('https://www.cdlhirelink.com/api/mail', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    })
+      .then((res: any) => res.json())
+      .then((val: any) => {
+        if (val.msg == 'Success') {
+          setSuccess(true)
+        } else {
+          setError(true)
+        }
+      })
+      .catch((e: any) => {
+        setError(true)
+      })
+      .finally(() => {
+        toggleLoading(false)
+      })
   }
   const checkData = () => {
     var data_: any = { ...data }
@@ -81,6 +103,22 @@ const ContactScreen = ({ navigation }: any) => {
   }, [])
   return (
     <Layout navigation={navigation} title={'CONTACT US'}>
+      {success && (
+        <ModalErrorSuccess
+          success={true}
+          close={() => {
+            setSuccess(false)
+          }}
+        />
+      )}
+      {error && (
+        <ModalErrorSuccess
+          success={false}
+          close={() => {
+            setError(false)
+          }}
+        />
+      )}
       <View
         sx={{
           width: '100%',
