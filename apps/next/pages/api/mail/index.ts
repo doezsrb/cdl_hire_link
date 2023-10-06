@@ -12,7 +12,7 @@ export default async function handler(
     sgMail.setApiKey(API_KEY_SENDGRID)
     var data = JSON.parse(req.body)
     try {
-      const msg = {
+      /* const msg = {
         to: 'office@cdlhirelink.com',
         from: 'office@cdlhirelink.com', // Use the email address or domain you verified above
         subject: 'TestSub',
@@ -53,19 +53,19 @@ export default async function handler(
         </body>
       </html>`,
       }
-      await sgMail.send(msg)
-      /*  var transporter = nodemailer.createTransport({
-        host: 'smtpout.secureserver.net',
+      await sgMail.send(msg) */
+      var transporter = nodemailer.createTransport({
+        host: 'smtp.sendgrid.net',
         port: 587,
         secure: false,
         auth: {
-          user: 'office@cdlhirelink.com',
-          pass: 'cdlhirelink123',
+          user: 'apikey',
+          pass: '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',
         },
       })
       const info = await transporter.sendMail({
         from: 'office@cdlhirelink.com',
-        to: 'office@cdlhirelink.com',
+        to: 'usaapp052@gmail.com',
         subject: data.subject.value,
         html: `<html>
     <body>
@@ -102,7 +102,7 @@ export default async function handler(
       </div>
     </body>
   </html>`,
-      }) */
+      })
       res.status(200).json({ msg: 'Success', result: 'Sent' })
     } catch (e) {
       console.log('ERROR')
