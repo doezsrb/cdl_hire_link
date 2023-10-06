@@ -59,8 +59,10 @@ export default async function handler(
   </html>`,
       })
       res.status(200).json({ msg: 'Success', result: 'Sent' })
-    } catch {
-      res.status(200).json({ msg: 'Error', result: 'Failed' })
+    } catch (e) {
+      console.log('ERROR')
+      console.log(e)
+      res.status(200).json({ msg: 'Error', result: e })
     }
   } else {
     res.status(200).json({ msg: 'Error', result: 'Error' })

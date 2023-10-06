@@ -69,6 +69,7 @@ const ContactScreen = ({ navigation }: any) => {
     })
       .then((res: any) => res.json())
       .then((val: any) => {
+        console.log(val)
         if (val.msg == 'Success') {
           setSuccess(true)
         } else {
@@ -76,6 +77,7 @@ const ContactScreen = ({ navigation }: any) => {
         }
       })
       .catch((e: any) => {
+        console.log(e)
         setError(true)
       })
       .finally(() => {
@@ -198,7 +200,7 @@ const ContactScreen = ({ navigation }: any) => {
                 updateData('message', val)
               }}
               currentValue={data.message.value}
-              multiline
+              multiline={true}
             />
           </View>
           <View sx={{ marginTop: '$2' }}>
