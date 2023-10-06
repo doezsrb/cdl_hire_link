@@ -134,7 +134,7 @@ const CustomInput = ({
           }}
         >
           <TextInput
-            textAlignVertical="top"
+            textAlignVertical={multiline ? 'top' : 'center'}
             sx={style.textInput}
             value={value}
             onChangeText={(text: any) => {

@@ -61,7 +61,6 @@ const ContactScreen = ({ navigation }: any) => {
     setData(data)
   }
   const submitData = () => {
-    console.log(data)
     toggleLoading(true)
     fetch('https://www.cdlhirelink.com/api/mail', {
       method: 'POST',
@@ -70,7 +69,6 @@ const ContactScreen = ({ navigation }: any) => {
     })
       .then((res: any) => res.json())
       .then((val: any) => {
-        console.log(val)
         if (val.msg == 'Success') {
           setSuccess(true)
         } else {
@@ -78,7 +76,6 @@ const ContactScreen = ({ navigation }: any) => {
         }
       })
       .catch((e: any) => {
-        console.log(e)
         setError(true)
       })
       .finally(() => {
