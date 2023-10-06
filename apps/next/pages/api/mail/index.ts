@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-
+import sgMail from '@sendgrid/mail'
 import nodemailer from 'nodemailer'
 
 export default async function handler(
@@ -7,9 +7,54 @@ export default async function handler(
   res: NextApiResponse<any>
 ) {
   if (req.method == 'POST') {
+    const API_KEY_SENDGRID =
+      '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'
+    sgMail.setApiKey(API_KEY_SENDGRID)
     var data = JSON.parse(req.body)
     try {
-      var transporter = nodemailer.createTransport({
+      const msg = {
+        to: 'office@cdlhirelink.com',
+        from: 'office@cdlhirelink.com', // Use the email address or domain you verified above
+        subject: 'TestSub',
+
+        html: `<html>
+        <body>
+          <style>
+            table,
+            th,
+            td {
+              border: 1px solid black;
+            }
+          </style>
+          <div style="width: 300px; height: 100%">
+            <table style="border: 1px solid black">
+              <tr style="text-align: center; border: 1px solid black">
+                <th>FIRSTNAME:</th>
+                <th>${data.firstname.value}</th>
+                <th>LASTNAME:</th>
+                <th>${data.lastname.value}</th>
+              </tr>
+      
+              <tr style="text-align: center">
+                <th>EMAIL:</th>
+                <th>${data.email.value}</th>
+                <th>SUBJECT:</th>
+                <th>${data.subject.value}</th>
+              </tr>
+      
+              <tr>
+                <th colspan="4" style="text-align: left">
+                  <b>MESSAGE:</b><br />
+                  ${data.message.value}
+                </th>
+              </tr>
+            </table>
+          </div>
+        </body>
+      </html>`,
+      }
+      sgMail.send(msg)
+      /*  var transporter = nodemailer.createTransport({
         host: 'smtpout.secureserver.net',
         port: 587,
         secure: false,
@@ -57,7 +102,7 @@ export default async function handler(
       </div>
     </body>
   </html>`,
-      })
+      }) */
       res.status(200).json({ msg: 'Success', result: 'Sent' })
     } catch (e) {
       console.log('ERROR')

@@ -17,6 +17,7 @@
     "@expo/next-adapter": "5.0.2",
     "@mui/material": "^5.13.4",
     "@mui/x-date-pickers": "^6.7.0",
+    "@sendgrid/mail": "^7.7.0",
     "@types/nodemailer": "^6.4.9",
     "app": "*",
     "dayjs": "^1.11.8",
