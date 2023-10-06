@@ -17,7 +17,7 @@ const ContactScreen = ({ navigation }: any) => {
   const mobileLoadingContext: any = useContext(MobileLoadingContext)
   const desktopLoadingContext: any = useContext(LoadingContext)
   const [error, setError] = useState(false)
-  const [success, setSuccess] = useState(true)
+  const [success, setSuccess] = useState(false)
   const [data, setData] = useState({
     firstname: {
       value: '',
