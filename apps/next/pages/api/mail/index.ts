@@ -53,7 +53,7 @@ export default async function handler(
         </body>
       </html>`,
       }
-      sgMail.send(msg)
+      await sgMail.send(msg)
       /*  var transporter = nodemailer.createTransport({
         host: 'smtpout.secureserver.net',
         port: 587,
