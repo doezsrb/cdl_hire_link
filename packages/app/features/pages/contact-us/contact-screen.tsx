@@ -65,6 +65,7 @@ const ContactScreen = ({ navigation }: any) => {
     toggleLoading(true)
     fetch('https://www.cdlhirelink.com/api/mail', {
       method: 'POST',
+      credentials: 'include',
       body: JSON.stringify(data),
     })
       .then((res: any) => res.json())
