@@ -49,7 +49,7 @@ function MyApp({ Component, pageProps }: SolitoAppProps) {
         />
         <meta property="og:title" content="CDL HIRE LINK" />
         <meta
-          property="og:url"
+          property="og:image"
           content="http://www.cdlhirelink.com/images/logoog.png"
         />
         <meta
