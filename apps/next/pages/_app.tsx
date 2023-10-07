@@ -36,7 +36,27 @@ function MyApp({ Component, pageProps }: SolitoAppProps) {
     <>
       <Head>
         <title>CDL HIRE LINK</title>
-        <meta name="description" content="CDL HIRE LINK" />
+        <meta
+          name="keywords"
+          content="cdl,hire link,cdlhirelink,driver,carrier,truck driver,truck"
+        />
+        <meta
+          name="description"
+          content="We are CDL Hire Link, your trusted partner in the world of CDL
+                driver recruitment. Our agency is dedicated to connecting
+                skilled and passionate CDL drivers with reputable trucking
+                companies nationwide."
+        />
+        <meta property="og:title" content="CDL HIRE LINK" />
+        <meta
+          property="og:url"
+          content="http://www.cdlhirelink.com/images/logoog.png"
+        />
+        <meta
+          name="og:description"
+          content="We are CDL Hire Link, your trusted partner in the world of CDL
+                driver recruitment."
+        />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
