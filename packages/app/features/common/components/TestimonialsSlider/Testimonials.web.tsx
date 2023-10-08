@@ -64,9 +64,21 @@ const style = StyleSheet.create({
 const testimonialsData = [
   {
     img: 'test1.png',
-    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-    name: 'John Doe',
-    firm: 'Random Firm Trucking',
+    text: 'I can’t thank CDL Hire Link enough. They connected me with a fantastic company that values safety and professionalism. I’ve never felt more supported in my career.',
+    name: 'David R.',
+    firm: '',
+  },
+  {
+    img: 'test1.png',
+    text: 'Kudos to CDL Hire Link! They truly care about the drivers they work with. They found me a great position that matches my experience, and I’m loving every mile of it',
+    name: 'Mike H.',
+    firm: '',
+  },
+  {
+    img: 'test1.png',
+    text: 'Working with CDL Hire Link has been a fantastic experience. Their attention to detail and commitment to finding the right fit for our company has been invaluable.',
+    name: 'John D.',
+    firm: '',
   },
 ]
 const TestimonialsSlider = () => {
