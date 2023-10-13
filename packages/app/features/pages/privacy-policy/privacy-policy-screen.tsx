@@ -12,6 +12,7 @@ import Logo from 'app/features/common/components/Logo/logo'
 import TruckIcon1 from 'app/features/common/components/TruckIcon/TruckIcon1'
 import TruckIcon2 from 'app/features/common/components/TruckIcon/TruckIcon2'
 import TruckIcon3 from 'app/features/common/components/TruckIcon/TruckIcon3'
+import { Linking } from 'react-native'
 
 const PrivacyPolicyScreen = ({ navigation }: any) => {
   const { theme } = useDripsyTheme()
@@ -253,8 +254,15 @@ const PrivacyPolicyScreen = ({ navigation }: any) => {
               By email: office@cdlhirelink.com
             </Text>
             <Text style={[sx(style.paragraph), { marginLeft: 10 }]}>
-              By visiting this page on our website:
-              https://www.cdlhirelink.com/contact-us
+              By visiting this page on our{' '}
+              <Text
+                sx={{ color: 'blue' }}
+                onPress={() => {
+                  Linking.openURL('https://www.cdlhirelink.com/contact-us')
+                }}
+              >
+                website
+              </Text>
             </Text>
             <Text style={[sx(style.paragraph), { marginLeft: 10 }]}>
               By phone number: (708) 853-5299
