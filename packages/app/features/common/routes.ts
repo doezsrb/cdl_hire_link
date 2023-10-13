@@ -6,6 +6,8 @@ export type UniversalRoute = {
   webLink: string
   webButton: boolean
   hidden: boolean
+  footerOnly: boolean
+  webOnly: boolean
 }
 
 const routes: UniversalRoute[] = [
@@ -17,6 +19,8 @@ const routes: UniversalRoute[] = [
     webLink: '/',
     webButton: false,
     hidden: false,
+    footerOnly: false,
+    webOnly: false,
   },
   {
     mobileName: 'available-jobs',
@@ -26,6 +30,8 @@ const routes: UniversalRoute[] = [
     webLink: '/available-jobs',
     webButton: false,
     hidden: false,
+    footerOnly: false,
+    webOnly: false,
   },
   {
     mobileName: 'job',
@@ -35,6 +41,8 @@ const routes: UniversalRoute[] = [
     webLink: '/',
     hidden: true,
     webButton: false,
+    footerOnly: false,
+    webOnly: false,
   },
   {
     mobileName: 'about-us',
@@ -44,6 +52,8 @@ const routes: UniversalRoute[] = [
     webLink: '/about-us',
     webButton: false,
     hidden: false,
+    footerOnly: false,
+    webOnly: false,
   },
   {
     mobileName: 'contact-us',
@@ -53,8 +63,20 @@ const routes: UniversalRoute[] = [
     webLink: '/contact-us',
     webButton: false,
     hidden: false,
+    footerOnly: false,
+    webOnly: false,
   },
-
+  {
+    mobileName: 'privacy-policy',
+    title: 'Privacy Policy',
+    component: 'PrivacyPolicyScreen',
+    initialParams: {},
+    webLink: '/privacy-policy',
+    webButton: false,
+    hidden: false,
+    footerOnly: true,
+    webOnly: true,
+  },
   {
     mobileName: 'apply/driver',
     title: 'Apply as a driver',
@@ -63,6 +85,8 @@ const routes: UniversalRoute[] = [
     webLink: '/apply/driver',
     webButton: true,
     hidden: false,
+    footerOnly: false,
+    webOnly: false,
   },
   {
     mobileName: 'apply/carrier',
@@ -72,6 +96,8 @@ const routes: UniversalRoute[] = [
     webLink: '/apply/carrier',
     webButton: true,
     hidden: false,
+    footerOnly: false,
+    webOnly: false,
   },
 ]
 

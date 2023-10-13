@@ -61,6 +61,8 @@ export function NativeNavigation() {
       drawerContent={(props) => <DrawerMenu drawerProps={props} />}
     >
       {routes.map((it: UniversalRoute, index: any) => {
+        if (it.footerOnly) return null
+        if (it.webOnly) return null
         return (
           <Drawer.Screen
             key={index}

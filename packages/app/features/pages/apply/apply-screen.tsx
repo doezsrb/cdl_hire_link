@@ -7,6 +7,7 @@ import StepInd from 'app/features/common/components/StepInd/StepInd'
 import { Pressable, SafeAreaView, Text, View } from 'dripsy'
 import { addData, uploadImage } from 'app/features/common/functions/firestore'
 import { useDripsyTheme } from 'dripsy'
+import BouncyCheckbox from 'react-native-bouncy-checkbox'
 import {
   Dimensions,
   Modal,
@@ -15,6 +16,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   Animated,
+  Linking,
 } from 'react-native'
 import { useState, useEffect, Fragment, useRef, useContext } from 'react'
 
@@ -32,6 +34,7 @@ import CARRIER_FORM from 'app/features/common/forms/carrier-form'
 import DRIVER_FORM from 'app/features/common/forms/driver-form'
 import LoadingScreen from 'app/features/common/components/LoadingScreen/LoadingScreen'
 import CenteredBox from 'app/features/common/components/CenteredBox/CenteredBox'
+import ThankYouApply from 'app/features/common/components/ThankYouApply/ThankYouApply'
 
 const { useParam } = createParam<{
   as: 'carrier' | 'driver'
@@ -54,7 +57,7 @@ const ApplyScreen = ({ route, navigation }: any) => {
   const { theme } = useDripsyTheme()
   const [step, setStep] = useState(1)
   const [allSteps, setAllSteps] = useState(0)
-
+  const [acceptPolicy, setAcceptPolicy] = useState(false)
   const [stepData, setStepData] = useState<any>({
     driver: DRIVER_FORM,
     carrier: CARRIER_FORM,
@@ -690,10 +693,16 @@ const ApplyScreen = ({ route, navigation }: any) => {
           {error && (
             <ModalErrorSuccess success={false} close={() => setError(false)} />
           )}
-          {success && (
-            <ModalErrorSuccess success={true} close={() => setSuccess(false)} />
-          )}
+          {success && <ThankYouApply close={() => setSuccess(false)} />}
 
+          <View sx={{ width: '100%', alignItems: 'center', mt: '$4' }}>
+            <View sx={{ width: '80%', textAlign: 'center' }}>
+              <Text sx={{ color: 'gray', fontSize: 16, textAlign: 'center' }}>
+                Please proceed to fill out the form, and we will be in touch
+                with you soon, either by phone or email.
+              </Text>
+            </View>
+          </View>
           <View sx={style.container}>
             <View sx={style.containerChild}>
               <StepInd
@@ -1421,6 +1430,53 @@ const ApplyScreen = ({ route, navigation }: any) => {
                 )}
               </Animated.View>
 
+              {step == allSteps && (
+                <>
+                  <View
+                    sx={{
+                      width: '100%',
+
+                      paddingVertical: 10,
+                      paddingHorizontal: 10,
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    <BouncyCheckbox
+                      isChecked={acceptPolicy}
+                      size={25}
+                      fillColor={theme.colors.secondary}
+                      unfillColor="#FFFFFF"
+                      text=""
+                      iconStyle={{ borderColor: theme.colors.secondary }}
+                      innerIconStyle={{ borderWidth: 2 }}
+                      onPress={(isChecked: boolean) => {
+                        setAcceptPolicy(isChecked)
+                      }}
+                    />
+                    <Text>
+                      I agree to the{' '}
+                      <Text
+                        onPress={() => {
+                          Linking.openURL(
+                            'https://www.cdlhirelink.com/privacy-policy'
+                          )
+                        }}
+                        sx={{ color: 'blue' }}
+                      >
+                        Privacy policy
+                      </Text>{' '}
+                      and the terms stated below
+                    </Text>
+                  </View>
+                  <Text sx={{ color: 'gray', textAlign: 'center' }}>
+                    By submitting this form i agree to give my personal
+                    information to CDL Hire Link Inc in purpose of potential
+                    employment opportunities.
+                  </Text>
+                </>
+              )}
               <View sx={style.containerButtons}>
                 <Pressable
                   style={[
@@ -1442,7 +1498,11 @@ const ApplyScreen = ({ route, navigation }: any) => {
                 >
                   <Text variant="buttonBig">BACK</Text>
                 </Pressable>
+
                 <Pressable
+                  disabled={
+                    step == allSteps ? (acceptPolicy ? false : true) : false
+                  }
                   style={[
                     theme.buttons.bigButton,
                     { opacity: step >= allSteps && step != allSteps ? 0 : 1 },

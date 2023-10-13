@@ -40,6 +40,7 @@ const CustomSelectInput = ({
         paddingRight: 2,
         minWidth: fullWidth ? '100%' : '50%',
         width: fullWidth ? '100%' : null,
+
         flex: 1,
       }}
     >
@@ -71,10 +72,8 @@ const CustomSelectInput = ({
         }}
         modalOptionsContainerStyle={{
           width: 'auto',
-          paddingBottom: 20,
 
-          borderBottomEndRadius: 15,
-          borderBottomStartRadius: 15,
+          height: 220,
         }}
         multipleSelectedItemStyle={{
           backgroundColor: theme.colors.primary,

@@ -4,6 +4,7 @@ import { JobScreen } from '../pages/job/job-screen'
 import ContactScreen from '../pages/contact-us/contact-screen'
 import AvailableJobsScreen from '../pages/jobs/jobs-screen'
 import { HomeScreen } from '../pages/home/home-screen'
+import PrivacyPolicyScreen from '../pages/privacy-policy/privacy-policy-screen'
 
 const COMPONENTS = {
   ApplyScreen: ApplyScreen,
@@ -12,6 +13,7 @@ const COMPONENTS = {
   ContactScreen: ContactScreen,
   AboutScreen: AboutScreen,
   HomeScreen: HomeScreen,
+  PrivacyPolicyScreen: PrivacyPolicyScreen,
 }
 
 export default COMPONENTS

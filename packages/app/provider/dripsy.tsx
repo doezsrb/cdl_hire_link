@@ -92,6 +92,7 @@ const theme = makeTheme({
       paddingBottom: 2,
     },
     smallBtn: {
+      overflow: 'hidden',
       paddingHorizontal: 20,
       paddingVertical: 5,
       color: 'primary',

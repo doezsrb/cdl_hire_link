@@ -116,6 +116,7 @@ const DesktopHeader = () => {
         </View>
         <View sx={style.menuBox}>
           {routes.map((it: UniversalRoute, index: any) => {
+            if (it.footerOnly) return null
             if (it.hidden) return null
             if (it.webButton) return null
             return (
