@@ -201,7 +201,7 @@ const DRIVER_FORM = {
                 value: '',
                 error: false,
                 required: true,
-                multiple: true,
+                multiple: false,
                 optionLabel: 'name',
                 optionValue: 'name',
                 arrayData: [
@@ -321,7 +321,7 @@ const DRIVER_FORM = {
                     value: '',
                     error: false,
                     required: true,
-                    multiple: true,
+                    multiple: false,
                     optionLabel: 'name',
                     optionValue: 'name',
                     arrayData: [

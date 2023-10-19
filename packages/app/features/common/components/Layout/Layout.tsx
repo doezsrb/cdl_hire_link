@@ -147,7 +147,11 @@ const Layout = ({
     },
   ]
   return (
-    <SafeAreaView sx={{ backgroundColor: 'white' }}>
+    <SafeAreaView
+      sx={{
+        backgroundColor: 'white',
+      }}
+    >
       <ScrollView
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh_} />
@@ -226,20 +230,22 @@ const Layout = ({
         {/* <DefaultHeaderSlider title={title} /> */}
         {children}
 
-        <NativeView
-          onLayout={(event) => {
-            var { y, height } = event.nativeEvent.layout
-            setFooterPosition(y)
-            setFooterHeight(height)
-          }}
-        >
-          <Footer
-            navigation={navigation}
-            scrollToTop={() =>
-              scrollToTop(scrollRef == null ? scrollRef_ : scrollRef)
-            }
-          />
-        </NativeView>
+        {Platform.OS == 'web' && (
+          <NativeView
+            onLayout={(event) => {
+              var { y, height } = event.nativeEvent.layout
+              setFooterPosition(y)
+              setFooterHeight(height)
+            }}
+          >
+            <Footer
+              navigation={navigation}
+              scrollToTop={() =>
+                scrollToTop(scrollRef == null ? scrollRef_ : scrollRef)
+              }
+            />
+          </NativeView>
+        )}
       </ScrollView>
     </SafeAreaView>
   )

@@ -89,6 +89,7 @@ const Footer = ({
             </Text>
             {routes.map((it: any, index: any) => {
               if (it.hidden) return null
+              if (it.mobOnly) return null
               if (it.webOnly) {
                 if (Platform.OS != 'web') return null
               }
@@ -155,40 +156,38 @@ const Footer = ({
             <Text sx={{ color: 'primary' }}>1234 Street, City, State</Text>
           </Box>
         </Box>
-        {Platform.OS == 'web' && (
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              flex: 1,
-            }}
-          >
-            <Text sx={{ fontSize: 30, fontWeight: 'bold', color: 'primary' }}>
-              GET OUR APP
-            </Text>
-            <SolitoImage
-              height={100}
-              width={200}
-              alt="google-play-logo"
-              src={
-                Platform.OS == 'web'
-                  ? '/images/playicon.png'
-                  : require('../../../../../../apps/expo/images/playicon.png')
-              }
-            />
-            <SolitoImage
-              height={100}
-              width={230}
-              alt="ios-logo"
-              src={
-                Platform.OS == 'web'
-                  ? '/images/iosicon.png'
-                  : require('../../../../../../apps/expo/images/iosicon.png')
-              }
-            />
-          </Box>
-        )}
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            flex: 1,
+          }}
+        >
+          <Text sx={{ fontSize: 30, fontWeight: 'bold', color: 'primary' }}>
+            GET OUR APP
+          </Text>
+          <SolitoImage
+            height={100}
+            width={200}
+            alt="google-play-logo"
+            src={
+              Platform.OS == 'web'
+                ? '/images/playicon.png'
+                : require('../../../../../../apps/expo/images/playicon.png')
+            }
+          />
+          <SolitoImage
+            height={100}
+            width={230}
+            alt="ios-logo"
+            src={
+              Platform.OS == 'web'
+                ? '/images/iosicon.png'
+                : require('../../../../../../apps/expo/images/iosicon.png')
+            }
+          />
+        </Box>
       </Box>
       <Box
         sx={{

@@ -33,6 +33,7 @@ const Drawer = createDrawerNavigator<{
   'apply/driver': undefined
   'apply/carrier': undefined
   'available-jobs': undefined
+  'fav-jobs': undefined
 }>()
 export function NativeNavigation() {
   const { theme } = useDripsyTheme()
@@ -63,6 +64,7 @@ export function NativeNavigation() {
       {routes.map((it: UniversalRoute, index: any) => {
         if (it.footerOnly) return null
         if (it.webOnly) return null
+
         return (
           <Drawer.Screen
             key={index}

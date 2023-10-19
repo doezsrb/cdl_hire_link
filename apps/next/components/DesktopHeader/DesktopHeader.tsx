@@ -119,6 +119,7 @@ const DesktopHeader = () => {
             if (it.footerOnly) return null
             if (it.hidden) return null
             if (it.webButton) return null
+            if (it.mobOnly) return null
             return (
               <TouchableOpacity
                 key={index}

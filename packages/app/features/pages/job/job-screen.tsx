@@ -61,10 +61,14 @@ export function JobScreen({ navigation }: any) {
         >
           <View
             sx={{
-              minHeight: Dimensions.get('window').height,
+              minHeight:
+                Platform.OS == 'web'
+                  ? Dimensions.get('window').height
+                  : Dimensions.get('window').height / 2,
               paddingBottom: 50,
               width: '100%',
               display: 'flex',
+
               flexDirection: 'column',
               alignItems: 'flex-start',
             }}

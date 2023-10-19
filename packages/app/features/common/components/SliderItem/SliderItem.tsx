@@ -35,7 +35,7 @@ const SliderItem = ({
       alignItems: 'center',
       bottom: 0,
       height: '100%',
-      paddingBottom: 50,
+      paddingBottom: Platform.OS == 'web' ? 50 : 100,
       justifyContent: 'flex-end',
     },
     sliderTextBox: {

@@ -212,7 +212,7 @@ export function HomeScreen({ navigation }: any) {
                     if (navigation != null) {
                       mobileLoadingContext.setLoading(true)
                       setTimeout(() => {
-                        navigation.navigate('available-jobs')
+                        navigation.navigate('Available Jobs')
                       }, 1)
                     }
                   }

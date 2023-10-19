@@ -42,7 +42,7 @@
         "UIBackgroundModes": ["fetch", "remote-notification"]
       },
       "bundleIdentifier": "com.cdlhire.link",
-      "buildNumber": "3",
+      "buildNumber": "7",
       "supportsTablet": true
     },
     "extra": {

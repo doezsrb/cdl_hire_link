@@ -1,6 +1,6 @@
 import { TextInput, View, useDripsyTheme, Text } from 'dripsy'
 import { useState, useEffect } from 'react'
-import { Platform, Pressable, StyleSheet } from 'react-native'
+import { Platform, Pressable, StyleSheet, Keyboard } from 'react-native'
 import {
   AdapterDayjs,
   DatePicker,
@@ -18,6 +18,7 @@ interface CustomInputProps {
   multiline?: boolean
   type?: 'numeric' | 'email' | 'text'
 }
+var waitForPicker = false
 const CustomInput = ({
   label,
   error,
@@ -65,12 +66,12 @@ const CustomInput = ({
         <View
           sx={{
             width: '101%',
-            height: '100%',
+            height: Platform.OS == 'ios' ? '95%' : '100%',
 
             position: 'absolute',
             zIndex: 2,
             alignItems: 'center',
-            justifyContent: 'center',
+            justifyContent: Platform.OS == 'ios' ? 'flex-end' : 'center',
           }}
         >
           <DateTimePicker
@@ -84,6 +85,7 @@ const CustomInput = ({
               setOpenDatePicker(false)
               setVal(
                 date.getMonth() +
+                  1 +
                   '/' +
                   date.getDate() +
                   '/' +
@@ -91,6 +93,7 @@ const CustomInput = ({
               )
               setValue(
                 date.getMonth() +
+                  1 +
                   '/' +
                   date.getDate() +
                   '/' +
@@ -147,7 +150,12 @@ const CustomInput = ({
             inputMode={type}
             onPressIn={() => {
               if (datePicker) {
-                setOpenDatePicker(true)
+                if (waitForPicker) return
+                waitForPicker = true
+                setTimeout(() => {
+                  setOpenDatePicker(true)
+                  waitForPicker = false
+                }, 2000)
               }
             }}
             onPressOut={undefined}

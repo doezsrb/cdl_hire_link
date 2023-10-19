@@ -205,7 +205,10 @@ const AvailableJobsScreen = ({ route, navigation }: any) => {
       position: 'relative',
       display: 'flex',
       width: '100%',
-      minHeight: Dimensions.get('window').height,
+      minHeight:
+        Platform.OS == 'web'
+          ? Dimensions.get('window').height
+          : Dimensions.get('window').height / 1.5,
       backgroundColor: 'white',
       paddingVertical: '$3',
     },

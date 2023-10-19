@@ -166,4 +166,40 @@ const addData = (
       })
   })
 }
-export { addData, getData, getImage, getSingleData, getCountData, uploadImage }
+const getDataByID = (col: string, ids: string[]) => {
+  return new Promise((resolve, reject) => {
+    firestore()
+      .collection(col)
+
+      .where(firestore.FieldPath.documentId(), 'in', ids)
+      .get()
+      .then((snap: any) => {
+        var dataArray: any[] = []
+
+        snap.forEach((it: any) => {
+          var obj: any = {}
+          obj['id'] = it.id
+          obj['data'] = it.data()
+          dataArray.push(obj)
+        })
+        var responseObj = {
+          data: dataArray,
+        }
+
+        resolve(responseObj)
+      })
+      .catch((e: any) => {
+        console.log(e)
+        resolve(null)
+      })
+  })
+}
+export {
+  addData,
+  getData,
+  getImage,
+  getSingleData,
+  getCountData,
+  uploadImage,
+  getDataByID,
+}

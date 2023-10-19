@@ -163,4 +163,13 @@ const getData = (
       })
   })
 }
-export { addData, getData, getImage, getSingleData, getCountData, uploadImage }
+const getDataByID = () => {}
+export {
+  addData,
+  getData,
+  getImage,
+  getSingleData,
+  getCountData,
+  uploadImage,
+  getDataByID,
+}

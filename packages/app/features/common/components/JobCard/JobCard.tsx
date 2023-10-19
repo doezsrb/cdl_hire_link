@@ -1,5 +1,12 @@
-import { ActivityIndicator, Text, View, useSx } from 'dripsy'
-import { useEffect, useState } from 'react'
+import {
+  ActivityIndicator,
+  Pressable,
+  Text,
+  View,
+  useDripsyTheme,
+  useSx,
+} from 'dripsy'
+import { useContext, useEffect, useState } from 'react'
 import {
   PixelRatio,
   Platform,
@@ -10,6 +17,8 @@ import { SolitoImage } from 'solito/image'
 import { getImage } from '../../functions/firestore'
 import { useRouter } from 'solito/router'
 import ImageLoader from '../ImageLoader/ImageLoader'
+import FavoriteIcon from '../Icons/FavoriteIcon'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 interface JobCardProps {
   name: string
@@ -20,12 +29,28 @@ interface JobCardProps {
 }
 const JobCard = ({ name, imageName, id, tags, types }: JobCardProps) => {
   const router = useRouter()
+
   const [image, setImage] = useState<any>(null)
   const [loading, setLoading] = useState(true)
   const [base64, setBase64] = useState<any>(null)
+  const [fav, setFav] = useState(false)
   const sx = useSx()
-
+  const { theme } = useDripsyTheme()
   useEffect(() => {
+    if (Platform.OS != 'web') {
+      AsyncStorage.getItem('fav').then((res: any) => {
+        if (res != null) {
+          var oldArr: any = JSON.parse(res)
+          if (oldArr.includes(id)) {
+            setFav(true)
+          } else {
+            setFav(false)
+          }
+        } else {
+          setFav(false)
+        }
+      })
+    }
     getImage(imageName)
       .then((res: any) => {
         setImage(res)
@@ -106,6 +131,39 @@ const JobCard = ({ name, imageName, id, tags, types }: JobCardProps) => {
       </View>
     )
   }
+  const favMethod = () => {
+    AsyncStorage.getItem('fav')
+      .then((res: any) => {
+        if (res != null) {
+          var oldArr = JSON.parse(res)
+          var index = oldArr.indexOf(id)
+          if (index == -1) {
+            oldArr.push(id)
+            AsyncStorage.setItem('fav', JSON.stringify(oldArr))
+              .then(() => {
+                setFav(true)
+              })
+              .catch(() => {})
+          } else {
+            oldArr.splice(index, 1)
+            AsyncStorage.setItem('fav', JSON.stringify(oldArr))
+              .then(() => {
+                setFav(false)
+              })
+              .catch(() => {})
+          }
+        } else {
+          var newArr: any[] = []
+          newArr.push(id)
+          AsyncStorage.setItem('fav', JSON.stringify(newArr))
+            .then(() => {
+              setFav(true)
+            })
+            .catch(() => {})
+        }
+      })
+      .catch(() => {})
+  }
   return (
     <View sx={style.container}>
       <TouchableOpacity
@@ -116,7 +174,7 @@ const JobCard = ({ name, imageName, id, tags, types }: JobCardProps) => {
         <View
           sx={{
             display: 'flex',
-            height: ['auto', 'auto', 420],
+            height: ['auto', 'auto', Platform.OS == 'web' ? 420 : 470],
             flexDirection: 'column',
           }}
         >
@@ -166,6 +224,19 @@ const JobCard = ({ name, imageName, id, tags, types }: JobCardProps) => {
               {tags.map((it: any, index: any) => Tag(it.value, index + 'tags'))}
             </View>
           </View>
+          {Platform.OS != 'web' && (
+            <View sx={{ width: '100%', height: 30, mt: 20 }}>
+              <Pressable
+                onPress={() => {
+                  favMethod()
+                }}
+              >
+                <FavoriteIcon
+                  color={fav ? theme.colors.secondary : 'lightgray'}
+                />
+              </Pressable>
+            </View>
+          )}
         </View>
       </TouchableOpacity>
     </View>

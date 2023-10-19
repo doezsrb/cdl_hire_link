@@ -21,6 +21,7 @@ const ThankYouApply = ({ close }: { close: Function }) => {
       transparent
       onRequestClose={() => {
         close()
+        router.push('/')
       }}
     >
       <View

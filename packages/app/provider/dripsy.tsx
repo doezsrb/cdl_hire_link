@@ -113,9 +113,10 @@ const theme = makeTheme({
       textAlign: 'center',
     },
     menuText: {
-      fontSize: 23,
+      fontSize: 20,
       paddingTop: 5,
-      color: 'white',
+
+      color: 'secondary',
       textAlign: 'center',
     },
 

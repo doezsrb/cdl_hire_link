@@ -26,9 +26,9 @@ const HeaderImage = ({ url, children }: HeaderImageProps) => {
           : 'black',
       shadowRadius: 14,
       shadowOpacity: 0.8,
-      elevation: 9,
+      elevation: 20,
       width: '100%',
-      height: Dimensions.get('window').height / 2,
+      height: Dimensions.get('window').height / 3,
       zIndex: 1,
     },
     sliderTextBox: {

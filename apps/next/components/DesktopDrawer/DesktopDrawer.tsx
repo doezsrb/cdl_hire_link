@@ -67,6 +67,7 @@ const DesktopDrawer = ({ openDrawer, setOpenDrawer }: DesktopDrawerProps) => {
           {routes.map((it: UniversalRoute, index: any) => {
             if (it.footerOnly) return null
             if (it.hidden) return null
+            if (it.mobOnly) return null
             return (
               <ListItem disablePadding key={index}>
                 <ListItemButton

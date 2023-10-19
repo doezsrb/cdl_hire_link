@@ -48,7 +48,8 @@ const WhyChooseCard = ({
       width: [null, null, '60%'] as any,
       fontSize: 18,
       color: 'primary',
-      textAlign: 'left',
+
+      textAlign: ['center', 'left'] as any,
     },
   })
   return (
