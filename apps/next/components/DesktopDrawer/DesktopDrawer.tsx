@@ -37,7 +37,7 @@ const DesktopDrawer = ({ openDrawer, setOpenDrawer }: DesktopDrawerProps) => {
     container: {
       width: 300,
       display: 'flex',
-      height: Dimensions.get('window').height,
+      height: '100%',
       backgroundColor: 'primary',
       paddingTop: 20,
     },
