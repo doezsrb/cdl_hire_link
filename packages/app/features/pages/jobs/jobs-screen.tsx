@@ -272,7 +272,7 @@ const AvailableJobsScreen = ({ route, navigation }: any) => {
                     flexDirection: ['column', 'row'],
                     rowGap: 15,
 
-                    width: 'auto',
+                    width: ['100%', '100%', 'auto'],
                     columnGap: [
                       null,
 
