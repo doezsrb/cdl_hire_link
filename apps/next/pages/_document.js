@@ -5,6 +5,7 @@ import * as React from 'react'
 import { AppRegistry } from 'react-native'
 
 export const style = `
+
 /**
  * Building on the RNWeb reset:
  * https://github.com/necolas/react-native-web/blob/master/packages/react-native-web/src/exports/StyleSheet/initialRules.js
@@ -26,13 +27,17 @@ html, body, #__next {
   display: flex;
   flex: 1;
 }
+
 html {
+  
   scroll-behavior: smooth;
   /* Prevent text size change on orientation change https://gist.github.com/tfausak/2222823#file-ios-8-web-app-html-L138 */
   -webkit-text-size-adjust: 100%;
   height: 100%;
 }
 body {
+  
+
   display: flex;
   /* Allows you to scroll below the viewport; default value is visible */
   overflow-y: auto;
@@ -61,6 +66,12 @@ export class Document extends NextDocument {
       <Html>
         <Head>
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+          <link
+            rel="preload"
+            href="/fonts/gantari.ttf"
+            as="font"
+            crossOrigin=""
+          />
         </Head>
         <body>
           <Main />

@@ -1,6 +1,13 @@
+import { Fonts } from 'app/features/common/functions/fonts'
 import { DripsyProvider, makeTheme } from 'dripsy'
 import { Dimensions, PixelRatio, Platform } from 'react-native'
 
+const webFont = (font: string) =>
+  Platform.select({
+    web: `Gantari`,
+    default: font,
+  })
+const fontName = 'gantari'
 const primary = '#005199'
 const secondary = '#66CC8F'
 const BASE_WIDTH = 414
@@ -45,6 +52,16 @@ export const normalize = (size: any, based = 'width') => {
 }; */
 const theme = makeTheme({
   // https://www.dripsy.xyz/usage/theming/create
+  customFonts: {
+    [fontName]: {
+      400: webFont(fontName),
+      default: webFont(fontName),
+      normal: webFont(fontName),
+    },
+  },
+  fonts: {
+    root: webFont(fontName),
+  },
   colors: {
     primary: primary,
     secondary: secondary,
@@ -138,12 +155,14 @@ declare module 'dripsy' {
 }
 export function Dripsy({ children }: { children: React.ReactNode }) {
   return (
-    <DripsyProvider
-      theme={theme}
-      // this disables SSR, since react-native-web doesn't have support for it (yet)
-      ssr
-    >
-      {children}
-    </DripsyProvider>
+    <Fonts>
+      <DripsyProvider
+        theme={theme}
+        // this disables SSR, since react-native-web doesn't have support for it (yet)
+        ssr
+      >
+        {children}
+      </DripsyProvider>
+    </Fonts>
   )
 }

@@ -79,7 +79,7 @@ const AboutScreen = ({ navigation }: any) => {
     paragraph: {
       fontSize: 20,
       color: 'primary',
-      textAlign: ['center', 'center', 'center', 'left'] as any,
+      textAlign: ['center', 'center', 'left', 'left'] as any,
     },
     textBox: {
       width: '100%',

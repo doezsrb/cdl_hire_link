@@ -304,8 +304,7 @@ const DesktopHeader = () => {
           </TouchableOpacity> */}
         </View>
         <View sx={style.numbers}>
-          <Text sx={style.numberStyle}>+38115256126126</Text>
-          <Text sx={style.numberStyle}>+3812412596823</Text>
+          <Text sx={style.numberStyle}>(708) 853-5299</Text>
         </View>
         <View sx={style.hamburgerBox}>
           <TouchableOpacity onPress={() => setOpenDrawer(true)}>

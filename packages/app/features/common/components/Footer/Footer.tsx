@@ -151,7 +151,7 @@ const Footer = ({
             >
               ABOUT US
             </Text>
-            <Text sx={{ color: 'primary' }}>+123 1323 13213</Text>
+            <Text sx={{ color: 'primary' }}>(708) 853-5299</Text>
             <Text sx={{ color: 'primary' }}>info@cdlhirelink.com</Text>
             <Text sx={{ color: 'primary' }}>1234 Street, City, State</Text>
           </Box>

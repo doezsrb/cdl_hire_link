@@ -31,15 +31,7 @@ const DrawerContact = () => {
             fontSize: 24,
           }}
         >
-          +38115256126126
-        </Text>
-        <Text
-          sx={{
-            color: 'secondary',
-            fontSize: 24,
-          }}
-        >
-          +3812412596823
+          (708) 853-5299
         </Text>
       </View>
       <View

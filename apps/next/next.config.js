@@ -26,9 +26,11 @@ const nextConfig = {
     'react-native-bouncy-checkbox',
     '@react-native-community/netinfo',
   ],
+
   images: {
     domains: ['firebasestorage.googleapis.com'],
   },
+
   async headers() {
     return [
       {

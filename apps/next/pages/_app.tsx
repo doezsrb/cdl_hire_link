@@ -1,6 +1,6 @@
 import 'raf/polyfill'
 import 'setimmediate'
-
+import '../styles/global.css'
 import { Provider } from 'app/provider'
 import Head from 'next/head'
 import React, { useContext, useEffect, useState } from 'react'
@@ -64,6 +64,7 @@ function MyApp({ Component, pageProps }: SolitoAppProps) {
         <Provider>
           <DesktopHeader />
           <View style={{ height: 80 }} />
+
           <Component {...pageProps} />
         </Provider>
       </LoadingProvider>
