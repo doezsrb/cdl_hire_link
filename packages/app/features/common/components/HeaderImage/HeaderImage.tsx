@@ -1,16 +1,33 @@
-import { ActivityIndicator, Text, View, useDripsyTheme, useSx } from 'dripsy'
+import {
+  ActivityIndicator,
+  Pressable,
+  Text,
+  View,
+  useDripsyTheme,
+  useSx,
+} from 'dripsy'
 import FrontSlider from '../FrontSlider/FrontSlider'
-import { Dimensions, PixelRatio, Platform, StyleSheet } from 'react-native'
+import {
+  Dimensions,
+  PixelRatio,
+  Platform,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native'
 import { SolitoImage } from 'solito/image'
 import { useState } from 'react'
 import ImageLoader from '../ImageLoader/ImageLoader'
+import BackIcon from '../Icons/BackIcon'
+import { useRouter } from 'solito/router'
 
 interface HeaderImageProps {
   url: string | null
   children: any
+  job?: boolean
 }
-const HeaderImage = ({ url, children }: HeaderImageProps) => {
+const HeaderImage = ({ url, children, job = false }: HeaderImageProps) => {
   const { theme } = useDripsyTheme()
+  const router = useRouter()
   const sx = useSx()
   const [loading, setLoading] = useState(true)
   const style = StyleSheet.create({
@@ -28,7 +45,14 @@ const HeaderImage = ({ url, children }: HeaderImageProps) => {
       shadowOpacity: 0.8,
       elevation: 20,
       width: '100%',
-      height: Dimensions.get('window').height / 3,
+      height: job
+        ? Dimensions.get('window').height / 2
+        : ([
+            Dimensions.get('window').height / 3,
+            Dimensions.get('window').height / 3,
+            Dimensions.get('window').height / 3,
+            Dimensions.get('window').height / 2,
+          ] as any),
       zIndex: 1,
     },
     sliderTextBox: {
@@ -80,6 +104,23 @@ const HeaderImage = ({ url, children }: HeaderImageProps) => {
           />
         )}
       </View>
+      {job && (
+        <Pressable
+          sx={{
+            width: 40,
+            height: 40,
+            mt: 30,
+            ml: 20,
+            zIndex: 3,
+            position: 'absolute',
+          }}
+          onPress={() => {
+            router.back()
+          }}
+        >
+          <BackIcon width={40} color={theme.colors.secondary} />
+        </Pressable>
+      )}
 
       {children}
     </View>

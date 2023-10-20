@@ -10,6 +10,7 @@ import {
 import { SolitoImage } from 'solito/image'
 import { RxHamburgerMenu } from 'react-icons/rx'
 import Logo from 'app/features/common/components/Logo/logo'
+
 import { useRouter } from 'next/router'
 import {
   Drawer,

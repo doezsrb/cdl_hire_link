@@ -24,7 +24,6 @@ const FilterDrawerDesktop = ({
   const { theme } = useDripsyTheme()
   return (
     <Drawer
-      disableScrollLock={true}
       open={open}
       anchor="left"
       onClose={() => setOpen(false)}

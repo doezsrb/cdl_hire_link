@@ -2,6 +2,7 @@ import { View, Text } from 'dripsy'
 import ApplyStepInd from '../ApplyStepInd/ApplyStepInd'
 import { Platform, StyleSheet } from 'react-native'
 import { SolitoImage } from 'solito/image'
+import { normalize } from 'app/provider/dripsy'
 
 interface ApplyCardProps {
   title: string
@@ -14,6 +15,7 @@ const ApplyCard = ({ title, step, button }: ApplyCardProps) => {
     childContainer: {
       flex: 1,
       paddingBottom: 20,
+
       alignItems: 'center',
     },
     image: {
@@ -57,7 +59,7 @@ const ApplyCard = ({ title, step, button }: ApplyCardProps) => {
         <View
           sx={{
             width: '100%',
-            height: 80,
+            height: [90, 80, 100],
             justifyContent: 'center',
             alignItems: 'center',
           }}
@@ -69,16 +71,23 @@ const ApplyCard = ({ title, step, button }: ApplyCardProps) => {
           sx={{
             width: '100%',
 
-            height: 40,
+            height: [40, 40, 80, 80, 40],
             alignItems: 'center',
             justifyContent: 'center',
           }}
         >
-          <View sx={{ flexDirection: 'column' }}>
+          <View
+            sx={{
+              borderWidth: 2,
+              borderRadius: 20,
+              borderColor: 'secondary',
+              alignItems: 'center',
+              justifyContent: 'center',
+              paddingHorizontal: 10,
+              paddingVertical: normalize(3, 'height'),
+            }}
+          >
             {button}
-            <View
-              sx={{ width: 'auto', height: 3, backgroundColor: 'secondary' }}
-            />
           </View>
         </View>
       </View>

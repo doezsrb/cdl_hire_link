@@ -6,20 +6,19 @@ import {
 } from '@react-navigation/drawer'
 
 import { useContext, useEffect } from 'react'
-import { View, Text } from 'dripsy'
+import { View, Text, useDripsyTheme } from 'dripsy'
 import Logo from 'app/features/common/components/Logo/logo'
 import BurgerIcon from 'app/features/common/components/Icons/BurgerIcon'
 
 import MobileLoadingContext from '../../context/mobileLoadingContext'
 import routes, { UniversalRoute } from 'app/features/common/routes'
-import FacebookIcon from 'app/features/common/components/Icons/FacebookIcon'
-import InstaIcon from 'app/features/common/components/Icons/InstaIcon'
-
+import DrawerContact from 'app/features/common/components/DrawerContact/DrawerContact'
 interface DrawerMenuProps {
   drawerProps: DrawerContentComponentProps
 }
 const DrawerMenu = ({ drawerProps }: DrawerMenuProps) => {
   const mobileLoadingContext: any = useContext(MobileLoadingContext)
+  const { theme } = useDripsyTheme()
   useEffect(() => {}, [])
   return (
     <DrawerContentScrollView style={{ backgroundColor: '#005199', padding: 5 }}>
@@ -50,7 +49,7 @@ const DrawerMenu = ({ drawerProps }: DrawerMenuProps) => {
           <DrawerItem
             focused={focused}
             key={index}
-            labelStyle={{ color: focused ? '#66CC8F' : 'white' }}
+            labelStyle={{ color: focused ? 'white' : theme.colors.secondary }}
             label={title == undefined ? '' : title.toUpperCase()}
             onPress={() => {
               if (focused) return
@@ -63,28 +62,7 @@ const DrawerMenu = ({ drawerProps }: DrawerMenuProps) => {
           />
         )
       })}
-      {/* <View
-        sx={{
-          width: '100%',
-          height: 1,
-          justifyContent: 'flex-end',
-          backgroundColor: 'secondary',
-        }}
-      /> */}
-
-      {/*  <View
-        sx={{
-          display: 'flex',
-          flexDirection: 'row',
-          alignItems: 'center',
-
-          gap: 10,
-          justifyContent: 'center',
-        }}
-      >
-        <FacebookIcon width={60} />
-        <InstaIcon width={60} />
-      </View> */}
+      <DrawerContact />
     </DrawerContentScrollView>
   )
 }

@@ -264,20 +264,22 @@ const AvailableJobsScreen = ({ route, navigation }: any) => {
                 </Text>
               </CenteredBox>
             ) : (
-              <View sx={{ width: '100%' }}>
+              <View sx={{ width: '100%', alignItems: 'center' }}>
                 <View
                   sx={{
                     mt: '$3',
                     display: 'flex',
                     flexDirection: ['column', 'row'],
                     rowGap: 15,
+
+                    width: 'auto',
                     columnGap: [
                       null,
 
                       (1.2 / 100) * Dimensions.get('window').width,
                     ],
                     flexWrap: 'wrap',
-                    width: '100%',
+
                     paddingHorizontal: '$3',
                   }}
                 >

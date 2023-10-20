@@ -11,6 +11,8 @@ import { Dimensions, StyleSheet } from 'react-native'
 import { useRouter } from 'next/router'
 import { useDripsyTheme } from 'dripsy'
 import routes, { UniversalRoute } from 'app/features/common/routes'
+import DrawerContact from 'app/features/common/components/DrawerContact/DrawerContact'
+
 interface DesktopDrawerProps {
   openDrawer: boolean
   setOpenDrawer: Function
@@ -22,7 +24,7 @@ const DesktopDrawer = ({ openDrawer, setOpenDrawer }: DesktopDrawerProps) => {
     divider: {
       width: '100%',
       height: 1,
-      backgroundColor: 'white',
+      backgroundColor: 'secondary',
       marginTop: 20,
       marginBottom: 20,
     },
@@ -42,27 +44,23 @@ const DesktopDrawer = ({ openDrawer, setOpenDrawer }: DesktopDrawerProps) => {
       paddingTop: 20,
     },
     numberStyleDrawer: {
-      color: 'white',
+      color: 'secondary',
       fontSize: 24,
     },
     numbersDrawer: {
       display: 'flex',
+      gap: 10,
       flexDirection: 'column',
       alignItems: 'center',
     },
   })
   return (
     <Drawer
-      disableScrollLock={true}
       open={openDrawer}
       anchor="right"
       onClose={() => setOpenDrawer(false)}
     >
       <View sx={style.container}>
-        <View sx={style.logo}>
-          <Logo />
-        </View>
-        <View sx={style.divider} />
         <List>
           {routes.map((it: UniversalRoute, index: any) => {
             if (it.footerOnly) return null
@@ -80,8 +78,8 @@ const DesktopDrawer = ({ openDrawer, setOpenDrawer }: DesktopDrawerProps) => {
                     sx={{
                       color:
                         router.route == it.webLink
-                          ? theme.colors.secondary
-                          : 'white',
+                          ? 'white'
+                          : theme.colors.secondary,
                     }}
                     primary={it.title.toUpperCase()}
                   />
@@ -174,11 +172,7 @@ const DesktopDrawer = ({ openDrawer, setOpenDrawer }: DesktopDrawerProps) => {
             </ListItemButton>
           </ListItem> */}
         </List>
-        <View sx={style.divider} />
-        <View sx={style.numbersDrawer}>
-          <Text sx={style.numberStyleDrawer}>+38115256126126</Text>
-          <Text sx={style.numberStyleDrawer}>+3812412596823</Text>
-        </View>
+        <DrawerContact />
       </View>
     </Drawer>
   )

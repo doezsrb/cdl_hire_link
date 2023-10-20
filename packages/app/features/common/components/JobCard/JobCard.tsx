@@ -68,7 +68,7 @@ const JobCard = ({ name, imageName, id, tags, types }: JobCardProps) => {
       paddingTop: '$2',
       justifyContent: 'space-between',
 
-      width: ['100%', '100%', '49%', '49.3%', '32.5%'] as any,
+      width: ['100%', '100%', '48.6%', '49%', '32.4%'] as any,
 
       shadowOffset: { width: 0, height: 5 },
       shadowColor:

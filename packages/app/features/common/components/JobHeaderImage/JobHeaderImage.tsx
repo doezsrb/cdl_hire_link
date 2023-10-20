@@ -33,7 +33,7 @@ const JobHeaderImage = ({
     },
   })
   return (
-    <HeaderImage url={jobscreenimage}>
+    <HeaderImage url={jobscreenimage} job>
       <View sx={style.sliderTextContainer}>
         <Text variant="sliderText">{title}</Text>
         <Text sx={{ color: 'lightgray', fontSize: 18 }}>

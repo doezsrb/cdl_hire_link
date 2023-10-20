@@ -73,6 +73,7 @@ export function NativeNavigation() {
               /* var job = route['params']['job'] */
               return {
                 title: it.title,
+                unmountOnBlur: it.mobileName == 'job',
               }
             }}
             initialParams={it.initialParams as any}
