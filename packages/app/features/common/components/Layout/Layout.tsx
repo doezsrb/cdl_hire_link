@@ -139,10 +139,17 @@ const Layout = ({
           : require('../../../../../../apps/expo/images/background2.jpg'),
     }, */
     {
-      text: 'LOOKING FOR A JOB? YOU ARE ON THE RIGHT PLACE!',
+      text: 'LOOKING FOR A JOB?',
       img:
         Platform.OS == 'web'
           ? '/images/background2.jpg'
+          : require('../../../../../../apps/expo/images/background2.jpg'),
+    },
+    {
+      text: 'YOU ARE ON THE RIGHT PLACE!',
+      img:
+        Platform.OS == 'web'
+          ? '/images/newback.jpg'
           : require('../../../../../../apps/expo/images/background2.jpg'),
     },
   ]
