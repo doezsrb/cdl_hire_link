@@ -72,6 +72,12 @@ export function NativeNavigation() {
             options={({ route }) => {
               /* var job = route['params']['job'] */
               return {
+                drawerIcon: ({ color, size, focused }) => (
+                  <it.icon
+                    color={focused ? 'white' : theme.colors.secondary}
+                    width={30}
+                  />
+                ),
                 title: it.title,
                 unmountOnBlur: it.mobileName == 'job',
               }

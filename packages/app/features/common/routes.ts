@@ -1,3 +1,9 @@
+import AboutUsIcon from './components/Icons/AboutUsIcon'
+import ApplyIcon from './components/Icons/ApplyIcon'
+import ContactUsIcon from './components/Icons/ContactUsIcon'
+import FavoriteIcon from './components/Icons/FavoriteIcon'
+import HomeIcon from './components/Icons/HomeIcon'
+import JobsIcon from './components/Icons/JobsIcon'
 export type UniversalRoute = {
   mobileName: string
   title: string
@@ -9,6 +15,7 @@ export type UniversalRoute = {
   footerOnly: boolean
   webOnly: boolean
   mobOnly: boolean
+  icon: any
 }
 
 const routes: UniversalRoute[] = [
@@ -23,6 +30,7 @@ const routes: UniversalRoute[] = [
     footerOnly: false,
     webOnly: false,
     mobOnly: true,
+    icon: HomeIcon,
   },
   {
     mobileName: 'favorite-jobs',
@@ -35,6 +43,7 @@ const routes: UniversalRoute[] = [
     footerOnly: false,
     webOnly: false,
     mobOnly: true,
+    icon: FavoriteIcon,
   },
   {
     mobileName: 'home',
@@ -47,10 +56,11 @@ const routes: UniversalRoute[] = [
     footerOnly: false,
     webOnly: true,
     mobOnly: false,
+    icon: HomeIcon,
   },
   {
     mobileName: 'available-jobs',
-    title: 'Jobs',
+    title: 'Available Jobs',
     component: 'AvailableJobsScreen',
     initialParams: {},
     webLink: '/available-jobs',
@@ -59,6 +69,7 @@ const routes: UniversalRoute[] = [
     footerOnly: false,
     webOnly: true,
     mobOnly: false,
+    icon: JobsIcon,
   },
   {
     mobileName: 'job',
@@ -71,6 +82,7 @@ const routes: UniversalRoute[] = [
     footerOnly: false,
     webOnly: false,
     mobOnly: false,
+    icon: JobsIcon,
   },
   {
     mobileName: 'apply/driver',
@@ -83,6 +95,7 @@ const routes: UniversalRoute[] = [
     footerOnly: false,
     webOnly: false,
     mobOnly: false,
+    icon: ApplyIcon,
   },
   {
     mobileName: 'apply/carrier',
@@ -95,6 +108,7 @@ const routes: UniversalRoute[] = [
     footerOnly: false,
     webOnly: false,
     mobOnly: false,
+    icon: ApplyIcon,
   },
   {
     mobileName: 'about-us',
@@ -107,6 +121,7 @@ const routes: UniversalRoute[] = [
     footerOnly: false,
     webOnly: false,
     mobOnly: false,
+    icon: AboutUsIcon,
   },
   {
     mobileName: 'contact-us',
@@ -119,6 +134,7 @@ const routes: UniversalRoute[] = [
     footerOnly: false,
     webOnly: false,
     mobOnly: false,
+    icon: ContactUsIcon,
   },
   {
     mobileName: 'privacy-policy',
@@ -131,6 +147,7 @@ const routes: UniversalRoute[] = [
     footerOnly: true,
     webOnly: true,
     mobOnly: false,
+    icon: AboutUsIcon,
   },
 ]
 

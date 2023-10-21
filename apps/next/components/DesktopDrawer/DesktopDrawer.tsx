@@ -6,6 +6,7 @@ import {
   ListItemButton,
   ListItemText,
 } from 'app/features/common/functions/mateiralui'
+import ListItemIcon from '@mui/material/ListItemIcon'
 import Logo from 'app/features/common/components/Logo/logo'
 import { Dimensions, StyleSheet } from 'react-native'
 import { useRouter } from 'next/router'
@@ -74,6 +75,18 @@ const DesktopDrawer = ({ openDrawer, setOpenDrawer }: DesktopDrawerProps) => {
                     setOpenDrawer(false)
                   }}
                 >
+                  <ListItemIcon>
+                    {
+                      <it.icon
+                        width={30}
+                        color={
+                          router.route == it.webLink
+                            ? 'white'
+                            : theme.colors.secondary
+                        }
+                      />
+                    }
+                  </ListItemIcon>
                   <ListItemText
                     sx={{
                       color:

@@ -33,6 +33,7 @@ const SliderItem = ({
       flexDirection: 'column',
       width: '100%',
       alignItems: 'center',
+
       bottom: 0,
       height: '100%',
       paddingBottom: Platform.OS == 'web' ? 50 : 100,

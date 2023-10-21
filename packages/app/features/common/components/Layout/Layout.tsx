@@ -150,7 +150,7 @@ const Layout = ({
       img:
         Platform.OS == 'web'
           ? '/images/newback.jpg'
-          : require('../../../../../../apps/expo/images/background2.jpg'),
+          : require('../../../../../../apps/expo/images/newback.jpg'),
     },
   ]
   return (

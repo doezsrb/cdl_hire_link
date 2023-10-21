@@ -34,9 +34,9 @@ const FrontSlider = ({
   }
   return (
     <Carousel
-      autoplayInterval={5000}
+      autoplayInterval={4000}
       autoplay
-      autoplayDelay={5000}
+      autoplayDelay={4000}
       ref={isCarousel}
       data={items}
       renderItem={renderItem}

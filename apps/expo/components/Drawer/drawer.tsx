@@ -13,6 +13,7 @@ import BurgerIcon from 'app/features/common/components/Icons/BurgerIcon'
 import MobileLoadingContext from '../../context/mobileLoadingContext'
 import routes, { UniversalRoute } from 'app/features/common/routes'
 import DrawerContact from 'app/features/common/components/DrawerContact/DrawerContact'
+import ContactUsIcon from 'app/features/common/components/Icons/ContactUsIcon'
 interface DrawerMenuProps {
   drawerProps: DrawerContentComponentProps
 }
@@ -49,6 +50,7 @@ const DrawerMenu = ({ drawerProps }: DrawerMenuProps) => {
           <DrawerItem
             focused={focused}
             key={index}
+            icon={drawerIcon}
             labelStyle={{ color: focused ? 'white' : theme.colors.secondary }}
             label={title == undefined ? '' : title.toUpperCase()}
             onPress={() => {
