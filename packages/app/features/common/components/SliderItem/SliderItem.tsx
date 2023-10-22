@@ -39,10 +39,7 @@ const SliderItem = ({
       paddingBottom: Platform.OS == 'web' ? 50 : 100,
       justifyContent: 'flex-end',
     },
-    sliderTextBox: {
-      paddingLeft: [50, Platform.OS == 'web' ? '20vw' : 50] as any,
-      paddingRight: [50, Platform.OS == 'web' ? '20vw' : 50] as any,
-    },
+    sliderTextBox: {},
     sliderButtonContainer: {
       width: '100%',
       alignItems: 'center',
