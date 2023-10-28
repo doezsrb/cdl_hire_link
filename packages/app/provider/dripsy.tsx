@@ -54,6 +54,7 @@ const theme = makeTheme({
   // https://www.dripsy.xyz/usage/theming/create
   customFonts: {
     [fontName]: {
+      bold: webFont(fontName),
       400: webFont(fontName),
       default: webFont(fontName),
       normal: webFont(fontName),

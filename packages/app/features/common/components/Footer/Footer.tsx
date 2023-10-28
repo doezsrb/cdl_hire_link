@@ -153,7 +153,9 @@ const Footer = ({
             </Text>
             <Text sx={{ color: 'primary' }}>(708) 853-5299</Text>
             <Text sx={{ color: 'primary' }}>info@cdlhirelink.com</Text>
-            <Text sx={{ color: 'primary' }}>1234 Street, City, State</Text>
+            <Text sx={{ color: 'primary' }}>
+              650 Warrenville, Lisle, IL 60532
+            </Text>
           </Box>
         </Box>
         <Box

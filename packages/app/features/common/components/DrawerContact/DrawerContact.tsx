@@ -24,7 +24,7 @@ const DrawerContact = () => {
           alignItems: 'center',
         }}
       >
-        <PhoneIcon width={60} color={theme.colors.secondary} />
+        <PhoneIcon width={40} color={theme.colors.secondary} />
         <Text
           sx={{
             color: 'secondary',

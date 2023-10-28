@@ -12,6 +12,8 @@ import Logo from 'app/features/common/components/Logo/logo'
 import TruckIcon1 from 'app/features/common/components/TruckIcon/TruckIcon1'
 import TruckIcon2 from 'app/features/common/components/TruckIcon/TruckIcon2'
 import TruckIcon3 from 'app/features/common/components/TruckIcon/TruckIcon3'
+import LocationIcon from 'app/features/common/components/Icons/LocationIcon'
+import PhoneIcon from 'app/features/common/components/Icons/PhoneIcon'
 
 const AboutScreen = ({ navigation }: any) => {
   const { theme } = useDripsyTheme()
@@ -45,8 +47,8 @@ const AboutScreen = ({ navigation }: any) => {
       flexDirection: 'column',
       alignItems: 'center',
       gap: '$4' as any,
-
-      paddingVertical: '$5',
+      paddingTop: '$3',
+      paddingBottom: '$5',
     },
     ourStoryContainer: {
       width: '100%',
@@ -93,6 +95,46 @@ const AboutScreen = ({ navigation }: any) => {
     <Layout navigation={navigation} title={'ABOUT US'}>
       <View>
         <View sx={style.whiteBoxParent}>
+          <View
+            sx={{
+              width: '100%',
+
+              display: 'flex',
+              gap: 10,
+              alignItems: ['center', 'center'],
+              flexDirection: ['column', 'column', 'row'],
+              justifyContent: 'center',
+            }}
+          >
+            <View
+              sx={{
+                display: 'flex',
+                height: 20,
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <LocationIcon width={20} color={theme.colors.primary} />
+              <Text sx={{ color: 'primary', fontSize: 16 }}>
+                650 Warrenville, Lisle, IL 60532
+              </Text>
+            </View>
+            <View
+              sx={{
+                display: 'flex',
+                height: 20,
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <PhoneIcon width={20} color={theme.colors.primary} />
+              <Text sx={{ color: 'primary', fontSize: 16 }}>
+                (708) 853-5299
+              </Text>
+            </View>
+          </View>
           <View sx={style.ourStoryContainer}>
             <View sx={style.circleBox}>
               <View sx={style.circle}>
