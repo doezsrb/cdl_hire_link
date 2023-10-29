@@ -1,11 +1,11 @@
 import Layout from 'app/features/common/components/Layout/Layout'
 
 import routerListener from 'app/features/common/functions/routerListener'
-import { Text, TextInput, View, useDripsyTheme, useSx } from 'dripsy'
+import { Text, TextInput, View, useDripsyTheme, useSx, Pressable } from 'dripsy'
 import { useContext, useEffect, useState } from 'react'
 
 import MobileLoadingContext from '../../../../../apps/expo/context/mobileLoadingContext'
-import { Dimensions, StyleSheet, Platform } from 'react-native'
+import { Dimensions, StyleSheet, Platform, Linking } from 'react-native'
 import AboutUsChooseCard from 'app/features/common/components/AboutUsChooseCard/AboutUsChooseCard'
 import { SolitoImage } from 'solito/image'
 import Logo from 'app/features/common/components/Logo/logo'
@@ -120,7 +120,10 @@ const AboutScreen = ({ navigation }: any) => {
                 650 Warrenville, Lisle, IL 60532
               </Text>
             </View>
-            <View
+            <Pressable
+              onPress={() => {
+                Linking.openURL('tel:+17088535299')
+              }}
               sx={{
                 display: 'flex',
                 height: 20,
@@ -133,7 +136,7 @@ const AboutScreen = ({ navigation }: any) => {
               <Text sx={{ color: 'primary', fontSize: 16 }}>
                 (708) 853-5299
               </Text>
-            </View>
+            </Pressable>
           </View>
           <View sx={style.ourStoryContainer}>
             <View sx={style.circleBox}>

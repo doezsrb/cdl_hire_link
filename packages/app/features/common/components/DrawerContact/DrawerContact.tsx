@@ -1,8 +1,8 @@
-import { View, Text, useDripsyTheme } from 'dripsy'
+import { View, Text, useDripsyTheme, Pressable } from 'dripsy'
 import PhoneIcon from '../Icons/PhoneIcon'
 import FacebookIcon from '../Icons/FacebookIcon'
 import InstaIcon from '../Icons/InstaIcon'
-
+import { Linking } from 'react-native'
 const DrawerContact = () => {
   const { theme } = useDripsyTheme()
   return (
@@ -15,7 +15,10 @@ const DrawerContact = () => {
           backgroundColor: 'secondary',
         }}
       />
-      <View
+      <Pressable
+        onPress={() => {
+          Linking.openURL('tel:+17088535299')
+        }}
         sx={{
           mt: 10,
           display: 'flex',
@@ -25,6 +28,7 @@ const DrawerContact = () => {
         }}
       >
         <PhoneIcon width={40} color={theme.colors.secondary} />
+
         <Text
           sx={{
             color: 'secondary',
@@ -33,7 +37,7 @@ const DrawerContact = () => {
         >
           (708) 853-5299
         </Text>
-      </View>
+      </Pressable>
       <View
         sx={{
           mt: 10,

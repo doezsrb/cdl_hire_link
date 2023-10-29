@@ -1,5 +1,11 @@
 import { Box, Text, useSx } from 'dripsy'
-import { Dimensions, Platform, Pressable, TouchableOpacity } from 'react-native'
+import {
+  Dimensions,
+  Linking,
+  Platform,
+  Pressable,
+  TouchableOpacity,
+} from 'react-native'
 import FacebookIcon from '../Icons/FacebookIcon'
 import InstaIcon from '../Icons/InstaIcon'
 import Logo from '../Logo/logo'
@@ -70,14 +76,14 @@ const Footer = ({
         </Box>
         <Box
           sx={{
-            flexDirection: 'row',
-            flex: 1,
-
+            flexDirection: ['column', 'column', 'row'],
+            flex: ['', '', 1],
+            height: 'auto',
             justifyContent: 'center',
-            gap: 40,
+            gap: [20, 20, 40],
           }}
         >
-          <Box sx={{ gap: 10 }}>
+          <Box sx={{ gap: 10, alignItems: 'center' }}>
             <Text
               sx={{
                 fontSize: 25,
@@ -140,7 +146,7 @@ const Footer = ({
               <Text sx={{ color: 'primary' }}>CONTACT US</Text>
             </TouchableOpacity> */}
           </Box>
-          <Box sx={{ gap: 10 }}>
+          <Box sx={{ gap: 10, alignItems: 'center' }}>
             <Text
               sx={{
                 fontSize: 25,
@@ -151,7 +157,13 @@ const Footer = ({
             >
               ABOUT US
             </Text>
-            <Text sx={{ color: 'primary' }}>(708) 853-5299</Text>
+            <Pressable
+              onPress={() => {
+                Linking.openURL('tel:+17088535299')
+              }}
+            >
+              <Text sx={{ color: 'primary' }}>(708) 853-5299</Text>
+            </Pressable>
             <Text sx={{ color: 'primary' }}>info@cdlhirelink.com</Text>
             <Text sx={{ color: 'primary' }}>
               650 Warrenville, Lisle, IL 60532
@@ -163,6 +175,7 @@ const Footer = ({
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
+            mt: [20, 20, 0],
             flex: 1,
           }}
         >
