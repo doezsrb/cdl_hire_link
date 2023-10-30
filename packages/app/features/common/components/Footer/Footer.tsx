@@ -62,14 +62,19 @@ const Footer = ({
               display: 'flex',
               flexDirection: 'row',
               gap: 20,
+
               alignItems: 'center',
               justifyContent: 'center',
             }}
           >
-            <TouchableOpacity style={sx({ width: ['20%', '30%'] })}>
+            <TouchableOpacity
+              style={sx({ width: ['20%', '20%', '10%', '30%'] })}
+            >
               <FacebookIcon width={'100%'} />
             </TouchableOpacity>
-            <TouchableOpacity style={sx({ width: ['20%', '30%'] })}>
+            <TouchableOpacity
+              style={sx({ width: ['20%', '20%', '10%', '30%'] })}
+            >
               <InstaIcon width={'100%'} />
             </TouchableOpacity>
           </Box>
