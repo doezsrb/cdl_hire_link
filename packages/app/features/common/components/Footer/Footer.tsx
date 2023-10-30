@@ -175,6 +175,7 @@ const Footer = ({
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
+
             mt: [20, 20, 0],
             flex: 1,
           }}
@@ -182,32 +183,52 @@ const Footer = ({
           <Text sx={{ fontSize: 30, fontWeight: 'bold', color: 'primary' }}>
             GET OUR APP
           </Text>
-          <SolitoImage
-            height={100}
-            width={200}
-            alt="google-play-logo"
-            src={
-              Platform.OS == 'web'
-                ? '/images/playicon.png'
-                : require('../../../../../../apps/expo/images/playicon.png')
-            }
-          />
-          <SolitoImage
-            height={100}
-            width={230}
-            alt="ios-logo"
-            src={
-              Platform.OS == 'web'
-                ? '/images/iosicon.png'
-                : require('../../../../../../apps/expo/images/iosicon.png')
-            }
-          />
+          <Pressable
+            onPress={() => {
+              Linking.openURL(
+                'https://play.google.com/store/apps/details?id=com.cdlhire.link'
+              )
+            }}
+            style={{ height: 100, width: 200, flex: 1 }}
+          >
+            <SolitoImage
+              height={100}
+              width={200}
+              alt="google-play-logo"
+              src={
+                Platform.OS == 'web'
+                  ? '/images/playicon.png'
+                  : require('../../../../../../apps/expo/images/playicon.png')
+              }
+            />
+          </Pressable>
+
+          <Pressable
+            onPress={() => {
+              Linking.openURL(
+                'https://apps.apple.com/us/app/cdl-hire-link/id6468799888'
+              )
+            }}
+            style={{ height: 100, width: 230, flex: 1 }}
+          >
+            <SolitoImage
+              height={100}
+              width={230}
+              alt="ios-logo"
+              src={
+                Platform.OS == 'web'
+                  ? '/images/iosicon.png'
+                  : require('../../../../../../apps/expo/images/iosicon.png')
+              }
+            />
+          </Pressable>
         </Box>
       </Box>
       <Box
         sx={{
           flexDirection: 'row',
           display: 'flex',
+
           width: '100%',
           alignItems: 'center',
         }}
