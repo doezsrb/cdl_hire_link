@@ -68,11 +68,19 @@ const Footer = ({
             }}
           >
             <TouchableOpacity
+              onPress={() => {
+                Linking.openURL(
+                  'https://www.facebook.com/profile.php?id=100091959270356&mibextid=ZbWKwL'
+                )
+              }}
               style={sx({ width: ['20%', '20%', '10%', '30%'] })}
             >
               <FacebookIcon width={'100%'} />
             </TouchableOpacity>
             <TouchableOpacity
+              onPress={() => {
+                Linking.openURL('https://instagram.com/cdlhirelinkllc')
+              }}
               style={sx({ width: ['20%', '20%', '10%', '30%'] })}
             >
               <InstaIcon width={'100%'} />

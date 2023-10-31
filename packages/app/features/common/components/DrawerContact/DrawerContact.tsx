@@ -59,8 +59,22 @@ const DrawerContact = () => {
           justifyContent: 'center',
         }}
       >
-        <FacebookIcon width={60} />
-        <InstaIcon width={60} />
+        <Pressable
+          onPress={() => {
+            Linking.openURL(
+              'https://www.facebook.com/profile.php?id=100091959270356&mibextid=ZbWKwL'
+            )
+          }}
+        >
+          <FacebookIcon width={60} />
+        </Pressable>
+        <Pressable
+          onPress={() => {
+            Linking.openURL('https://instagram.com/cdlhirelinkllc')
+          }}
+        >
+          <InstaIcon width={60} />
+        </Pressable>
       </View>
     </>
   )
